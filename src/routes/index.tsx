@@ -189,9 +189,9 @@ function DepoimentVideo({ video, poster, index }: (typeof DEPOIMENTS)[number] & 
   };
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-card ring-1 ring-border">
+    <div className="relative mx-auto w-[90%] cursor-pointer overflow-hidden rounded-2xl bg-card ring-1 ring-border">
       <video
-        className="aspect-[9/16] w-full object-cover"
+        className="aspect-[9/16] w-full cursor-pointer object-cover"
         controls={showControls}
         playsInline
         preload="metadata"
