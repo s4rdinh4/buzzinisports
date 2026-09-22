@@ -237,8 +237,8 @@ function Team() {
                 <img
                   src={coach.photo}
                   alt={`Retrato de ${coach.name}`}
-                  width={1024}
-                  height={1024}
+                  width={512}
+                  height={512}
                   loading="lazy"
                   className="h-full w-full object-cover object-top"
                 />
