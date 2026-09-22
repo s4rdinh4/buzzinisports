@@ -260,7 +260,14 @@ function Team() {
 const LOCATIONS = ["Bebedouro", "São Paulo", "Online"] as const;
 type Location = (typeof LOCATIONS)[number];
 
-const PRICES: Record<Location, { period: string; price: string; detail: string }[]> = {
+const PLAN_BENEFITS = {
+  Mensal: "Flexibilidade para começar",
+  Trimestral: "Tempo para criar consistência",
+  Semestral: "Evolução com acompanhamento",
+  Anual: "Melhor custo-benefício",
+} as const;
+
+const PRICES: Record<Location, { period: keyof typeof PLAN_BENEFITS; price: string; detail: string }[]> = {
   Bebedouro: [
     { period: "Mensal", price: "R$ 129", detail: "por mês" },
     { period: "Trimestral", price: "R$ 349", detail: "3 meses" },
@@ -331,6 +338,9 @@ function Plans() {
                 </p>
                 <p className="mt-4 font-display text-3xl font-semibold leading-none sm:text-4xl">
                   {option.price}
+                </p>
+                <p className={`mt-3 font-mono text-xs leading-relaxed ${index === 3 ? "text-primary-foreground/80" : "text-foreground/75"}`}>
+                  {PLAN_BENEFITS[option.period]}
                 </p>
               </div>
               <p className={`mt-6 font-mono text-xs ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}>
