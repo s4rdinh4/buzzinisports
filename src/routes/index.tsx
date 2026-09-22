@@ -61,7 +61,7 @@ function SiteLogo() {
 
   return (
     <header
-      className={`z-50 transition-all duration-300 ${
+      className={`z-50 transition-none ${
         isDesktopScrolled
           ? "fixed left-6 top-4 sm:left-12 sm:top-6"
           : isDesktop
@@ -78,17 +78,17 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center rounded-full bg-background/85 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border transition-all duration-300 ${isMenuOpen ? "w-60" : "w-40"} ${isDesktopScrolled ? (isMenuOpen ? "md:w-60" : "md:w-40") : "md:w-auto md:rounded-none md:bg-transparent md:p-0 md:shadow-none md:ring-0"}`}
+        className={`flex items-center rounded-full bg-background/85 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border transition-none ${isMenuOpen ? "w-60" : "w-40"} ${isDesktopScrolled ? (isMenuOpen ? "md:w-60" : "md:w-40") : "md:w-auto md:rounded-none md:bg-transparent md:p-0 md:shadow-none md:ring-0"}`}
       >
         <a
           href="#inicio"
           aria-label="Buzzini Sports — início"
-          className="block min-w-0 flex-1 transition-transform hover:scale-105"
+          className="block min-w-0 flex-1 transition-none"
         >
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className={`w-auto object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.35)] transition-all duration-300 ${isDesktopScrolled ? "h-8 sm:h-9" : "h-8 sm:h-9 md:h-24"}`}
+            className={`w-auto object-contain transition-none ${!isDesktop || isDesktopScrolled ? "translate-x-1" : ""} ${isDesktopScrolled ? "h-8 sm:h-9" : "h-8 sm:h-9 md:h-24"}`}
           />
         </a>
         <button
