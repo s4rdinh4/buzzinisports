@@ -39,7 +39,7 @@ function SiteLogo() {
 
   return (
     <header
-      className="absolute left-6 top-4 z-50 translate-x-[30px] sm:left-12 sm:top-6"
+      className="absolute left-6 top-4 z-50 sm:left-12 sm:top-6"
       onMouseEnter={() => setIsMenuOpen(true)}
       onMouseLeave={() => setIsMenuOpen(false)}
       onFocus={() => setIsMenuOpen(true)}
@@ -60,7 +60,7 @@ function SiteLogo() {
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className="h-8 w-auto object-contain drop-shadow-lg sm:h-9"
+            className="h-8 w-auto translate-x-[30px] object-contain drop-shadow-lg sm:h-9"
           />
         </a>
         <button
