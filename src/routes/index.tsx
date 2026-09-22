@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, MapPin, Menu, Radio, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Menu, Play, Radio, X } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -180,6 +180,48 @@ const DEPOIMENTS = [
   { video: video03, poster: video03Poster },
 ];
 
+function DepoimentVideo({ video, poster, index }: (typeof DEPOIMENTS)[number] & { index: number }) {
+  const [showControls, setShowControls] = useState(false);
+
+  const startVideo = (element: HTMLVideoElement) => {
+    setShowControls(true);
+    void element.play();
+  };
+
+  return (
+    <div className="relative overflow-hidden rounded-2xl bg-card ring-1 ring-border">
+      <video
+        className="aspect-[9/16] w-full object-cover"
+        controls={showControls}
+        playsInline
+        preload="metadata"
+        poster={poster}
+        aria-label={`Depoimento em vídeo da Buzzini Sports ${index + 1}`}
+        onClick={(event) => {
+          if (!showControls) startVideo(event.currentTarget);
+        }}
+      >
+        <source src={video} type="video/mp4" />
+      </video>
+      {!showControls && (
+        <button
+          type="button"
+          onClick={(event) => {
+            const videoElement = event.currentTarget.previousElementSibling;
+            if (videoElement instanceof HTMLVideoElement) startVideo(videoElement);
+          }}
+          className="absolute inset-0 flex items-center justify-center bg-black/10 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
+          aria-label={`Reproduzir depoimento ${index + 1}`}
+        >
+          <span className="flex size-14 items-center justify-center rounded-full bg-primary shadow-lg">
+            <Play aria-hidden="true" className="ml-1 size-6 fill-current" />
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
+
 function Stories() {
   return (
     <section
@@ -195,21 +237,7 @@ function Stories() {
         </h2>
         <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
           {DEPOIMENTS.map((depoiment, index) => (
-            <div
-              key={depoiment.video}
-              className="overflow-hidden rounded-2xl bg-card ring-1 ring-border"
-            >
-              <video
-                className="aspect-[9/16] w-full object-cover"
-                controls
-                playsInline
-                preload="metadata"
-                poster={depoiment.poster}
-                aria-label={`Depoimento em vídeo da Buzzini Sports ${index + 1}`}
-              >
-                <source src={depoiment.video} type="video/mp4" />
-              </video>
-            </div>
+            <DepoimentVideo key={depoiment.video} {...depoiment} index={index} />
           ))}
         </div>
       </div>
