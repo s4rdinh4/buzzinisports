@@ -287,9 +287,9 @@ function Locations() {
       <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-6 py-14 sm:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <div className="relative order-2 mx-auto w-full max-w-xl lg:order-1">
           <svg
-            viewBox={brazilMap.viewBox}
+            viewBox="285 275 310 285"
             role="img"
-            aria-label="Mapa do Brasil com Bebedouro, Ribeirão Preto e São Paulo destacadas"
+            aria-label="Mapa ampliado da região Sudeste com Bebedouro, Ribeirão Preto e São Paulo destacadas"
             className="relative mx-auto h-auto max-h-[58svh] w-full overflow-visible"
           >
             {brazilMap.locations.map((state: { id: string; path: string }) => (
@@ -302,9 +302,9 @@ function Locations() {
               />
             ))}
             {[
-              { x: 407, y: 471, number: "1", label: "BEBEDOURO" },
-              { x: 418, y: 480, number: "2", label: "RIBEIRÃO PRETO" },
-              { x: 438, y: 515, number: "3", label: "SÃO PAULO" },
+              { x: 398, y: 415, number: "1", label: "BEBEDOURO" },
+              { x: 409, y: 419, number: "2", label: "RIBEIRÃO PRETO" },
+              { x: 427, y: 459, number: "3", label: "SÃO PAULO" },
             ].map((point) => (
               <g key={point.label}>
                 <circle cx={point.x} cy={point.y} r="15" className="fill-primary/20" />
