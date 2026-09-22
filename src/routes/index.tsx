@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { MapPin, Menu, Radio, X } from "lucide-react";
+import { useState } from "react";
+import { MapPin, Radio } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
@@ -32,102 +32,20 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const SECTIONS = [
-  { id: "inicio", label: "Início" },
-  { id: "historias", label: "Histórias" },
-  { id: "equipe", label: "Equipe" },
-  { id: "localidades", label: "Localidades" },
-  { id: "planos", label: "Planos" },
-  { id: "faq", label: "FAQ" },
-  { id: "rodape", label: "Contato" },
-];
-
-function SiteNavigation() {
-  const [active, setActive] = useState("inicio");
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        }
-      },
-      { rootMargin: "-45% 0px -45% 0px" },
-    );
-    for (const { id } of SECTIONS) {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    }
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!open) return;
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, [open]);
-
+function SiteLogo() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex items-start justify-between px-4 pt-4 sm:px-8 sm:pt-6">
+    <header className="fixed left-4 top-4 z-50 sm:left-8 sm:top-6">
       <a
         href="#inicio"
         aria-label="Buzzini Sports — início"
-        onClick={() => setOpen(false)}
-        className="flex h-14 items-center rounded-full bg-background/90 px-5 ring-1 ring-border shadow-xl backdrop-blur-md transition-colors hover:bg-card sm:h-16 sm:px-6"
+        className="block transition-transform hover:scale-105"
       >
         <img
           src={buzziniLogo.url}
           alt="Buzzini Sports"
-          className="h-9 w-auto object-contain sm:h-11"
+          className="h-14 w-auto object-contain drop-shadow-lg sm:h-16"
         />
       </a>
-
-      <div className="flex flex-col items-end gap-3">
-        <Button
-          type="button"
-          size="icon"
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={open}
-          aria-controls="site-menu"
-          onClick={() => setOpen((current) => !current)}
-          className="size-14 rounded-full bg-primary text-primary-foreground shadow-xl hover:bg-primary-soft sm:size-16 [&_svg]:size-6"
-        >
-          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </Button>
-
-        <nav
-          id="site-menu"
-          aria-label="Navegação principal"
-          className={`w-[min(19rem,calc(100vw-2rem))] origin-top-right overflow-hidden rounded-3xl bg-background/95 p-2 ring-1 ring-border shadow-xl backdrop-blur-md transition-all duration-300 ${
-            open
-              ? "visible translate-y-0 scale-100 opacity-100"
-              : "invisible -translate-y-2 scale-95 opacity-0"
-          }`}
-        >
-          {SECTIONS.map(({ id, label }, index) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              onClick={() => setOpen(false)}
-              aria-current={active === id ? "page" : undefined}
-              className={`flex items-center justify-between rounded-full px-5 py-3 font-mono text-sm uppercase transition-colors ${
-                active === id
-                  ? "bg-primary text-primary-foreground"
-                  : "text-foreground hover:bg-card-high"
-              }`}
-            >
-              <span>{label}</span>
-              <span className="text-[10px] opacity-60">0{index + 1}</span>
-            </a>
-          ))}
-        </nav>
-      </div>
     </header>
   );
 }
@@ -652,7 +570,7 @@ function Footer() {
 function Index() {
   return (
     <main className="bg-background">
-      <SiteNavigation />
+      <SiteLogo />
       <Hero />
       <Stories />
       <Team />
