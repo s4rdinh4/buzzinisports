@@ -157,27 +157,57 @@ function Stories() {
 const COACHES = [
   {
     photo: coachPaulo,
+    name: "Lucas Buzzini",
+    credential: "Diretor · Maratonista",
+    bio: "Formado em Fisioterapia, idealizador do projeto e apaixonado por corrida.",
+  },
+  {
+    photo: coachPaulo,
     name: "Robson Botelho",
     credential: "Head Coach · Maratonista",
     bio: "Especializado em treinamento de alta performances.",
   },
   {
+    photo: coachPaulo,
+    name: "Vinicius Silva",
+    credential: "Coach · Fisioterapeuta",
+    bio: "Formado em fisioterapia, especializado em reabilitação e prevenção de lesões.",
+  },
+  {
     photo: coachMarina,
-    name: "Marina Duarte",
-    credential: "CREF 12345-G · Master Runner",
-    bio: "11 anos de assessoria, foco em iniciantes e ritmo de base.",
+    name: "Beatriz Padovan",
+    credential: "Coach Auxiliar · Educação Física",
+    bio: "Treinadora de corrida, como foco principal no desenvolvimento de atletas iniciantes e intermediários.",
   },
   {
     photo: coachLara,
-    name: "Lara Nogueira",
-    credential: "CREF 55670-G · Fundiadora",
-    bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
+    name: "Rodrigo Brito",
+    credential: "Coach · Maratonista",
+    bio: "Treinador de corrida, responsável técnico pela Buzzini São Paulo.",
+  },
+  {
+    photo: coachLara,
+    name: "Hudson Morais",
+    credential: "Coach Auxiliar · Educação Física",
+    bio: "Treinador de corrida, responsável técnico pela Buzzini Ribeirão Preto.",
+  },
+  {
+    photo: coachLara,
+    name: "George Almeida",
+    credential: "Coach Auxiliar · Educação Física",
+    bio: "Treinador de corrida, com foco em desenvolvimento de atletas iniciantes.",
   },
   {
     photo: coachLara,
     name: "Nara de Lucena",
-    credential: "Treinadora Corrida",
+    credential: "Coach · Corrida",
     bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
+  },
+  {
+    photo: coachLara,
+    name: "Igor Sardinha",
+    credential: "Tech · Desenvolvedor",
+    bio: "Responsável pelo sistema de acompanhamento de treinos e evolução dos alunos.",
   },
 ];
 
