@@ -68,21 +68,21 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-background/5" />
       <div className="relative z-10 w-full px-6 pb-14 sm:px-12">
         <h1 className="max-w-[20ch] font-display text-5xl font-semibold leading-none text-balance text-foreground sm:text-7xl">
-          A primeira passada já está contada.
+          Find Your Motivation!
         </h1>
         <p className="mt-6 max-w-[44ch] font-mono text-sm text-pretty text-foreground/80 sm:text-base">
-          Do 5K à maratona, um plano que respira com o seu ritmo. Treinos guiados de verdade, semana
-          após semana.
+          Não somos apenas uma assessoria de corrida, somos seu parceiro na jornada de transformar
+          desafios em conquistas.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
             href="#planos"
             className="rounded-full bg-primary px-5 py-3 font-mono text-sm font-bold text-primary-foreground ring-1 ring-inset ring-primary-soft/40 transition-transform hover:-translate-y-0.5 hover:bg-primary-soft"
           >
-            Assinar plano
+            Quero correr
           </a>
           <span className="font-mono text-xs uppercase tracking-[0.15em] text-foreground/70">
-            3 cidades · 480 alunos ativos
+            Presencial e Online · +400 alunos atendidos
           </span>
         </div>
       </div>
@@ -170,6 +170,12 @@ const COACHES = [
   {
     photo: coachLara,
     name: "Lara Nogueira",
+    credential: "CREF 55670-G · Fundiadora",
+    bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
+  },
+  {
+    photo: coachLara,
+    name: "Nara de Lucena",
     credential: "CREF 55670-G · Fundiadora",
     bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
   },
