@@ -785,8 +785,8 @@ function Faq() {
 
 function Footer() {
   return (
-    <section id="rodape" className="snap-sec relative flex flex-col justify-end bg-background">
-      <div className="mx-auto w-full max-w-6xl px-6 pb-12 sm:px-12">
+    <footer id="rodape" className="relative bg-background py-12 sm:py-16">
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="grid gap-10 sm:grid-cols-2">
           <div>
             <p className="font-display text-3xl font-semibold text-foreground">Buzzini Sports</p>
@@ -823,7 +823,7 @@ function Footer() {
           © 2026 Buzzini Sports · Bebedouro · Ribeirão Preto · São Paulo
         </p>
       </div>
-    </section>
+    </footer>
   );
 }
 
