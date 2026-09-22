@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
 
 function SiteLogo() {
   return (
-    <header className="fixed left-4 top-4 z-50 sm:left-8 sm:top-6">
+    <header className="absolute left-4 top-4 z-50 sm:left-8 sm:top-6">
       <a
         href="#inicio"
         aria-label="Buzzini Sports — início"
