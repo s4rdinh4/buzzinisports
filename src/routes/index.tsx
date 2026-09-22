@@ -292,7 +292,7 @@ function Locations() {
             aria-label="Mapa do Brasil com Bebedouro, Ribeirão Preto e São Paulo destacadas"
             className="relative mx-auto h-auto max-h-[58svh] w-full overflow-visible"
           >
-            {brazilMap.locations.map((state) => (
+            {brazilMap.locations.map((state: { id: string; path: string }) => (
               <path
                 key={state.id}
                 d={state.path}
