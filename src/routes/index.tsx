@@ -507,9 +507,7 @@ function Locations() {
         </div>
 
         <div className="order-1 lg:order-2">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
-            Onde a passada acontece
-          </p>
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary"></p>
           <h2 className="mt-4 max-w-[14ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
             Perto de você. Em todo o Brasil.
           </h2>
@@ -545,7 +543,7 @@ function Locations() {
   );
 }
 
-const LOCATIONS = ["Bebedouro", "São Paulo", "Online"] as const;
+const LOCATIONS = ["Bebedouro/Ribeirão", "São Paulo", "Online"] as const;
 type Location = (typeof LOCATIONS)[number];
 
 const PLAN_BENEFITS = {
@@ -559,7 +557,7 @@ const PRICES: Record<
   Location,
   { period: keyof typeof PLAN_BENEFITS; price: string; detail: string }[]
 > = {
-  Bebedouro: [
+  "Bebedouro/Ribeirão": [
     { period: "Mensal", price: "R$ 129", detail: "por mês" },
     { period: "Trimestral", price: "R$ 349", detail: "3 meses" },
     { period: "Semestral", price: "R$ 649", detail: "6 meses" },
