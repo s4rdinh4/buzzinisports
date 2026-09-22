@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { MapPin, Radio } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Radio } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
@@ -218,17 +218,48 @@ const COACHES = [
 ];
 
 function Team() {
+  const [page, setPage] = useState(0);
+  const pageSize = 3;
+  const pageCount = Math.ceil(COACHES.length / pageSize);
+  const visibleCoaches = COACHES.slice(page * pageSize, (page + 1) * pageSize);
+
   return (
     <section id="equipe" className="snap-sec relative flex flex-col justify-center bg-card">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
-          Quem faz o treino acontecer
-        </p>
-        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
-          A equipe por trás do ritmo.
-        </h2>
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
+              Quem faz o treino acontecer
+            </p>
+            <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
+              A equipe por trás do ritmo.
+            </h2>
+          </div>
+          <div className="hidden shrink-0 gap-2 sm:flex">
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={() => setPage((currentPage) => currentPage - 1)}
+              disabled={page === 0}
+              aria-label="Página anterior da equipe"
+            >
+              <ChevronLeft aria-hidden="true" />
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={() => setPage((currentPage) => currentPage + 1)}
+              disabled={page === pageCount - 1}
+              aria-label="Próxima página da equipe"
+            >
+              <ChevronRight aria-hidden="true" />
+            </Button>
+          </div>
+        </div>
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
-          {COACHES.map((coach) => (
+          {visibleCoaches.map((coach) => (
             <div
               key={coach.name}
               className="overflow-hidden rounded-lg bg-background ring-1 ring-border"
@@ -252,6 +283,45 @@ function Team() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-6 flex items-center justify-between sm:justify-center">
+          <div className="flex gap-2" role="tablist" aria-label="Páginas da equipe">
+            {Array.from({ length: pageCount }, (_, index) => (
+              <button
+                key={index}
+                type="button"
+                role="tab"
+                aria-selected={page === index}
+                aria-label={`Ir para página ${index + 1} da equipe`}
+                onClick={() => setPage(index)}
+                className={`h-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card ${
+                  page === index ? "w-8 bg-primary" : "w-2 bg-border hover:bg-primary/60"
+                }`}
+              />
+            ))}
+          </div>
+          <div className="flex gap-2 sm:hidden">
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={() => setPage((currentPage) => currentPage - 1)}
+              disabled={page === 0}
+              aria-label="Página anterior da equipe"
+            >
+              <ChevronLeft aria-hidden="true" />
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              onClick={() => setPage((currentPage) => currentPage + 1)}
+              disabled={page === pageCount - 1}
+              aria-label="Próxima página da equipe"
+            >
+              <ChevronRight aria-hidden="true" />
+            </Button>
+          </div>
         </div>
       </div>
     </section>
@@ -580,13 +650,19 @@ function Footer() {
           </div>
           <div className="flex flex-col gap-3 font-mono text-sm text-foreground/80">
             <p className="text-xs uppercase tracking-[0.15em] text-muted">Contato</p>
-            <p>ola@passada.run</p>
-            <p>+55 11 98877-0014</p>
+            <p>assessoria@buzzini.com.br</p>
+            <p>+55 17 98802-6622</p>
             <div className="mt-2 flex gap-4">
-              <a href="#" className="transition-colors hover:text-primary">
+              <a
+                href="https://www.instagram.com/buzzinisports/"
+                className="transition-colors hover:text-primary"
+              >
                 Instagram
               </a>
-              <a href="#" className="transition-colors hover:text-primary">
+              <a
+                href="https://www.strava.com/clubs/buzzini"
+                className="transition-colors hover:text-primary"
+              >
                 Strava
               </a>
               <a href="#" className="transition-colors hover:text-primary">
