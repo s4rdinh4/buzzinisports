@@ -78,7 +78,7 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center rounded-full bg-gradient-to-r from-background/65 via-background/85 to-background/65 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border/80 transition-all duration-300 ${isMenuOpen ? "w-60" : "w-40"} ${isDesktopScrolled ? (isMenuOpen ? "md:w-60" : "md:w-40") : "md:w-auto md:rounded-none md:bg-gradient-to-r md:from-transparent md:via-background/40 md:to-transparent md:p-0 md:shadow-none md:ring-0"}`}
+        className={`flex items-center rounded-full bg-background/85 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border transition-all duration-300 ${isMenuOpen ? "w-60" : "w-40"} ${isDesktopScrolled ? (isMenuOpen ? "md:w-60" : "md:w-40") : "md:w-auto md:rounded-none md:bg-transparent md:p-0 md:shadow-none md:ring-0"}`}
       >
         <a
           href="#inicio"
