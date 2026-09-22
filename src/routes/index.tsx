@@ -261,10 +261,10 @@ const LOCATIONS = ["Bebedouro", "São Paulo", "Online"] as const;
 type Location = (typeof LOCATIONS)[number];
 
 const PLAN_BENEFITS = {
-  Mensal: "Flexibilidade para começar",
-  Trimestral: "Tempo para criar consistência",
-  Semestral: "Evolução com acompanhamento",
-  Anual: "Melhor custo-benefício",
+  Mensal: ["Treino personalizado", "Ajustes mensais", "Sem fidelidade"],
+  Trimestral: ["Treino personalizado", "Ajustes mensais", "Mais consistência"],
+  Semestral: ["Treino personalizado", "Ajustes mensais", "Evolução acompanhada"],
+  Anual: ["Treino personalizado", "Ajustes mensais", "Melhor custo-benefício"],
 } as const;
 
 const PRICES: Record<Location, { period: keyof typeof PLAN_BENEFITS; price: string; detail: string }[]> = {
@@ -339,9 +339,14 @@ function Plans() {
                 <p className="mt-4 font-display text-3xl font-semibold leading-none sm:text-4xl">
                   {option.price}
                 </p>
-                <p className={`mt-3 font-mono text-xs leading-relaxed ${index === 3 ? "text-primary-foreground/80" : "text-foreground/75"}`}>
-                  {PLAN_BENEFITS[option.period]}
-                </p>
+                <ul className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${index === 3 ? "text-primary-foreground/80" : "text-foreground/75"}`}>
+                  {PLAN_BENEFITS[option.period].map((benefit) => (
+                    <li key={benefit} className="flex gap-2">
+                      <span aria-hidden="true" className={index === 3 ? "text-primary-foreground" : "text-primary"}>✓</span>
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
               <p className={`mt-6 font-mono text-xs ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}>
                 {option.detail}
