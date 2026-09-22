@@ -290,7 +290,7 @@ function Locations() {
             viewBox="285 275 310 285"
             role="img"
             aria-label="Mapa ampliado da região Sudeste com Bebedouro, Ribeirão Preto e São Paulo destacadas"
-            className="relative mx-auto h-auto max-h-[58svh] w-full overflow-visible"
+            className="relative mx-auto block h-auto max-h-[52svh] w-full overflow-hidden"
           >
             {brazilMap.locations.map((state: { id: string; path: string }) => (
               <path
@@ -320,7 +320,7 @@ function Locations() {
               </g>
             ))}
           </svg>
-          <div className="mt-3 flex flex-wrap justify-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase text-muted">
+          <div className="relative z-10 mx-auto mt-6 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-full bg-background px-5 py-3 font-mono text-[10px] uppercase text-muted ring-1 ring-border">
             <span><b className="text-primary">1</b> Bebedouro</span>
             <span><b className="text-primary">2</b> Ribeirão Preto</span>
             <span><b className="text-primary">3</b> São Paulo</span>
