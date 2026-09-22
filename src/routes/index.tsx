@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { MapPin, Radio } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
-import heroShoe from "@/assets/hero-shoe.jpg.asset.json";
+import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
+import heroVideoMp4 from "@/assets/hero-video.mp4.asset.json";
+import heroVideoWebm from "@/assets/hero-video.webm.asset.json";
 import coachMarina from "@/assets/coach-marina.png";
 import coachPaulo from "@/assets/coach-paulo.png";
 import coachLara from "@/assets/coach-lara.png";
@@ -85,13 +87,24 @@ function Hero() {
       id="inicio"
       className="snap-sec relative flex items-end overflow-hidden bg-background"
     >
-      <img
-        src={heroShoe.url}
-        alt="Corredor em passada sobre asfalto molhado ao amanhecer"
-        className="ken-burns absolute inset-0 h-full w-full object-cover"
-      />
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-label="Pessoa correndo ao amanhecer"
+      >
+        <source src={heroVideoWebm.url} type="video/webm" />
+        <source src={heroVideoMp4.url} type="video/mp4" />
+      </video>
       <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-background/5" />
       <div className="relative z-10 w-full px-6 pb-14 sm:px-12">
+        <img
+          src={buzziniLogo.url}
+          alt="Buzzini Sports"
+          className="mb-7 h-20 w-auto object-contain object-left sm:h-24"
+        />
         <p className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground/90 sm:text-sm">
           Assessoria de corrida · desde 2014
         </p>
