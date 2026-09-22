@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, MapPin, Radio } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Menu, Radio, X } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -35,19 +35,68 @@ export const Route = createFileRoute("/")({
 });
 
 function SiteLogo() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <header className="absolute left-4 top-4 z-50 sm:left-8 sm:top-6">
-      <a
-        href="#inicio"
-        aria-label="Buzzini Sports — início"
-        className="block transition-transform hover:scale-105"
+    <header
+      className="absolute left-4 top-4 z-50 sm:left-8 sm:top-6"
+      onMouseEnter={() => setIsMenuOpen(true)}
+      onMouseLeave={() => setIsMenuOpen(false)}
+      onFocus={() => setIsMenuOpen(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsMenuOpen(false);
+        }
+      }}
+    >
+      <div
+        className={`flex items-center rounded-full bg-background/85 p-2 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-200 ${isMenuOpen ? "w-64" : "w-44"}`}
       >
-        <img
-          src={buzziniLogo.url}
-          alt="Buzzini Sports"
-          className="h-14 w-auto object-contain drop-shadow-lg sm:h-16"
-        />
-      </a>
+        <a
+          href="#inicio"
+          aria-label="Buzzini Sports — início"
+          className="block min-w-0 flex-1 transition-transform hover:scale-105"
+        >
+          <img
+            src={buzziniLogo.url}
+            alt="Buzzini Sports"
+            className="h-9 w-auto object-contain drop-shadow-lg sm:h-10"
+          />
+        </a>
+        <button
+          type="button"
+          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="site-navigation"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          className="flex size-10 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </button>
+      </div>
+      <nav
+        id="site-navigation"
+        aria-label="Navegação principal"
+        className={`absolute left-0 top-full mt-2 w-64 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-200 ${isMenuOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}
+      >
+        {[
+          ["Início", "inicio"],
+          ["Histórias", "historias"],
+          ["Equipe", "equipe"],
+          ["Localidades", "localidades"],
+          ["Planos", "planos"],
+          ["Dúvidas", "faq"],
+        ].map(([label, section]) => (
+          <a
+            key={section}
+            href={`#${section}`}
+            onClick={() => setIsMenuOpen(false)}
+            className="block rounded-xl px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-muted transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
     </header>
   );
 }
@@ -655,9 +704,11 @@ function Footer() {
       <div className="mx-auto w-full max-w-6xl px-6 pb-12 sm:px-12">
         <div className="grid gap-10 sm:grid-cols-2">
           <div>
-            <p className="font-display text-3xl font-semibold text-foreground">Passada</p>
+            <p className="font-display text-3xl font-semibold text-foreground">Buzzini Sports</p>
             <p className="mt-3 max-w-[40ch] font-mono text-sm text-pretty text-muted">
-              Assessoria de corrida com foco em ritmo, respiração e progressão medível.
+              Combinamos conhecimento técnico com uma abordagem inovadora para criar treinos
+              personalizados que realmente fazem a diferença. Desenhamos planos que são tão únicos
+              quanto você, ajustados para quebrar limites.
             </p>
           </div>
           <div className="flex flex-col gap-3 font-mono text-sm text-foreground/80">
@@ -684,7 +735,7 @@ function Footer() {
           </div>
         </div>
         <p className="mt-10 border-t border-border pt-5 font-mono text-xs text-muted">
-          © 2026 Passada Assessoria · Bebedouro · Ribeirão Preto · São Paulo
+          © 2026 Buzzini Sports · Bebedouro · Ribeirão Preto · São Paulo
         </p>
       </div>
     </section>
