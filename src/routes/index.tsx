@@ -499,14 +499,17 @@ function Plans() {
   const [location, setLocation] = useState<Location>("Bebedouro");
 
   return (
-    <section id="planos" className="snap-sec relative flex flex-col justify-center bg-background">
+    <section
+      id="planos"
+      className="snap-sec relative flex flex-col justify-start bg-background py-16 sm:justify-center sm:py-0"
+    >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">Planos Buzzini</p>
-        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
+        <h2 className="mt-3 max-w-[40ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:mt-4 sm:text-5xl">
           Seu treino, no seu ritmo.
         </h2>
         <div
-          className="mt-8 flex w-full gap-1 rounded-full bg-card-high p-1 ring-1 ring-border"
+          className="mt-6 flex w-full gap-1 rounded-full bg-card-high p-1 ring-1 ring-border sm:mt-8"
           role="tablist"
           aria-label="Local de treino"
         >
@@ -528,7 +531,7 @@ function Plans() {
             </Button>
           ))}
         </div>
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-5 grid grid-cols-1 gap-3 sm:mt-6 sm:grid-cols-4">
           {PRICES[location].map((option, index) => (
             <article
               key={option.period}
