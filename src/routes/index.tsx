@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type TouchEvent } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Menu, Play, Radio, X } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
@@ -316,6 +316,25 @@ function Team() {
   const pageCount = Math.ceil(COACHES.length / pageSize);
   const visibleCoaches = COACHES.slice(page * pageSize, (page + 1) * pageSize);
 
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const startX = touchStartX.current;
+    const endX = event.changedTouches[0]?.clientX;
+    touchStartX.current = null;
+
+    if (startX === null || endX === undefined) return;
+
+    const distance = endX - startX;
+    if (Math.abs(distance) < 48) return;
+
+    setPage((currentPage) =>
+      Math.max(0, Math.min(pageCount - 1, currentPage + (distance < 0 ? 1 : -1))),
+    );
+  };
+
   useEffect(() => {
     setPage((currentPage) => Math.min(currentPage, pageCount - 1));
   }, [pageCount]);
@@ -358,30 +377,13 @@ function Team() {
             </Button>
           </div>
         </div>
-        <div
-          className="mt-8 grid touch-pan-y gap-4 sm:mt-9 sm:grid-cols-3 sm:gap-5"
-          onTouchStart={(event) => {
-            touchStartX.current = event.touches[0]?.clientX ?? null;
-          }}
-          onTouchEnd={(event) => {
-            const startX = touchStartX.current;
-            const endX = event.changedTouches[0]?.clientX;
-            touchStartX.current = null;
-
-            if (startX === null || endX === undefined) return;
-
-            const distance = endX - startX;
-            if (Math.abs(distance) < 48) return;
-
-            setPage((currentPage) =>
-              Math.max(0, Math.min(pageCount - 1, currentPage + (distance < 0 ? 1 : -1))),
-            );
-          }}
-        >
+        <div className="mt-8 grid gap-4 sm:mt-9 sm:grid-cols-3 sm:gap-5">
           {visibleCoaches.map((coach) => (
             <div
               key={coach.name}
-              className="overflow-hidden rounded-lg bg-background ring-1 ring-border"
+              className="touch-pan-y overflow-hidden rounded-lg bg-background ring-1 ring-border"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
             >
               <div className="aspect-[40/27] w-full overflow-hidden sm:aspect-[8/9]">
                 <img
