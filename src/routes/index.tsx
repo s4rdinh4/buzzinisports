@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { MapPin, Radio } from "lucide-react";
+import { MapPin, Menu, Radio, X } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
@@ -42,8 +42,9 @@ const SECTIONS = [
   { id: "rodape", label: "Contato" },
 ];
 
-function Dots() {
+function SiteNavigation() {
   const [active, setActive] = useState("inicio");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -63,21 +64,71 @@ function Dots() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
+
   return (
-    <nav
-      aria-label="Navegação entre seções"
-      className="fixed right-5 top-1/2 z-50 flex -translate-y-1/2 flex-col gap-4"
-    >
-      {SECTIONS.map(({ id, label }) => (
-        <a key={id} href={`#${id}`} title={label} aria-label={label}>
-          <span
-            className={`block size-2.5 rounded-full transition-colors duration-300 ${
-              active === id ? "bg-primary" : "bg-foreground/25 hover:bg-foreground/50"
-            }`}
-          />
-        </a>
-      ))}
-    </nav>
+    <header className="fixed inset-x-0 top-0 z-50 flex items-start justify-between px-4 pt-4 sm:px-8 sm:pt-6">
+      <a
+        href="#inicio"
+        aria-label="Buzzini Sports — início"
+        onClick={() => setOpen(false)}
+        className="flex h-14 items-center rounded-full bg-background/90 px-5 ring-1 ring-border shadow-xl backdrop-blur-md transition-colors hover:bg-card sm:h-16 sm:px-6"
+      >
+        <img
+          src={buzziniLogo.url}
+          alt="Buzzini Sports"
+          className="h-9 w-auto object-contain sm:h-11"
+        />
+      </a>
+
+      <div className="flex flex-col items-end gap-3">
+        <Button
+          type="button"
+          size="icon"
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
+          aria-controls="site-menu"
+          onClick={() => setOpen((current) => !current)}
+          className="size-14 rounded-full bg-primary text-primary-foreground shadow-xl hover:bg-primary-soft sm:size-16 [&_svg]:size-6"
+        >
+          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </Button>
+
+        <nav
+          id="site-menu"
+          aria-label="Navegação principal"
+          className={`w-[min(19rem,calc(100vw-2rem))] origin-top-right overflow-hidden rounded-3xl bg-background/95 p-2 ring-1 ring-border shadow-xl backdrop-blur-md transition-all duration-300 ${
+            open
+              ? "visible translate-y-0 scale-100 opacity-100"
+              : "invisible -translate-y-2 scale-95 opacity-0"
+          }`}
+        >
+          {SECTIONS.map(({ id, label }, index) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              onClick={() => setOpen(false)}
+              aria-current={active === id ? "page" : undefined}
+              className={`flex items-center justify-between rounded-full px-5 py-3 font-mono text-sm uppercase transition-colors ${
+                active === id
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-card-high"
+              }`}
+            >
+              <span>{label}</span>
+              <span className="text-[10px] opacity-60">0{index + 1}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
   );
 }
 
@@ -100,11 +151,6 @@ function Hero() {
       </video>
       <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-background/5" />
       <div className="relative z-10 w-full px-6 pb-14 sm:px-12">
-        <img
-          src={buzziniLogo.url}
-          alt="Buzzini Sports"
-          className="mb-7 h-20 w-auto object-contain object-left sm:h-24"
-        />
         <p className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground/90 sm:text-sm">
           Assessoria de corrida · desde 2014
         </p>
@@ -606,7 +652,7 @@ function Footer() {
 function Index() {
   return (
     <main className="bg-background">
-      <Dots />
+      <SiteNavigation />
       <Hero />
       <Stories />
       <Team />
