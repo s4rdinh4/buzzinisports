@@ -353,7 +353,7 @@ function Team() {
               key={coach.name}
               className="overflow-hidden rounded-lg bg-background ring-1 ring-border"
             >
-              <div className="aspect-[4/3] w-full overflow-hidden sm:aspect-[4/5]">
+              <div className="aspect-[40/27] w-full overflow-hidden sm:aspect-[8/9]">
                 <img
                   src={coach.photo}
                   alt={`Retrato de ${coach.name}`}
