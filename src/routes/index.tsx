@@ -69,9 +69,6 @@ function Hero() {
       </video>
       <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-background/5" />
       <div className="relative z-10 w-full px-6 pb-14 sm:px-12">
-        <p className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground/90 sm:text-sm">
-          Assessoria de corrida · desde 2014
-        </p>
         <h1 className="max-w-[20ch] font-display text-5xl font-semibold leading-none text-balance text-foreground sm:text-7xl">
           A primeira passada já está contada.
         </h1>
