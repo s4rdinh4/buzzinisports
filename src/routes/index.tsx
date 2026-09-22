@@ -395,6 +395,10 @@ function Faq() {
         </h2>
         <div className="mt-10 space-y-3">
           {FAQS.map((faq, index) => (
+            <div
+              key={faq.question}
+              className="overflow-hidden rounded-[min(1vw,18px)] bg-cream ring-1 ring-black/5"
+            >
               <details open={index === 0} className="group">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5">
                   <span className="font-display text-lg font-medium text-ink">
