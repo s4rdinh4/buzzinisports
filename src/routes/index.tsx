@@ -176,7 +176,7 @@ const COACHES = [
   {
     photo: coachLara,
     name: "Nara de Lucena",
-    credential: "CREF 55670-G · Fundiadora",
+    credential: "CREF 163548-G/SP · Treinadora",
     bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
   },
 ];
