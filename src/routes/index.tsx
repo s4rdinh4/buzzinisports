@@ -303,7 +303,11 @@ function Plans() {
         <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
           Seu treino, no seu ritmo.
         </h2>
-        <div className="mt-8 flex w-full border-b border-border" role="tablist" aria-label="Local de treino">
+        <div
+          className="mt-8 flex w-full gap-1 rounded-full bg-card-high p-1 ring-1 ring-border"
+          role="tablist"
+          aria-label="Local de treino"
+        >
           {LOCATIONS.map((item) => (
             <Button
               key={item}
@@ -312,10 +316,10 @@ function Plans() {
               aria-selected={location === item}
               variant="ghost"
               onClick={() => setLocation(item)}
-              className={`h-12 flex-1 rounded-none border-b-2 font-mono text-xs uppercase sm:text-sm ${
+              className={`h-11 flex-1 rounded-full font-mono text-xs uppercase sm:text-sm ${
                 location === item
-                  ? "border-primary text-primary hover:bg-primary/10 hover:text-primary"
-                  : "border-transparent text-muted hover:bg-card-high hover:text-foreground"
+                  ? "bg-primary text-primary-foreground shadow-sm hover:bg-primary-soft hover:text-primary-foreground"
+                  : "text-muted hover:bg-background/60 hover:text-foreground"
               }`}
             >
               {item}
