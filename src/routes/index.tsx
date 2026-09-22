@@ -309,8 +309,8 @@ function Locations() {
               { x: 427, y: 459, number: "3", label: "SÃO PAULO" },
             ].map((point) => (
               <g key={point.label}>
-                <circle cx={point.x} cy={point.y} r="15" className="fill-primary/20" />
-                <circle cx={point.x} cy={point.y} r="10" className="fill-primary stroke-background" strokeWidth="3" />
+                <circle cx={point.x} cy={point.y} r="11" className="fill-primary/20" />
+                <circle cx={point.x} cy={point.y} r="7" className="fill-primary stroke-background" strokeWidth="2" />
                 <text
                   x={point.x}
                   y={point.y + 4}
