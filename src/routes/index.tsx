@@ -543,21 +543,33 @@ function Locations() {
   );
 }
 
-const LOCATIONS = ["Bebedouro/Ribeirão", "São Paulo", "Online"] as const;
+const LOCATIONS = ["Outras cidades", "São Paulo", "Online"] as const;
 type Location = (typeof LOCATIONS)[number];
 
 const PLAN_BENEFITS = {
-  Mensal: ["Treino personalizado", "Ajustes mensais", "Sem fidelidade"],
-  Trimestral: ["Treino personalizado", "Ajustes mensais", "Mais consistência"],
-  Semestral: ["Treino personalizado", "Ajustes mensais", "Evolução acompanhada"],
-  Anual: ["Treino personalizado", "Ajustes mensais", "Melhor custo-benefício"],
+  Mensal: {
+    included: ["Treino personalizado", "Ajustes mensais", "Sem fidelidade"],
+    excluded: ["Treinos presenciais"],
+  },
+  Trimestral: {
+    included: ["Treino personalizado", "Ajustes mensais", "Mais consistência"],
+    excluded: ["Treinos presenciais"],
+  },
+  Semestral: {
+    included: ["Treino personalizado", "Ajustes mensais", "Evolução acompanhada"],
+    excluded: ["Treinos presenciais"],
+  },
+  Anual: {
+    included: ["Treino personalizado", "Ajustes mensais", "Melhor custo-benefício"],
+    excluded: ["Treinos presenciais"],
+  },
 } as const;
 
 const PRICES: Record<
   Location,
   { period: keyof typeof PLAN_BENEFITS; price: string; detail: string }[]
 > = {
-  "Bebedouro/Ribeirão": [
+  "Outras cidades": [
     { period: "Mensal", price: "R$ 129", detail: "por mês" },
     { period: "Trimestral", price: "R$ 349", detail: "3 meses" },
     { period: "Semestral", price: "R$ 649", detail: "6 meses" },
@@ -635,13 +647,21 @@ function Plans() {
                 <ul
                   className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${index === 3 ? "text-primary-foreground/80" : "text-foreground/75"}`}
                 >
-                  {PLAN_BENEFITS[option.period].map((benefit) => (
+                  {PLAN_BENEFITS[option.period].included.map((benefit) => (
                     <li key={benefit} className="flex gap-2">
                       <span
                         aria-hidden="true"
                         className={index === 3 ? "text-primary-foreground" : "text-primary"}
                       >
                         ✓
+                      </span>
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                  {PLAN_BENEFITS[option.period].excluded.map((benefit) => (
+                    <li key={benefit} className="flex gap-2 text-muted line-through">
+                      <span aria-hidden="true" className="text-muted no-underline">
+                        ×
                       </span>
                       <span>{benefit}</span>
                     </li>
