@@ -489,6 +489,22 @@ function Plans() {
               >
                 {option.detail}
               </p>
+              <Button
+                asChild
+                variant="ghost"
+                className={`mt-5 h-10 w-full rounded-full px-3 font-mono text-xs uppercase ${
+                  index === 3
+                    ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90 hover:text-primary"
+                    : "bg-transparent text-foreground ring-1 ring-border hover:bg-primary hover:text-primary-foreground"
+                }`}
+              >
+                <a
+                  href={`mailto:ola@passada.run?subject=${encodeURIComponent(`Interesse no plano ${option.period} - ${location}`)}`}
+                  aria-label={`Quero o plano ${option.period} de ${location}`}
+                >
+                  Quero este plano
+                </a>
+              </Button>
             </article>
           ))}
         </div>
