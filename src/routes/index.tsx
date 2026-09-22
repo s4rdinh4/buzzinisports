@@ -172,6 +172,11 @@ const COACHES = [
     credential: "CREF 55670-G · Fundiadora",
     bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
   },
+    photo: coachLara,
+    name: "Nara  ",
+    credential: "CREF 55670-G · Fundiadora",
+    bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
+  },
 ];
 
 function Team() {
