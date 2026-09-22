@@ -88,7 +88,7 @@ function SiteLogo() {
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className={`w-auto object-contain transition-none ${!isDesktop || isDesktopScrolled ? "translate-x-3" : ""} ${isDesktopScrolled ? "h-8 sm:h-9" : "h-8 sm:h-9 md:h-24"}`}
+            className={`w-auto object-contain transition-none ${!isDesktop || isDesktopScrolled ? "translate-x-[22px]" : ""} ${isDesktopScrolled ? "h-8 sm:h-9" : "h-8 sm:h-9 md:h-24"}`}
           />
         </a>
         <button
