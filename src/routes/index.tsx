@@ -36,13 +36,35 @@ export const Route = createFileRoute("/")({
 
 function SiteLogo() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktopScrolled, setIsDesktopScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateScrollState = () => {
+      const isDesktopViewport = window.matchMedia("(min-width: 768px)").matches;
+      const hasPassedHero = window.scrollY > window.innerHeight * 0.75;
+      setIsDesktop(isDesktopViewport);
+      setIsDesktopScrolled(hasPassedHero);
+      if (isDesktopViewport && !hasPassedHero) setIsMenuOpen(false);
+    };
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+    return () => {
+      window.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, []);
+
+  const shouldShowMenu = !isDesktop || isDesktopScrolled;
 
   return (
     <header
-      className="absolute left-6 top-4 z-50 sm:left-12 sm:top-6"
-      onMouseEnter={() => setIsMenuOpen(true)}
+      className={`z-50 transition-all duration-300 ${isDesktopScrolled ? "fixed left-6 top-4 sm:left-12 sm:top-6" : "absolute left-6 top-4 sm:left-12 sm:top-6 md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"}`}
+      onMouseEnter={() => shouldShowMenu && setIsMenuOpen(true)}
       onMouseLeave={() => setIsMenuOpen(false)}
-      onFocus={() => setIsMenuOpen(true)}
+      onFocus={() => shouldShowMenu && setIsMenuOpen(true)}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
           setIsMenuOpen(false);
@@ -50,7 +72,7 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center rounded-full bg-background/85 p-1.5 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-200 ${isMenuOpen ? "w-60" : "w-40"}`}
+        className={`flex items-center rounded-full bg-background/85 p-1.5 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-300 ${isMenuOpen ? "w-60" : "w-40"} ${isDesktopScrolled ? (isMenuOpen ? "md:w-60" : "md:w-40") : "md:w-auto md:rounded-none md:bg-transparent md:p-0 md:shadow-none md:ring-0 md:backdrop-blur-0"}`}
       >
         <a
           href="#inicio"
@@ -60,7 +82,7 @@ function SiteLogo() {
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className="h-8 w-auto translate-x-[30px] object-contain drop-shadow-lg sm:h-9"
+            className={`w-auto object-contain drop-shadow-lg transition-all duration-300 ${isDesktopScrolled ? "h-8 translate-x-[30px] sm:h-9" : "h-8 translate-x-[30px] sm:h-9 md:h-24 md:translate-x-0"}`}
           />
         </a>
         <button
@@ -69,7 +91,7 @@ function SiteLogo() {
           aria-expanded={isMenuOpen}
           aria-controls="site-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
-          className="flex size-9 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className={`flex size-9 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${isDesktopScrolled ? "" : "md:hidden"}`}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
@@ -77,7 +99,7 @@ function SiteLogo() {
       <nav
         id="site-navigation"
         aria-label="Navegação principal"
-        className={`absolute left-0 top-full mt-2 w-64 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-200 ${isMenuOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}
+        className={`absolute left-0 top-full mt-2 w-64 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-200 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}
       >
         {[
           ["Início", "inicio"],
