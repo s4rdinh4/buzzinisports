@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { MapPin, Radio } from "lucide-react";
@@ -172,11 +173,6 @@ const COACHES = [
     credential: "CREF 55670-G · Fundiadora",
     bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
   },
-    photo: coachLara,
-    name: "Nara  ",
-    credential: "CREF 55670-G · Fundiadora",
-    bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
-  },
 ];
 
 function Team() {
@@ -189,7 +185,7 @@ function Team() {
         <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
           A equipe por trás do ritmo.
         </h2>
-        <div className="mt-10 grid gap-5 sm:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:grid-cols-4">
           {COACHES.map((coach) => (
             <div
               key={coach.name}
