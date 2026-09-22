@@ -61,7 +61,7 @@ function SiteLogo() {
 
   return (
     <header
-      className={`z-50 transition-all duration-300 ${isDesktopScrolled ? "fixed left-6 top-4 sm:left-12 sm:top-6" : "absolute left-6 top-4 sm:left-12 sm:top-6 md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"}`}
+      className={`z-50 transition-all duration-300 ${isDesktopScrolled ? "fixed left-6 top-4 sm:left-12 sm:top-6" : "absolute left-6 top-4 sm:left-12 sm:top-6"}`}
       onMouseEnter={() => shouldShowMenu && setIsMenuOpen(true)}
       onMouseLeave={() => setIsMenuOpen(false)}
       onFocus={() => shouldShowMenu && setIsMenuOpen(true)}
@@ -72,7 +72,7 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center rounded-full bg-background/85 p-1.5 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-300 ${isMenuOpen ? "w-60" : "w-40"} ${isDesktopScrolled ? (isMenuOpen ? "md:w-60" : "md:w-40") : "md:w-auto md:rounded-none md:bg-transparent md:p-0 md:shadow-none md:ring-0 md:backdrop-blur-0"}`}
+        className={`flex items-center rounded-full bg-background/85 p-1.5 shadow-xl ring-1 ring-border transition-all duration-300 ${isMenuOpen ? "w-60" : "w-40"} ${isDesktopScrolled ? (isMenuOpen ? "md:w-60" : "md:w-40") : "md:w-auto md:rounded-none md:bg-transparent md:p-0 md:shadow-none md:ring-0"}`}
       >
         <a
           href="#inicio"
@@ -99,7 +99,7 @@ function SiteLogo() {
       <nav
         id="site-navigation"
         aria-label="Navegação principal"
-        className={`absolute left-0 top-full mt-2 w-64 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-200 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}
+        className={`absolute left-0 top-full mt-2 w-64 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border transition-all duration-200 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}
       >
         {[
           ["Início", "inicio"],
