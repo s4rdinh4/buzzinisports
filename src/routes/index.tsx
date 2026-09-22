@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Menu, Play, Radio, X } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
@@ -310,6 +310,7 @@ const COACHES = [
 
 function Team() {
   const [page, setPage] = useState(0);
+  const touchStartX = useRef<number | null>(null);
   const isMobile = useIsMobile();
   const pageSize = isMobile ? 1 : 3;
   const pageCount = Math.ceil(COACHES.length / pageSize);
@@ -357,7 +358,26 @@ function Team() {
             </Button>
           </div>
         </div>
-        <div className="mt-8 grid gap-4 sm:mt-9 sm:grid-cols-3 sm:gap-5">
+        <div
+          className="mt-8 grid touch-pan-y gap-4 sm:mt-9 sm:grid-cols-3 sm:gap-5"
+          onTouchStart={(event) => {
+            touchStartX.current = event.touches[0]?.clientX ?? null;
+          }}
+          onTouchEnd={(event) => {
+            const startX = touchStartX.current;
+            const endX = event.changedTouches[0]?.clientX;
+            touchStartX.current = null;
+
+            if (startX === null || endX === undefined) return;
+
+            const distance = endX - startX;
+            if (Math.abs(distance) < 48) return;
+
+            setPage((currentPage) =>
+              Math.max(0, Math.min(pageCount - 1, currentPage + (distance < 0 ? 1 : -1))),
+            );
+          }}
+        >
           {visibleCoaches.map((coach) => (
             <div
               key={coach.name}
