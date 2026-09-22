@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import heroShoe from "@/assets/hero-shoe.jpg.asset.json";
 import coachMarina from "@/assets/coach-marina.png";
 import coachPaulo from "@/assets/coach-paulo.png";
@@ -66,7 +67,7 @@ function Dots() {
         <a key={id} href={`#${id}`} title={label} aria-label={label}>
           <span
             className={`block size-2.5 rounded-full transition-colors duration-300 ${
-              active === id ? "bg-amber" : "bg-ink/20 hover:bg-ink/40"
+              active === id ? "bg-primary" : "bg-foreground/25 hover:bg-foreground/50"
             }`}
           />
         </a>
@@ -79,33 +80,33 @@ function Hero() {
   return (
     <section
       id="inicio"
-      className="snap-sec relative flex items-end overflow-hidden bg-ink"
+      className="snap-sec relative flex items-end overflow-hidden bg-background"
     >
       <img
         src={heroShoe.url}
         alt="Corredor em passada sobre asfalto molhado ao amanhecer"
         className="ken-burns absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-ink/0" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-background/5" />
       <div className="relative z-10 w-full px-6 pb-14 sm:px-12">
-        <p className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-cream/90 sm:text-sm">
+        <p className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground/90 sm:text-sm">
           Assessoria de corrida · desde 2014
         </p>
-        <h1 className="max-w-[20ch] font-display text-5xl font-semibold leading-none text-balance text-cream sm:text-7xl">
+        <h1 className="max-w-[20ch] font-display text-5xl font-semibold leading-none text-balance text-foreground sm:text-7xl">
           A primeira passada já está contada.
         </h1>
-        <p className="mt-6 max-w-[44ch] font-mono text-sm text-pretty text-cream/80 sm:text-base">
+        <p className="mt-6 max-w-[44ch] font-mono text-sm text-pretty text-foreground/80 sm:text-base">
           Do 5K à maratona, um plano que respira com o seu ritmo. Treinos
           guiados de verdade, semana após semana.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
             href="#planos"
-            className="rounded-full bg-amber py-3 pl-5 pr-5 font-mono text-sm font-bold text-ink ring-1 ring-inset ring-amber/40 transition-transform hover:-translate-y-0.5"
+            className="rounded-full bg-primary px-5 py-3 font-mono text-sm font-bold text-primary-foreground ring-1 ring-inset ring-primary-soft/40 transition-transform hover:-translate-y-0.5 hover:bg-primary-soft"
           >
             Assinar plano
           </a>
-          <span className="font-mono text-xs uppercase tracking-[0.15em] text-cream/70">
+          <span className="font-mono text-xs uppercase tracking-[0.15em] text-foreground/70">
             3 cidades · 480 alunos ativos
           </span>
         </div>
@@ -121,7 +122,7 @@ const STORIES = [
     name: "Beatriz Leão",
     city: "São Paulo",
     text: "Primeira prova da vida, depois de 9 semanas de treino guiado.",
-    card: "bg-[#F0E7DB]",
+    card: "bg-card",
     accent: "text-pistao",
   },
   {
@@ -130,7 +131,7 @@ const STORIES = [
     name: "Ricardo Alves",
     city: "Curitiba",
     text: "Chegou no 3:40 após o plano de maratona de 16 semanas.",
-    card: "bg-[#E7ECE2]",
+    card: "bg-card-high",
     accent: "text-sage",
   },
   {
@@ -139,7 +140,7 @@ const STORIES = [
     name: "Camila Rocha",
     city: "Recife",
     text: "Primeira meia maratona, sem dor e com ritmo constante.",
-    card: "bg-[#E2EAEE]",
+    card: "bg-card",
     accent: "text-sky",
   },
 ];
@@ -148,35 +149,35 @@ function Stories() {
   return (
     <section
       id="historias"
-      className="snap-sec relative flex flex-col justify-center bg-cream"
+      className="snap-sec relative flex flex-col justify-center bg-background"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-pistao">
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Histórias de quem terminou
         </p>
-        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-ink sm:text-5xl">
+        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
           Progressão que você sente no asfalto.
         </h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
           {STORIES.map((story) => (
             <div
               key={story.name}
-              className={`rounded-[min(1vw,20px)] p-6 ring-1 ring-black/5 ${story.card}`}
+              className={`rounded-lg p-6 ring-1 ring-border ${story.card}`}
             >
               <div className="flex items-baseline gap-2">
                 <span
-                  className={`font-display text-5xl font-semibold leading-none ${story.accent}`}
+                   className="font-display text-5xl font-semibold leading-none text-primary"
                 >
                   {story.result}
                 </span>
-                <span className="font-mono text-sm text-ink-soft">
+                <span className="font-mono text-sm text-muted">
                   {story.detail}
                 </span>
               </div>
-              <p className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-ink-soft">
+              <p className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-muted">
                 {story.name} · {story.city}
               </p>
-              <p className="mt-2 font-mono text-sm text-pretty text-ink/80">
+              <p className="mt-2 font-mono text-sm text-pretty text-foreground/80">
                 {story.text}
               </p>
             </div>
@@ -212,20 +213,20 @@ function Team() {
   return (
     <section
       id="equipe"
-      className="snap-sec relative flex flex-col justify-center bg-[#EDE6D9]"
+      className="snap-sec relative flex flex-col justify-center bg-card"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-pistao">
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Quem faz o treino acontecer
         </p>
-        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-ink sm:text-5xl">
+        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
           A equipe por trás do ritmo.
         </h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
           {COACHES.map((coach) => (
             <div
               key={coach.name}
-              className="overflow-hidden rounded-[min(1vw,20px)] bg-cream ring-1 ring-black/5"
+              className="overflow-hidden rounded-lg bg-background ring-1 ring-border"
             >
               <div className="aspect-[4/5] w-full overflow-hidden">
                 <img
@@ -238,13 +239,13 @@ function Team() {
                 />
               </div>
               <div className="p-5">
-                <p className="font-display text-xl font-semibold text-ink">
+                <p className="font-display text-xl font-semibold text-foreground">
                   {coach.name}
                 </p>
-                <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-pistao">
+                <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-primary">
                   {coach.credential}
                 </p>
-                <p className="mt-2 font-mono text-sm text-pretty text-ink-soft">
+                <p className="mt-2 font-mono text-sm text-pretty text-muted">
                   {coach.bio}
                 </p>
               </div>
@@ -256,103 +257,87 @@ function Team() {
   );
 }
 
-const PLANS = [
-  {
-    name: "Plano Base",
-    price: "R$ 89",
-    features: ["Plano de treino mensal", "App de acompanhamento", "Comunidade de alunos"],
-    cities: "São Paulo · Curitiba",
-    highlight: false,
-  },
-  {
-    name: "Plano Completo",
-    price: "R$ 149",
-    features: ["Tudo do Base", "2 retornos por mês", "Análise de corrida"],
-    cities: "São Paulo · Curitiba · Recife",
-    highlight: true,
-  },
-  {
-    name: "Plano Pro",
-    price: "R$ 229",
-    features: ["Tudo do Completo", "Retornos ilimitados", "Planejamento de prova"],
-    cities: "São Paulo · Curitiba · Recife",
-    highlight: false,
-  },
-];
+const LOCATIONS = ["Bebedouro", "São Paulo", "Online"] as const;
+type Location = (typeof LOCATIONS)[number];
+
+const PRICES: Record<Location, { period: string; price: string; detail: string }[]> = {
+  Bebedouro: [
+    { period: "Mensal", price: "R$ 129", detail: "por mês" },
+    { period: "Trimestral", price: "R$ 349", detail: "3 meses" },
+    { period: "Semestral", price: "R$ 649", detail: "6 meses" },
+    { period: "Anual", price: "R$ 1.190", detail: "12 meses" },
+  ],
+  "São Paulo": [
+    { period: "Mensal", price: "R$ 169", detail: "por mês" },
+    { period: "Trimestral", price: "R$ 459", detail: "3 meses" },
+    { period: "Semestral", price: "R$ 849", detail: "6 meses" },
+    { period: "Anual", price: "R$ 1.590", detail: "12 meses" },
+  ],
+  Online: [
+    { period: "Mensal", price: "R$ 89", detail: "por mês" },
+    { period: "Trimestral", price: "R$ 239", detail: "3 meses" },
+    { period: "Semestral", price: "R$ 449", detail: "6 meses" },
+    { period: "Anual", price: "R$ 790", detail: "12 meses" },
+  ],
+};
 
 function Plans() {
+  const [location, setLocation] = useState<Location>("Bebedouro");
+
   return (
     <section
       id="planos"
-      className="snap-sec relative flex flex-col justify-center bg-cream"
+      className="snap-sec relative flex flex-col justify-center bg-background"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-pistao">
-          Planos mensais
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
+          Planos Buzzini
         </p>
-        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-ink sm:text-5xl">
-          Escolha o ritmo, a cidade e o plano.
+        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
+          Seu treino, no seu ritmo.
         </h2>
-        <div className="mt-10 grid gap-5 sm:grid-cols-3">
-          {PLANS.map((plan) =>
-            plan.highlight ? (
-              <div
-                key={plan.name}
-                className="flex flex-col rounded-[min(1vw,20px)] bg-pistao p-6 ring-1 ring-inset ring-pistao/40"
-              >
-                <p className="font-mono text-xs uppercase tracking-[0.15em] text-cream/80">
-                  {plan.name}
+        <div className="mt-8 flex w-full border-b border-border" role="tablist" aria-label="Local de treino">
+          {LOCATIONS.map((item) => (
+            <Button
+              key={item}
+              type="button"
+              role="tab"
+              aria-selected={location === item}
+              variant="ghost"
+              onClick={() => setLocation(item)}
+              className={`h-12 flex-1 rounded-none border-b-2 font-mono text-xs uppercase sm:text-sm ${
+                location === item
+                  ? "border-primary text-primary hover:bg-primary/10 hover:text-primary"
+                  : "border-transparent text-muted hover:bg-card-high hover:text-foreground"
+              }`}
+            >
+              {item}
+            </Button>
+          ))}
+        </div>
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {PRICES[location].map((option, index) => (
+            <article
+              key={option.period}
+              className={`flex min-h-44 flex-col justify-between rounded-lg p-5 ring-1 ${
+                index === 3
+                  ? "bg-primary text-primary-foreground ring-primary-soft"
+                  : "bg-card text-foreground ring-border"
+              }`}
+            >
+              <div>
+                <p className={`font-mono text-xs uppercase tracking-[0.12em] ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}>
+                  {option.period}
                 </p>
-                <p className="mt-3 font-display text-4xl font-semibold text-cream">
-                  {plan.price}
-                  <span className="font-mono text-base font-normal text-cream/70">
-                    /mês
-                  </span>
+                <p className="mt-4 font-display text-3xl font-semibold leading-none sm:text-4xl">
+                  {option.price}
                 </p>
-                <ul className="mt-5 space-y-2 font-mono text-sm text-pretty text-cream/90">
-                  {plan.features.map((feature) => (
-                    <li key={feature}>{feature}</li>
-                  ))}
-                </ul>
-                <div className="mt-auto border-t border-cream/20 pt-6">
-                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-cream/80">
-                    Cidades
-                  </p>
-                  <p className="mt-1 font-mono text-sm text-cream">
-                    {plan.cities}
-                  </p>
-                </div>
               </div>
-            ) : (
-              <div
-                key={plan.name}
-                className="flex flex-col rounded-[min(1vw,20px)] bg-[#F0E7DB] p-6 ring-1 ring-black/5"
-              >
-                <p className="font-mono text-xs uppercase tracking-[0.15em] text-ink-soft">
-                  {plan.name}
-                </p>
-                <p className="mt-3 font-display text-4xl font-semibold text-ink">
-                  {plan.price}
-                  <span className="font-mono text-base font-normal text-ink-soft">
-                    /mês
-                  </span>
-                </p>
-                <ul className="mt-5 space-y-2 font-mono text-sm text-pretty text-ink/80">
-                  {plan.features.map((feature) => (
-                    <li key={feature}>{feature}</li>
-                  ))}
-                </ul>
-                <div className="mt-auto border-t border-black/5 pt-6">
-                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-ink-soft">
-                    Cidades
-                  </p>
-                  <p className="mt-1 font-mono text-sm text-ink">
-                    {plan.cities}
-                  </p>
-                </div>
-              </div>
-            ),
-          )}
+              <p className={`mt-6 font-mono text-xs ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}>
+                {option.detail}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -381,32 +366,32 @@ function Faq() {
   return (
     <section
       id="faq"
-      className="snap-sec relative flex flex-col justify-center bg-[#EDE6D9]"
+      className="snap-sec relative flex flex-col justify-center bg-card"
     >
       <div className="mx-auto w-full max-w-4xl px-6 sm:px-12">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-pistao">
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Dúvidas frequentes
         </p>
-        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-ink sm:text-5xl">
+        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
           Antes de amarrar o cadarço.
         </h2>
         <div className="mt-10 space-y-3">
           {FAQS.map((faq, index) => (
             <div
               key={faq.question}
-              className="overflow-hidden rounded-[min(1vw,18px)] bg-cream ring-1 ring-black/5"
+               className="overflow-hidden rounded-lg bg-background ring-1 ring-border"
             >
               <details open={index === 0} className="group">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5">
-                  <span className="font-display text-lg font-medium text-ink">
+                   <span className="font-display text-lg font-medium text-foreground">
                     {faq.question}
                   </span>
-                  <span className="font-mono text-xl leading-none text-ink-soft">
+                   <span className="font-mono text-xl leading-none text-primary">
                     <span className="group-open:hidden">+</span>
                     <span className="hidden group-open:inline">–</span>
                   </span>
                 </summary>
-                <p className="px-6 pb-6 font-mono text-sm text-pretty text-ink-soft">
+                 <p className="px-6 pb-6 font-mono text-sm text-pretty text-muted">
                   {faq.answer}
                 </p>
               </details>
@@ -422,21 +407,21 @@ function Footer() {
   return (
     <section
       id="rodape"
-      className="snap-sec relative flex flex-col justify-end bg-ink"
+      className="snap-sec relative flex flex-col justify-end bg-background"
     >
       <div className="mx-auto w-full max-w-6xl px-6 pb-12 sm:px-12">
         <div className="grid gap-10 sm:grid-cols-2">
           <div>
-            <p className="font-display text-3xl font-semibold text-cream">
+             <p className="font-display text-3xl font-semibold text-foreground">
               Passada
             </p>
-            <p className="mt-3 max-w-[40ch] font-mono text-sm text-pretty text-cream/70">
+             <p className="mt-3 max-w-[40ch] font-mono text-sm text-pretty text-muted">
               Assessoria de corrida com foco em ritmo, respiração e progressão
               medível.
             </p>
           </div>
-          <div className="flex flex-col gap-3 font-mono text-sm text-cream/80">
-            <p className="text-xs uppercase tracking-[0.15em] text-cream/50">
+           <div className="flex flex-col gap-3 font-mono text-sm text-foreground/80">
+             <p className="text-xs uppercase tracking-[0.15em] text-muted">
               Contato
             </p>
             <p>ola@passada.run</p>
@@ -444,26 +429,26 @@ function Footer() {
             <div className="mt-2 flex gap-4">
               <a
                 href="#"
-                className="transition-colors hover:text-amber"
+                 className="transition-colors hover:text-primary"
               >
                 Instagram
               </a>
               <a
                 href="#"
-                className="transition-colors hover:text-amber"
+                 className="transition-colors hover:text-primary"
               >
                 Strava
               </a>
               <a
                 href="#"
-                className="transition-colors hover:text-amber"
+                 className="transition-colors hover:text-primary"
               >
                 YouTube
               </a>
             </div>
           </div>
         </div>
-        <p className="mt-10 border-t border-cream/10 pt-5 font-mono text-xs text-cream/40">
+         <p className="mt-10 border-t border-border pt-5 font-mono text-xs text-muted">
           © 2026 Passada Assessoria · São Paulo · Curitiba · Recife
         </p>
       </div>
@@ -473,7 +458,7 @@ function Footer() {
 
 function Index() {
   return (
-    <main className="bg-cream">
+    <main className="bg-background">
       <Dots />
       <Hero />
       <Stories />
