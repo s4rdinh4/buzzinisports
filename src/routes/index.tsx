@@ -125,20 +125,23 @@ function Stories() {
   return (
     <section
       id="historias"
-      className="snap-sec relative flex flex-col justify-center bg-background"
+      className="snap-sec relative flex flex-col justify-start bg-background py-16 sm:justify-center sm:py-0"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Histórias de quem terminou
         </p>
-        <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
+        <h2 className="mt-3 max-w-[40ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:mt-4 sm:text-5xl">
           Progressão que você sente no asfalto.
         </h2>
-        <div className="mt-10 grid gap-5 sm:grid-cols-3">
+        <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-5">
           {STORIES.map((story) => (
-            <div key={story.name} className={`rounded-lg p-6 ring-1 ring-border ${story.card}`}>
+            <div
+              key={story.name}
+              className={`rounded-lg p-5 ring-1 ring-border sm:p-6 ${story.card}`}
+            >
               <div className="flex items-baseline gap-2">
-                <span className="font-display text-5xl font-semibold leading-none text-primary">
+                <span className="font-display text-4xl font-semibold leading-none text-primary sm:text-5xl">
                   {story.result}
                 </span>
                 <span className="font-mono text-sm text-muted">{story.detail}</span>
