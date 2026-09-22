@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Radio } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
 import heroVideoMp4 from "@/assets/hero-video.mp4.asset.json";
 import heroVideoWebm from "@/assets/hero-video.webm.asset.json";
@@ -219,9 +220,14 @@ const COACHES = [
 
 function Team() {
   const [page, setPage] = useState(0);
-  const pageSize = 3;
+  const isMobile = useIsMobile();
+  const pageSize = isMobile ? 1 : 3;
   const pageCount = Math.ceil(COACHES.length / pageSize);
   const visibleCoaches = COACHES.slice(page * pageSize, (page + 1) * pageSize);
+
+  useEffect(() => {
+    setPage((currentPage) => Math.min(currentPage, pageCount - 1));
+  }, [pageCount]);
 
   return (
     <section id="equipe" className="snap-sec relative flex flex-col justify-center bg-card">
@@ -264,7 +270,7 @@ function Team() {
               key={coach.name}
               className="overflow-hidden rounded-lg bg-background ring-1 ring-border"
             >
-              <div className="aspect-[4/5] w-full overflow-hidden">
+              <div className="aspect-[4/3] w-full overflow-hidden sm:aspect-[4/5]">
                 <img
                   src={coach.photo}
                   alt={`Retrato de ${coach.name}`}
