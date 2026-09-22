@@ -61,7 +61,13 @@ function SiteLogo() {
 
   return (
     <header
-      className={`z-50 transition-all duration-300 ${isDesktopScrolled ? "fixed left-1/2 top-4 -translate-x-1/2 sm:top-6" : "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"}`}
+      className={`z-50 transition-all duration-300 ${
+        isDesktopScrolled
+          ? "fixed left-6 top-4 sm:left-12 sm:top-6"
+          : isDesktop
+            ? "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
+            : "absolute left-6 top-4 sm:left-12 sm:top-6"
+      }`}
       onMouseEnter={() => shouldShowMenu && setIsMenuOpen(true)}
       onMouseLeave={() => setIsMenuOpen(false)}
       onFocus={() => shouldShowMenu && setIsMenuOpen(true)}
