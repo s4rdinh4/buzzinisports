@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
         content:
           "Planos de treino personalizados, equipe de coaches e acompanhamento de verdade. Do 5K à maratona.",
       },
-et      { property: "og:type", content: "website" },
+      { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
