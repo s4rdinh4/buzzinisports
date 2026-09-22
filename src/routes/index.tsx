@@ -209,6 +209,12 @@ const COACHES = [
     credential: "Tech · Desenvolvedor",
     bio: "Responsável pelo sistema de acompanhamento de treinos e evolução dos alunos.",
   },
+  {
+    photo: coachLara,
+    name: "Larissa Paredes",
+    credential: "Marketing · Designer",
+    bio: "Responsável pela comunicação visual e marketing da Buzzini Sports.",
+  },
 ];
 
 function Team() {
@@ -221,7 +227,7 @@ function Team() {
         <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
           A equipe por trás do ritmo.
         </h2>
-        <div className="mt-10 grid gap-5 sm:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:grid-cols-3">
           {COACHES.map((coach) => (
             <div
               key={coach.name}
