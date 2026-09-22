@@ -13,13 +13,13 @@ import coachLara from "@/assets/coach-lara.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Passada — Assessoria de Corrida" },
+      { title: "Buzzini Sports — Assessoria de Corrida" },
       {
         name: "description",
         content:
           "Assessoria de corrida com planos personalizados do 5K à maratona. São Paulo, Curitiba e Recife — presencial e online.",
       },
-      { property: "og:title", content: "Passada — Assessoria de Corrida" },
+      { property: "og:title", content: "Buzzini Sports— Assessoria de Corrida" },
       {
         property: "og:description",
         content:
@@ -52,10 +52,7 @@ function SiteLogo() {
 
 function Hero() {
   return (
-    <section
-      id="inicio"
-      className="snap-sec relative flex items-end overflow-hidden bg-background"
-    >
+    <section id="inicio" className="snap-sec relative flex items-end overflow-hidden bg-background">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
@@ -73,8 +70,8 @@ function Hero() {
           A primeira passada já está contada.
         </h1>
         <p className="mt-6 max-w-[44ch] font-mono text-sm text-pretty text-foreground/80 sm:text-base">
-          Do 5K à maratona, um plano que respira com o seu ritmo. Treinos
-          guiados de verdade, semana após semana.
+          Do 5K à maratona, um plano que respira com o seu ritmo. Treinos guiados de verdade, semana
+          após semana.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
@@ -137,26 +134,17 @@ function Stories() {
         </h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
           {STORIES.map((story) => (
-            <div
-              key={story.name}
-              className={`rounded-lg p-6 ring-1 ring-border ${story.card}`}
-            >
+            <div key={story.name} className={`rounded-lg p-6 ring-1 ring-border ${story.card}`}>
               <div className="flex items-baseline gap-2">
-                <span
-                   className="font-display text-5xl font-semibold leading-none text-primary"
-                >
+                <span className="font-display text-5xl font-semibold leading-none text-primary">
                   {story.result}
                 </span>
-                <span className="font-mono text-sm text-muted">
-                  {story.detail}
-                </span>
+                <span className="font-mono text-sm text-muted">{story.detail}</span>
               </div>
               <p className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-muted">
                 {story.name} · {story.city}
               </p>
-              <p className="mt-2 font-mono text-sm text-pretty text-foreground/80">
-                {story.text}
-              </p>
+              <p className="mt-2 font-mono text-sm text-pretty text-foreground/80">{story.text}</p>
             </div>
           ))}
         </div>
@@ -188,10 +176,7 @@ const COACHES = [
 
 function Team() {
   return (
-    <section
-      id="equipe"
-      className="snap-sec relative flex flex-col justify-center bg-card"
-    >
+    <section id="equipe" className="snap-sec relative flex flex-col justify-center bg-card">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Quem faz o treino acontecer
@@ -216,15 +201,11 @@ function Team() {
                 />
               </div>
               <div className="p-5">
-                <p className="font-display text-xl font-semibold text-foreground">
-                  {coach.name}
-                </p>
+                <p className="font-display text-xl font-semibold text-foreground">{coach.name}</p>
                 <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-primary">
                   {coach.credential}
                 </p>
-                <p className="mt-2 font-mono text-sm text-pretty text-muted">
-                  {coach.bio}
-                </p>
+                <p className="mt-2 font-mono text-sm text-pretty text-muted">{coach.bio}</p>
               </div>
             </div>
           ))}
@@ -269,13 +250,17 @@ function Locations() {
             {brazilMap.locations
               .filter((state: { id: string }) => ["sp", "mg", "rj", "es"].includes(state.id))
               .map((state: { id: string; path: string }) => (
-              <path
-                key={state.id}
-                d={state.path}
-                className={state.id === "sp" ? "fill-primary/20 stroke-primary" : "fill-background stroke-border"}
-                strokeWidth={state.id === "sp" ? 2.5 : 1.5}
-                strokeLinejoin="round"
-              />
+                <path
+                  key={state.id}
+                  d={state.path}
+                  className={
+                    state.id === "sp"
+                      ? "fill-primary/20 stroke-primary"
+                      : "fill-background stroke-border"
+                  }
+                  strokeWidth={state.id === "sp" ? 2.5 : 1.5}
+                  strokeLinejoin="round"
+                />
               ))}
             {[
               { x: 398, y: 415, number: "1", label: "BEBEDOURO" },
@@ -284,7 +269,13 @@ function Locations() {
             ].map((point) => (
               <g key={point.label}>
                 <circle cx={point.x} cy={point.y} r="11" className="fill-primary/20" />
-                <circle cx={point.x} cy={point.y} r="7" className="fill-primary stroke-background" strokeWidth="2" />
+                <circle
+                  cx={point.x}
+                  cy={point.y}
+                  r="7"
+                  className="fill-primary stroke-background"
+                  strokeWidth="2"
+                />
                 <text
                   x={point.x}
                   y={point.y + 4}
@@ -297,9 +288,15 @@ function Locations() {
             ))}
           </svg>
           <div className="relative z-10 mx-auto mt-6 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-full bg-background px-5 py-3 font-mono text-[10px] uppercase text-muted ring-1 ring-border">
-            <span><b className="text-primary">1</b> Bebedouro</span>
-            <span><b className="text-primary">2</b> Ribeirão Preto</span>
-            <span><b className="text-primary">3</b> São Paulo</span>
+            <span>
+              <b className="text-primary">1</b> Bebedouro
+            </span>
+            <span>
+              <b className="text-primary">2</b> Ribeirão Preto
+            </span>
+            <span>
+              <b className="text-primary">3</b> São Paulo
+            </span>
           </div>
         </div>
 
@@ -317,12 +314,8 @@ function Locations() {
                   <MapPin aria-hidden="true" className="size-5" />
                 </div>
                 <div>
-                  <p className="font-display text-xl font-semibold text-foreground">
-                    {item.name}
-                  </p>
-                  <p className="mt-1 font-mono text-xs uppercase text-primary">
-                    {item.state}
-                  </p>
+                  <p className="font-display text-xl font-semibold text-foreground">{item.name}</p>
+                  <p className="mt-1 font-mono text-xs uppercase text-primary">{item.state}</p>
                   <p className="mt-2 font-mono text-sm text-muted">{item.detail}</p>
                 </div>
               </div>
@@ -356,7 +349,10 @@ const PLAN_BENEFITS = {
   Anual: ["Treino personalizado", "Ajustes mensais", "Melhor custo-benefício"],
 } as const;
 
-const PRICES: Record<Location, { period: keyof typeof PLAN_BENEFITS; price: string; detail: string }[]> = {
+const PRICES: Record<
+  Location,
+  { period: keyof typeof PLAN_BENEFITS; price: string; detail: string }[]
+> = {
   Bebedouro: [
     { period: "Mensal", price: "R$ 129", detail: "por mês" },
     { period: "Trimestral", price: "R$ 349", detail: "3 meses" },
@@ -381,14 +377,9 @@ function Plans() {
   const [location, setLocation] = useState<Location>("Bebedouro");
 
   return (
-    <section
-      id="planos"
-      className="snap-sec relative flex flex-col justify-center bg-background"
-    >
+    <section id="planos" className="snap-sec relative flex flex-col justify-center bg-background">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
-          Planos Buzzini
-        </p>
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">Planos Buzzini</p>
         <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
           Seu treino, no seu ritmo.
         </h2>
@@ -426,22 +417,33 @@ function Plans() {
               }`}
             >
               <div>
-                <p className={`font-mono text-xs uppercase tracking-[0.12em] ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}>
+                <p
+                  className={`font-mono text-xs uppercase tracking-[0.12em] ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}
+                >
                   {option.period}
                 </p>
                 <p className="mt-4 font-display text-3xl font-semibold leading-none sm:text-4xl">
                   {option.price}
                 </p>
-                <ul className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${index === 3 ? "text-primary-foreground/80" : "text-foreground/75"}`}>
+                <ul
+                  className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${index === 3 ? "text-primary-foreground/80" : "text-foreground/75"}`}
+                >
                   {PLAN_BENEFITS[option.period].map((benefit) => (
                     <li key={benefit} className="flex gap-2">
-                      <span aria-hidden="true" className={index === 3 ? "text-primary-foreground" : "text-primary"}>✓</span>
+                      <span
+                        aria-hidden="true"
+                        className={index === 3 ? "text-primary-foreground" : "text-primary"}
+                      >
+                        ✓
+                      </span>
                       <span>{benefit}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <p className={`mt-6 font-mono text-xs ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}>
+              <p
+                className={`mt-6 font-mono text-xs ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}
+              >
                 {option.detail}
               </p>
             </article>
@@ -472,10 +474,7 @@ const FAQS = [
 
 function Faq() {
   return (
-    <section
-      id="faq"
-      className="snap-sec relative flex flex-col justify-center bg-card"
-    >
+    <section id="faq" className="snap-sec relative flex flex-col justify-center bg-card">
       <div className="mx-auto w-full max-w-4xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Dúvidas frequentes
@@ -487,21 +486,19 @@ function Faq() {
           {FAQS.map((faq, index) => (
             <div
               key={faq.question}
-               className="overflow-hidden rounded-lg bg-background ring-1 ring-border"
+              className="overflow-hidden rounded-lg bg-background ring-1 ring-border"
             >
               <details open={index === 0} className="group">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5">
-                   <span className="font-display text-lg font-medium text-foreground">
+                  <span className="font-display text-lg font-medium text-foreground">
                     {faq.question}
                   </span>
-                   <span className="font-mono text-xl leading-none text-primary">
+                  <span className="font-mono text-xl leading-none text-primary">
                     <span className="group-open:hidden">+</span>
                     <span className="hidden group-open:inline">–</span>
                   </span>
                 </summary>
-                 <p className="px-6 pb-6 font-mono text-sm text-pretty text-muted">
-                  {faq.answer}
-                </p>
+                <p className="px-6 pb-6 font-mono text-sm text-pretty text-muted">{faq.answer}</p>
               </details>
             </div>
           ))}
@@ -513,51 +510,34 @@ function Faq() {
 
 function Footer() {
   return (
-    <section
-      id="rodape"
-      className="snap-sec relative flex flex-col justify-end bg-background"
-    >
+    <section id="rodape" className="snap-sec relative flex flex-col justify-end bg-background">
       <div className="mx-auto w-full max-w-6xl px-6 pb-12 sm:px-12">
         <div className="grid gap-10 sm:grid-cols-2">
           <div>
-             <p className="font-display text-3xl font-semibold text-foreground">
-              Passada
-            </p>
-             <p className="mt-3 max-w-[40ch] font-mono text-sm text-pretty text-muted">
-              Assessoria de corrida com foco em ritmo, respiração e progressão
-              medível.
+            <p className="font-display text-3xl font-semibold text-foreground">Passada</p>
+            <p className="mt-3 max-w-[40ch] font-mono text-sm text-pretty text-muted">
+              Assessoria de corrida com foco em ritmo, respiração e progressão medível.
             </p>
           </div>
-           <div className="flex flex-col gap-3 font-mono text-sm text-foreground/80">
-             <p className="text-xs uppercase tracking-[0.15em] text-muted">
-              Contato
-            </p>
+          <div className="flex flex-col gap-3 font-mono text-sm text-foreground/80">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted">Contato</p>
             <p>ola@passada.run</p>
             <p>+55 11 98877-0014</p>
             <div className="mt-2 flex gap-4">
-              <a
-                href="#"
-                 className="transition-colors hover:text-primary"
-              >
+              <a href="#" className="transition-colors hover:text-primary">
                 Instagram
               </a>
-              <a
-                href="#"
-                 className="transition-colors hover:text-primary"
-              >
+              <a href="#" className="transition-colors hover:text-primary">
                 Strava
               </a>
-              <a
-                href="#"
-                 className="transition-colors hover:text-primary"
-              >
+              <a href="#" className="transition-colors hover:text-primary">
                 YouTube
               </a>
             </div>
           </div>
         </div>
-         <p className="mt-10 border-t border-border pt-5 font-mono text-xs text-muted">
-          © 2026 Passada Assessoria · São Paulo · Curitiba · Recife
+        <p className="mt-10 border-t border-border pt-5 font-mono text-xs text-muted">
+          © 2026 Passada Assessoria · Bebedouro · Ribeirão Preto · São Paulo
         </p>
       </div>
     </section>
