@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { MapPin, Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroShoe from "@/assets/hero-shoe.jpg.asset.json";
 import coachMarina from "@/assets/coach-marina.png";
@@ -32,6 +33,7 @@ const SECTIONS = [
   { id: "inicio", label: "Início" },
   { id: "historias", label: "Histórias" },
   { id: "equipe", label: "Equipe" },
+  { id: "localidades", label: "Localidades" },
   { id: "planos", label: "Planos" },
   { id: "faq", label: "FAQ" },
   { id: "rodape", label: "Contato" },
@@ -251,6 +253,116 @@ function Team() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const LOCATIONS_INFO = [
+  {
+    name: "Bebedouro",
+    state: "São Paulo",
+    detail: "Treinos presenciais e acompanhamento próximo.",
+  },
+  {
+    name: "São Paulo",
+    state: "Capital",
+    detail: "Encontros em grupo e preparação para provas.",
+  },
+] as const;
+
+function Locations() {
+  return (
+    <section
+      id="localidades"
+      className="snap-sec relative flex flex-col justify-center overflow-hidden bg-card"
+    >
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-6 py-14 sm:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div className="relative order-2 mx-auto w-full max-w-xl lg:order-1">
+          <div className="absolute inset-x-[18%] top-[42%] h-px bg-primary/25" />
+          <svg
+            viewBox="0 0 520 560"
+            role="img"
+            aria-label="Mapa do Brasil com Bebedouro e São Paulo destacadas"
+            className="relative mx-auto h-auto max-h-[58svh] w-full overflow-visible"
+          >
+            <path
+              d="M207 34 249 51 285 47 319 72 365 74 391 105 438 118 458 154 431 186 442 218 416 248 405 290 375 311 362 351 332 376 317 415 287 443 274 493 247 530 225 487 196 462 182 425 148 398 126 362 91 341 83 306 54 276 67 242 54 206 82 179 84 143 120 132 140 94 177 84Z"
+              className="fill-background stroke-border"
+              strokeWidth="3"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M207 34 249 51 285 47 319 72 365 74 391 105 438 118 458 154 431 186 442 218 416 248 405 290 375 311 362 351 332 376 317 415 287 443 274 493 247 530 225 487 196 462 182 425 148 398 126 362 91 341 83 306 54 276 67 242 54 206 82 179 84 143 120 132 140 94 177 84Z"
+              fill="none"
+              className="stroke-primary/25"
+              strokeWidth="10"
+              strokeLinejoin="round"
+            />
+            <g className="fill-none stroke-border" strokeWidth="1">
+              <path d="M84 143 176 170 250 132 365 74" />
+              <path d="M67 242 160 252 232 225 330 239 431 186" />
+              <path d="M83 306 176 315 264 287 405 290" />
+              <path d="M126 362 216 370 332 376" />
+              <path d="M182 425 287 443" />
+            </g>
+            <g>
+              <circle cx="291" cy="375" r="20" className="fill-primary/15" />
+              <circle cx="291" cy="375" r="7" className="fill-primary" />
+              <circle cx="291" cy="375" r="13" className="fill-none stroke-primary" strokeWidth="2" />
+              <path d="M291 361V323H365" className="fill-none stroke-primary" strokeWidth="2" />
+              <text x="375" y="318" className="fill-foreground font-mono text-[15px] font-bold">BEBEDOURO</text>
+              <text x="375" y="338" className="fill-muted font-mono text-[11px]">SP</text>
+            </g>
+            <g>
+              <circle cx="279" cy="397" r="20" className="fill-primary/15" />
+              <circle cx="279" cy="397" r="7" className="fill-primary" />
+              <circle cx="279" cy="397" r="13" className="fill-none stroke-primary" strokeWidth="2" />
+              <path d="M279 411V449H354" className="fill-none stroke-primary" strokeWidth="2" />
+              <text x="364" y="454" className="fill-foreground font-mono text-[15px] font-bold">SÃO PAULO</text>
+              <text x="364" y="474" className="fill-muted font-mono text-[11px]">CAPITAL</text>
+            </g>
+          </svg>
+        </div>
+
+        <div className="order-1 lg:order-2">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
+            Onde a passada acontece
+          </p>
+          <h2 className="mt-4 max-w-[14ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
+            Perto de você. Em todo o Brasil.
+          </h2>
+          <div className="mt-8 divide-y divide-border border-y border-border">
+            {LOCATIONS_INFO.map((item) => (
+              <div key={item.name} className="flex gap-4 py-5">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                  <MapPin aria-hidden="true" className="size-5" />
+                </div>
+                <div>
+                  <p className="font-display text-xl font-semibold text-foreground">
+                    {item.name}
+                  </p>
+                  <p className="mt-1 font-mono text-xs uppercase text-primary">
+                    {item.state}
+                  </p>
+                  <p className="mt-2 font-mono text-sm text-muted">{item.detail}</p>
+                </div>
+              </div>
+            ))}
+            <div className="flex gap-4 py-5">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-background text-primary ring-1 ring-border">
+                <Radio aria-hidden="true" className="size-5" />
+              </div>
+              <div>
+                <p className="font-display text-xl font-semibold text-foreground">Online</p>
+                <p className="mt-1 font-mono text-xs uppercase text-primary">Todo o Brasil</p>
+                <p className="mt-2 font-mono text-sm text-muted">
+                  Planilha personalizada e acompanhamento onde você estiver.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -482,6 +594,7 @@ function Index() {
       <Hero />
       <Stories />
       <Team />
+      <Locations />
       <Plans />
       <Faq />
       <Footer />
