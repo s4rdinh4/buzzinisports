@@ -156,16 +156,16 @@ function Stories() {
 
 const COACHES = [
   {
+    photo: coachPaulo,
+    name: "Robson Botelho",
+    credential: "Head Coach · Maratonista",
+    bio: "Especializado em treinamento de alta performances.",
+  },
+  {
     photo: coachMarina,
     name: "Marina Duarte",
     credential: "CREF 12345-G · Master Runner",
     bio: "11 anos de assessoria, foco em iniciantes e ritmo de base.",
-  },
-  {
-    photo: coachPaulo,
-    name: "Paulo Serrano",
-    credential: "CREF 88213-G · Maratonista",
-    bio: "Plano de maratona e progressão de volume sob medida.",
   },
   {
     photo: coachLara,
@@ -176,7 +176,7 @@ const COACHES = [
   {
     photo: coachLara,
     name: "Nara de Lucena",
-    credential: "CREF 163548-G/SP · Treinadora",
+    credential: "Treinadora Corrida",
     bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
   },
 ];
