@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import heroVideoWebm from "@/assets/hero-video.webm";
-import heroVideoMp4 from "@/assets/hero-video.mp4";
 import heroShoe from "@/assets/hero-shoe.jpg.asset.json";
 import coachMarina from "@/assets/coach-marina.png";
 import coachPaulo from "@/assets/coach-paulo.png";
@@ -83,17 +81,6 @@ function Hero() {
       id="inicio"
       className="snap-sec relative flex items-end overflow-hidden bg-ink"
     >
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster={heroShoe.url}
-      >
-        <source src={heroVideoWebm} type="video/webm" />
-        <source src={heroVideoMp4} type="video/mp4" />
-      </video>
       <img
         src={heroShoe.url}
         alt="Corredor em passada sobre asfalto molhado ao amanhecer"
