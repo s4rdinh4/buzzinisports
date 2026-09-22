@@ -785,7 +785,7 @@ function Faq() {
 
 function Footer() {
   return (
-    <footer id="rodape" className="relative bg-background py-12 sm:py-16">
+    <footer id="rodape" className="relative snap-start bg-background py-12 sm:py-16">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="grid gap-10 sm:grid-cols-2">
           <div>
