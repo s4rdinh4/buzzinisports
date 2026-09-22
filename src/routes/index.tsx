@@ -168,35 +168,7 @@ function Hero() {
   );
 }
 
-const STORIES = [
-  {
-    result: "5K",
-    detail: "em 25min",
-    name: "Beatriz Leão",
-    city: "São Paulo",
-    text: "Primeira prova da vida, depois de 9 semanas de treino guiado.",
-    card: "bg-card",
-    accent: "text-pistao",
-  },
-  {
-    result: "42K",
-    detail: "concluída",
-    name: "Ricardo Alves",
-    city: "Curitiba",
-    text: "Chegou no 3:40 após o plano de maratona de 16 semanas.",
-    card: "bg-card-high",
-    accent: "text-sage",
-  },
-  {
-    result: "21K",
-    detail: "estreia",
-    name: "Camila Rocha",
-    city: "Recife",
-    text: "Primeira meia maratona, sem dor e com ritmo constante.",
-    card: "bg-card",
-    accent: "text-sky",
-  },
-];
+const INSTAGRAM_REELS = ["Dalj0uZBQJ6", "DZ6B1tyt4J8", "DYQSDL6RDSJ"];
 
 function Stories() {
   return (
@@ -206,27 +178,21 @@ function Stories() {
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
-          Histórias de quem terminou
+          Buzzini em ação
         </p>
         <h2 className="mt-3 max-w-[40ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:mt-4 sm:text-5xl">
-          Progressão que você sente no asfalto.
+          Histórias que ganham movimento.
         </h2>
-        <div className="mt-8 grid gap-3 sm:mt-10 sm:grid-cols-3 sm:gap-5">
-          {STORIES.map((story) => (
-            <div
-              key={story.name}
-              className={`rounded-lg p-5 ring-1 ring-border sm:p-6 ${story.card}`}
-            >
-              <div className="flex items-baseline gap-2">
-                <span className="font-display text-4xl font-semibold leading-none text-primary sm:text-5xl">
-                  {story.result}
-                </span>
-                <span className="font-mono text-sm text-muted">{story.detail}</span>
-              </div>
-              <p className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-muted">
-                {story.name} · {story.city}
-              </p>
-              <p className="mt-2 font-mono text-sm text-pretty text-foreground/80">{story.text}</p>
+        <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
+          {INSTAGRAM_REELS.map((reelId, index) => (
+            <div key={reelId} className="overflow-hidden rounded-2xl bg-card ring-1 ring-border">
+              <iframe
+                src={`https://www.instagram.com/reel/${reelId}/embed`}
+                title={`Reel da Buzzini Sports ${index + 1}`}
+                className="aspect-[9/16] w-full border-0"
+                loading="lazy"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              />
             </div>
           ))}
         </div>
