@@ -11,6 +11,12 @@ import heroVideoWebm from "@/assets/hero-video.webm.asset.json";
 import coachMarina from "@/assets/coach-marina.png";
 import coachPaulo from "@/assets/coach-paulo.png";
 import coachLara from "@/assets/coach-lara.png";
+import video01 from "@/assets/depoiments/video01.mp4";
+import video01Poster from "@/assets/depoiments/video01.jpg";
+import video02 from "@/assets/depoiments/video02.mp4";
+import video02Poster from "@/assets/depoiments/video02.jpg";
+import video03 from "@/assets/depoiments/video03.mp4";
+import video03Poster from "@/assets/depoiments/video03.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -168,7 +174,11 @@ function Hero() {
   );
 }
 
-const INSTAGRAM_REELS = ["Dalj0uZBQJ6", "DZ6B1tyt4J8", "DYQSDL6RDSJ"];
+const DEPOIMENTS = [
+  { video: video01, poster: video01Poster },
+  { video: video02, poster: video02Poster },
+  { video: video03, poster: video03Poster },
+];
 
 function Stories() {
   return (
@@ -184,15 +194,21 @@ function Stories() {
           Histórias que ganham movimento.
         </h2>
         <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
-          {INSTAGRAM_REELS.map((reelId, index) => (
-            <div key={reelId} className="overflow-hidden rounded-2xl bg-card ring-1 ring-border">
-              <iframe
-                src={`https://www.instagram.com/reel/${reelId}/embed`}
-                title={`Reel da Buzzini Sports ${index + 1}`}
-                className="aspect-[9/16] w-full border-0"
-                loading="lazy"
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              />
+          {DEPOIMENTS.map((depoiment, index) => (
+            <div
+              key={depoiment.video}
+              className="overflow-hidden rounded-2xl bg-card ring-1 ring-border"
+            >
+              <video
+                className="aspect-[9/16] w-full object-cover"
+                controls
+                playsInline
+                preload="metadata"
+                poster={depoiment.poster}
+                aria-label={`Depoimento em vídeo da Buzzini Sports ${index + 1}`}
+              >
+                <source src={depoiment.video} type="video/mp4" />
+              </video>
             </div>
           ))}
         </div>
