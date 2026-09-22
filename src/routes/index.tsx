@@ -39,7 +39,7 @@ function SiteLogo() {
 
   return (
     <header
-      className="absolute left-4 top-4 z-50 sm:left-8 sm:top-6"
+      className="absolute left-6 top-4 z-50 sm:left-12 sm:top-6"
       onMouseEnter={() => setIsMenuOpen(true)}
       onMouseLeave={() => setIsMenuOpen(false)}
       onFocus={() => setIsMenuOpen(true)}
@@ -50,7 +50,7 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center rounded-full bg-background/85 p-2 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-200 ${isMenuOpen ? "w-64" : "w-44"}`}
+        className={`flex items-center rounded-full bg-background/85 p-1.5 shadow-xl ring-1 ring-border backdrop-blur-md transition-all duration-200 ${isMenuOpen ? "w-60" : "w-40"}`}
       >
         <a
           href="#inicio"
@@ -60,7 +60,7 @@ function SiteLogo() {
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className="h-9 w-auto object-contain drop-shadow-lg sm:h-10"
+            className="h-8 w-auto object-contain drop-shadow-lg sm:h-9"
           />
         </a>
         <button
@@ -69,7 +69,7 @@ function SiteLogo() {
           aria-expanded={isMenuOpen}
           aria-controls="site-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
-          className="flex size-10 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className="flex size-9 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
