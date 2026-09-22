@@ -590,7 +590,7 @@ const PRICES: Record<
 };
 
 function Plans() {
-  const [location, setLocation] = useState<Location>("Bebedouro");
+  const [location, setLocation] = useState<Location>("Outras cidades");
 
   return (
     <section
