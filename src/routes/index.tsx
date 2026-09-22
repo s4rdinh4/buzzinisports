@@ -292,7 +292,9 @@ function Locations() {
             aria-label="Mapa ampliado da região Sudeste com Bebedouro, Ribeirão Preto e São Paulo destacadas"
             className="relative mx-auto block h-auto max-h-[52svh] w-full overflow-hidden"
           >
-            {brazilMap.locations.map((state: { id: string; path: string }) => (
+            {brazilMap.locations
+              .filter((state: { id: string }) => ["sp", "mg", "rj", "es"].includes(state.id))
+              .map((state: { id: string; path: string }) => (
               <path
                 key={state.id}
                 d={state.path}
@@ -300,7 +302,7 @@ function Locations() {
                 strokeWidth={state.id === "sp" ? 2.5 : 1.5}
                 strokeLinejoin="round"
               />
-            ))}
+              ))}
             {[
               { x: 398, y: 415, number: "1", label: "BEBEDOURO" },
               { x: 409, y: 419, number: "2", label: "RIBEIRÃO PRETO" },
@@ -313,7 +315,7 @@ function Locations() {
                   x={point.x}
                   y={point.y + 4}
                   textAnchor="middle"
-                  className="fill-primary-foreground font-mono text-[10px] font-bold"
+                  className="fill-primary-foreground font-mono text-[7px] font-bold"
                 >
                   {point.number}
                 </text>
