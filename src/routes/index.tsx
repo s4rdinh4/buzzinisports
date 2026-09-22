@@ -88,7 +88,7 @@ function SiteLogo() {
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className={`w-auto object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.35)] transition-all duration-300 ${isDesktopScrolled ? "h-8 translate-x-[30px] sm:h-9" : "h-8 translate-x-[30px] sm:h-9 md:h-24 md:translate-x-0"}`}
+            className={`w-auto object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.35)] transition-all duration-300 ${isDesktopScrolled ? "h-8 sm:h-9" : "h-8 sm:h-9 md:h-24"}`}
           />
         </a>
         <button
@@ -310,14 +310,17 @@ function Team() {
   }, [pageCount]);
 
   return (
-    <section id="equipe" className="snap-sec relative flex flex-col justify-center bg-card">
+    <section
+      id="equipe"
+      className="snap-sec relative flex flex-col justify-center bg-card py-12 sm:py-16"
+    >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
               Quem faz o treino acontecer
             </p>
-            <h2 className="mt-4 max-w-[40ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
+            <h2 className="mt-3 max-w-[40ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:mt-4 sm:text-5xl">
               A equipe por trás do ritmo.
             </h2>
           </div>
@@ -344,7 +347,7 @@ function Team() {
             </Button>
           </div>
         </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:mt-9 sm:grid-cols-3 sm:gap-5">
           {visibleCoaches.map((coach) => (
             <div
               key={coach.name}
@@ -360,12 +363,16 @@ function Team() {
                   className="h-full w-full object-cover object-top"
                 />
               </div>
-              <div className="p-5">
-                <p className="font-display text-xl font-semibold text-foreground">{coach.name}</p>
-                <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-primary">
+              <div className="p-4 sm:p-5">
+                <p className="font-display text-lg font-semibold text-foreground sm:text-xl">
+                  {coach.name}
+                </p>
+                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-primary sm:text-xs">
                   {coach.credential}
                 </p>
-                <p className="mt-2 font-mono text-sm text-pretty text-muted">{coach.bio}</p>
+                <p className="mt-2 font-mono text-xs text-pretty text-muted sm:text-sm">
+                  {coach.bio}
+                </p>
               </div>
             </div>
           ))}
