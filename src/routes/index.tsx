@@ -706,7 +706,6 @@ type Location = (typeof LOCATIONS)[number];
 type Plan = {
   name: string;
   price: string;
-  detail: string;
   benefits: string[];
   featuredBenefits: string[];
   isFeatured: boolean;
@@ -716,8 +715,7 @@ const PLANS: Record<Location, Plan[]> = {
   "Outras cidades": [
     {
       name: "Mensal",
-      price: "R$ 150",
-      detail: "por mês",
+      price: "R$ 150/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -729,8 +727,7 @@ const PLANS: Record<Location, Plan[]> = {
     },
     {
       name: "Trimestral",
-      price: "R$ 145",
-      detail: "/mês | 3 meses",
+      price: "R$ 145/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -742,8 +739,7 @@ const PLANS: Record<Location, Plan[]> = {
     },
     {
       name: "Semestral",
-      price: "R$ 140",
-      detail: "/mês | 6 meses",
+      price: "R$ 140/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -755,8 +751,7 @@ const PLANS: Record<Location, Plan[]> = {
     },
     {
       name: "Anual",
-      price: "R$ 130",
-      detail: "/mês | 12 meses",
+      price: "R$ 130/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -770,8 +765,7 @@ const PLANS: Record<Location, Plan[]> = {
   "São Paulo": [
     {
       name: "Mensal",
-      price: "R$ 250",
-      detail: "por mês",
+      price: "R$ 250/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -783,8 +777,7 @@ const PLANS: Record<Location, Plan[]> = {
     },
     {
       name: "Trimestral",
-      price: "R$ 245",
-      detail: "/mês | 3 meses",
+      price: "R$ 245/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -796,8 +789,7 @@ const PLANS: Record<Location, Plan[]> = {
     },
     {
       name: "Semestral",
-      price: "R$ 240",
-      detail: "/mês | 6 meses",
+      price: "R$ 240/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -809,8 +801,7 @@ const PLANS: Record<Location, Plan[]> = {
     },
     {
       name: "Anual",
-      price: "R$ 230",
-      detail: "/mês | 12 meses",
+      price: "R$ 230/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -824,8 +815,7 @@ const PLANS: Record<Location, Plan[]> = {
   Online: [
     {
       name: "Trimestral",
-      price: "R$ 110",
-      detail: "/mês | 3 meses",
+      price: "R$ 110/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -905,6 +895,7 @@ function Plans() {
         <div className="mt-5 grid grid-cols-1 gap-5 pb-2 sm:mt-6 sm:grid-cols-4 sm:pb-0">
           {PLANS[location].map((plan) => {
             const isFeatured = plan.isFeatured;
+            const [priceValue, priceSuffix] = plan.price.split("/");
 
             return (
               <article
@@ -926,8 +917,13 @@ function Plans() {
                   >
                     {plan.name}
                   </p>
-                  <p className="mt-4 font-display text-3xl font-semibold leading-none text-foreground sm:text-4xl">
-                    {plan.price}
+                  <p className="mt-4 flex items-baseline gap-1 font-display font-semibold leading-none text-foreground">
+                    <span className="text-3xl sm:text-4xl">{priceValue}</span>
+                    {priceSuffix && (
+                      <span className="font-mono text-xs font-normal text-muted sm:text-sm">
+                        /{priceSuffix}
+                      </span>
+                    )}
                   </p>
                   <ul
                     className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${
@@ -955,7 +951,6 @@ function Plans() {
                     ))}
                   </ul>
                 </div>
-                <p className="mt-6 font-mono text-xs text-muted">{plan.detail}</p>
                 <Button
                   variant="ghost"
                   type="button"
