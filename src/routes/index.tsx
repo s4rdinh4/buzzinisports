@@ -8,18 +8,16 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
 import heroVideoMp4 from "@/assets/hero-video.mp4.asset.json";
 import heroVideoWebm from "@/assets/hero-video.webm.asset.json";
-import coachMarina from "@/assets/coach-marina.png";
-import coachPaulo from "@/assets/coach-paulo.png";
-import coachLara from "@/assets/coach-lara.png";
-import fotoLucas from "@/assets/foto_lucas.jpg";
-import fotoRobson from "@/assets/foto_robson.jpg";
-import fotoVinicius from "@/assets/foto_vinicius.jpg";
-import fotoLarissa from "@/assets/foto_larissa.jpg";
-import fotoBeatriz from "@/assets/foto_beatriz.jpg";
-import fotoGeorge from "@/assets/foto_george.jpg";
-import fotoHudson from "@/assets/foto_hudson.jpg";
-import fotoRodrigo from "@/assets/foto_rodrigo.jpg";
-import fotoIgor from "@/assets/foto_igor.jpg";
+import coachLara from "@/assets/coach-lara.webp.asset.json";
+import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
+import fotoRobson from "@/assets/foto_robson.webp.asset.json";
+import fotoVinicius from "@/assets/foto_vinicius.webp.asset.json";
+import fotoLarissa from "@/assets/foto_larissa.webp.asset.json";
+import fotoBeatriz from "@/assets/foto_beatriz.webp.asset.json";
+import fotoGeorge from "@/assets/foto_george.webp.asset.json";
+import fotoHudson from "@/assets/foto_hudson.webp.asset.json";
+import fotoRodrigo from "@/assets/foto_rodrigo.webp.asset.json";
+import fotoIgor from "@/assets/foto_igor.webp.asset.json";
 import video01 from "@/assets/depoiments/video01.mp4";
 import video01Poster from "@/assets/depoiments/video01.jpg";
 import video02 from "@/assets/depoiments/video02.mp4";
@@ -256,61 +254,61 @@ function Stories() {
 
 const COACHES = [
   {
-    photo: fotoLucas,
+    photo: fotoLucas.url,
     name: "Lucas Buzzini",
     credential: "Diretor · Maratonista",
     bio: "Formado em Fisioterapia, idealizador do projeto e apaixonado por corrida.",
   },
   {
-    photo: fotoRobson,
+    photo: fotoRobson.url,
     name: "Robson Botelho",
     credential: "Treinador · Maratonista",
     bio: "Especializado em treinamento de alta performances.",
   },
   {
-    photo: fotoRodrigo,
+    photo: fotoRodrigo.url,
     name: "Rodrigo Brito",
     credential: "Treinador · Maratonista",
     bio: "Treinador de corrida, responsável técnico pela Buzzini São Paulo.",
   },
   {
-    photo: coachLara,
+    photo: coachLara.url,
     name: "Nara de Lucena",
     credential: "Treinadora · Corrida",
     bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
   },
   {
-    photo: fotoVinicius,
+    photo: fotoVinicius.url,
     name: "Vinicius Silva",
     credential: "Treinador Auxiliar · Fisioterapeuta",
     bio: "Formado em fisioterapia, especializado em reabilitação e prevenção de lesões.",
   },
   {
-    photo: fotoBeatriz,
+    photo: fotoBeatriz.url,
     name: "Beatriz Padovan",
     credential: "Treinadora Auxiliar · Educação Física",
     bio: "Treinadora de corrida, como foco principal no desenvolvimento de atletas iniciantes e intermediários.",
   },
   {
-    photo: fotoHudson,
+    photo: fotoHudson.url,
     name: "Hudson Morais",
     credential: "Treinador Auxiliar · Educação Física",
     bio: "Treinador de corrida, responsável técnico pela Buzzini Ribeirão Preto.",
   },
   {
-    photo: fotoGeorge,
+    photo: fotoGeorge.url,
     name: "George Almeida",
     credential: "Treinador Auxiliar · Educação Física",
     bio: "Treinador de corrida, com foco em desenvolvimento de atletas iniciantes.",
   },
   {
-    photo: fotoIgor,
+    photo: fotoIgor.url,
     name: "Igor Sardinha",
     credential: "Tech · Desenvolvedor",
     bio: "Responsável pelo sistema de acompanhamento de treinos e evolução dos alunos.",
   },
   {
-    photo: fotoLarissa,
+    photo: fotoLarissa.url,
     name: "Larissa Paredes",
     credential: "Marketing · Designer",
     bio: "Responsável pela comunicação visual e marketing da Buzzini Sports.",
