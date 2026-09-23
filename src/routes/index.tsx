@@ -716,14 +716,14 @@ function Plans() {
             return (
               <article
                 key={option.period}
-                className={`relative flex min-h-44 flex-col justify-between rounded-lg p-5 pt-8 ring-1 transition-all ${
+                className={`relative flex min-h-44 flex-col justify-between rounded-lg p-5 pt-8 transition-all ${
                   isFeatured
-                    ? "border-2 border-primary bg-background text-foreground shadow-[0_0_0_1px_rgba(255,120,33,0.2)]"
+                    ? "border border-primary bg-background text-foreground shadow-[0_0_0_1px_rgba(255,120,33,0.2)]"
                     : "bg-card text-foreground ring-border"
                 }`}
               >
                 {isFeatured && (
-                  <span className="absolute -top-3 left-4 rounded-full bg-primary px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-primary-foreground">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-sm">
                     Mais escolhido
                   </span>
                 )}
