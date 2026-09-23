@@ -896,6 +896,7 @@ function Plans() {
           {PLANS[location].map((plan) => {
             const isFeatured = plan.isFeatured;
             const [priceValue, priceSuffix] = plan.price.split("/");
+            const [currency, amount] = priceValue.split(" ");
 
             return (
               <article
@@ -918,7 +919,8 @@ function Plans() {
                     {plan.name}
                   </p>
                   <p className="mt-4 flex items-baseline gap-1 font-display font-semibold leading-none text-foreground">
-                    <span className="text-3xl sm:text-4xl">{priceValue}</span>
+                    <span className="text-xl font-medium sm:text-2xl">{currency}</span>
+                    <span className="text-3xl sm:text-4xl">{amount}</span>
                     {priceSuffix && (
                       <span className="font-mono text-xs font-normal text-muted sm:text-sm">
                         /{priceSuffix}
