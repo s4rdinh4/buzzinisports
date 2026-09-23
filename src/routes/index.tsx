@@ -11,7 +11,7 @@ import heroVideoWebm from "@/assets/hero-video.webm.asset.json";
 import coachMarina from "@/assets/coach-marina.png";
 import coachPaulo from "@/assets/coach-paulo.png";
 import coachLara from "@/assets/coach-lara.png";
-import fotoLucas from "@/assets/foto_lucas.png";
+import fotoLucas from "@/assets/foto_lucas.jpg";
 import fotoRobson from "@/assets/foto_robson.jpg";
 import fotoVinicius from "@/assets/foto_vinicius.jpg";
 import fotoLarissa from "@/assets/foto_larissa.jpg";
