@@ -295,7 +295,7 @@ function Stories() {
   return (
     <section
       id="historias"
-      className="snap-sec relative mb-10 flex flex-col justify-start bg-background py-16 sm:mb-12 sm:justify-center sm:py-0"
+      className="snap-sec relative mb-0 flex flex-col justify-start bg-background py-16 pb-24 sm:mb-12 sm:justify-center sm:py-0"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">

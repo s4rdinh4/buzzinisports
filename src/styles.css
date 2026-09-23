@@ -37,6 +37,16 @@ html {
   min-height: 100svh;
 }
 
+@media (max-width: 767px) {
+  html {
+    scroll-snap-type: none;
+  }
+
+  .snap-sec {
+    scroll-snap-align: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
