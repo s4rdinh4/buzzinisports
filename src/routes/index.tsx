@@ -18,7 +18,7 @@ import fotoLarissa from "@/assets/foto_larissa.jpg";
 import fotoBeatriz from "@/assets/foto_beatriz.jpg";
 import fotoGeorge from "@/assets/foto_george.jpg";
 import fotoHudson from "@/assets/foto_hudson.jpg";
-import fotoRodrigo from "@/assets/foto_Rodrigo.jpg";
+import fotoRodrigo from "@/assets/foto_rodrigo.jpg";
 import fotoIgor from "@/assets/foto_igor.jpg";
 import video01 from "@/assets/depoiments/video01.mp4";
 import video01Poster from "@/assets/depoiments/video01.jpg";
