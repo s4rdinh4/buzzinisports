@@ -678,6 +678,11 @@ function Plans() {
                 <p className="mt-4 font-display text-3xl font-semibold leading-none sm:text-4xl">
                   {option.price}
                 </p>
+                <p
+                  className={`mt-6 font-mono text-xs ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}
+                >
+                  {option.detail}
+                </p>
                 <ul
                   className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${index === 3 ? "text-primary-foreground/80" : "text-foreground/75"}`}
                 >
@@ -702,11 +707,6 @@ function Plans() {
                   ))}
                 </ul>
               </div>
-              <p
-                className={`mt-6 font-mono text-xs ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}
-              >
-                {option.detail}
-              </p>
               <Button
                 asChild
                 variant="ghost"
