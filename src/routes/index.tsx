@@ -200,16 +200,20 @@ const DEPOIMENTS = [
     video: video01,
     poster: video01Poster,
     title: "Mudar de vida em cada treino",
+    description: "Estrutura, disciplina e apoio para seguir evoluindo mesmo com a rotina pesada.",
   },
   {
     video: video02,
     poster: video02Poster,
     title: "Mais consistência, mais confiança",
+    description: "Treinos pensados para o seu momento e para o resultado que você quer alcançar.",
   },
   {
     video: video03,
     poster: video03Poster,
     title: "O resultado que veio com o processo",
+    description:
+      "Acompanhamento real, planejamento individual e evolução que faz diferença no dia a dia.",
   },
 ] as const;
 
@@ -218,6 +222,7 @@ function DepoimentVideo({
   poster,
   index,
   title,
+  description,
 }: (typeof DEPOIMENTS)[number] & { index: number }) {
   const [showControls, setShowControls] = useState(false);
 
@@ -227,8 +232,8 @@ function DepoimentVideo({
   };
 
   return (
-    <div className="flex w-full flex-col justify-center overflow-hidden rounded-2xl bg-card ring-1 ring-border sm:mx-0">
-      <div className="relative mx-auto w-full max-w-[260px] cursor-pointer overflow-hidden rounded-t-2xl bg-card sm:max-w-none">
+    <div className="flex w-full flex-col justify-center sm:mx-0">
+      <div className="relative mx-auto w-[85%] cursor-pointer overflow-hidden rounded-2xl bg-card ring-1 ring-border">
         <video
           className="aspect-[9/16] w-full cursor-pointer object-cover"
           controls={showControls}
@@ -258,8 +263,12 @@ function DepoimentVideo({
           </button>
         )}
       </div>
-      <div className="px-3 pb-3 pt-2 sm:px-4 sm:pb-4">
+
+      <div className="mx-auto mt-3 w-[85%] text-left">
         <p className="font-display text-base font-semibold text-foreground sm:text-lg">{title}</p>
+        <p className="mt-1 font-mono text-[10px] leading-relaxed text-muted sm:text-xs">
+          {description}
+        </p>
       </div>
     </div>
   );
