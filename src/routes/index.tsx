@@ -724,7 +724,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Acesso ao App Runy",
         "Estrutura Buzzini no dia da Prova",
       ],
-      featuredBenefits: ["Sem fidelidade", "Acesso à evolução contínua"],
+      featuredBenefits: [],
       isFeatured: false,
     },
     {
@@ -737,7 +737,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Acesso ao App Runy",
         "Estrutura Buzzini no dia da Prova",
       ],
-      featuredBenefits: ["Melhor custo-benefício", "Sem fidelidade"],
+      featuredBenefits: [],
       isFeatured: false,
     },
     {
@@ -751,7 +751,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Estrutura Buzzini no dia da Prova",
       ],
       featuredBenefits: ["Camiseta Buzzini", "Melhor suporte com o treinador"],
-      isFeatured: false,
+      isFeatured: true,
     },
     {
       name: "Anual",
@@ -764,7 +764,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Estrutura Buzzini no dia da Prova",
       ],
       featuredBenefits: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
-      isFeatured: true,
+      isFeatured: false,
     },
   ],
   "São Paulo": [
@@ -778,7 +778,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Acesso ao App Runy",
         "Estrutura Buzzini no dia da Prova",
       ],
-      featuredBenefits: ["Sem fidelidade", "Acesso à evolução contínua"],
+      featuredBenefits: [],
       isFeatured: false,
     },
     {
@@ -791,7 +791,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Acesso ao App Runy",
         "Estrutura Buzzini no dia da Prova",
       ],
-      featuredBenefits: ["Melhor custo-benefício", "Sem fidelidade"],
+      featuredBenefits: [],
       isFeatured: false,
     },
     {
@@ -805,7 +805,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Estrutura Buzzini no dia da Prova",
       ],
       featuredBenefits: ["Camiseta Buzzini", "Melhor suporte com o treinador"],
-      isFeatured: false,
+      isFeatured: true,
     },
     {
       name: "Anual",
@@ -818,7 +818,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Estrutura Buzzini no dia da Prova",
       ],
       featuredBenefits: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
-      isFeatured: true,
+      isFeatured: false,
     },
   ],
   Online: [
@@ -832,7 +832,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Acesso ao App Runy",
         "Estrutura Buzzini no dia da Prova",
       ],
-      featuredBenefits: ["Treino 100% online", "Acompanhamento onde você estiver"],
+      featuredBenefits: ["Acompanhamento onde você estiver"],
       isFeatured: false,
     },
   ],
