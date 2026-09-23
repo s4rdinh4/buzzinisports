@@ -11,6 +11,10 @@ import heroVideoWebm from "@/assets/hero-video.webm.asset.json";
 import coachMarina from "@/assets/coach-marina.png";
 import coachPaulo from "@/assets/coach-paulo.png";
 import coachLara from "@/assets/coach-lara.png";
+import fotoLucas from "@/assets/foto_lucas.png";
+import fotoRobson from "@/assets/foto_robson.jpg";
+import fotoVinicius from "@/assets/foto_vinicius.jpg";
+import fotoLarissa from "@/assets/foto_larissa.jpg";
 import video01 from "@/assets/depoiments/video01.mp4";
 import video01Poster from "@/assets/depoiments/video01.jpg";
 import video02 from "@/assets/depoiments/video02.mp4";
@@ -247,19 +251,19 @@ function Stories() {
 
 const COACHES = [
   {
-    photo: coachPaulo,
+    photo: fotoLucas,
     name: "Lucas Buzzini",
     credential: "Diretor · Maratonista",
     bio: "Formado em Fisioterapia, idealizador do projeto e apaixonado por corrida.",
   },
   {
-    photo: coachPaulo,
+    photo: fotoRobson,
     name: "Robson Botelho",
     credential: "Head Coach · Maratonista",
     bio: "Especializado em treinamento de alta performances.",
   },
   {
-    photo: coachPaulo,
+    photo: fotoVinicius,
     name: "Vinicius Silva",
     credential: "Coach · Fisioterapeuta",
     bio: "Formado em fisioterapia, especializado em reabilitação e prevenção de lesões.",
@@ -301,7 +305,7 @@ const COACHES = [
     bio: "Responsável pelo sistema de acompanhamento de treinos e evolução dos alunos.",
   },
   {
-    photo: coachLara,
+    photo: fotoLarissa,
     name: "Larissa Paredes",
     credential: "Marketing · Designer",
     bio: "Responsável pela comunicação visual e marketing da Buzzini Sports.",
