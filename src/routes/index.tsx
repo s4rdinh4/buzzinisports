@@ -703,75 +703,152 @@ function Locations() {
 const LOCATIONS = ["Outras cidades", "São Paulo", "Online"] as const;
 type Location = (typeof LOCATIONS)[number];
 
-const PLAN_BENEFITS = {
-  Mensal: {
-    included: [
-      "Planilha Personalizada",
-      "Contato com Treinador",
-      "Acesso ao App Runy",
-      "Estrutura Buzzini no dia da Prova",
-    ],
-    differentials: ["Sem fidelidade", "Acesso à evolução contínua"],
-  },
-  Trimestral: {
-    included: [
-      "Planilha Personalizada",
-      "Contato com Treinador",
-      "Acesso ao App Runy",
-      "Estrutura Buzzini no dia da Prova",
-    ],
-    differentials: ["Melhor custo-benefício", "Sem fidelidade"],
-  },
-  Semestral: {
-    included: [
-      "Planilha Personalizada",
-      "Contato com Treinador",
-      "Acesso ao App Runy",
-      "Estrutura Buzzini no dia da Prova",
-    ],
-    differentials: ["Camiseta Buzzini", "Melhor suporte com o treinador"],
-  },
-  Anual: {
-    included: [
-      "Planilha Personalizada",
-      "Contato com Treinador",
-      "Acesso ao App Runy",
-      "Estrutura Buzzini no dia da Prova",
-    ],
-    differentials: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
-  },
-} as const;
+type Plan = {
+  name: string;
+  price: string;
+  detail: string;
+  benefits: string[];
+  featuredBenefits: string[];
+  isFeatured: boolean;
+};
 
-const PRICES: Record<
-  Location,
-  { period: keyof typeof PLAN_BENEFITS; price: string; detail: string }[]
-> = {
+const PLANS: Record<Location, Plan[]> = {
   "Outras cidades": [
-    { period: "Mensal", price: "R$ 150", detail: "por mês" },
-    { period: "Trimestral", price: "R$ 145", detail: "/mês | 3 meses" },
-    { period: "Semestral", price: "R$ 140", detail: "/mês | 6 meses" },
-    { period: "Anual", price: "R$ 130", detail: "/mês | 12 meses" },
+    {
+      name: "Mensal",
+      price: "R$ 150",
+      detail: "por mês",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: ["Sem fidelidade", "Acesso à evolução contínua"],
+      isFeatured: false,
+    },
+    {
+      name: "Trimestral",
+      price: "R$ 145",
+      detail: "/mês | 3 meses",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: ["Melhor custo-benefício", "Sem fidelidade"],
+      isFeatured: false,
+    },
+    {
+      name: "Semestral",
+      price: "R$ 140",
+      detail: "/mês | 6 meses",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: ["Camiseta Buzzini", "Melhor suporte com o treinador"],
+      isFeatured: false,
+    },
+    {
+      name: "Anual",
+      price: "R$ 130",
+      detail: "/mês | 12 meses",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
+      isFeatured: true,
+    },
   ],
   "São Paulo": [
-    { period: "Mensal", price: "R$ 250", detail: "por mês" },
-    { period: "Trimestral", price: "R$ 245", detail: "/mês | 3 meses" },
-    { period: "Semestral", price: "R$ 240", detail: "/mês | 6 meses" },
-    { period: "Anual", price: "R$ 230", detail: "/mês | 12 meses" },
+    {
+      name: "Mensal",
+      price: "R$ 250",
+      detail: "por mês",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: ["Sem fidelidade", "Acesso à evolução contínua"],
+      isFeatured: false,
+    },
+    {
+      name: "Trimestral",
+      price: "R$ 245",
+      detail: "/mês | 3 meses",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: ["Melhor custo-benefício", "Sem fidelidade"],
+      isFeatured: false,
+    },
+    {
+      name: "Semestral",
+      price: "R$ 240",
+      detail: "/mês | 6 meses",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: ["Camiseta Buzzini", "Melhor suporte com o treinador"],
+      isFeatured: false,
+    },
+    {
+      name: "Anual",
+      price: "R$ 230",
+      detail: "/mês | 12 meses",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
+      isFeatured: true,
+    },
   ],
-  Online: [{ period: "Trimestral", price: "R$ 110", detail: "/mês | 3 meses" }],
+  Online: [
+    {
+      name: "Trimestral",
+      price: "R$ 110",
+      detail: "/mês | 3 meses",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: ["Treino 100% online", "Acompanhamento onde você estiver"],
+      isFeatured: false,
+    },
+  ],
 };
 
 function Plans() {
   const [location, setLocation] = useState<Location>("Outras cidades");
   const isMobile = useIsMobile();
   const [selectedPlan, setSelectedPlan] = useState<{
-    period: keyof typeof PLAN_BENEFITS;
+    name: string;
     location: Location;
   } | null>(null);
 
   const whatsappNumber = "5517988026622";
   const whatsappMessage = selectedPlan
-    ? `Olá, vi no site o plano ${selectedPlan.period} e gostaria de mais informações`
+    ? `Olá, vi no site o plano ${selectedPlan.name} e gostaria de mais informações`
     : "";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   const whatsappWebLink = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
@@ -826,13 +903,12 @@ function Plans() {
           ))}
         </div>
         <div className="mt-5 grid grid-cols-1 gap-5 pb-2 sm:mt-6 sm:grid-cols-4 sm:pb-0">
-          {PRICES[location].map((option, index) => {
-            const isFeatured = index === 3;
-            const benefits = PLAN_BENEFITS[option.period];
+          {PLANS[location].map((plan) => {
+            const isFeatured = plan.isFeatured;
 
             return (
               <article
-                key={option.period}
+                key={plan.name}
                 className={`relative flex min-h-44 flex-col justify-between rounded-lg p-5 pt-8 transition-all ${
                   isFeatured
                     ? "border border-primary bg-background text-foreground shadow-[0_0_0_1px_rgba(255,120,33,0.2)]"
@@ -848,17 +924,17 @@ function Plans() {
                   <p
                     className={`font-mono text-xs uppercase tracking-[0.12em] ${isFeatured ? "text-primary" : "text-muted"}`}
                   >
-                    {option.period}
+                    {plan.name}
                   </p>
                   <p className="mt-4 font-display text-3xl font-semibold leading-none text-foreground sm:text-4xl">
-                    {option.price}
+                    {plan.price}
                   </p>
                   <ul
                     className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${
                       isFeatured ? "text-foreground/80" : "text-foreground/75"
                     }`}
                   >
-                    {benefits.included.map((benefit) => (
+                    {plan.benefits.map((benefit) => (
                       <li key={benefit} className="flex gap-2">
                         <span
                           aria-hidden="true"
@@ -869,7 +945,7 @@ function Plans() {
                         <span>{benefit}</span>
                       </li>
                     ))}
-                    {benefits.differentials.map((benefit) => (
+                    {plan.featuredBenefits.map((benefit) => (
                       <li key={benefit} className="flex gap-2 font-bold text-primary">
                         <span aria-hidden="true" className="text-primary">
                           ★
@@ -879,12 +955,12 @@ function Plans() {
                     ))}
                   </ul>
                 </div>
-                <p className="mt-6 font-mono text-xs text-muted">{option.detail}</p>
+                <p className="mt-6 font-mono text-xs text-muted">{plan.detail}</p>
                 <Button
                   variant="ghost"
                   type="button"
                   onClick={() => {
-                    const message = `Olá, vi no site o plano ${option.period} e gostaria de mais informações`;
+                    const message = `Olá, vi no site o plano ${plan.name} e gostaria de mais informações`;
                     const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
                     if (isMobile) {
@@ -892,7 +968,7 @@ function Plans() {
                       return;
                     }
 
-                    setSelectedPlan({ period: option.period, location });
+                    setSelectedPlan({ name: plan.name, location });
                   }}
                   className={`mt-5 h-10 w-full rounded-full px-3 font-mono text-xs uppercase ${
                     isFeatured
@@ -937,7 +1013,7 @@ function Plans() {
               </h3>
               <p id="plan-dialog-description" className="font-mono text-sm text-muted">
                 Escaneie o QR Code ou abra o WhatsApp Web para mais informações sobre o plano{" "}
-                {selectedPlan.period}.
+                {selectedPlan.name}.
               </p>
             </div>
             <div className="mt-2 grid gap-6 sm:grid-cols-2 sm:items-center">
@@ -958,7 +1034,7 @@ function Plans() {
               <div className="flex flex-col gap-4">
                 <div>
                   <p className="font-mono text-xs uppercase tracking-[0.12em] text-primary">
-                    Plano {selectedPlan.period}
+                    Plano {selectedPlan.name}
                   </p>
                   <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-muted">
                     {selectedPlan.location}
