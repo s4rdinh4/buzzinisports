@@ -764,7 +764,10 @@ const FAQS = [
 
 function Faq() {
   return (
-    <section id="faq" className="snap-sec relative flex flex-col justify-center bg-card">
+    <section
+      id="faq"
+      className="snap-sec relative flex flex-col justify-center bg-card py-12 sm:py-16"
+    >
       <div className="mx-auto w-full max-w-4xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Dúvidas frequentes
