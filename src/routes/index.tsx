@@ -15,6 +15,11 @@ import fotoLucas from "@/assets/foto_lucas.jpg";
 import fotoRobson from "@/assets/foto_robson.jpg";
 import fotoVinicius from "@/assets/foto_vinicius.jpg";
 import fotoLarissa from "@/assets/foto_larissa.jpg";
+import fotoBeatriz from "@/assets/foto_beatriz.jpg";
+import fotoGeorge from "@/assets/foto_george.jpg";
+import fotoHudson from "@/assets/foto_hudson.jpg";
+import fotoRodrigo from "@/assets/foto_Rodrigo.jpg";
+import fotoIgor from "@/assets/foto_igor.jpg";
 import video01 from "@/assets/depoiments/video01.mp4";
 import video01Poster from "@/assets/depoiments/video01.jpg";
 import video02 from "@/assets/depoiments/video02.mp4";
@@ -269,25 +274,25 @@ const COACHES = [
     bio: "Formado em fisioterapia, especializado em reabilitação e prevenção de lesões.",
   },
   {
-    photo: coachMarina,
+    photo: fotoBeatriz,
     name: "Beatriz Padovan",
     credential: "Coach Auxiliar · Educação Física",
     bio: "Treinadora de corrida, como foco principal no desenvolvimento de atletas iniciantes e intermediários.",
   },
   {
-    photo: coachLara,
+    photo: fotoRodrigo,
     name: "Rodrigo Brito",
     credential: "Coach · Maratonista",
     bio: "Treinador de corrida, responsável técnico pela Buzzini São Paulo.",
   },
   {
-    photo: coachLara,
+    photo: fotoHudson,
     name: "Hudson Morais",
     credential: "Coach Auxiliar · Educação Física",
     bio: "Treinador de corrida, responsável técnico pela Buzzini Ribeirão Preto.",
   },
   {
-    photo: coachLara,
+    photo: fotoGeorge,
     name: "George Almeida",
     credential: "Coach Auxiliar · Educação Física",
     bio: "Treinador de corrida, com foco em desenvolvimento de atletas iniciantes.",
@@ -299,7 +304,7 @@ const COACHES = [
     bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
   },
   {
-    photo: coachLara,
+    photo: fotoIgor,
     name: "Igor Sardinha",
     credential: "Tech · Desenvolvedor",
     bio: "Responsável pelo sistema de acompanhamento de treinos e evolução dos alunos.",
