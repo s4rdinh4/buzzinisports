@@ -39,6 +39,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
+
+    const isStaleRouteModule = error.message.includes("Failed to fetch dynamically imported module");
+    const recoveryKey = "buzzini-route-module-recovery";
+    if (isStaleRouteModule && sessionStorage.getItem(recoveryKey) !== "attempted") {
+      sessionStorage.setItem(recoveryKey, "attempted");
+      window.location.reload();
+    }
   }, [error]);
 
   return (
@@ -132,6 +139,10 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    sessionStorage.removeItem("buzzini-route-module-recovery");
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
