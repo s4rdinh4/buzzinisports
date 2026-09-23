@@ -632,7 +632,7 @@ function Plans() {
 
   const whatsappNumber = "5517988026622";
   const whatsappMessage = selectedPlan
-    ? `Vim no site o plano ${selectedPlan.period} e gostaria de mais informações`
+    ? `Olá, vi no site o plano ${selectedPlan.period} e gostaria de mais informações`
     : "";
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   const whatsappWebLink = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
@@ -779,7 +779,7 @@ function Plans() {
                 Fale com a Buzzini Sports
               </h3>
               <p id="plan-dialog-description" className="font-mono text-sm text-muted">
-                Escaneie o QR Code ou abra o WhatsApp Web para continuar sobre o plano{" "}
+                Escaneie o QR Code ou abra o WhatsApp Web para mais informações sobre o plano{" "}
                 {selectedPlan.period}.
               </p>
             </div>
@@ -794,7 +794,8 @@ function Plans() {
                   />
                 </div>
                 <p className="max-w-[26ch] font-mono text-xs text-muted">
-                  Aponte a câmera do celular para iniciar a conversa com a mensagem preenchida.
+                  Aponte a câmera do celular para iniciar a conversa com a Buzzini Sports no
+                  WhatsApp.
                 </p>
               </div>
               <div className="flex flex-col gap-4">
