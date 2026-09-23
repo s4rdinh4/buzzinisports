@@ -708,7 +708,7 @@ function Plans() {
             </Button>
           ))}
         </div>
-        <div className="mt-5 grid grid-cols-1 gap-3 sm:mt-6 sm:grid-cols-4">
+        <div className="mt-5 grid grid-cols-1 gap-5 pb-2 sm:mt-6 sm:grid-cols-4 sm:pb-0">
           {PRICES[location].map((option, index) => {
             const isFeatured = index === 3;
             const benefits = PLAN_BENEFITS[option.period];
@@ -716,28 +716,24 @@ function Plans() {
             return (
               <article
                 key={option.period}
-                className={`relative flex min-h-44 flex-col justify-between rounded-lg p-5 ring-1 transition-all ${
+                className={`relative flex min-h-44 flex-col justify-between rounded-lg p-5 pt-8 ring-1 transition-all ${
                   isFeatured
-                    ? "border-2 border-[#32D951] bg-background text-foreground shadow-[0_0_0_1px_rgba(50,217,81,0.2)]"
+                    ? "border-2 border-primary bg-background text-foreground shadow-[0_0_0_1px_rgba(255,120,33,0.2)]"
                     : "bg-card text-foreground ring-border"
                 }`}
               >
                 {isFeatured && (
-                  <span className="absolute -top-3 left-4 rounded-full border border-[#32D951] bg-[#32D951]/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[#32D951]">
+                  <span className="absolute -top-3 left-4 rounded-full bg-primary px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-primary-foreground">
                     Mais escolhido
                   </span>
                 )}
                 <div>
                   <p
-                    className={`font-mono text-xs uppercase tracking-[0.12em] ${isFeatured ? "text-[#32D951]" : "text-muted"}`}
+                    className={`font-mono text-xs uppercase tracking-[0.12em] ${isFeatured ? "text-primary" : "text-muted"}`}
                   >
                     {option.period}
                   </p>
-                  <p
-                    className={`mt-4 font-display text-3xl font-semibold leading-none sm:text-4xl ${
-                      isFeatured ? "text-foreground" : "text-foreground"
-                    }`}
-                  >
+                  <p className="mt-4 font-display text-3xl font-semibold leading-none text-foreground sm:text-4xl">
                     {option.price}
                   </p>
                   <ul
@@ -749,7 +745,7 @@ function Plans() {
                       <li key={benefit} className="flex gap-2">
                         <span
                           aria-hidden="true"
-                          className={isFeatured ? "text-[#32D951]" : "text-primary"}
+                          className={isFeatured ? "text-primary" : "text-primary"}
                         >
                           ✓
                         </span>
@@ -757,8 +753,8 @@ function Plans() {
                       </li>
                     ))}
                     {benefits.differentials.map((benefit) => (
-                      <li key={benefit} className="flex gap-2 font-bold text-[#32D951]">
-                        <span aria-hidden="true" className="text-[#32D951]">
+                      <li key={benefit} className="flex gap-2 font-bold text-primary">
+                        <span aria-hidden="true" className="text-primary">
                           ★
                         </span>
                         <span>{benefit}</span>
@@ -766,9 +762,7 @@ function Plans() {
                     ))}
                   </ul>
                 </div>
-                <p className={`mt-6 font-mono text-xs ${isFeatured ? "text-muted" : "text-muted"}`}>
-                  {option.detail}
-                </p>
+                <p className="mt-6 font-mono text-xs text-muted">{option.detail}</p>
                 <Button
                   variant="ghost"
                   type="button"
@@ -785,7 +779,7 @@ function Plans() {
                   }}
                   className={`mt-5 h-10 w-full rounded-full px-3 font-mono text-xs uppercase ${
                     isFeatured
-                      ? "bg-[#32D951] text-[#0D1B12] hover:bg-[#32D951]/90 hover:text-[#0D1B12]"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
                       : "bg-transparent text-foreground ring-1 ring-border hover:bg-primary hover:text-primary-foreground"
                   }`}
                 >
