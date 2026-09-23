@@ -199,19 +199,16 @@ const DEPOIMENTS = [
   {
     video: video01,
     poster: video01Poster,
-    title: "Mudar de vida em cada treino",
     description: "Estrutura, disciplina e apoio para seguir evoluindo mesmo com a rotina pesada.",
   },
   {
     video: video02,
     poster: video02Poster,
-    title: "Mais consistência, mais confiança",
     description: "Treinos pensados para o seu momento e para o resultado que você quer alcançar.",
   },
   {
     video: video03,
     poster: video03Poster,
-    title: "O resultado que veio com o processo",
     description:
       "Acompanhamento real, planejamento individual e evolução que faz diferença no dia a dia.",
   },
@@ -221,7 +218,6 @@ function DepoimentVideo({
   video,
   poster,
   index,
-  title,
   description,
 }: (typeof DEPOIMENTS)[number] & { index: number }) {
   const [showControls, setShowControls] = useState(false);
@@ -265,10 +261,7 @@ function DepoimentVideo({
       </div>
 
       <div className="mx-auto mt-3 w-[85%] text-left">
-        <p className="font-display text-base font-semibold text-foreground sm:text-lg">{title}</p>
-        <p className="mt-1 font-mono text-[10px] leading-relaxed text-muted sm:text-xs">
-          {description}
-        </p>
+        <p className="font-mono text-[10px] leading-relaxed text-muted sm:text-xs">{description}</p>
       </div>
     </div>
   );
