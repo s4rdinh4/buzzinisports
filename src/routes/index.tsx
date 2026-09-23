@@ -363,7 +363,7 @@ function Team() {
   return (
     <section
       id="equipe"
-      className="snap-sec relative flex flex-col justify-center bg-card py-12 sm:py-16"
+      className="snap-sec relative flex flex-col justify-center bg-card py-8 sm:py-12"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="flex items-end justify-between gap-6">
@@ -398,15 +398,15 @@ function Team() {
             </Button>
           </div>
         </div>
-        <div className="mt-8 grid gap-4 sm:mt-9 sm:grid-cols-3 sm:gap-5">
+        <div className="mt-6 grid gap-3 sm:mt-7 sm:grid-cols-3 sm:gap-4">
           {visibleCoaches.map((coach) => (
             <div
               key={coach.name}
-              className="touch-pan-y overflow-hidden rounded-lg bg-background ring-1 ring-border"
+              className="touch-pan-y flex h-full flex-col overflow-hidden rounded-lg bg-background ring-1 ring-border"
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
-              <div className="aspect-[40/27] w-full overflow-hidden sm:aspect-[8/9]">
+              <div className="aspect-[4/5] w-full overflow-hidden sm:aspect-[5/6]">
                 <img
                   src={coach.photo}
                   alt={`Retrato de ${coach.name}`}
@@ -416,14 +416,14 @@ function Team() {
                   className="h-full w-full object-cover object-top"
                 />
               </div>
-              <div className="p-4 sm:p-5">
-                <p className="font-display text-lg font-semibold text-foreground sm:text-xl">
+              <div className="flex flex-1 flex-col p-3 sm:p-4">
+                <p className="font-display text-base font-semibold text-foreground sm:text-lg">
                   {coach.name}
                 </p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-primary sm:text-xs">
+                <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-primary sm:text-[10px]">
                   {coach.credential}
                 </p>
-                <p className="mt-2 font-mono text-xs text-pretty text-muted sm:text-sm">
+                <p className="mt-2 font-mono text-[10px] leading-relaxed text-pretty text-muted sm:text-xs">
                   {coach.bio}
                 </p>
               </div>
@@ -481,7 +481,7 @@ const HOW_IT_WORKS = [
     subtitle: "Sua rotina que manda, ajuste conforme seu tempo.",
     icon: CalendarClock,
     layout: "sm:col-span-7 sm:row-span-2",
-    titleSize: "text-xl sm:text-4xl",
+    titleSize: "text-lg sm:text-3xl",
   },
   {
     number: "02",
@@ -505,7 +505,7 @@ const HOW_IT_WORKS = [
     subtitle: "Um plano criado para você ir mais longe.",
     icon: RouteIcon,
     layout: "sm:col-span-12",
-    titleSize: "text-xl sm:text-3xl",
+    titleSize: "text-lg sm:text-2xl",
   },
 ] as const;
 
@@ -515,7 +515,7 @@ function HowItWorks() {
       id="como-funciona"
       className="snap-sec relative flex flex-col justify-center overflow-hidden bg-background"
     >
-      <div className="mx-auto w-full max-w-6xl px-6 py-10 sm:px-12 sm:py-12">
+      <div className="mx-auto w-full max-w-6xl px-6 py-8 sm:px-12 sm:py-10">
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary sm:text-xs">
@@ -531,13 +531,13 @@ function HowItWorks() {
           </p>
         </div>
 
-        <div className="mt-6 grid auto-rows-fr grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-12 sm:grid-rows-3 sm:gap-4">
+        <div className="mt-5 grid auto-rows-fr grid-cols-2 gap-3 sm:mt-7 sm:grid-cols-12 sm:grid-rows-3 sm:gap-4">
           {HOW_IT_WORKS.map((item, index) => {
             const Icon = item.icon;
             return (
               <article
                 key={item.number}
-                className={`group relative flex min-h-0 flex-col justify-between overflow-hidden rounded-lg border p-4 sm:p-6 ${
+                className={`group relative flex min-h-0 flex-col justify-between overflow-hidden rounded-lg border p-3 sm:p-4 ${
                   index === 0
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border bg-card text-foreground"
@@ -545,22 +545,24 @@ function HowItWorks() {
               >
                 <div className="flex items-start justify-between gap-3">
                   <span
-                    className={`font-mono text-[10px] font-bold ${index === 0 ? "text-primary-foreground/70" : "text-primary"}`}
+                    className={`font-mono text-[9px] font-bold ${index === 0 ? "text-primary-foreground/70" : "text-primary"}`}
                   >
                     {item.number}
                   </span>
                   <Icon
                     aria-hidden="true"
-                    className={`size-5 sm:size-6 ${index === 0 ? "text-primary-foreground" : "text-primary"}`}
+                    className={`size-4 sm:size-5 ${index === 0 ? "text-primary-foreground" : "text-primary"}`}
                     strokeWidth={1.75}
                   />
                 </div>
-                <div className="mt-5 sm:mt-8">
-                  <h3 className={`font-display font-semibold leading-tight text-balance ${item.titleSize}`}>
+                <div className="mt-3 sm:mt-5">
+                  <h3
+                    className={`font-display font-semibold leading-tight text-balance ${item.titleSize}`}
+                  >
                     {item.title}
                   </h3>
                   <p
-                    className={`mt-2 max-w-[46ch] font-mono text-[10px] leading-relaxed text-pretty sm:text-xs ${
+                    className={`mt-1.5 max-w-[44ch] font-mono text-[9px] leading-relaxed text-pretty sm:text-[10px] ${
                       index === 0 ? "text-primary-foreground/75" : "text-muted"
                     }`}
                   >
@@ -600,13 +602,13 @@ function Locations() {
       id="localidades"
       className="snap-sec relative flex flex-col justify-center overflow-hidden bg-card"
     >
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-6 py-14 sm:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-6 px-6 py-10 sm:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
         <div className="relative order-2 mx-auto w-full max-w-xl lg:order-1">
           <svg
             viewBox="285 275 310 285"
             role="img"
             aria-label="Mapa ampliado da região Sudeste com Bebedouro, Ribeirão Preto e São Paulo destacadas"
-            className="relative mx-auto block h-auto max-h-[52svh] w-full overflow-hidden"
+            className="relative mx-auto block h-auto max-h-[42svh] w-full overflow-hidden"
           >
             {brazilMap.locations
               .filter((state: { id: string }) => ["sp", "mg", "rj", "es"].includes(state.id))
@@ -666,27 +668,27 @@ function Locations() {
           <h2 className="mt-4 max-w-[14ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
             Perto de você. Em todo o Brasil.
           </h2>
-          <div className="mt-8 divide-y divide-border border-y border-border">
+          <div className="mt-6 divide-y divide-border border-y border-border">
             {LOCATIONS_INFO.map((item) => (
-              <div key={item.name} className="flex gap-4 py-5">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                  <MapPin aria-hidden="true" className="size-5" />
+              <div key={item.name} className="flex gap-4 py-4">
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                  <MapPin aria-hidden="true" className="size-4" />
                 </div>
                 <div>
-                  <p className="font-display text-xl font-semibold text-foreground">{item.name}</p>
-                  <p className="mt-1 font-mono text-xs uppercase text-primary">{item.state}</p>
-                  <p className="mt-2 font-mono text-sm text-muted">{item.detail}</p>
+                  <p className="font-display text-lg font-semibold text-foreground">{item.name}</p>
+                  <p className="mt-1 font-mono text-[10px] uppercase text-primary">{item.state}</p>
+                  <p className="mt-2 font-mono text-xs text-muted">{item.detail}</p>
                 </div>
               </div>
             ))}
-            <div className="flex gap-4 py-5">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-background text-primary ring-1 ring-border">
-                <Radio aria-hidden="true" className="size-5" />
+            <div className="flex gap-4 py-4">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-background text-primary ring-1 ring-border">
+                <Radio aria-hidden="true" className="size-4" />
               </div>
               <div>
-                <p className="font-display text-xl font-semibold text-foreground">Online</p>
-                <p className="mt-1 font-mono text-xs uppercase text-primary">Todo o Brasil</p>
-                <p className="mt-2 font-mono text-sm text-muted">
+                <p className="font-display text-lg font-semibold text-foreground">Online</p>
+                <p className="mt-1 font-mono text-[10px] uppercase text-primary">Todo o Brasil</p>
+                <p className="mt-2 font-mono text-xs text-muted">
                   Planilha personalizada e acompanhamento onde você estiver.
                 </p>
               </div>
