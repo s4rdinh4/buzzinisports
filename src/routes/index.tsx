@@ -457,17 +457,17 @@ const LOCATIONS_INFO = [
   {
     name: "Bebedouro",
     state: "São Paulo",
-    detail: "Treinos presenciais e acompanhamento próximo.",
+    detail: "Treinos presenciais e encontros de performance.",
   },
   {
     name: "Ribeirão Preto",
     state: "São Paulo",
-    detail: "Treinos presenciais e encontros de performance.",
+    detail: "Treinos presenciais e acompanhamento próximo.",
   },
   {
     name: "São Paulo",
     state: "Capital",
-    detail: "Encontros em grupo e preparação para provas.",
+    detail: "Treinos presenciais, e experiência personalizada para cada aluno.",
   },
 ] as const;
 
@@ -731,19 +731,34 @@ function Plans() {
 
 const FAQS = [
   {
-    question: "Preciso já correr para assinar?",
+    question: "Preciso ser corredor experiente para entrar na assessoria?",
     answer:
-      "Não. Começamos com uma avaliação e um plano de caminhada para os que estão saindo do zero.",
+      "Não! A assessoria é para todos os níveis, desde quem está começando do zero até quem já corre e quer melhorar seus tempos. Os treinos são planejados de acordo com seu nível, objetivo e rotina.",
   },
   {
-    question: "Como funciona o retorno do treino?",
+    question: "E se eu não conseguir acompanhar os treinos?",
     answer:
-      "Você registra os treinos no app e o treinador ajusta volume e intensidade a cada ciclo.",
+      "Você não precisa acompanhar o ritmo de ninguém. O treinamento é individualizado e ajustado à sua realidade, respeitando seu momento, sua capacidade e sua evolução.",
   },
   {
-    question: "Atendem pessoas fora das três cidades?",
+    question: "Quantos dias por semana preciso treinar?",
     answer:
-      "Sim, o acompanhamento é remoto; a presença local vale para encontros de grupo opcionais.",
+      "Depende do seu objetivo e da sua disponibilidade. O planejamento é adaptado à sua rotina, podendo ser estruturado para quem corre 2, 3, 4 ou mais vezes por semana.",
+  },
+  {
+    question: "Como vou saber qual ritmo devo fazer em cada treino?",
+    answer:
+      "Você não precisa ficar chutando o ritmo. Os treinos são prescritos com referências de ritmo, esforço e/ou frequência cardíaca, para que você saiba exatamente como executar cada sessão.",
+  },
+  {
+    question: "A assessoria serve para quem quer correr uma prova específica?",
+    answer:
+      "Sim! O planejamento pode ser direcionado para uma meta específica, como completar seus primeiros 5 km, melhorar o tempo nos 10 km, buscar um RP na meia maratona ou se preparar para uma maratona.",
+  },
+  {
+    question: "Vou ter acompanhamento mesmo treinando sozinho?",
+    answer:
+      "Sim! Mesmo treinando sozinho, você conta com acompanhamento da equipe durante todo o processo. Você recebe seu planejamento, pode tirar dúvidas e acompanha sua evolução ao longo das semanas.",
   },
 ];
 
