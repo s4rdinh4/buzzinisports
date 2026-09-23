@@ -4,13 +4,6 @@ import { useEffect, useRef, useState, type TouchEvent } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Menu, Play, Radio, X } from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
 import heroVideoMp4 from "@/assets/hero-video.mp4.asset.json";
@@ -644,6 +637,22 @@ function Plans() {
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   const whatsappWebLink = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
 
+  useEffect(() => {
+    if (selectedPlan === null) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedPlan(null);
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [selectedPlan]);
+
   return (
     <section
       id="planos"
@@ -741,60 +750,78 @@ function Plans() {
           ))}
         </div>
       </div>
-      <Dialog
-        open={selectedPlan !== null}
-        onOpenChange={(open) => {
-          if (!open) setSelectedPlan(null);
-        }}
-      >
-        <DialogContent className="max-w-2xl p-6 sm:p-8">
-          <DialogHeader>
-            <DialogTitle className="font-display text-2xl text-foreground">
-              Fale com a Buzzini Sports
-            </DialogTitle>
-            <DialogDescription className="font-mono text-sm text-muted">
-              Escaneie o QR Code ou abra o WhatsApp Web para continuar sobre o plano{" "}
-              {selectedPlan?.period}.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="mt-2 grid gap-6 sm:grid-cols-2 sm:items-center">
-            <div className="flex flex-col items-center gap-4 rounded-lg bg-card p-5 text-center ring-1 ring-border">
-              <div className="rounded-lg bg-white p-3">
-                <img
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodeURIComponent(whatsappLink)}`}
-                  alt="QR Code para abrir a conversa no WhatsApp"
-                  width={220}
-                  height={220}
-                />
-              </div>
-              <p className="max-w-[26ch] font-mono text-xs text-muted">
-                Aponte a câmera do celular para iniciar a conversa com a mensagem preenchida.
+      {selectedPlan !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.currentTarget === event.target) setSelectedPlan(null);
+          }}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="plan-dialog-title"
+            aria-describedby="plan-dialog-description"
+            className="relative grid w-full max-w-2xl gap-4 rounded-lg border border-border bg-background p-6 shadow-lg sm:p-8"
+          >
+            <Button
+              type="button"
+              variant="ghost"
+              aria-label="Fechar"
+              onClick={() => setSelectedPlan(null)}
+              className="absolute right-3 top-3 size-9 rounded-full p-0 text-muted hover:bg-card hover:text-foreground"
+            >
+              <X className="size-4" aria-hidden="true" />
+            </Button>
+            <div className="flex flex-col space-y-1.5 pr-10 text-center sm:text-left">
+              <h3 id="plan-dialog-title" className="font-display text-2xl text-foreground">
+                Fale com a Buzzini Sports
+              </h3>
+              <p id="plan-dialog-description" className="font-mono text-sm text-muted">
+                Escaneie o QR Code ou abra o WhatsApp Web para continuar sobre o plano{" "}
+                {selectedPlan.period}.
               </p>
             </div>
-            <div className="flex flex-col gap-4">
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.12em] text-primary">
-                  Plano {selectedPlan?.period}
-                </p>
-                <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-muted">
-                  {selectedPlan?.location}
-                </p>
-                <p className="mt-3 font-mono text-sm leading-relaxed text-foreground/80">
-                  “{whatsappMessage}”
+            <div className="mt-2 grid gap-6 sm:grid-cols-2 sm:items-center">
+              <div className="flex flex-col items-center gap-4 rounded-lg bg-card p-5 text-center ring-1 ring-border">
+                <div className="rounded-lg bg-white p-3">
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodeURIComponent(whatsappLink)}`}
+                    alt="QR Code para abrir a conversa no WhatsApp"
+                    width={220}
+                    height={220}
+                  />
+                </div>
+                <p className="max-w-[26ch] font-mono text-xs text-muted">
+                  Aponte a câmera do celular para iniciar a conversa com a mensagem preenchida.
                 </p>
               </div>
-              <Button
-                asChild
-                className="h-12 rounded-full bg-primary font-mono text-xs uppercase text-primary-foreground hover:bg-primary-soft"
-              >
-                <a href={whatsappWebLink} target="_blank" rel="noreferrer">
-                  Abrir WhatsApp Web
-                </a>
-              </Button>
+              <div className="flex flex-col gap-4">
+                <div>
+                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-primary">
+                    Plano {selectedPlan.period}
+                  </p>
+                  <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-muted">
+                    {selectedPlan.location}
+                  </p>
+                  <p className="mt-3 font-mono text-sm leading-relaxed text-foreground/80">
+                    “{whatsappMessage}”
+                  </p>
+                </div>
+                <Button
+                  asChild
+                  className="h-12 rounded-full bg-primary font-mono text-xs uppercase text-primary-foreground hover:bg-primary-soft"
+                >
+                  <a href={whatsappWebLink} target="_blank" rel="noreferrer">
+                    Abrir WhatsApp Web
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      )}
     </section>
   );
 }
