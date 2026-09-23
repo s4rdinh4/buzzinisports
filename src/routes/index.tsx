@@ -865,9 +865,11 @@ function Plans() {
       className="snap-sec relative flex flex-col justify-start bg-background py-16 sm:justify-center sm:py-0"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">Planos Buzzini</p>
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
+          Você define seu plano, nós cuidamos do resto.
+        </p>
         <h2 className="mt-3 max-w-[40ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:mt-4 sm:text-5xl">
-          Seu treino, no seu ritmo.
+          Planos Buzzini
         </h2>
         <div
           className="mt-6 flex w-full gap-1 rounded-full bg-card-high p-1 ring-1 ring-border sm:mt-8"
