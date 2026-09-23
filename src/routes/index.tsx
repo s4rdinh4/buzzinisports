@@ -134,13 +134,9 @@ function SiteLogo() {
         className={`absolute left-0 top-full mt-2 w-64 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border transition-all duration-200 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}
       >
         {[
-          ["Início", "inicio"],
           ["Histórias", "historias"],
-          ["Equipe", "equipe"],
-          ["Como funciona", "como-funciona"],
           ["Localidades", "localidades"],
           ["Planos", "planos"],
-          ["Dúvidas", "faq"],
         ].map(([label, section]) => (
           <a
             key={section}
