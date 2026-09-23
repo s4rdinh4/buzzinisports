@@ -593,9 +593,8 @@ const PLAN_BENEFITS = {
       "Contato com Treinador",
       "Acesso ao App Runy",
       "Estrutura Buzzini no dia da Prova",
-      "Sem fidelidade",
     ],
-    excluded: ["Camiseta Buzzini"],
+    differentials: ["Sem fidelidade", "Acesso à evolução contínua"],
   },
   Trimestral: {
     included: [
@@ -603,9 +602,8 @@ const PLAN_BENEFITS = {
       "Contato com Treinador",
       "Acesso ao App Runy",
       "Estrutura Buzzini no dia da Prova",
-      "Sem fidelidade",
     ],
-    excluded: ["Camiseta Buzzini"],
+    differentials: ["Melhor custo-benefício", "Sem fidelidade"],
   },
   Semestral: {
     included: [
@@ -613,10 +611,8 @@ const PLAN_BENEFITS = {
       "Contato com Treinador",
       "Acesso ao App Runy",
       "Estrutura Buzzini no dia da Prova",
-      "Sem fidelidade",
-      "Camiseta Buzzini",
     ],
-    excluded: [""],
+    differentials: ["Camiseta Buzzini", "Melhor suporte com o treinador"],
   },
   Anual: {
     included: [
@@ -624,10 +620,8 @@ const PLAN_BENEFITS = {
       "Contato com Treinador",
       "Acesso ao App Runy",
       "Estrutura Buzzini no dia da Prova",
-      "Sem fidelidade",
-      "Kit Exclusivo Buzzini",
     ],
-    excluded: [""],
+    differentials: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
   },
 } as const;
 
@@ -715,77 +709,91 @@ function Plans() {
           ))}
         </div>
         <div className="mt-5 grid grid-cols-1 gap-3 sm:mt-6 sm:grid-cols-4">
-          {PRICES[location].map((option, index) => (
-            <article
-              key={option.period}
-              className={`flex min-h-44 flex-col justify-between rounded-lg p-5 ring-1 ${
-                index === 3
-                  ? "bg-primary text-primary-foreground ring-primary-soft"
-                  : "bg-card text-foreground ring-border"
-              }`}
-            >
-              <div>
-                <p
-                  className={`font-mono text-xs uppercase tracking-[0.12em] ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}
-                >
-                  {option.period}
-                </p>
-                <p className="mt-4 font-display text-3xl font-semibold leading-none sm:text-4xl">
-                  {option.price}
-                </p>
-                <ul
-                  className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${index === 3 ? "text-primary-foreground/80" : "text-foreground/75"}`}
-                >
-                  {PLAN_BENEFITS[option.period].included.map((benefit) => (
-                    <li key={benefit} className="flex gap-2">
-                      <span
-                        aria-hidden="true"
-                        className={index === 3 ? "text-primary-foreground" : "text-primary"}
-                      >
-                        ✓
-                      </span>
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                  {PLAN_BENEFITS[option.period].excluded.map((benefit) => (
-                    <li key={benefit} className="flex gap-2 text-muted line-through">
-                      <span aria-hidden="true" className="text-muted no-underline">
-                        ×
-                      </span>
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <p
-                className={`mt-6 font-mono text-xs ${index === 3 ? "text-primary-foreground/70" : "text-muted"}`}
-              >
-                {option.detail}
-              </p>
-              <Button
-                variant="ghost"
-                type="button"
-                onClick={() => {
-                  const message = `Olá, vi no site o plano ${option.period} e gostaria de mais informações`;
-                  const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+          {PRICES[location].map((option, index) => {
+            const isFeatured = index === 3;
+            const benefits = PLAN_BENEFITS[option.period];
 
-                  if (isMobile) {
-                    window.location.href = link;
-                    return;
-                  }
-
-                  setSelectedPlan({ period: option.period, location });
-                }}
-                className={`mt-5 h-10 w-full rounded-full px-3 font-mono text-xs uppercase ${
-                  index === 3
-                    ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90 hover:text-primary"
-                    : "bg-transparent text-foreground ring-1 ring-border hover:bg-primary hover:text-primary-foreground"
+            return (
+              <article
+                key={option.period}
+                className={`relative flex min-h-44 flex-col justify-between rounded-lg p-5 ring-1 transition-all ${
+                  isFeatured
+                    ? "border-2 border-[#32D951] bg-background text-foreground shadow-[0_0_0_1px_rgba(50,217,81,0.2)]"
+                    : "bg-card text-foreground ring-border"
                 }`}
               >
-                Quero esse plano
-              </Button>
-            </article>
-          ))}
+                {isFeatured && (
+                  <span className="absolute -top-3 left-4 rounded-full border border-[#32D951] bg-[#32D951]/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[#32D951]">
+                    Mais escolhido
+                  </span>
+                )}
+                <div>
+                  <p
+                    className={`font-mono text-xs uppercase tracking-[0.12em] ${isFeatured ? "text-[#32D951]" : "text-muted"}`}
+                  >
+                    {option.period}
+                  </p>
+                  <p
+                    className={`mt-4 font-display text-3xl font-semibold leading-none sm:text-4xl ${
+                      isFeatured ? "text-foreground" : "text-foreground"
+                    }`}
+                  >
+                    {option.price}
+                  </p>
+                  <ul
+                    className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${
+                      isFeatured ? "text-foreground/80" : "text-foreground/75"
+                    }`}
+                  >
+                    {benefits.included.map((benefit) => (
+                      <li key={benefit} className="flex gap-2">
+                        <span
+                          aria-hidden="true"
+                          className={isFeatured ? "text-[#32D951]" : "text-primary"}
+                        >
+                          ✓
+                        </span>
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                    {benefits.differentials.map((benefit) => (
+                      <li key={benefit} className="flex gap-2 font-bold text-[#32D951]">
+                        <span aria-hidden="true" className="text-[#32D951]">
+                          ★
+                        </span>
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <p className={`mt-6 font-mono text-xs ${isFeatured ? "text-muted" : "text-muted"}`}>
+                  {option.detail}
+                </p>
+                <Button
+                  variant="ghost"
+                  type="button"
+                  onClick={() => {
+                    const message = `Olá, vi no site o plano ${option.period} e gostaria de mais informações`;
+                    const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+                    if (isMobile) {
+                      window.location.href = link;
+                      return;
+                    }
+
+                    setSelectedPlan({ period: option.period, location });
+                  }}
+                  className={`mt-5 h-10 w-full rounded-full px-3 font-mono text-xs uppercase ${
+                    isFeatured
+                      ? "bg-[#32D951] text-[#0D1B12] hover:bg-[#32D951]/90 hover:text-[#0D1B12]"
+                      : "bg-transparent text-foreground ring-1 ring-border hover:bg-primary hover:text-primary-foreground"
+                  }`}
+                >
+                  Quero esse plano
+                </Button>
+              </article>
+            );
+          })}
         </div>
       </div>
       {selectedPlan !== null && (
