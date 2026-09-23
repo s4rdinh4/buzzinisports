@@ -1,7 +1,19 @@
 /* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type TouchEvent } from "react";
-import { ChevronLeft, ChevronRight, MapPin, Menu, Play, Radio, X } from "lucide-react";
+import {
+  CalendarClock,
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  Menu,
+  Play,
+  Radio,
+  Route as RouteIcon,
+  UserRoundCheck,
+  Watch,
+  X,
+} from "lucide-react";
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -125,6 +137,7 @@ function SiteLogo() {
           ["Início", "inicio"],
           ["Histórias", "historias"],
           ["Equipe", "equipe"],
+          ["Como funciona", "como-funciona"],
           ["Localidades", "localidades"],
           ["Planos", "planos"],
           ["Dúvidas", "faq"],
@@ -455,6 +468,108 @@ function Team() {
               <ChevronRight aria-hidden="true" />
             </Button>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const HOW_IT_WORKS = [
+  {
+    number: "01",
+    title: "Você define sua realidade",
+    subtitle: "Sua rotina que manda, ajuste conforme seu tempo.",
+    icon: CalendarClock,
+    layout: "sm:col-span-7 sm:row-span-2",
+    titleSize: "text-xl sm:text-4xl",
+  },
+  {
+    number: "02",
+    title: "Acesso ao App Runy",
+    subtitle: "Possibilidade de sincronizar com seu relógio GPS.",
+    icon: Watch,
+    layout: "sm:col-span-5",
+    titleSize: "text-lg sm:text-2xl",
+  },
+  {
+    number: "03",
+    title: "Seu treinador próximo a você",
+    subtitle: "Um treinador que acompanha sua evolução.",
+    icon: UserRoundCheck,
+    layout: "sm:col-span-5",
+    titleSize: "text-lg sm:text-2xl",
+  },
+  {
+    number: "04",
+    title: "Metodologia Exclusiva",
+    subtitle: "Um plano criado para você ir mais longe.",
+    icon: RouteIcon,
+    layout: "sm:col-span-12",
+    titleSize: "text-xl sm:text-3xl",
+  },
+] as const;
+
+function HowItWorks() {
+  return (
+    <section
+      id="como-funciona"
+      className="snap-sec relative flex flex-col justify-center overflow-hidden bg-background"
+    >
+      <div className="mx-auto w-full max-w-6xl px-6 py-10 sm:px-12 sm:py-12">
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary sm:text-xs">
+              Como funciona
+            </p>
+            <h2 className="mt-2 max-w-[18ch] font-display text-3xl font-semibold leading-none text-balance text-foreground sm:mt-3 sm:text-5xl">
+              Seu treino, no seu ritmo.
+            </h2>
+          </div>
+          <p className="hidden max-w-[34ch] font-mono text-xs leading-relaxed text-muted md:block">
+            Planejamento individual, tecnologia e acompanhamento para transformar constância em
+            evolução.
+          </p>
+        </div>
+
+        <div className="mt-6 grid auto-rows-fr grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-12 sm:grid-rows-3 sm:gap-4">
+          {HOW_IT_WORKS.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <article
+                key={item.number}
+                className={`group relative flex min-h-0 flex-col justify-between overflow-hidden rounded-lg border p-4 sm:p-6 ${
+                  index === 0
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-card text-foreground"
+                } ${item.layout}`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <span
+                    className={`font-mono text-[10px] font-bold ${index === 0 ? "text-primary-foreground/70" : "text-primary"}`}
+                  >
+                    {item.number}
+                  </span>
+                  <Icon
+                    aria-hidden="true"
+                    className={`size-5 sm:size-6 ${index === 0 ? "text-primary-foreground" : "text-primary"}`}
+                    strokeWidth={1.75}
+                  />
+                </div>
+                <div className="mt-5 sm:mt-8">
+                  <h3 className={`font-display font-semibold leading-tight text-balance ${item.titleSize}`}>
+                    {item.title}
+                  </h3>
+                  <p
+                    className={`mt-2 max-w-[46ch] font-mono text-[10px] leading-relaxed text-pretty sm:text-xs ${
+                      index === 0 ? "text-primary-foreground/75" : "text-muted"
+                    }`}
+                  >
+                    {item.subtitle}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -1009,6 +1124,7 @@ function Index() {
       <Hero />
       <Stories />
       <Team />
+      <HowItWorks />
       <Locations />
       <Plans />
       <Faq />
