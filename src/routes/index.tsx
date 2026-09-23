@@ -609,23 +609,18 @@ const PRICES: Record<
   { period: keyof typeof PLAN_BENEFITS; price: string; detail: string }[]
 > = {
   "Outras cidades": [
-    { period: "Mensal", price: "R$ 129", detail: "por mês" },
-    { period: "Trimestral", price: "R$ 349", detail: "3 meses" },
-    { period: "Semestral", price: "R$ 649", detail: "6 meses" },
-    { period: "Anual", price: "R$ 1.190", detail: "12 meses" },
+    { period: "Mensal", price: "R$ 150", detail: "por mês" },
+    { period: "Trimestral", price: "R$ 145", detail: "/mês | 3 meses" },
+    { period: "Semestral", price: "R$ 140", detail: "/mês | 6 meses" },
+    { period: "Anual", price: "R$ 130", detail: "/mês | 12 meses" },
   ],
   "São Paulo": [
-    { period: "Mensal", price: "R$ 169", detail: "por mês" },
-    { period: "Trimestral", price: "R$ 459", detail: "3 meses" },
-    { period: "Semestral", price: "R$ 849", detail: "6 meses" },
-    { period: "Anual", price: "R$ 1.590", detail: "12 meses" },
+    { period: "Mensal", price: "R$ 250", detail: "por mês" },
+    { period: "Trimestral", price: "R$ 245", detail: "/mês | 3 meses" },
+    { period: "Semestral", price: "R$ 240", detail: "/mês | 6 meses" },
+    { period: "Anual", price: "R$ 230", detail: "/mês | 12 meses" },
   ],
-  Online: [
-    { period: "Mensal", price: "R$ 89", detail: "por mês" },
-    { period: "Trimestral", price: "R$ 239", detail: "3 meses" },
-    { period: "Semestral", price: "R$ 449", detail: "6 meses" },
-    { period: "Anual", price: "R$ 790", detail: "12 meses" },
-  ],
+  Online: [{ period: "Trimestral", price: "R$ 110", detail: "/mês | 3 meses" }],
 };
 
 function Plans() {
