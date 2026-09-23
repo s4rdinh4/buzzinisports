@@ -18,6 +18,7 @@ import fotoGeorge from "@/assets/foto_george.webp.asset.json";
 import fotoHudson from "@/assets/foto_hudson.webp.asset.json";
 import fotoRodrigo from "@/assets/foto_rodrigo.webp.asset.json";
 import fotoIgor from "@/assets/foto_igor.webp.asset.json";
+import whatsappIcon from "@/assets/whatsapp.webp";
 import video01 from "@/assets/depoiments/video01.mp4";
 import video01Poster from "@/assets/depoiments/video01.jpg";
 import video02 from "@/assets/depoiments/video02.mp4";
@@ -812,10 +813,21 @@ function Plans() {
                 </div>
                 <Button
                   asChild
-                  className="h-12 rounded-full bg-primary font-mono text-xs uppercase text-primary-foreground hover:bg-primary-soft"
+                  className="h-12 rounded-full border border-[#32D951] bg-transparent font-mono text-xs uppercase text-[#32D951] hover:bg-[#32D951]/10 hover:text-[#32D951]"
                 >
-                  <a href={whatsappWebLink} target="_blank" rel="noreferrer">
+                  <a
+                    href={whatsappWebLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center justify-center gap-2"
+                  >
                     Abrir WhatsApp Web
+                    <img
+                      src={whatsappIcon}
+                      alt=""
+                      aria-hidden="true"
+                      className="size-5 object-contain"
+                    />
                   </a>
                 </Button>
               </div>
