@@ -626,6 +626,7 @@ const PRICES: Record<
 
 function Plans() {
   const [location, setLocation] = useState<Location>("Outras cidades");
+  const isMobile = useIsMobile();
   const [selectedPlan, setSelectedPlan] = useState<{
     period: keyof typeof PLAN_BENEFITS;
     location: Location;
@@ -738,7 +739,17 @@ function Plans() {
               <Button
                 variant="ghost"
                 type="button"
-                onClick={() => setSelectedPlan({ period: option.period, location })}
+                onClick={() => {
+                  const message = `Olá, vi no site o plano ${option.period} e gostaria de mais informações`;
+                  const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+                  if (isMobile) {
+                    window.location.href = link;
+                    return;
+                  }
+
+                  setSelectedPlan({ period: option.period, location });
+                }}
                 className={`mt-5 h-10 w-full rounded-full px-3 font-mono text-xs uppercase ${
                   index === 3
                     ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90 hover:text-primary"
