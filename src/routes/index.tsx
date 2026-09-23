@@ -588,20 +588,46 @@ type Location = (typeof LOCATIONS)[number];
 
 const PLAN_BENEFITS = {
   Mensal: {
-    included: ["Treino personalizado", "Ajustes mensais", "Sem fidelidade"],
-    excluded: ["Treinos presenciais"],
+    included: [
+      "Planilha Personalizada",
+      "Contato com Treinador",
+      "Acesso ao App Runy",
+      "Estrutura Buzzini no dia da Prova",
+      "Sem fidelidade",
+    ],
+    excluded: ["Camiseta Buzzini"],
   },
   Trimestral: {
-    included: ["Treino personalizado", "Ajustes mensais", "Mais consistência"],
-    excluded: ["Treinos presenciais"],
+    included: [
+      "Planilha Personalizada",
+      "Contato com Treinador",
+      "Acesso ao App Runy",
+      "Estrutura Buzzini no dia da Prova",
+      "Sem fidelidade",
+    ],
+    excluded: ["Camiseta Buzzini"],
   },
   Semestral: {
-    included: ["Treino personalizado", "Ajustes mensais", "Evolução acompanhada"],
-    excluded: ["Treinos presenciais"],
+    included: [
+      "Planilha Personalizada",
+      "Contato com Treinador",
+      "Acesso ao App Runy",
+      "Estrutura Buzzini no dia da Prova",
+      "Sem fidelidade",
+      "Camiseta Buzzini",
+    ],
+    excluded: [""],
   },
   Anual: {
-    included: ["Treino personalizado", "Ajustes mensais", "Melhor custo-benefício"],
-    excluded: ["Treinos presenciais"],
+    included: [
+      "Planilha Personalizada",
+      "Contato com Treinador",
+      "Acesso ao App Runy",
+      "Estrutura Buzzini no dia da Prova",
+      "Sem fidelidade",
+      "Kit Exclusivo Buzzini",
+    ],
+    excluded: [""],
   },
 } as const;
 
