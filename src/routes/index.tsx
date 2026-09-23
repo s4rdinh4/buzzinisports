@@ -229,9 +229,9 @@ function DepoimentVideo({
 
   return (
     <div className="flex w-full flex-col justify-center sm:mx-0">
-      <div className="relative mx-auto w-[85%] cursor-pointer overflow-hidden rounded-2xl bg-card ring-1 ring-border">
+      <div className="relative mx-auto w-[72%] cursor-pointer overflow-hidden rounded-2xl bg-card ring-1 ring-border max-sm:w-full">
         <video
-          className="aspect-[9/16] w-full cursor-pointer object-cover"
+          className="aspect-[9/16] w-full cursor-pointer object-cover max-sm:aspect-[16/9]"
           controls={showControls}
           playsInline
           preload="metadata"
@@ -260,7 +260,7 @@ function DepoimentVideo({
         )}
       </div>
 
-      <div className="mx-auto mt-3 w-[85%] text-left">
+      <div className="mx-auto mt-3 w-[72%] text-left max-sm:w-full">
         <p className="font-mono text-[10px] leading-relaxed text-muted sm:text-xs">{description}</p>
       </div>
     </div>
@@ -296,8 +296,6 @@ function Stories() {
     setPage((currentPage) => Math.min(currentPage, pageCount - 1));
   }, [pageCount]);
 
-  const visibleStories = isMobile ? DEPOIMENTS.slice(page, page + 1) : DEPOIMENTS;
-
   return (
     <section
       id="historias"
@@ -312,11 +310,18 @@ function Stories() {
         </h2>
 
         {isMobile ? (
-          <div className="mt-8" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-            <div className="flex gap-4">
-              {visibleStories.map((depoiment, index) => (
-                <div key={depoiment.video} className="w-full min-w-full">
-                  <DepoimentVideo {...depoiment} index={index + page} />
+          <div
+            className="mt-8 overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="flex gap-4 transition-transform duration-300 ease-out"
+              style={{ transform: `translateX(calc(-${page} * (82% + 1rem)))` }}
+            >
+              {DEPOIMENTS.map((depoiment, index) => (
+                <div key={depoiment.video} className="w-[82%] min-w-[82%]">
+                  <DepoimentVideo {...depoiment} index={index} />
                 </div>
               ))}
             </div>
