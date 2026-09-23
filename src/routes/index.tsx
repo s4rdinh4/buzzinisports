@@ -227,7 +227,7 @@ function DepoimentVideo({
     <div className="flex w-full flex-col justify-center sm:mx-0">
       <div className="relative mx-auto w-[72%] cursor-pointer overflow-hidden rounded-2xl bg-card ring-1 ring-border max-sm:w-full">
         <video
-          className="aspect-[9/16] w-full cursor-pointer object-cover max-sm:aspect-[16/9]"
+          className="aspect-[9/16] w-full cursor-pointer object-cover"
           controls={showControls}
           playsInline
           preload="metadata"
