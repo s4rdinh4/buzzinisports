@@ -723,7 +723,7 @@ function Plans() {
                 }`}
               >
                 {isFeatured && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-sm">
+                  <span className="absolute -top-3 left-4 rounded-full bg-primary px-3 py-1 font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-sm">
                     Mais escolhido
                   </span>
                 )}
