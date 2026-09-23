@@ -406,14 +406,14 @@ function Team() {
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
-              <div className="aspect-[4/5] w-full overflow-hidden sm:aspect-[5/6]">
+              <div className="aspect-[5/4] w-full overflow-hidden sm:aspect-[5/4]">
                 <img
                   src={coach.photo}
                   alt={`Retrato de ${coach.name}`}
                   width={512}
                   height={512}
                   loading="lazy"
-                  className="h-full w-full object-cover object-top"
+                  className="h-full w-full scale-[1.02] object-cover object-top"
                 />
               </div>
               <div className="flex flex-1 flex-col p-3 sm:p-4">
