@@ -763,6 +763,8 @@ const FAQS = [
 ];
 
 function Faq() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   return (
     <section
       id="faq"
@@ -781,8 +783,14 @@ function Faq() {
               key={faq.question}
               className="overflow-hidden rounded-lg bg-background ring-1 ring-border"
             >
-              <details open={index === 0} className="group">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5">
+              <details open={openFaq === index} className="group">
+                <summary
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setOpenFaq((currentFaq) => (currentFaq === index ? null : index));
+                  }}
+                  className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5"
+                >
                   <span className="font-display text-lg font-medium text-foreground">
                     {faq.question}
                   </span>
