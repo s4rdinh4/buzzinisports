@@ -33,13 +33,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Assessoria de corrida com planos personalizados do 5K à maratona. São Paulo, Curitiba e Recife — presencial e online.",
+          "Combinamos conhecimento técnico com uma abordagem inovadora para criar treinos personalizados que realmente fazem a diferença. Desenhamos planos que são tão únicos quanto você, ajustados para quebrar limites.",
       },
-      { property: "og:title", content: "Buzzini Sports— Assessoria de Corrida" },
+      { property: "og:title", content: "Buzzini Sports — Assessoria de Corrida" },
       {
         property: "og:description",
         content:
-          "Planos de treino personalizados, equipe de coaches e acompanhamento de verdade. Do 5K à maratona.",
+          "Combinamos conhecimento técnico com uma abordagem inovadora para criar treinos personalizados que realmente fazem a diferença. Desenhamos planos que são tão únicos quanto você, ajustados para quebrar limites.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
