@@ -202,9 +202,9 @@ function OpeningMessage() {
           Não importa se você ainda acredita que
           <span className="mt-2 block">
             <span className="relative inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] text-primary">
-              corrida não é pra você
-            </span>
-            .
+              corrida{" "}
+            </span>{" "}
+            não é pra você.
           </span>
         </p>
       </div>
@@ -224,14 +224,18 @@ function Manifesto() {
         aria-hidden="true"
         className="pointer-events-none absolute -left-24 top-1/2 w-[30rem] max-w-[82vw] -translate-y-1/2 opacity-[0.07] sm:-left-20 sm:w-[44rem]"
       />
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col justify-center px-6 py-24 sm:px-12">
-        <p className="max-w-[22ch] font-display text-3xl font-semibold leading-[1.12] text-balance text-foreground sm:text-5xl lg:text-6xl">
-          Não treinamos pessoas só pra correr mais rápido.
+      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-5xl flex-col items-center justify-center px-6 py-24 text-center sm:px-12">
+        <p className="max-w-[20ch] font-display text-3xl font-semibold leading-[1.12] text-balance text-foreground sm:text-5xl lg:text-6xl">
+          Não treinamos
+          <span className="relative mx-[0.12em] inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] text-primary">
+            pessoas
+          </span>
+          <span className="block">só pra correr mais rápido.</span>
         </p>
-        <p className="mt-6 max-w-[66ch] font-mono text-sm leading-relaxed text-pretty text-muted sm:mt-8 sm:text-base lg:text-lg">
-          Treinamos pessoas para desenvolver disciplina, autonomia e saúde através da corrida. A
-          performance é consequência de um processo consistente — e a consistência nasce quando
-          fisiologia, psicologia e comportamento trabalham juntos.
+        <p className="mt-6 max-w-[52ch] font-mono text-sm leading-relaxed text-pretty text-muted sm:mt-8 sm:text-base lg:text-lg">
+          Treinamos pessoas para desenvolver
+          <span className="font-bold text-foreground"> disciplina, autonomia e saúde </span>
+          através da corrida.
         </p>
         <a
           href="#historias"
