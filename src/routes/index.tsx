@@ -19,8 +19,7 @@ import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
-import heroVideoMp4 from "@/assets/hero-video.mp4.asset.json";
-import heroVideoWebm from "@/assets/hero-video.webm.asset.json";
+import fundoBuzzini from "@/assets/fundo_buzzini.jpg";
 import coachLara from "@/assets/coach-lara.webp.asset.json";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
@@ -156,18 +155,12 @@ function SiteLogo() {
 function Hero() {
   return (
     <section id="inicio" className="snap-sec relative flex items-end overflow-hidden bg-background">
-      <video
+      <img
+        src={fundoBuzzini}
+        alt="Pessoa correndo ao amanhecer"
         className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-label="Pessoa correndo ao amanhecer"
-      >
-        <source src={heroVideoWebm.url} type="video/webm" />
-        <source src={heroVideoMp4.url} type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-background/5" />
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/75 to-background/15" />
       <div className="relative z-10 w-full px-6 pb-14 sm:px-12">
         <h1 className="max-w-[20ch] font-display text-5xl font-semibold leading-none text-balance text-foreground sm:text-7xl">
           Find Your Motivation!
