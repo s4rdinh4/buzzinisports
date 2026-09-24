@@ -507,7 +507,10 @@ function Team() {
   }, [pageCount]);
 
   return (
-    <section id="equipe" className="relative flex flex-col justify-center bg-card py-8 sm:py-12">
+    <section
+      id="equipe"
+      className="snap-sec relative flex flex-col justify-center bg-card py-8 sm:py-12"
+    >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="flex items-end justify-between gap-6">
           <div>
