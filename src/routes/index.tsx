@@ -354,7 +354,7 @@ function Stories() {
   return (
     <section
       id="historias"
-      className="relative mb-0 flex flex-col justify-start bg-background py-16 pb-24 sm:mb-12 sm:justify-center sm:py-0"
+      className="relative mb-0 flex flex-col justify-start bg-background pt-14 pb-24 sm:mb-12 sm:justify-center sm:pt-20 sm:pb-24"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
@@ -656,7 +656,7 @@ function HowItWorks() {
   return (
     <section
       id="como-funciona"
-      className="relative flex flex-col justify-center overflow-hidden bg-background"
+      className="snap-sec relative flex flex-col justify-center overflow-hidden bg-background"
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-8 sm:px-12 sm:py-10">
         <div className="flex items-end justify-between gap-6">
@@ -1039,7 +1039,7 @@ function Plans() {
   return (
     <section
       id="planos"
-      className="relative flex flex-col justify-start bg-background pt-8 pb-16 sm:justify-center sm:pt-4 sm:pb-10"
+      className="snap-sec relative flex flex-col justify-start bg-background pt-8 pb-16 sm:justify-center sm:pt-4 sm:pb-10"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
