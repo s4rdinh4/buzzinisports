@@ -976,9 +976,9 @@ const PLANS: Record<Location, Plan[]> = {
 
 function RestartBanner() {
   return (
-    <section className="snap-sec relative overflow-hidden bg-background py-6 sm:py-10">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
-        <div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-background shadow-[0_24px_80px_rgba(0,0,0,0.22)]">
+    <section className="snap-sec relative overflow-hidden bg-background py-4 sm:py-6">
+      <div className="mx-auto w-full max-w-[calc(100%-1.25rem)] px-0 sm:max-w-[calc(100%-2rem)]">
+        <div className="relative overflow-hidden rounded-[1.5rem] border border-primary/20 bg-background shadow-[0_24px_80px_rgba(0,0,0,0.22)] sm:rounded-[2rem]">
           <img
             src={fundoSite}
             alt="Pessoa correndo em ambiente natural"
@@ -988,7 +988,7 @@ function RestartBanner() {
           <div className="absolute -right-14 bottom-[-2.5rem] h-72 w-72 rounded-full bg-gradient-to-br from-primary via-primary/80 to-primary/20 blur-3xl opacity-80" />
           <div className="absolute left-8 top-8 h-28 w-28 rounded-full bg-primary/20 blur-2xl" />
 
-          <div className="relative z-10 grid min-h-[28rem] items-center gap-8 px-6 py-8 sm:px-10 lg:grid-cols-[1.2fr_0.8fr] lg:px-16 lg:py-10">
+          <div className="relative z-10 grid min-h-[26rem] items-center gap-8 px-5 py-7 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-12 lg:py-9">
             <div className="max-w-[18ch]">
               <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">
                 Recomeçar é possível
