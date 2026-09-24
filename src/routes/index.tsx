@@ -187,12 +187,12 @@ function Hero() {
 
 function OpeningMessage() {
   return (
-    <section className="bg-background py-14 sm:py-20">
+    <section className="flex min-h-[60vh] items-center bg-background py-14 sm:py-20">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:px-12">
         <p className="max-w-[24ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
           Não importa sua idade, seu ritmo ou
           <span className="mt-2 block">
-            <span className="border-b-2 border-primary pb-1 text-primary">
+            <span className="relative inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] text-primary">
               onde você está começando
             </span>
             .
@@ -201,7 +201,7 @@ function OpeningMessage() {
         <p className="max-w-[30ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
           Não importa se você ainda acredita que
           <span className="mt-2 block">
-            <span className="border-b-2 border-primary pb-1 text-primary">
+            <span className="relative inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] text-primary">
               corrida não é pra você
             </span>
             .
