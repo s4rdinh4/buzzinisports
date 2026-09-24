@@ -187,7 +187,7 @@ function Hero() {
 
 function OpeningMessage() {
   return (
-    <section className="flex min-h-[60vh] items-center bg-background py-14 sm:py-20">
+    <section className="snap-sec flex min-h-[60vh] items-center bg-background py-14 sm:py-20">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:px-12">
         <p className="max-w-[24ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
           Não importa sua idade, seu ritmo ou
