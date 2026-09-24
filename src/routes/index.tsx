@@ -19,7 +19,7 @@ import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
-import fundoBuzzini from "@/assets/fundo_buzzini.jpg";
+import fundoSite from "@/assets/fundo_site.jpeg";
 import coachLara from "@/assets/coach-lara.webp.asset.json";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
@@ -156,7 +156,7 @@ function Hero() {
   return (
     <section id="inicio" className="snap-sec relative flex items-end overflow-hidden bg-background">
       <img
-        src={fundoBuzzini}
+        src={fundoSite}
         alt="Pessoa correndo ao amanhecer"
         className="absolute inset-0 h-full w-full object-cover"
       />
