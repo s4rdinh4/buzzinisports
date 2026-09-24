@@ -19,7 +19,7 @@ import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
-import fundoSite from "@/assets/fundo_site.jpeg";
+import fundoBuzzini from "@/assets/fundo_buzzini.jpeg";
 import coachLara from "@/assets/coach-lara.webp.asset.json";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
@@ -156,7 +156,7 @@ function Hero() {
   return (
     <section id="inicio" className="snap-sec relative flex items-end overflow-hidden bg-background">
       <img
-        src={fundoSite}
+        src={fundoBuzzini}
         alt="Pessoa correndo ao amanhecer"
         className="absolute inset-0 h-full w-full object-cover"
       />
@@ -180,6 +180,33 @@ function Hero() {
             Presencial e Online · +400 alunos atendidos
           </span>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function OpeningMessage() {
+  return (
+    <section className="bg-background py-14 sm:py-20">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:px-12">
+        <p className="max-w-[24ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
+          Não importa sua idade, seu ritmo ou
+          <span className="mt-2 block">
+            <span className="border-b-2 border-primary pb-1 text-primary">
+              onde você está começando
+            </span>
+            .
+          </span>
+        </p>
+        <p className="max-w-[30ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
+          Não importa se você ainda acredita que
+          <span className="mt-2 block">
+            <span className="border-b-2 border-primary pb-1 text-primary">
+              corrida não é pra você
+            </span>
+            .
+          </span>
+        </p>
       </div>
     </section>
   );
@@ -1322,6 +1349,7 @@ function Index() {
     <main className="bg-background">
       <SiteLogo />
       <Hero />
+      <OpeningMessage />
       <Manifesto />
       <Stories />
       <Team />
