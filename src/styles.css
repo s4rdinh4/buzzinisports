@@ -39,12 +39,18 @@ html {
   min-height: 100svh;
 }
 
+.snap-intro {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
 @media (max-width: 767px) {
   html {
     scroll-snap-type: none;
   }
 
-  .snap-sec {
+  .snap-sec,
+  .snap-intro {
     scroll-snap-align: none;
     scroll-snap-stop: normal;
   }

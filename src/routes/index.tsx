@@ -88,7 +88,7 @@ function SiteLogo() {
 
   return (
     <header
-      className={`z-50 transition-none ${
+      className={`snap-intro z-50 transition-none ${
         isDesktopScrolled
           ? "fixed left-6 top-4 sm:left-12 sm:top-6"
           : isDesktop
@@ -155,7 +155,10 @@ function SiteLogo() {
 
 function Hero() {
   return (
-    <section id="inicio" className="snap-sec relative flex items-end overflow-hidden bg-background">
+    <section
+      id="inicio"
+      className="snap-intro snap-sec relative flex items-end overflow-hidden bg-background"
+    >
       <img
         src={fundoBuzzini}
         alt="Pessoa correndo ao amanhecer"
@@ -188,7 +191,7 @@ function Hero() {
 
 function OpeningMessage() {
   return (
-    <section className="snap-sec flex min-h-[60vh] items-center bg-background py-14 sm:py-20">
+    <section className="snap-intro snap-sec flex min-h-[60vh] items-center bg-background py-14 sm:py-20">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:px-12">
         <p className="max-w-[24ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
           Não importa sua idade, seu ritmo ou
@@ -217,7 +220,7 @@ function Manifesto() {
   return (
     <section
       aria-label="Manifesto Buzzini Sports"
-      className="snap-sec relative flex min-h-[100svh] items-center overflow-hidden bg-card"
+      className="snap-intro snap-sec relative flex min-h-[100svh] items-center overflow-hidden bg-card"
     >
       <img
         src={buzziniLogo.url}
@@ -659,7 +662,7 @@ function HowItWorks() {
   return (
     <section
       id="como-funciona"
-      className="snap-sec relative flex flex-col justify-center overflow-hidden bg-background"
+      className="snap-intro snap-sec relative flex flex-col justify-center overflow-hidden bg-background"
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-8 sm:px-12 sm:py-10">
         <div className="flex items-end justify-between gap-6">
