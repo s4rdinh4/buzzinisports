@@ -2,6 +2,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type TouchEvent } from "react";
 import {
+  ArrowDown,
   CalendarClock,
   ChevronLeft,
   ChevronRight,
@@ -186,6 +187,34 @@ function Hero() {
             Presencial e Online · +400 alunos atendidos
           </span>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function Manifesto() {
+  return (
+    <section
+      aria-label="Manifesto Buzzini Sports"
+      className="snap-sec relative flex min-h-[100svh] items-center overflow-hidden bg-card"
+    >
+      <img
+        src={buzziniLogo.url}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 top-1/2 w-[30rem] max-w-[82vw] -translate-y-1/2 opacity-[0.07] sm:-left-20 sm:w-[44rem]"
+      />
+      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col justify-center px-6 py-24 sm:px-12">
+        <p className="max-w-[18ch] font-display text-4xl font-semibold leading-[1.08] text-balance text-foreground sm:text-6xl lg:text-7xl">
+          Não treinamos pessoas só pra correr mais rápido.
+        </p>
+        <a
+          href="#historias"
+          aria-label="Ir para Histórias"
+          className="mt-12 flex size-14 items-center justify-center self-start rounded-full border border-primary text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-card sm:mt-16 sm:size-16"
+        >
+          <ArrowDown aria-hidden="true" className="size-6" />
+        </a>
       </div>
     </section>
   );
@@ -1295,6 +1324,7 @@ function Index() {
     <main className="bg-background">
       <SiteLogo />
       <Hero />
+      <Manifesto />
       <Stories />
       <Team />
       <HowItWorks />
