@@ -27,7 +27,7 @@
   --font-sans: "Manrope", sans-serif;
 }
 
-/* Snap only on the designated sections to avoid locking the page in the wrong block */
+/* Snap focused on the opening sequence to keep the landing flow anchored without locking the rest of the page */
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
@@ -35,6 +35,7 @@ html {
 
 .snap-sec {
   scroll-snap-align: start;
+  scroll-snap-stop: proximity;
   min-height: 100svh;
 }
 
@@ -45,6 +46,7 @@ html {
 
   .snap-sec {
     scroll-snap-align: none;
+    scroll-snap-stop: normal;
   }
 }
 
