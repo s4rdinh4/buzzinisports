@@ -216,9 +216,9 @@ function Manifesto() {
         <a
           href="#historias"
           aria-label="Ir para Histórias"
-          className="mt-10 flex size-14 items-center justify-center self-start rounded-full border border-primary text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-card sm:mt-12 sm:size-16"
+          className="mt-10 flex size-12 items-center justify-center self-center rounded-full border border-primary text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-card sm:mt-12 sm:size-14"
         >
-          <ArrowDown aria-hidden="true" className="size-6" />
+          <ArrowDown aria-hidden="true" className="size-5 sm:size-5" />
         </a>
       </div>
     </section>
