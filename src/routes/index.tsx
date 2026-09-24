@@ -88,7 +88,7 @@ function SiteLogo() {
 
   return (
     <header
-      className={`z-50 transition-none ${
+      className={`z-50 snap-start transition-none ${
         isDesktopScrolled
           ? "fixed left-6 top-4 sm:left-12 sm:top-6"
           : isDesktop
@@ -507,10 +507,7 @@ function Team() {
   }, [pageCount]);
 
   return (
-    <section
-      id="equipe"
-      className="snap-sec relative flex flex-col justify-center bg-card py-8 sm:py-12"
-    >
+    <section id="equipe" className="relative flex flex-col justify-center bg-card py-8 sm:py-12">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="flex items-end justify-between gap-6">
           <div>
@@ -1338,7 +1335,7 @@ function Faq() {
 
 function Footer() {
   return (
-    <footer id="rodape" className="relative snap-start bg-background py-12 sm:py-16">
+    <footer id="rodape" className="relative bg-background py-12 sm:py-16">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="grid gap-10 sm:grid-cols-2">
           <div>
