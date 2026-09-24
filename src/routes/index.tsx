@@ -995,7 +995,7 @@ function RestartBanner() {
               </p>
               <h2 className="mt-4 font-display text-3xl font-semibold leading-[0.96] text-balance text-foreground sm:text-4xl lg:text-5xl">
                 Nunca correu? Tudo bem.
-                <span className="mt-2 block">
+                <span className="mt-2 block text-foreground/95">
                   Parou há um tempo? Você pode{" "}
                   <span className="font-bold text-primary">recomeçar</span>.
                 </span>
