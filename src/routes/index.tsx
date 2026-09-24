@@ -1355,9 +1355,9 @@ function Index() {
       <Hero />
       <OpeningMessage />
       <Manifesto />
+      <HowItWorks />
       <Stories />
       <Team />
-      <HowItWorks />
       <Locations />
       <Plans />
       <Faq />
