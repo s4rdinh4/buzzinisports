@@ -111,7 +111,7 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center transition-none ${
+        className={`flex items-center gap-2 transition-none ${
           isCompactHeader
             ? "rounded-full bg-background/85 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border"
             : "rounded-none bg-transparent p-0 shadow-none ring-0"
@@ -125,8 +125,8 @@ function SiteLogo() {
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className={`w-auto object-contain transition-none ${isCompactHeader ? "translate-x-[22px]" : ""} ${
-              isCompactHeader ? "h-8 sm:h-9" : "h-10 sm:h-12 md:h-24"
+            className={`w-auto object-contain transition-none ${isCompactHeader && isDesktop ? "translate-x-[22px]" : ""} ${
+              isCompactHeader ? "h-8 sm:h-9" : !isDesktop ? "h-12 sm:h-16" : "h-10 sm:h-12 md:h-24"
             }`}
           />
         </a>
@@ -136,7 +136,7 @@ function SiteLogo() {
           aria-expanded={isMenuOpen}
           aria-controls="site-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
-          className={`flex size-9 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+          className={`ml-auto flex size-9 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
             shouldShowMenu ? "visible" : "hidden"
           } ${isCompactHeader ? "" : "md:hidden"}`}
         >
