@@ -507,10 +507,7 @@ function Team() {
   }, [pageCount]);
 
   return (
-    <section
-      id="equipe"
-      className="snap-sec relative flex flex-col justify-center bg-card py-8 sm:py-12"
-    >
+    <section id="equipe" className="relative flex flex-col justify-center bg-card py-8 sm:py-12">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="flex items-end justify-between gap-6">
           <div>
@@ -1042,7 +1039,7 @@ function Plans() {
   return (
     <section
       id="planos"
-      className="snap-sec relative flex flex-col justify-start bg-background pt-8 pb-16 sm:justify-center sm:pt-4 sm:pb-10"
+      className="relative flex flex-col justify-start bg-background pt-8 pb-16 sm:justify-center sm:pt-4 sm:pb-10"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
