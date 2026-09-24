@@ -656,7 +656,7 @@ function HowItWorks() {
   return (
     <section
       id="como-funciona"
-      className="snap-sec relative flex flex-col justify-center overflow-hidden bg-background"
+      className="relative flex flex-col justify-center overflow-hidden bg-background"
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-8 sm:px-12 sm:py-10">
         <div className="flex items-end justify-between gap-6">
@@ -743,7 +743,7 @@ function Locations() {
   return (
     <section
       id="localidades"
-      className="snap-sec relative flex flex-col justify-center overflow-hidden bg-card"
+      className="relative flex flex-col justify-center overflow-hidden bg-card"
     >
       <div className="mx-auto grid w-full max-w-6xl items-center gap-6 px-6 py-10 sm:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
         <div className="relative order-2 mx-auto w-full max-w-xl lg:order-1">
