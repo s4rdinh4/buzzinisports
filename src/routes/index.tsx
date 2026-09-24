@@ -239,11 +239,14 @@ function Manifesto() {
           através da corrida.
         </p>
         <a
-          href="#historias"
-          aria-label="Ir para Histórias"
-          className="mt-10 flex size-12 items-center justify-center self-center rounded-full border border-primary text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-card sm:mt-12 sm:size-14"
+          href="#como-funciona"
+          aria-label="Ir para Como funciona"
+          className="group mt-10 flex size-12 items-center justify-center self-center rounded-full border border-primary text-primary transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-card sm:mt-12 sm:size-14"
         >
-          <ArrowDown aria-hidden="true" className="size-5 sm:size-5" />
+          <ArrowDown
+            aria-hidden="true"
+            className="size-5 transition-transform duration-200 ease-out group-hover:-translate-y-0.5 sm:size-5"
+          />
         </a>
       </div>
     </section>
