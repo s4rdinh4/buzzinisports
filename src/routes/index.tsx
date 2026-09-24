@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
 import fundoBuzzini from "@/assets/fundo_buzzini.jpeg";
+import fundoSite from "@/assets/fundo_site.jpeg";
 import coachLara from "@/assets/coach-lara.webp.asset.json";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
@@ -973,6 +974,52 @@ const PLANS: Record<Location, Plan[]> = {
   ],
 };
 
+function RestartBanner() {
+  return (
+    <section className="snap-sec relative overflow-hidden bg-background py-6 sm:py-10">
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
+        <div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-background shadow-[0_24px_80px_rgba(0,0,0,0.22)]">
+          <img
+            src={fundoSite}
+            alt="Pessoa correndo em ambiente natural"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/30" />
+          <div className="absolute -right-14 bottom-[-2.5rem] h-72 w-72 rounded-full bg-gradient-to-br from-primary via-primary/80 to-primary/20 blur-3xl opacity-80" />
+          <div className="absolute left-8 top-8 h-28 w-28 rounded-full bg-primary/20 blur-2xl" />
+
+          <div className="relative z-10 grid min-h-[32rem] items-center gap-8 px-6 py-10 sm:px-10 lg:grid-cols-[1.2fr_0.8fr] lg:px-16 lg:py-16">
+            <div className="max-w-[18ch]">
+              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">
+                Recomeçar é possível
+              </p>
+              <h2 className="mt-4 font-display text-4xl font-semibold leading-[0.95] text-balance text-foreground sm:text-5xl lg:text-6xl">
+                Nunca correu? Tudo bem.
+                <span className="mt-2 block">
+                  Parou há um tempo? Você pode{" "}
+                  <span className="font-bold text-primary">recomeçar</span>.
+                </span>
+              </h2>
+            </div>
+
+            <div className="justify-self-end lg:w-full lg:max-w-[20rem]">
+              <div className="rounded-full border border-primary/30 bg-background/25 p-4 text-center backdrop-blur-[2px] sm:p-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/80 sm:text-xs">
+                  Comece do seu jeito
+                </p>
+                <p className="mt-3 font-display text-2xl font-semibold text-foreground sm:text-3xl">
+                  Todo começo
+                  <span className="block text-primary">tem ritmo.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Plans() {
   const [location, setLocation] = useState<Location>("Outras cidades");
   const isMobile = useIsMobile();
@@ -1356,9 +1403,10 @@ function Index() {
       <OpeningMessage />
       <Manifesto />
       <HowItWorks />
+      <Locations />
       <Stories />
       <Team />
-      <Locations />
+      <RestartBanner />
       <Plans />
       <Faq />
       <Footer />
