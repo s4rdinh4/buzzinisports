@@ -120,13 +120,13 @@ function SiteLogo() {
         <a
           href="#inicio"
           aria-label="Buzzini Sports — início"
-          className="block min-w-0 flex-1 transition-none"
+          className="block min-w-0 flex-1 pl-2 transition-none"
         >
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
             className={`w-auto object-contain transition-none ${isCompactHeader && isDesktop ? "translate-x-[22px]" : ""} ${
-              isCompactHeader ? "h-8 sm:h-9" : !isDesktop ? "h-12 sm:h-16" : "h-10 sm:h-12 md:h-24"
+              isCompactHeader ? "h-9 sm:h-10" : !isDesktop ? "h-12 sm:h-16" : "h-10 sm:h-12 md:h-24"
             }`}
           />
         </a>
