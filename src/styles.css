@@ -27,14 +27,15 @@
   --font-sans: "Manrope", sans-serif;
 }
 
-/* Full-page navigation: each section snaps into the viewport */
+/* Snap only on the designated sections to avoid locking the page in the wrong block */
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 .snap-sec {
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   min-height: 100svh;
 }
 
@@ -45,6 +46,7 @@ html {
 
   .snap-sec {
     scroll-snap-align: none;
+    scroll-snap-stop: normal;
   }
 }
 

@@ -88,7 +88,7 @@ function SiteLogo() {
 
   return (
     <header
-      className={`z-50 snap-start transition-none ${
+      className={`z-50 transition-none ${
         isDesktopScrolled
           ? "fixed left-6 top-4 sm:left-12 sm:top-6"
           : isDesktop
