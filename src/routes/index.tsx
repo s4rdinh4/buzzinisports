@@ -994,7 +994,7 @@ function Plans() {
           {PLANS[location].map((plan) => {
             const isFeatured = plan.isFeatured;
             const [priceValue, priceSuffix] = plan.price.split("/");
-            const [currency, amount] = priceValue.split(" ");
+            const [currency, amount] = (priceValue ?? plan.price).split(" ");
 
             return (
               <article

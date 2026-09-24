@@ -22,8 +22,9 @@
   --color-pistao: oklch(0.56 0.19 40);
   --color-sky: oklch(0.73 0.055 230);
   --color-sage: oklch(0.72 0.07 145);
-  --font-display: "Fraunces", serif;
-  --font-mono: "Space Mono", monospace;
+  --font-display: "Sora", sans-serif;
+  --font-mono: "Manrope", sans-serif;
+  --font-sans: "Manrope", sans-serif;
 }
 
 /* Full-page navigation: each section snaps into the viewport */
@@ -61,7 +62,7 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
-  font-family: "Space Mono", monospace;
+  font-family: "Manrope", sans-serif;
 }
 
 @keyframes ken-burns {
