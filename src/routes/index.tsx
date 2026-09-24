@@ -91,15 +91,25 @@ function SiteLogo() {
 
   const isCompactHeader = isDesktopScrolled || (!isDesktop && isMobileHeaderPill);
   const shouldShowMenu = isDesktop ? isDesktopScrolled : isMobileHeaderPill;
+  const isMobileMenuFullscreen = !isDesktop && isMenuOpen;
+
+  useEffect(() => {
+    document.body.style.overflow = !isDesktop && isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isDesktop, isMenuOpen]);
 
   return (
     <header
       className={`snap-intro z-50 transition-none ${
-        isCompactHeader
-          ? "fixed left-6 top-4 sm:left-12 sm:top-6"
-          : isDesktop
-            ? "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
-            : "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
+        isMobileMenuFullscreen
+          ? "fixed inset-0 bg-background/95 px-4 pb-12 pt-4 backdrop-blur-sm"
+          : isCompactHeader
+            ? "fixed left-6 top-4 sm:left-12 sm:top-6"
+            : isDesktop
+              ? "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
+              : "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
       }`}
       onMouseEnter={() => shouldShowMenu && setIsMenuOpen(true)}
       onMouseLeave={() => setIsMenuOpen(false)}
@@ -112,21 +122,29 @@ function SiteLogo() {
     >
       <div
         className={`flex items-center gap-2 transition-none ${
-          isCompactHeader
-            ? "rounded-full bg-background/85 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border"
-            : "rounded-none bg-transparent p-0 shadow-none ring-0"
+          isMobileMenuFullscreen
+            ? "relative w-full"
+            : isCompactHeader
+              ? "rounded-full bg-background/85 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border"
+              : "rounded-none bg-transparent p-0 shadow-none ring-0"
         } ${isMenuOpen && isCompactHeader ? "w-60" : "w-auto"} ${isCompactHeader ? "sm:w-40" : "sm:w-auto"}`}
       >
         <a
           href="#inicio"
           aria-label="Buzzini Sports — início"
-          className="block min-w-0 flex-1 pl-2 transition-none"
+          className={`block min-w-0 flex-1 transition-none ${isMobileMenuFullscreen ? "pl-0" : "pl-2"}`}
         >
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
             className={`w-auto object-contain transition-none ${isCompactHeader && isDesktop ? "translate-x-[22px]" : ""} ${
-              isCompactHeader ? "h-9 sm:h-10" : !isDesktop ? "h-12 sm:h-16" : "h-10 sm:h-12 md:h-24"
+              isMobileMenuFullscreen
+                ? "h-11 sm:h-12"
+                : isCompactHeader
+                  ? "h-9 sm:h-10"
+                  : !isDesktop
+                    ? "h-12 sm:h-16"
+                    : "h-10 sm:h-12 md:h-24"
             }`}
           />
         </a>
@@ -136,9 +154,9 @@ function SiteLogo() {
           aria-expanded={isMenuOpen}
           aria-controls="site-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
-          className={`ml-auto flex size-9 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-            shouldShowMenu ? "visible" : "hidden"
-          } ${isCompactHeader ? "" : "md:hidden"}`}
+          className={`ml-auto flex shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+            isMobileMenuFullscreen ? "size-10" : "size-9"
+          } ${shouldShowMenu ? "visible" : "hidden"} ${isCompactHeader ? "" : "md:hidden"}`}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
@@ -146,7 +164,11 @@ function SiteLogo() {
       <nav
         id="site-navigation"
         aria-label="Navegação principal"
-        className={`absolute left-0 top-full mt-2 w-64 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border transition-all duration-200 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}
+        className={
+          isMobileMenuFullscreen
+            ? "mt-16 flex h-[calc(100%-4rem)] flex-col items-center justify-center gap-4 text-center"
+            : `absolute left-0 top-full mt-2 w-64 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border transition-all duration-200 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`
+        }
       >
         {[
           ["Histórias", "historias"],
@@ -157,7 +179,11 @@ function SiteLogo() {
             key={section}
             href={`#${section}`}
             onClick={() => setIsMenuOpen(false)}
-            className="block rounded-xl px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-muted transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className={
+              isMobileMenuFullscreen
+                ? "block w-full max-w-xs rounded-full border border-border bg-card px-5 py-4 font-mono text-sm uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                : "block rounded-xl px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-muted transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            }
           >
             {label}
           </a>
@@ -248,7 +274,7 @@ function Manifesto() {
           <span className="relative mx-[0.12em] inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] text-primary">
             pessoas
           </span>
-          <span className="block">só pra correr mais rápido.</span>
+          <span className="block">só para correr mais rápido.</span>
         </p>
         <p className="mt-6 max-w-[52ch] font-mono text-sm leading-relaxed text-pretty text-muted sm:mt-8 sm:text-base lg:text-lg">
           Treinamos pessoas para desenvolver
