@@ -35,7 +35,6 @@ html {
 
 .snap-sec {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
   min-height: 100svh;
 }
 
@@ -46,7 +45,6 @@ html {
 
   .snap-sec {
     scroll-snap-align: none;
-    scroll-snap-stop: normal;
   }
 }
 
