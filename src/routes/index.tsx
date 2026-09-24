@@ -976,7 +976,7 @@ const PLANS: Record<Location, Plan[]> = {
 
 function RestartBanner() {
   return (
-    <section className="snap-sec relative overflow-hidden bg-background py-4 sm:py-6">
+    <section className="relative overflow-hidden bg-background py-4 sm:py-6">
       <div className="mx-auto w-full max-w-[calc(100%-1.25rem)] px-0 sm:max-w-[calc(100%-2rem)]">
         <div className="relative overflow-hidden rounded-[1.5rem] border border-primary/20 bg-background shadow-[0_24px_80px_rgba(0,0,0,0.22)] sm:rounded-[2rem]">
           <img
@@ -1042,7 +1042,7 @@ function Plans() {
   return (
     <section
       id="planos"
-      className="snap-sec relative flex flex-col justify-start bg-background py-16 sm:justify-center sm:py-0"
+      className="snap-sec relative flex flex-col justify-start bg-background pt-8 pb-16 sm:justify-center sm:pt-4 sm:pb-10"
     >
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
