@@ -65,14 +65,19 @@ function SiteLogo() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isDesktopScrolled, setIsDesktopScrolled] = useState(false);
+  const [isMobileHeaderPill, setIsMobileHeaderPill] = useState(false);
 
   useEffect(() => {
     const updateScrollState = () => {
       const isDesktopViewport = window.matchMedia("(min-width: 768px)").matches;
       const hasPassedHero = window.scrollY > window.innerHeight * 0.75;
+      const hasScrolledForMobilePill = window.scrollY > 48;
       setIsDesktop(isDesktopViewport);
       setIsDesktopScrolled(hasPassedHero);
+      setIsMobileHeaderPill(hasScrolledForMobilePill);
+
       if (isDesktopViewport && !hasPassedHero) setIsMenuOpen(false);
+      if (!isDesktopViewport && !hasScrolledForMobilePill) setIsMenuOpen(false);
     };
 
     updateScrollState();
@@ -84,16 +89,17 @@ function SiteLogo() {
     };
   }, []);
 
-  const shouldShowMenu = !isDesktop || isDesktopScrolled;
+  const isCompactHeader = isDesktopScrolled || (!isDesktop && isMobileHeaderPill);
+  const shouldShowMenu = isDesktop ? isDesktopScrolled : isMobileHeaderPill;
 
   return (
     <header
       className={`snap-intro z-50 transition-none ${
-        isDesktopScrolled
+        isCompactHeader
           ? "fixed left-6 top-4 sm:left-12 sm:top-6"
           : isDesktop
             ? "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
-            : "absolute left-6 top-4 sm:left-12 sm:top-6"
+            : "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
       }`}
       onMouseEnter={() => shouldShowMenu && setIsMenuOpen(true)}
       onMouseLeave={() => setIsMenuOpen(false)}
@@ -105,7 +111,11 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center rounded-full bg-background/85 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border transition-none ${isMenuOpen ? "w-60" : "w-40"} ${isDesktopScrolled ? (isMenuOpen ? "md:w-60" : "md:w-40") : "md:w-auto md:rounded-none md:bg-transparent md:p-0 md:shadow-none md:ring-0"}`}
+        className={`flex items-center transition-none ${
+          isCompactHeader
+            ? "rounded-full bg-background/85 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border"
+            : "rounded-none bg-transparent p-0 shadow-none ring-0"
+        } ${isMenuOpen && isCompactHeader ? "w-60" : "w-auto"} ${isCompactHeader ? "sm:w-40" : "sm:w-auto"}`}
       >
         <a
           href="#inicio"
@@ -115,7 +125,9 @@ function SiteLogo() {
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className={`w-auto object-contain transition-none ${!isDesktop || isDesktopScrolled ? "translate-x-[22px]" : ""} ${isDesktopScrolled ? "h-8 sm:h-9" : "h-8 sm:h-9 md:h-24"}`}
+            className={`w-auto object-contain transition-none ${isCompactHeader ? "translate-x-[22px]" : ""} ${
+              isCompactHeader ? "h-8 sm:h-9" : "h-10 sm:h-12 md:h-24"
+            }`}
           />
         </a>
         <button
@@ -124,7 +136,9 @@ function SiteLogo() {
           aria-expanded={isMenuOpen}
           aria-controls="site-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
-          className={`flex size-9 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${isDesktopScrolled ? "" : "md:hidden"}`}
+          className={`flex size-9 shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+            shouldShowMenu ? "visible" : "hidden"
+          } ${isCompactHeader ? "" : "md:hidden"}`}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
