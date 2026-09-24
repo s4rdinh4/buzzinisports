@@ -205,13 +205,18 @@ function Manifesto() {
         className="pointer-events-none absolute -left-24 top-1/2 w-[30rem] max-w-[82vw] -translate-y-1/2 opacity-[0.07] sm:-left-20 sm:w-[44rem]"
       />
       <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col justify-center px-6 py-24 sm:px-12">
-        <p className="max-w-[18ch] font-display text-4xl font-semibold leading-[1.08] text-balance text-foreground sm:text-6xl lg:text-7xl">
+        <p className="max-w-[22ch] font-display text-3xl font-semibold leading-[1.12] text-balance text-foreground sm:text-5xl lg:text-6xl">
           Não treinamos pessoas só pra correr mais rápido.
+        </p>
+        <p className="mt-6 max-w-[66ch] font-mono text-sm leading-relaxed text-pretty text-muted sm:mt-8 sm:text-base lg:text-lg">
+          Treinamos pessoas para desenvolver disciplina, autonomia e saúde através da corrida. A
+          performance é consequência de um processo consistente — e a consistência nasce quando
+          fisiologia, psicologia e comportamento trabalham juntos.
         </p>
         <a
           href="#historias"
           aria-label="Ir para Histórias"
-          className="mt-12 flex size-14 items-center justify-center self-start rounded-full border border-primary text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-card sm:mt-16 sm:size-16"
+          className="mt-10 flex size-14 items-center justify-center self-start rounded-full border border-primary text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-card sm:mt-12 sm:size-16"
         >
           <ArrowDown aria-hidden="true" className="size-6" />
         </a>
