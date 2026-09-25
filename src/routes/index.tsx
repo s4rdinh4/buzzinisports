@@ -660,10 +660,10 @@ function Team() {
   return (
     <section
       id="equipe"
-      className="relative flex flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.08),_transparent_30%),linear-gradient(180deg,_rgba(9,11,16,0.98),_rgba(15,15,19,1))] py-8 sm:py-12"
+      className="relative isolate flex flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.08),_transparent_30%),linear-gradient(180deg,_rgba(9,11,16,0.98),_rgba(15,15,19,1))] py-8 sm:py-12"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.03),transparent,rgba(249,115,22,0.05))]" />
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.03),transparent,rgba(249,115,22,0.05))]" />
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
