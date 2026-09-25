@@ -152,10 +152,10 @@ function SiteLogo() {
         isMobileMenuFullscreen
           ? "fixed inset-0 bg-background/95 px-4 pb-12 pt-4 backdrop-blur-sm"
           : isCompactHeader
-            ? "fixed left-3 top-2 sm:left-4 sm:top-3"
+            ? "fixed left-3 top-[calc(0.5rem+env(safe-area-inset-top))] sm:left-4 sm:top-[calc(0.75rem+env(safe-area-inset-top))]"
             : isDesktop
-              ? "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
-              : "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
+              ? "absolute left-1/2 top-[calc(1rem+env(safe-area-inset-top))] -translate-x-1/2 sm:top-[calc(1.5rem+env(safe-area-inset-top))]"
+              : "absolute left-1/2 top-[calc(1rem+env(safe-area-inset-top))] -translate-x-1/2 sm:top-[calc(1.5rem+env(safe-area-inset-top))]"
       }`}
       onMouseEnter={() => shouldShowMenu && setIsMenuOpen(true)}
       onMouseLeave={() => setIsMenuOpen(false)}
