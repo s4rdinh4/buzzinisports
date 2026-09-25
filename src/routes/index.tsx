@@ -468,55 +468,59 @@ function Stories() {
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Buzzini em ação
         </p>
-        <div className="mt-3 inline-block max-w-[90%] rounded-2xl border border-primary/10 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/15 px-3 py-2 shadow-[0_10px_24px_rgba(249,115,22,0.08)] sm:mt-4">
-          <h2 className="max-w-[40ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
-            Histórias que ganham movimento.
-          </h2>
-        </div>
+        <h2 className="mt-3 max-w-[40ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:mt-4 sm:text-5xl">
+          Histórias que ganham movimento.
+        </h2>
 
-        {isMobile ? (
-          <div
-            className="mt-8 overflow-hidden"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div
-              className="flex gap-4 transition-transform duration-300 ease-out"
-              style={{ transform: `translateX(calc(-${page} * (82% + 1rem)))` }}
-            >
-              {DEPOIMENTS.map((depoiment, index) => (
-                <div key={depoiment.video} className="w-[82%] min-w-[82%]">
-                  <DepoimentVideo {...depoiment} index={index} />
+        <div className="relative mt-8 overflow-hidden rounded-[2rem] border border-border/80 bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.12),_transparent_40%),linear-gradient(180deg,_rgba(15,15,19,0.96),_rgba(15,15,19,1))] p-4 sm:mt-10 sm:p-6">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
+
+          <div className="relative z-10">
+            {isMobile ? (
+              <div
+                className="overflow-hidden"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div
+                  className="flex gap-4 transition-transform duration-300 ease-out"
+                  style={{ transform: `translateX(calc(-${page} * (82% + 1rem)))` }}
+                >
+                  {DEPOIMENTS.map((depoiment, index) => (
+                    <div key={depoiment.video} className="w-[82%] min-w-[82%]">
+                      <DepoimentVideo {...depoiment} index={index} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <div
-              className="mt-6 flex items-center justify-center gap-2"
-              role="tablist"
-              aria-label="Páginas de histórias"
-            >
-              {DEPOIMENTS.map((depoiment, index) => (
-                <button
-                  key={depoiment.video}
-                  type="button"
-                  role="tab"
-                  aria-selected={page === index}
-                  aria-label={`Ir para vídeo ${index + 1}`}
-                  onClick={() => setPage(index)}
-                  className={`h-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card ${
-                    page === index ? "w-8 bg-primary" : "w-2 bg-border hover:bg-primary/60"
-                  }`}
-                />
-              ))}
-            </div>
+                <div
+                  className="mt-6 flex items-center justify-center gap-2"
+                  role="tablist"
+                  aria-label="Páginas de histórias"
+                >
+                  {DEPOIMENTS.map((depoiment, index) => (
+                    <button
+                      key={depoiment.video}
+                      type="button"
+                      role="tab"
+                      aria-selected={page === index}
+                      aria-label={`Ir para vídeo ${index + 1}`}
+                      onClick={() => setPage(index)}
+                      className={`h-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card ${
+                        page === index ? "w-8 bg-primary" : "w-2 bg-border hover:bg-primary/60"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
+                {DEPOIMENTS.map((depoiment, index) => (
+                  <DepoimentVideo key={depoiment.video} {...depoiment} index={index} />
+                ))}
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
-            {DEPOIMENTS.map((depoiment, index) => (
-              <DepoimentVideo key={depoiment.video} {...depoiment} index={index} />
-            ))}
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );
