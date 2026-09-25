@@ -1196,14 +1196,21 @@ function Plans() {
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
             })} por dia`;
+            const planGradient = isFeatured
+              ? "bg-[linear-gradient(180deg,rgba(249,115,22,0.15),rgba(16,17,20,0.96),rgba(16,17,20,1))]"
+              : plan.name === "Semestral"
+                ? "bg-[linear-gradient(180deg,rgba(34,211,238,0.12),rgba(16,17,20,0.96),rgba(16,17,20,1))]"
+                : plan.name === "Trimestral"
+                  ? "bg-[linear-gradient(180deg,rgba(168,85,247,0.12),rgba(16,17,20,0.96),rgba(16,17,20,1))]"
+                  : "bg-[linear-gradient(180deg,rgba(16,185,129,0.12),rgba(16,17,20,0.96),rgba(16,17,20,1))]";
 
             return (
               <article
                 key={plan.name}
-                className={`relative flex min-h-44 flex-col justify-between rounded-lg p-5 pt-8 transition-all ${
+                className={`relative flex min-h-44 flex-col justify-between rounded-lg p-5 pt-8 transition-all ${planGradient} ${
                   isFeatured
-                    ? "border border-primary bg-background text-foreground shadow-[0_0_0_1px_rgba(255,120,33,0.2)]"
-                    : "bg-card text-foreground ring-border"
+                    ? "border border-primary/40 text-foreground shadow-[0_0_0_1px_rgba(255,120,33,0.18)]"
+                    : "text-foreground ring-border"
                 }`}
               >
                 {isFeatured && (
@@ -1254,9 +1261,9 @@ function Plans() {
                 </div>
                 {isAnnualPlan && (
                   <div className="mt-3 flex justify-center">
-                    <p className="inline-flex max-w-full items-center justify-center rounded-full border border-primary/40 bg-[linear-gradient(135deg,#f97316_0%,#ff9d4d_100%)] px-2.5 py-1.5 font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-[0_8px_18px_rgba(249,115,22,0.22)] sm:text-[9px]">
+                    <span className="relative inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] font-mono text-[8px] font-bold uppercase tracking-[0.14em] text-primary sm:text-[9px]">
                       {dailyPriceText}
-                    </p>
+                    </span>
                   </div>
                 )}
                 <Button
