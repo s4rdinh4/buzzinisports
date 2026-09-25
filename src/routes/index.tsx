@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/logo_buzzini.svg";
 import logoBuzziniOutline from "@/assets/logo_buzzini_outline.svg";
+import findLogo from "@/assets/find.svg";
 import faixaBuzzini from "@/assets/faixa_buzzini.png";
 import fundoBuzzini from "@/assets/fundo_buzzini.jpeg";
 import fundoSite from "@/assets/fundo_site.jpeg";
@@ -1604,54 +1605,65 @@ function Footer() {
             </p>
           </div>
           <div className="flex flex-col gap-3 font-mono text-sm text-foreground/80">
-            <p className="text-xs uppercase tracking-[0.15em] text-muted">Contato</p>
-            <a
-              href="mailto:assessoria@buzzini.com.br"
-              className="transition-colors hover:text-primary"
-            >
-              assessoria@buzzini.com.br
-            </a>
-            <a
-              href="https://web.whatsapp.com/send?phone=5517988026622&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Abrir WhatsApp da Buzzini Sports"
-              className="inline-flex items-center gap-2 transition-colors hover:text-primary"
-            >
-              <Phone aria-hidden="true" className="size-4" />
-              <span>+55 17 98802-6622</span>
-            </a>
-            <div className="mt-2 flex flex-col items-start gap-2">
-              <a
-                href="https://www.instagram.com/buzzinisports/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram da Buzzini Sports"
-                className="inline-flex items-center gap-2 transition-colors hover:text-primary"
-              >
-                <Instagram aria-hidden="true" className="size-4" />
-                <span>Instagram</span>
-              </a>
-              <a
-                href="https://www.strava.com/clubs/buzzini"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Strava da Buzzini Sports"
-                className="inline-flex items-center gap-2 transition-colors hover:text-primary"
-              >
-                <StravaIcon className="size-4" />
-                <span>Strava</span>
-              </a>
-              <a
-                href="https://web.whatsapp.com/send?phone=5517988026622&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
-                target="_blank"
-                rel="noreferrer"
-                aria-label="WhatsApp da Buzzini Sports"
-                className="inline-flex items-center gap-2 transition-colors hover:text-primary"
-              >
-                <MessageCircle aria-hidden="true" className="size-4" />
-                <span>WhatsApp</span>
-              </a>
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-1 flex-col gap-3">
+                <p className="text-xs uppercase tracking-[0.15em] text-muted">Contato</p>
+                <a
+                  href="mailto:assessoria@buzzini.com.br"
+                  className="transition-colors hover:text-primary"
+                >
+                  assessoria@buzzini.com.br
+                </a>
+                <a
+                  href="https://web.whatsapp.com/send?phone=5517988026622&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Abrir WhatsApp da Buzzini Sports"
+                  className="inline-flex items-center gap-2 transition-colors hover:text-primary"
+                >
+                  <Phone aria-hidden="true" className="size-4" />
+                  <span>+55 17 98802-6622</span>
+                </a>
+                <div className="mt-2 flex flex-col items-start gap-2">
+                  <a
+                    href="https://www.instagram.com/buzzinisports/"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Instagram da Buzzini Sports"
+                    className="inline-flex items-center gap-2 transition-colors hover:text-primary"
+                  >
+                    <Instagram aria-hidden="true" className="size-4" />
+                    <span>Instagram</span>
+                  </a>
+                  <a
+                    href="https://www.strava.com/clubs/buzzini"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Strava da Buzzini Sports"
+                    className="inline-flex items-center gap-2 transition-colors hover:text-primary"
+                  >
+                    <StravaIcon className="size-4" />
+                    <span>Strava</span>
+                  </a>
+                  <a
+                    href="https://web.whatsapp.com/send?phone=5517988026622&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="WhatsApp da Buzzini Sports"
+                    className="inline-flex items-center gap-2 transition-colors hover:text-primary"
+                  >
+                    <MessageCircle aria-hidden="true" className="size-4" />
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+
+              <img
+                src={findLogo}
+                alt=""
+                aria-hidden="true"
+                className="hidden h-20 w-auto shrink-0 opacity-80 md:block"
+              />
             </div>
           </div>
         </div>
