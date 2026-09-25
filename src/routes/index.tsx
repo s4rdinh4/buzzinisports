@@ -1087,20 +1087,21 @@ const PLANS: Record<Location, Plan[]> = {
 
 function RestartBanner() {
   return (
-    <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.12),transparent_32%),linear-gradient(180deg,#0c0f12_0%,#090b10_100%)] py-4 sm:py-6">
+    <section className="relative overflow-hidden bg-background py-4 sm:py-6">
       <div className="mx-auto w-full max-w-[calc(100%-1.25rem)] px-0 sm:max-w-[calc(100%-2rem)]">
         <div className="relative overflow-hidden rounded-[1.5rem] border border-primary/20 bg-background shadow-[0_24px_80px_rgba(0,0,0,0.22)] sm:rounded-[2rem]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(249,115,22,0.18),transparent_28%),linear-gradient(120deg,rgba(15,23,42,0.72),rgba(9,11,16,0.8),rgba(9,11,16,0.42))]" />
           <img
             src={fundoSite}
             alt="Pessoa correndo em ambiente natural"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(15,23,42,0.7),rgba(9,11,16,0.8),rgba(9,11,16,0.34))]" />
-          <div className="absolute -right-14 bottom-[-2.5rem] h-72 w-72 rounded-full bg-gradient-to-br from-primary via-primary/80 to-primary/20 blur-3xl opacity-80" />
-          <div className="absolute left-8 top-8 h-28 w-28 rounded-full bg-primary/20 blur-2xl" />
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(15,23,42,0.72),rgba(9,11,16,0.82),rgba(9,11,16,0.48))]" />
+          <div className="absolute bottom-[-2.5rem] right-[-2rem] h-60 w-60 rounded-full bg-gradient-to-br from-primary via-primary/80 to-primary/20 blur-3xl opacity-80" />
+          <div className="absolute left-8 top-8 h-20 w-20 rounded-full bg-primary/10 blur-2xl" />
 
-          <div className="relative z-10 flex min-h-[24rem] items-center px-5 py-7 sm:px-8 lg:px-12 lg:py-9">
-            <div className="max-w-[22ch] text-left">
+          <div className="relative z-10 flex min-h-[24rem] items-center justify-center px-5 py-7 sm:px-8 lg:px-12 lg:py-9">
+            <div className="w-full max-w-[32rem] text-left sm:ml-10 lg:ml-16">
               <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">
                 Recomeçar é possível
               </p>
