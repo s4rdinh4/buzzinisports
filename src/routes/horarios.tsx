@@ -6,39 +6,29 @@ import logoBuzziniOutline from "@/assets/logo_buzzini_outline.svg";
 
 const SCHEDULE = [
   {
-    day: "Segunda",
+    day: "Ter-qui",
+    time: "06:00",
+    detail: "Bebedouro e Ribeirão",
+  },
+  {
+    day: "Ter-qui",
     time: "18:30",
-    detail: "Treino de corrida + técnica",
+    detail: "Bebedouro",
   },
   {
-    day: "Terça",
-    time: "06:15",
-    detail: "Fartlek e desenvolvimento de ritmo",
+    day: "Sáb",
+    time: "06:00",
+    detail: "Bebedouro, Ribeirão e São Paulo",
   },
   {
-    day: "Quarta",
-    time: "18:30",
-    detail: "Treino contínuo + desempenho",
-  },
-  {
-    day: "Quinta",
-    time: "06:15",
-    detail: "Treino de qualidade e recuperação",
-  },
-  {
-    day: "Sexta",
-    time: "18:30",
-    detail: "Treino de velocidade e potência",
-  },
-  {
-    day: "Sábado",
-    time: "08:00",
-    detail: "Longa distância / prova",
+    day: "Domingo",
+    time: "Provas",
+    detail: "Selecionadas",
   },
 ] as const;
 
 const HIGHLIGHTS = [
-  { label: "Presencial", value: "Bebedouro / SP" },
+  { label: "Presencial", value: "Bebedouro, Ribeirão e São Paulo" },
   { label: "Online", value: "Todo o Brasil" },
   { label: "Acompanhamento", value: "Semanal + WhatsApp" },
 ] as const;
@@ -117,15 +107,15 @@ function HorariosPage() {
               <div>
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">Agenda</p>
                 <h2 className="mt-2 font-display text-2xl font-semibold text-white sm:text-4xl">
-                  Treinos da semana
+                  Treinos presenciais
                 </h2>
               </div>
               <div className="hidden rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-primary sm:block">
-                Presencial & Online
+                Bebedouro • Ribeirão • SP
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
               {SCHEDULE.map((item) => (
                 <div
                   key={item.day}
