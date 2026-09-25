@@ -285,6 +285,19 @@ function Hero() {
           </span>
         </div>
       </div>
+
+      <a
+        href="#como-funciona"
+        aria-label="Rolar para a próxima seção"
+        className="pointer-events-auto absolute right-6 top-1/2 hidden -translate-y-1/2 items-center justify-center md:flex"
+      >
+        <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-background/10 text-white/80 shadow-[0_8px_25px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+          <ArrowDown
+            aria-hidden="true"
+            className="size-5 animate-bounce [animation-duration:1.8s]"
+          />
+        </span>
+      </a>
     </section>
   );
 }
