@@ -1253,8 +1253,8 @@ function Plans() {
                   </ul>
                 </div>
                 {isAnnualPlan && (
-                  <div className="mt-4">
-                    <p className="inline-flex w-full items-center justify-center rounded-full bg-primary px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground shadow-[0_10px_24px_rgba(249,115,22,0.22)]">
+                  <div className="mt-4 flex justify-center">
+                    <p className="inline-flex max-w-full items-center justify-center rounded-full border border-primary/40 bg-[linear-gradient(135deg,#f97316_0%,#ff9d4d_100%)] px-4 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-primary-foreground shadow-[0_16px_32px_rgba(249,115,22,0.35)] sm:text-[11px]">
                       {dailyPriceText}
                     </p>
                   </div>
