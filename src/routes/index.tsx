@@ -468,9 +468,11 @@ function Stories() {
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Buzzini em ação
         </p>
-        <h2 className="mt-3 max-w-[40ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:mt-4 sm:text-5xl">
-          Histórias que ganham movimento.
-        </h2>
+        <div className="mt-3 inline-block max-w-[90%] rounded-2xl border border-primary/10 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/15 px-3 py-2 shadow-[0_10px_24px_rgba(249,115,22,0.08)] sm:mt-4">
+          <h2 className="max-w-[40ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
+            Histórias que ganham movimento.
+          </h2>
+        </div>
 
         {isMobile ? (
           <div
