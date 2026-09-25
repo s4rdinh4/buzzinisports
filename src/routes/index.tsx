@@ -359,7 +359,7 @@ function Manifesto() {
       <img
         src={timeBuzzini}
         alt="Time Buzzini Sports"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-35 md:object-[center_26%]"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-35 md:object-[center_32%]"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,11,16,0.92)_0%,rgba(9,11,16,0.8)_36%,rgba(9,11,16,0.58)_64%,rgba(9,11,16,0.88)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(249,115,22,0.16),transparent_22%)]" />
