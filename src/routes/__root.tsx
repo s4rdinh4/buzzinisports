@@ -40,7 +40,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
 
-    const isStaleRouteModule = error.message.includes("Failed to fetch dynamically imported module");
+    const isStaleRouteModule = error.message.includes(
+      "Failed to fetch dynamically imported module",
+    );
     const recoveryKey = "buzzini-route-module-recovery";
     if (isStaleRouteModule && sessionStorage.getItem(recoveryKey) !== "attempted") {
       sessionStorage.setItem(recoveryKey, "attempted");
@@ -116,7 +118,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "shortcut icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
   }),
   shellComponent: RootShell,
