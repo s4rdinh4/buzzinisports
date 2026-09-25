@@ -1671,7 +1671,7 @@ function Footer() {
               quanto você, ajustados para quebrar limites.
             </p>
           </div>
-          <div className="flex flex-col gap-3 font-mono text-sm text-foreground/80">
+          <div className="flex flex-col gap-4 font-mono text-sm text-foreground/80">
             <div className="flex items-start justify-between gap-4">
               <div className="flex flex-1 flex-col gap-3">
                 <p className="text-xs uppercase tracking-[0.15em] text-muted">Contato</p>
@@ -1691,7 +1691,7 @@ function Footer() {
                   <Phone aria-hidden="true" className="size-4" />
                   <span>+55 17 98802-6622</span>
                 </a>
-                <div className="mt-2 flex flex-col items-start gap-2">
+                <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-2">
                   <a
                     href="https://www.instagram.com/buzzinisports/"
                     target="_blank"
@@ -1731,6 +1731,16 @@ function Footer() {
                 aria-hidden="true"
                 className="hidden h-20 w-auto shrink-0 opacity-80 md:block"
               />
+            </div>
+
+            <div className="flex flex-col gap-2 pt-2">
+              <p className="text-xs uppercase tracking-[0.15em] text-muted">Parcerias</p>
+              <a
+                href="mailto:marketing@buzzini.com.br"
+                className="transition-colors hover:text-primary"
+              >
+                marketing@buzzini.com.br
+              </a>
             </div>
           </div>
         </div>
