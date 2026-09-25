@@ -472,18 +472,18 @@ function Stories() {
   const isMobile = useIsMobile();
   const pageCount = DEPOIMENTS.length;
 
-  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
-    touchStartX.current = event.touches[0]?.clientX ?? null;
+  const handleDragStart = (clientX: number | null | undefined) => {
+    if (clientX === null || clientX === undefined) return;
+    touchStartX.current = clientX;
   };
 
-  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+  const handleDragEnd = (clientX: number | null | undefined) => {
     const startX = touchStartX.current;
-    const endX = event.changedTouches[0]?.clientX;
     touchStartX.current = null;
 
-    if (startX === null || endX === undefined) return;
+    if (startX === null || clientX === null || clientX === undefined) return;
 
-    const distance = endX - startX;
+    const distance = clientX - startX;
     if (Math.abs(distance) < 48) return;
 
     setPage((currentPage) =>
@@ -510,9 +510,14 @@ function Stories() {
 
         {isMobile ? (
           <div
-            className="mt-8 overflow-hidden"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+            className="mt-8 cursor-grab overflow-hidden active:cursor-grabbing"
+            onTouchStart={(event) => handleDragStart(event.touches[0]?.clientX ?? null)}
+            onTouchEnd={(event) => handleDragEnd(event.changedTouches[0]?.clientX ?? null)}
+            onMouseDown={(event) => handleDragStart(event.clientX)}
+            onMouseUp={(event) => handleDragEnd(event.clientX)}
+            onMouseLeave={() => {
+              touchStartX.current = null;
+            }}
           >
             <div
               className="flex gap-4 transition-transform duration-300 ease-out"
@@ -631,18 +636,18 @@ function Team() {
     setPage((currentPage) => Math.max(0, Math.min(pageCount - 1, currentPage + direction)));
   };
 
-  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
-    touchStartX.current = event.touches[0]?.clientX ?? null;
+  const handleDragStart = (clientX: number | null | undefined) => {
+    if (clientX === null || clientX === undefined) return;
+    touchStartX.current = clientX;
   };
 
-  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+  const handleDragEnd = (clientX: number | null | undefined) => {
     const startX = touchStartX.current;
-    const endX = event.changedTouches[0]?.clientX;
     touchStartX.current = null;
 
-    if (startX === null || endX === undefined) return;
+    if (startX === null || clientX === null || clientX === undefined) return;
 
-    const distance = endX - startX;
+    const distance = clientX - startX;
     if (Math.abs(distance) < 48) return;
 
     handlePageChange(distance < 0 ? 1 : -1);
@@ -695,9 +700,14 @@ function Team() {
           {visibleCoaches.map((coach) => (
             <div
               key={coach.name}
-              className="touch-pan-y flex h-full flex-col overflow-hidden rounded-[1.15rem] border border-border/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(17,17,20,0.96),rgba(11,12,15,1))] shadow-[0_14px_32px_rgba(0,0,0,0.08)]"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
+              className="touch-pan-y flex h-full cursor-grab flex-col overflow-hidden rounded-[1.15rem] border border-border/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(17,17,20,0.96),rgba(11,12,15,1))] shadow-[0_14px_32px_rgba(0,0,0,0.08)] active:cursor-grabbing"
+              onTouchStart={(event) => handleDragStart(event.touches[0]?.clientX ?? null)}
+              onTouchEnd={(event) => handleDragEnd(event.changedTouches[0]?.clientX ?? null)}
+              onMouseDown={(event) => handleDragStart(event.clientX)}
+              onMouseUp={(event) => handleDragEnd(event.clientX)}
+              onMouseLeave={() => {
+                touchStartX.current = null;
+              }}
             >
               <div className="aspect-[5/4] w-full overflow-hidden sm:aspect-[5/4]">
                 <img
