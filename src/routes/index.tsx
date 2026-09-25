@@ -1188,6 +1188,7 @@ function Plans() {
             const isFeatured = plan.isFeatured;
             const [priceValue, priceSuffix] = plan.price.split("/");
             const [currency, amount] = (priceValue ?? plan.price).split(" ");
+            const isAnnualPlan = plan.name === "Anual";
             const dailyValue = Number((amount ?? "0").replace(/\./g, "")) / 30;
             const dailyPriceText = `Cerca de ${Number(dailyValue).toLocaleString("pt-BR", {
               style: "currency",
@@ -1225,9 +1226,11 @@ function Plans() {
                       </span>
                     )}
                   </p>
-                  <p className="mt-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white">
-                    {dailyPriceText}
-                  </p>
+                  {isAnnualPlan && (
+                    <p className="mt-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                      {dailyPriceText}
+                    </p>
+                  )}
                   <ul
                     className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${
                       isFeatured ? "text-foreground/80" : "text-foreground/75"
@@ -1254,6 +1257,7 @@ function Plans() {
                     ))}
                   </ul>
                 </div>
+                {isAnnualPlan && <div className="mt-4 h-4" />}
                 <Button
                   variant="ghost"
                   type="button"
