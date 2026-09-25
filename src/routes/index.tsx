@@ -359,7 +359,7 @@ function Manifesto() {
       <img
         src={timeBuzzini}
         alt="Time Buzzini Sports"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-35"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-35 md:object-[center_26%]"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,11,16,0.92)_0%,rgba(9,11,16,0.8)_36%,rgba(9,11,16,0.58)_64%,rgba(9,11,16,0.88)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(249,115,22,0.16),transparent_22%)]" />
@@ -627,6 +627,10 @@ function Team() {
   const pageCount = Math.ceil(COACHES.length / pageSize);
   const visibleCoaches = COACHES.slice(page * pageSize, (page + 1) * pageSize);
 
+  const handlePageChange = (direction: -1 | 1) => {
+    setPage((currentPage) => Math.max(0, Math.min(pageCount - 1, currentPage + direction)));
+  };
+
   const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     touchStartX.current = event.touches[0]?.clientX ?? null;
   };
@@ -641,9 +645,7 @@ function Team() {
     const distance = endX - startX;
     if (Math.abs(distance) < 48) return;
 
-    setPage((currentPage) =>
-      Math.max(0, Math.min(pageCount - 1, currentPage + (distance < 0 ? 1 : -1))),
-    );
+    handlePageChange(distance < 0 ? 1 : -1);
   };
 
   useEffect(() => {
@@ -671,7 +673,7 @@ function Team() {
               type="button"
               variant="outline"
               size="icon"
-              onClick={() => setPage((currentPage) => currentPage - 1)}
+              onClick={() => handlePageChange(-1)}
               disabled={page === 0}
               aria-label="Página anterior da equipe"
             >
@@ -681,7 +683,7 @@ function Team() {
               type="button"
               variant="outline"
               size="icon"
-              onClick={() => setPage((currentPage) => currentPage + 1)}
+              onClick={() => handlePageChange(1)}
               disabled={page === pageCount - 1}
               aria-label="Próxima página da equipe"
             >
@@ -742,7 +744,7 @@ function Team() {
               type="button"
               variant="outline"
               size="icon"
-              onClick={() => setPage((currentPage) => currentPage - 1)}
+              onClick={() => handlePageChange(-1)}
               disabled={page === 0}
               aria-label="Página anterior da equipe"
             >
@@ -752,7 +754,7 @@ function Team() {
               type="button"
               variant="outline"
               size="icon"
-              onClick={() => setPage((currentPage) => currentPage + 1)}
+              onClick={() => handlePageChange(1)}
               disabled={page === pageCount - 1}
               aria-label="Próxima página da equipe"
             >
