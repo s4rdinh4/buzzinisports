@@ -21,7 +21,7 @@ import {
 import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
-import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
+import buzziniLogo from "@/assets/logo_buzzini.svg";
 import fundoBuzzini from "@/assets/fundo_buzzini.jpeg";
 import fundoSite from "@/assets/fundo_site.jpeg";
 import timeBuzzini from "@/assets/time_buzzini.jpg";
@@ -161,7 +161,7 @@ function SiteLogo() {
           className={`block min-w-0 flex-1 transition-none ${isMobileMenuFullscreen ? "pl-0" : "pl-1"}`}
         >
           <img
-            src={buzziniLogo.url}
+            src={buzziniLogo}
             alt="Buzzini Sports"
             className={`w-auto object-contain transition-none ${isCompactHeader && isDesktop ? "translate-x-[10px]" : ""} ${
               isMobileMenuFullscreen
@@ -1567,7 +1567,7 @@ function Footer() {
           <div>
             <div className="mb-4 flex items-center justify-start">
               <img
-                src={buzziniLogo.url}
+                src={buzziniLogo}
                 alt="Buzzini Sports"
                 className="h-12 w-auto object-contain sm:h-14"
               />
