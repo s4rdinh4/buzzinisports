@@ -392,35 +392,37 @@ function DepoimentVideo({
 
   return (
     <div className="flex w-full flex-col justify-center sm:mx-0">
-      <div className="relative mx-auto w-[72%] cursor-pointer overflow-hidden rounded-2xl bg-card ring-1 ring-border max-sm:w-full">
-        <video
-          className="aspect-[9/16] w-full cursor-pointer object-cover"
-          controls={showControls}
-          playsInline
-          preload="metadata"
-          poster={poster}
-          aria-label={`Depoimento em vídeo da Buzzini Sports ${index + 1}`}
-          onClick={(event) => {
-            if (!showControls) startVideo(event.currentTarget);
-          }}
-        >
-          <source src={video} type="video/mp4" />
-        </video>
-        {!showControls && (
-          <button
-            type="button"
+      <div className="relative mx-auto w-[72%] rounded-[1.5rem] bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.18),_transparent_52%),linear-gradient(180deg,_rgba(255,255,255,0.02),_rgba(249,115,22,0.06))] p-[1px] shadow-[0_10px_24px_rgba(0,0,0,0.08)] max-sm:w-full">
+        <div className="relative cursor-pointer overflow-hidden rounded-[1.35rem] bg-card ring-1 ring-border">
+          <video
+            className="aspect-[9/16] w-full cursor-pointer object-cover"
+            controls={showControls}
+            playsInline
+            preload="metadata"
+            poster={poster}
+            aria-label={`Depoimento em vídeo da Buzzini Sports ${index + 1}`}
             onClick={(event) => {
-              const videoElement = event.currentTarget.previousElementSibling;
-              if (videoElement instanceof HTMLVideoElement) startVideo(videoElement);
+              if (!showControls) startVideo(event.currentTarget);
             }}
-            className="absolute inset-0 flex items-center justify-center bg-black/10 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
-            aria-label={`Reproduzir depoimento ${index + 1}`}
           >
-            <span className="flex size-14 items-center justify-center rounded-full bg-primary shadow-lg">
-              <Play aria-hidden="true" className="ml-1 size-6 fill-current" />
-            </span>
-          </button>
-        )}
+            <source src={video} type="video/mp4" />
+          </video>
+          {!showControls && (
+            <button
+              type="button"
+              onClick={(event) => {
+                const videoElement = event.currentTarget.previousElementSibling;
+                if (videoElement instanceof HTMLVideoElement) startVideo(videoElement);
+              }}
+              className="absolute inset-0 flex items-center justify-center bg-black/10 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
+              aria-label={`Reproduzir depoimento ${index + 1}`}
+            >
+              <span className="flex size-14 items-center justify-center rounded-full bg-primary shadow-lg">
+                <Play aria-hidden="true" className="ml-1 size-6 fill-current" />
+              </span>
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="mx-auto mt-3 w-[72%] text-left max-sm:w-full">
@@ -472,55 +474,49 @@ function Stories() {
           Histórias que ganham movimento.
         </h2>
 
-        <div className="relative mt-8 overflow-hidden rounded-[2rem] border border-border/80 bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.12),_transparent_40%),linear-gradient(180deg,_rgba(15,15,19,0.96),_rgba(15,15,19,1))] p-4 sm:mt-10 sm:p-6">
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
-
-          <div className="relative z-10">
-            {isMobile ? (
-              <div
-                className="overflow-hidden"
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-              >
-                <div
-                  className="flex gap-4 transition-transform duration-300 ease-out"
-                  style={{ transform: `translateX(calc(-${page} * (82% + 1rem)))` }}
-                >
-                  {DEPOIMENTS.map((depoiment, index) => (
-                    <div key={depoiment.video} className="w-[82%] min-w-[82%]">
-                      <DepoimentVideo {...depoiment} index={index} />
-                    </div>
-                  ))}
+        {isMobile ? (
+          <div
+            className="mt-8 overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="flex gap-4 transition-transform duration-300 ease-out"
+              style={{ transform: `translateX(calc(-${page} * (82% + 1rem)))` }}
+            >
+              {DEPOIMENTS.map((depoiment, index) => (
+                <div key={depoiment.video} className="w-[82%] min-w-[82%]">
+                  <DepoimentVideo {...depoiment} index={index} />
                 </div>
-                <div
-                  className="mt-6 flex items-center justify-center gap-2"
-                  role="tablist"
-                  aria-label="Páginas de histórias"
-                >
-                  {DEPOIMENTS.map((depoiment, index) => (
-                    <button
-                      key={depoiment.video}
-                      type="button"
-                      role="tab"
-                      aria-selected={page === index}
-                      aria-label={`Ir para vídeo ${index + 1}`}
-                      onClick={() => setPage(index)}
-                      className={`h-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card ${
-                        page === index ? "w-8 bg-primary" : "w-2 bg-border hover:bg-primary/60"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
-                {DEPOIMENTS.map((depoiment, index) => (
-                  <DepoimentVideo key={depoiment.video} {...depoiment} index={index} />
-                ))}
-              </div>
-            )}
+              ))}
+            </div>
+            <div
+              className="mt-6 flex items-center justify-center gap-2"
+              role="tablist"
+              aria-label="Páginas de histórias"
+            >
+              {DEPOIMENTS.map((depoiment, index) => (
+                <button
+                  key={depoiment.video}
+                  type="button"
+                  role="tab"
+                  aria-selected={page === index}
+                  aria-label={`Ir para vídeo ${index + 1}`}
+                  onClick={() => setPage(index)}
+                  className={`h-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card ${
+                    page === index ? "w-8 bg-primary" : "w-2 bg-border hover:bg-primary/60"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-5">
+            {DEPOIMENTS.map((depoiment, index) => (
+              <DepoimentVideo key={depoiment.video} {...depoiment} index={index} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
