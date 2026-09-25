@@ -153,9 +153,7 @@ function SiteLogo() {
           ? "fixed inset-0 bg-background/95 px-4 pb-12 pt-4 backdrop-blur-sm"
           : isCompactHeader
             ? "fixed left-3 top-2 sm:left-4 sm:top-3"
-            : isDesktop
-              ? "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
-              : "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
+            : "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
       }`}
       onMouseEnter={() => shouldShowMenu && setIsMenuOpen(true)}
       onMouseLeave={() => setIsMenuOpen(false)}
@@ -167,27 +165,27 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center gap-1 transition-none ${
+        className={`flex items-center transition-none ${
           isMobileMenuFullscreen
             ? "relative w-full"
             : isCompactHeader
-              ? "rounded-full bg-background/85 p-0.5 shadow-[0_8px_24px_rgba(0,0,0,0.12)] ring-1 ring-border/80"
-              : "rounded-none bg-transparent p-0 shadow-none ring-0"
-        } ${isMenuOpen && isCompactHeader ? "w-36 sm:w-32" : "w-auto"} ${isCompactHeader ? "sm:w-28" : "sm:w-auto"}`}
+              ? "w-auto gap-2 rounded-full bg-background/90 py-1.5 pl-2.5 pr-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.18)] ring-1 ring-border/80 backdrop-blur-md sm:gap-2.5 sm:py-1.5 sm:pl-3 sm:pr-1.5"
+              : "w-auto rounded-none bg-transparent p-0 shadow-none ring-0"
+        }`}
       >
         <a
           href="#inicio"
           aria-label="Buzzini Sports — início"
-          className={`block min-w-0 flex-1 transition-none ${isMobileMenuFullscreen ? "pl-0" : "pl-1"}`}
+          className={`flex items-center transition-opacity hover:opacity-85 ${isMobileMenuFullscreen ? "min-w-0 flex-1 pl-0" : ""}`}
         >
           <img
             src={buzziniLogo}
             alt="Buzzini Sports"
-            className={`w-auto object-contain transition-none ${isCompactHeader && isDesktop ? "translate-x-[10px]" : ""} ${
+            className={`w-auto object-contain transition-none ${
               isMobileMenuFullscreen
                 ? "h-11 sm:h-12"
                 : isCompactHeader
-                  ? "h-6 sm:h-7"
+                  ? "h-8 sm:h-9"
                   : !isDesktop
                     ? "h-12 sm:h-16"
                     : "h-10 sm:h-12 md:h-24"
@@ -200,11 +198,19 @@ function SiteLogo() {
           aria-expanded={isMenuOpen}
           aria-controls="site-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
-          className={`ml-auto flex shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-            isMobileMenuFullscreen ? "size-10" : "size-9 sm:size-7"
-          } ${shouldShowMenu ? "visible" : "hidden"} ${isCompactHeader ? "" : "md:hidden"}`}
+          className={`flex shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+            isMobileMenuFullscreen
+              ? "ml-auto size-10"
+              : isCompactHeader
+                ? "size-8 sm:size-9"
+                : "size-9 sm:size-7 md:hidden"
+          } ${shouldShowMenu ? "visible" : "hidden"}`}
         >
-          {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+          {isMenuOpen ? (
+            <X aria-hidden="true" className="size-4 sm:size-4.5" />
+          ) : (
+            <Menu aria-hidden="true" className="size-4 sm:size-4.5" />
+          )}
         </button>
       </div>
       <nav
