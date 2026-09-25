@@ -22,6 +22,8 @@ import brazilMap from "@svg-maps/brazil";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/logo_buzzini.svg";
+import logoBuzziniOutline from "@/assets/logo_buzzini_outline.svg";
+import faixaBuzzini from "@/assets/faixa_buzzini.png";
 import fundoBuzzini from "@/assets/fundo_buzzini.jpeg";
 import fundoSite from "@/assets/fundo_site.jpeg";
 import timeBuzzini from "@/assets/time_buzzini.jpg";
@@ -500,6 +502,12 @@ function Stories() {
       id="historias"
       className="relative mb-0 flex flex-col justify-start bg-background pt-14 pb-24 sm:mb-12 sm:justify-center sm:pt-20 sm:pb-24"
     >
+      <img
+        src={logoBuzziniOutline}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[-3.5rem] top-1/2 hidden h-60 w-auto -translate-y-1/2 opacity-10 md:block"
+      />
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Buzzini em ação
@@ -1535,6 +1543,13 @@ function FinalCtaBanner() {
     <section className="relative overflow-hidden bg-background py-4 sm:py-6">
       <div className="mx-auto w-full max-w-[calc(100%-1.25rem)] px-0 sm:max-w-[calc(100%-2rem)]">
         <div className="relative overflow-hidden rounded-[1.5rem] border border-orange-300/30 bg-[linear-gradient(135deg,#f97316_0%,#ea580c_24%,#c2410c_52%,#431407_100%)] shadow-[0_24px_80px_rgba(249,115,22,0.22)] sm:rounded-[2rem]">
+          <img
+            src={faixaBuzzini}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-80"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.72),rgba(252,146,61,0.26),rgba(120,53,15,0.72))]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(255,255,255,0.12),transparent_26%)]" />
           <div className="absolute -right-10 bottom-[-2.5rem] h-52 w-52 rounded-full bg-orange-950/20 blur-3xl" />
 
