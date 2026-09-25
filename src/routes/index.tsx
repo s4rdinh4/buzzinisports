@@ -6,8 +6,11 @@ import {
   CalendarClock,
   ChevronLeft,
   ChevronRight,
+  Instagram,
   MapPin,
   Menu,
+  MessageCircle,
+  Phone,
   Play,
   Radio,
   Route as RouteIcon,
@@ -60,6 +63,17 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+function StravaIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>
+      <path
+        d="M11.2 2.5 8.1 9.4h2.8L11.2 2.5Zm-1.7 6.9L9 15.8h2.7L9.5 9.4Zm5.3 0L13.8 15.8h2.7L15.8 9.4Zm-1.7 6.9 1.2 5.2h2.4l-3.6-5.2Zm-5-4.9L7.1 15.8H9.8L8.1 9.4Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
 
 function SiteLogo() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -1441,23 +1455,49 @@ function Footer() {
           </div>
           <div className="flex flex-col gap-3 font-mono text-sm text-foreground/80">
             <p className="text-xs uppercase tracking-[0.15em] text-muted">Contato</p>
-            <p>assessoria@buzzini.com.br</p>
-            <p>+55 17 98802-6622</p>
-            <div className="mt-2 flex gap-4">
+            <a
+              href="mailto:assessoria@buzzini.com.br"
+              className="transition-colors hover:text-primary"
+            >
+              assessoria@buzzini.com.br
+            </a>
+            <a
+              href="https://wa.me/5517988026622?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Abrir WhatsApp da Buzzini Sports"
+              className="inline-flex items-center gap-2 transition-colors hover:text-primary"
+            >
+              <Phone aria-hidden="true" className="size-4" />
+              <span>+55 17 98802-6622</span>
+            </a>
+            <div className="mt-2 flex items-center gap-3">
               <a
                 href="https://www.instagram.com/buzzinisports/"
-                className="transition-colors hover:text-primary"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram da Buzzini Sports"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
               >
-                Instagram
+                <Instagram aria-hidden="true" className="size-4" />
               </a>
               <a
                 href="https://www.strava.com/clubs/buzzini"
-                className="transition-colors hover:text-primary"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Strava da Buzzini Sports"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
               >
-                Strava
+                <StravaIcon className="size-4" />
               </a>
-              <a href="#" className="transition-colors hover:text-primary">
-                YouTube
+              <a
+                href="https://wa.me/5517988026622?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp da Buzzini Sports"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+              >
+                <MessageCircle aria-hidden="true" className="size-4" />
               </a>
             </div>
           </div>
