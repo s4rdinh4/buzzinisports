@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type TouchEvent } from "react";
+import { useEffect, useRef, useState, type ReactNode, type TouchEvent } from "react";
 import {
   ArrowDown,
   CalendarClock,
@@ -254,6 +254,56 @@ function SiteLogo() {
   );
 }
 
+function ScrollRevealSection({
+  children,
+  className = "",
+  id,
+}: {
+  children: ReactNode;
+  className?: string;
+  id?: string;
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!entry) return;
+
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      id={id}
+      ref={ref}
+      className={`${className} transition-all duration-700 ease-out ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+      }`}
+    >
+      {children}
+    </section>
+  );
+}
+
 function Hero() {
   return (
     <section
@@ -499,7 +549,7 @@ function Stories() {
   }, [pageCount]);
 
   return (
-    <section
+    <ScrollRevealSection
       id="historias"
       className="relative mb-0 flex flex-col justify-start bg-background pt-14 pb-24 sm:mb-12 sm:justify-center sm:pt-20 sm:pb-24"
     >
@@ -566,7 +616,7 @@ function Stories() {
           </div>
         )}
       </div>
-    </section>
+    </ScrollRevealSection>
   );
 }
 
@@ -667,7 +717,7 @@ function Team() {
   }, [pageCount]);
 
   return (
-    <section
+    <ScrollRevealSection
       id="equipe"
       className="relative isolate flex flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.08),_transparent_30%),linear-gradient(180deg,_rgba(9,11,16,0.98),_rgba(15,15,19,1))] py-8 sm:py-12"
     >
@@ -788,7 +838,7 @@ function Team() {
           </div>
         </div>
       </div>
-    </section>
+    </ScrollRevealSection>
   );
 }
 
@@ -829,7 +879,7 @@ const HOW_IT_WORKS = [
 
 function HowItWorks() {
   return (
-    <section
+    <ScrollRevealSection
       id="como-funciona"
       className="snap-intro snap-sec relative flex flex-col justify-center overflow-hidden bg-background"
     >
@@ -903,7 +953,7 @@ function HowItWorks() {
           })}
         </div>
       </div>
-    </section>
+    </ScrollRevealSection>
   );
 }
 
@@ -927,7 +977,7 @@ const LOCATIONS_INFO = [
 
 function Locations() {
   return (
-    <section
+    <ScrollRevealSection
       id="localidades"
       className="relative flex flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.12),_transparent_36%),linear-gradient(180deg,_rgba(10,10,12,0.92),_rgba(15,15,19,1))]"
     >
@@ -1030,7 +1080,7 @@ function Locations() {
           </div>
         </div>
       </div>
-    </section>
+    </ScrollRevealSection>
   );
 }
 
@@ -1164,7 +1214,7 @@ const PLANS: Record<Location, Plan[]> = {
 
 function RestartBanner() {
   return (
-    <section className="relative overflow-hidden bg-background py-4 sm:py-6">
+    <ScrollRevealSection className="relative overflow-hidden bg-background py-4 sm:py-6">
       <div className="mx-auto w-full max-w-[calc(100%-1.25rem)] px-0 sm:max-w-[calc(100%-2rem)]">
         <div className="relative overflow-hidden rounded-[1.5rem] border border-primary/20 bg-background shadow-[0_24px_80px_rgba(0,0,0,0.22)] sm:rounded-[2rem]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(249,115,22,0.18),transparent_28%),linear-gradient(120deg,rgba(15,23,42,0.72),rgba(9,11,16,0.8),rgba(9,11,16,0.42))]" />
@@ -1193,7 +1243,7 @@ function RestartBanner() {
           </div>
         </div>
       </div>
-    </section>
+    </ScrollRevealSection>
   );
 }
 
@@ -1229,7 +1279,7 @@ function Plans() {
   }, [selectedPlan]);
 
   return (
-    <section
+    <ScrollRevealSection
       id="planos"
       className="snap-sec relative flex flex-col justify-start bg-background pt-8 pb-16 sm:justify-center sm:pt-4 sm:pb-10"
     >
@@ -1458,7 +1508,7 @@ function Plans() {
           </div>
         </div>
       )}
-    </section>
+    </ScrollRevealSection>
   );
 }
 
@@ -1499,7 +1549,7 @@ function Faq() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <section
+    <ScrollRevealSection
       id="faq"
       className="relative flex flex-col justify-center overflow-hidden bg-card py-12 sm:py-16"
     >
@@ -1544,13 +1594,13 @@ function Faq() {
           ))}
         </div>
       </div>
-    </section>
+    </ScrollRevealSection>
   );
 }
 
 function FinalCtaBanner() {
   return (
-    <section className="relative overflow-hidden bg-background py-4 sm:py-6">
+    <ScrollRevealSection className="relative overflow-hidden bg-background py-4 sm:py-6">
       <div className="mx-auto w-full max-w-[calc(100%-1.25rem)] px-0 sm:max-w-[calc(100%-2rem)]">
         <div className="relative overflow-hidden rounded-[1.5rem] border border-orange-300/30 bg-[linear-gradient(135deg,#f97316_0%,#ea580c_24%,#c2410c_52%,#431407_100%)] shadow-[0_24px_80px_rgba(249,115,22,0.22)] sm:rounded-[2rem]">
           <img
@@ -1578,7 +1628,7 @@ function FinalCtaBanner() {
           </div>
         </div>
       </div>
-    </section>
+    </ScrollRevealSection>
   );
 }
 
