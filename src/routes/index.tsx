@@ -1419,10 +1419,19 @@ function Faq() {
 
 function Footer() {
   return (
-    <footer id="rodape" className="relative bg-background py-12 sm:py-16">
+    <footer id="rodape" className="relative overflow-hidden bg-background py-12 sm:py-16">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-primary/8 via-primary/3 to-transparent" />
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
         <div className="grid gap-10 sm:grid-cols-2">
           <div>
+            <div className="mb-4 flex items-center justify-start">
+              <img
+                src={buzziniLogo.url}
+                alt="Buzzini Sports"
+                className="h-12 w-auto object-contain sm:h-14"
+              />
+            </div>
             <p className="font-display text-3xl font-semibold text-foreground">Buzzini Sports</p>
             <p className="mt-3 max-w-[40ch] font-mono text-sm text-pretty text-muted">
               Combinamos conhecimento técnico com uma abordagem inovadora para criar treinos
@@ -1454,7 +1463,7 @@ function Footer() {
           </div>
         </div>
         <p className="mt-10 border-t border-border pt-5 font-mono text-xs text-muted">
-          © 2026 Buzzini Sports · Bebedouro · Ribeirão Preto · São Paulo
+          © 2026 Buzzini Sports · CNPJ 58.977.432/0001-37
         </p>
       </div>
     </footer>
