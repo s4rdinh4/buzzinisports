@@ -132,7 +132,7 @@ function SiteLogo() {
         isMobileMenuFullscreen
           ? "fixed inset-0 bg-background/95 px-4 pb-12 pt-4 backdrop-blur-sm"
           : isCompactHeader
-            ? "fixed left-4 top-3 sm:left-6 sm:top-4"
+            ? "fixed left-3 top-2 sm:left-4 sm:top-3"
             : isDesktop
               ? "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
               : "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
@@ -147,27 +147,27 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center gap-1.5 transition-none ${
+        className={`flex items-center gap-1 transition-none ${
           isMobileMenuFullscreen
             ? "relative w-full"
             : isCompactHeader
-              ? "rounded-full bg-background/85 p-1 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border"
+              ? "rounded-full bg-background/85 p-0.5 shadow-[0_8px_24px_rgba(0,0,0,0.12)] ring-1 ring-border/80"
               : "rounded-none bg-transparent p-0 shadow-none ring-0"
-        } ${isMenuOpen && isCompactHeader ? "w-44 sm:w-40" : "w-auto"} ${isCompactHeader ? "sm:w-32" : "sm:w-auto"}`}
+        } ${isMenuOpen && isCompactHeader ? "w-36 sm:w-32" : "w-auto"} ${isCompactHeader ? "sm:w-28" : "sm:w-auto"}`}
       >
         <a
           href="#inicio"
           aria-label="Buzzini Sports — início"
-          className={`block min-w-0 flex-1 transition-none ${isMobileMenuFullscreen ? "pl-0" : "pl-1.5"}`}
+          className={`block min-w-0 flex-1 transition-none ${isMobileMenuFullscreen ? "pl-0" : "pl-1"}`}
         >
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className={`w-auto object-contain transition-none ${isCompactHeader && isDesktop ? "translate-x-[14px]" : ""} ${
+            className={`w-auto object-contain transition-none ${isCompactHeader && isDesktop ? "translate-x-[10px]" : ""} ${
               isMobileMenuFullscreen
                 ? "h-11 sm:h-12"
                 : isCompactHeader
-                  ? "h-7 sm:h-8"
+                  ? "h-6 sm:h-7"
                   : !isDesktop
                     ? "h-12 sm:h-16"
                     : "h-10 sm:h-12 md:h-24"
@@ -181,7 +181,7 @@ function SiteLogo() {
           aria-controls="site-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
           className={`ml-auto flex shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-            isMobileMenuFullscreen ? "size-10" : "size-8"
+            isMobileMenuFullscreen ? "size-10" : "size-7"
           } ${shouldShowMenu ? "visible" : "hidden"} ${isCompactHeader ? "" : "md:hidden"}`}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -193,14 +193,14 @@ function SiteLogo() {
         className={
           isMobileMenuFullscreen
             ? "mt-16 flex h-[calc(100%-4rem)] flex-col items-center justify-center gap-4 text-center"
-            : `absolute left-0 top-full mt-2 w-56 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border transition-all duration-300 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`
+            : `absolute left-0 top-full mt-1.5 w-48 rounded-xl bg-background/95 p-1.5 shadow-lg ring-1 ring-border transition-all duration-300 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`
         }
       >
         {menuItems.map((item, index) => {
           const shouldReveal = isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu);
           const sharedClasses = isMobileMenuFullscreen
             ? "block w-full max-w-xs rounded-full border px-5 py-4 font-mono text-sm uppercase tracking-[0.18em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            : "block rounded-xl px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
+            : "block rounded-lg px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
 
           if (item.isDisabled) {
             return (
