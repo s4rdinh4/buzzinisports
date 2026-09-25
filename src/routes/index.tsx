@@ -862,57 +862,60 @@ function Locations() {
   return (
     <section
       id="localidades"
-      className="relative flex flex-col justify-center overflow-hidden bg-card"
+      className="relative flex flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.12),_transparent_36%),linear-gradient(180deg,_rgba(10,10,12,0.92),_rgba(15,15,19,1))]"
     >
       <div className="mx-auto grid w-full max-w-6xl items-center gap-6 px-6 py-10 sm:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
         <div className="relative order-2 mx-auto w-full max-w-xl lg:order-1">
-          <svg
-            viewBox="285 275 310 285"
-            role="img"
-            aria-label="Mapa ampliado da região Sudeste com Bebedouro, Ribeirão Preto e São Paulo destacadas"
-            className="relative mx-auto block h-auto max-h-[42svh] w-full overflow-hidden"
-          >
-            {brazilMap.locations
-              .filter((state: { id: string }) => ["sp", "mg", "rj", "es"].includes(state.id))
-              .map((state: { id: string; path: string }) => (
-                <path
-                  key={state.id}
-                  d={state.path}
-                  className={
-                    state.id === "sp"
-                      ? "fill-primary/20 stroke-primary"
-                      : "fill-background stroke-border"
-                  }
-                  strokeWidth={state.id === "sp" ? 2.5 : 1.5}
-                  strokeLinejoin="round"
-                />
+          <div className="absolute inset-10 rounded-[2rem] bg-[radial-gradient(circle,_rgba(249,115,22,0.22),_transparent_60%)] blur-3xl" />
+          <div className="relative rounded-[2rem] border border-primary/10 bg-gradient-to-br from-background via-card to-primary/5 p-4 shadow-[0_24px_70px_rgba(15,15,19,0.26)]">
+            <svg
+              viewBox="285 275 310 285"
+              role="img"
+              aria-label="Mapa ampliado da região Sudeste com Bebedouro, Ribeirão Preto e São Paulo destacadas"
+              className="relative mx-auto block h-auto max-h-[42svh] w-full overflow-hidden"
+            >
+              {brazilMap.locations
+                .filter((state: { id: string }) => ["sp", "mg", "rj", "es"].includes(state.id))
+                .map((state: { id: string; path: string }) => (
+                  <path
+                    key={state.id}
+                    d={state.path}
+                    className={
+                      state.id === "sp"
+                        ? "fill-primary/20 stroke-primary"
+                        : "fill-background stroke-border"
+                    }
+                    strokeWidth={state.id === "sp" ? 2.5 : 1.5}
+                    strokeLinejoin="round"
+                  />
+                ))}
+              {[
+                { x: 398, y: 415, number: "1", label: "BEBEDOURO" },
+                { x: 409, y: 419, number: "2", label: "RIBEIRÃO PRETO" },
+                { x: 427, y: 459, number: "3", label: "SÃO PAULO" },
+              ].map((point) => (
+                <g key={point.label}>
+                  <circle cx={point.x} cy={point.y} r="11" className="fill-primary/20" />
+                  <circle
+                    cx={point.x}
+                    cy={point.y}
+                    r="7"
+                    className="fill-primary stroke-background"
+                    strokeWidth="2"
+                  />
+                  <text
+                    x={point.x}
+                    y={point.y + 4}
+                    textAnchor="middle"
+                    className="fill-primary-foreground font-mono text-[7px] font-bold"
+                  >
+                    {point.number}
+                  </text>
+                </g>
               ))}
-            {[
-              { x: 398, y: 415, number: "1", label: "BEBEDOURO" },
-              { x: 409, y: 419, number: "2", label: "RIBEIRÃO PRETO" },
-              { x: 427, y: 459, number: "3", label: "SÃO PAULO" },
-            ].map((point) => (
-              <g key={point.label}>
-                <circle cx={point.x} cy={point.y} r="11" className="fill-primary/20" />
-                <circle
-                  cx={point.x}
-                  cy={point.y}
-                  r="7"
-                  className="fill-primary stroke-background"
-                  strokeWidth="2"
-                />
-                <text
-                  x={point.x}
-                  y={point.y + 4}
-                  textAnchor="middle"
-                  className="fill-primary-foreground font-mono text-[7px] font-bold"
-                >
-                  {point.number}
-                </text>
-              </g>
-            ))}
-          </svg>
-          <div className="relative z-10 mx-auto mt-6 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-full bg-background px-5 py-3 font-mono text-[10px] uppercase text-muted ring-1 ring-border">
+            </svg>
+          </div>
+          <div className="relative z-10 mx-auto mt-6 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-full border border-primary/10 bg-gradient-to-r from-background via-card to-background px-5 py-3 font-mono text-[10px] uppercase text-muted shadow-[0_10px_25px_rgba(0,0,0,0.08)]">
             <span>
               <b className="text-primary">1</b> Bebedouro
             </span>
@@ -930,10 +933,13 @@ function Locations() {
           <h2 className="mt-4 max-w-[14ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
             Perto de você. Em todo o Brasil.
           </h2>
-          <div className="mt-6 divide-y divide-border border-y border-border">
+          <div className="mt-6 divide-y divide-border/70 border-y border-border/80 bg-background/30 backdrop-blur-sm">
             {LOCATIONS_INFO.map((item) => (
-              <div key={item.name} className="flex gap-4 py-4">
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+              <div
+                key={item.name}
+                className="flex gap-4 py-4 transition-colors duration-300 hover:bg-gradient-to-r hover:from-primary/5 hover:via-transparent hover:to-primary/5"
+              >
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-[0_12px_24px_rgba(249,115,22,0.22)]">
                   <MapPin aria-hidden="true" className="size-4" />
                 </div>
                 <div>
@@ -943,8 +949,8 @@ function Locations() {
                 </div>
               </div>
             ))}
-            <div className="flex gap-4 py-4">
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-background text-primary ring-1 ring-border">
+            <div className="flex gap-4 py-4 transition-colors duration-300 hover:bg-gradient-to-r hover:from-primary/5 hover:via-transparent hover:to-primary/5">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-background to-card text-primary ring-1 ring-border shadow-[0_10px_20px_rgba(15,15,19,0.12)]">
                 <Radio aria-hidden="true" className="size-4" />
               </div>
               <div>
