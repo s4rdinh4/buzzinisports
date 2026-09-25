@@ -67,18 +67,20 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://buzzinisports.lovable.app/" },
     ],
     links: [{ rel: "canonical", href: "https://buzzinisports.lovable.app/" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: FAQS.map(({ question, answer }) => ({
-          "@type": "Question",
-          name: question,
-          acceptedAnswer: { "@type": "Answer", text: answer },
-        })),
-      }),
-    }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map(({ question, answer }) => ({
+            "@type": "Question",
+            name: question,
+            acceptedAnswer: { "@type": "Answer", text: answer },
+          })),
+        }),
+      },
+    ],
   }),
   component: Index,
 });
@@ -323,7 +325,7 @@ function Hero() {
   return (
     <section
       id="inicio"
-      className="snap-intro snap-sec relative flex min-h-[100svh] items-end overflow-hidden bg-background"
+      className="relative flex min-h-[100svh] items-end overflow-hidden bg-background"
     >
       <img
         src={fundoBuzzini}
