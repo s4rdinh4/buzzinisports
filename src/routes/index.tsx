@@ -1238,7 +1238,7 @@ function RestartBanner() {
           <img
             src={fundoSite}
             alt="Pessoa correndo em ambiente natural"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-bottom"
           />
           <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(15,23,42,0.72),rgba(9,11,16,0.82),rgba(9,11,16,0.48))]" />
           <div className="absolute bottom-[-2.5rem] right-[-2rem] h-60 w-60 rounded-full bg-gradient-to-br from-primary via-primary/80 to-primary/20 blur-3xl opacity-80" />
