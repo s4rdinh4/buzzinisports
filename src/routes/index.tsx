@@ -92,6 +92,12 @@ function SiteLogo() {
   const isCompactHeader = isDesktopScrolled || (!isDesktop && isMobileHeaderPill);
   const shouldShowMenu = isDesktop ? isDesktopScrolled : isMobileHeaderPill;
   const isMobileMenuFullscreen = !isDesktop && isMenuOpen;
+  const menuItems = [
+    { label: "COMO FUNCIONA", href: "#como-funciona", isPrimary: false, isDisabled: false },
+    { label: "LOCAIS", href: "#localidades", isPrimary: false, isDisabled: false },
+    { label: "HORÁRIOS", href: "#horarios", isPrimary: false, isDisabled: true },
+    { label: "PLANOS", href: "#planos", isPrimary: true, isDisabled: false },
+  ] as const;
 
   useEffect(() => {
     document.body.style.overflow = !isDesktop && isMenuOpen ? "hidden" : "";
@@ -167,27 +173,65 @@ function SiteLogo() {
         className={
           isMobileMenuFullscreen
             ? "mt-16 flex h-[calc(100%-4rem)] flex-col items-center justify-center gap-4 text-center"
-            : `absolute left-0 top-full mt-2 w-64 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border transition-all duration-200 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`
+            : `absolute left-0 top-full mt-2 w-72 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border transition-all duration-300 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`
         }
       >
-        {[
-          ["Histórias", "historias"],
-          ["Localidades", "localidades"],
-          ["Planos", "planos"],
-        ].map(([label, section]) => (
-          <a
-            key={section}
-            href={`#${section}`}
-            onClick={() => setIsMenuOpen(false)}
-            className={
-              isMobileMenuFullscreen
-                ? "block w-full max-w-xs rounded-full border border-border bg-card px-5 py-4 font-mono text-sm uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                : "block rounded-xl px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-muted transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            }
-          >
-            {label}
-          </a>
-        ))}
+        {menuItems.map((item, index) => {
+          const isActiveItem = item.isPrimary && (isMobileMenuFullscreen || isMenuOpen);
+          const sharedClasses = isMobileMenuFullscreen
+            ? "block w-full max-w-xs rounded-full border px-5 py-4 font-mono text-sm uppercase tracking-[0.18em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            : "block rounded-xl px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
+
+          if (item.isDisabled) {
+            return (
+              <span
+                key={item.label}
+                className={`${sharedClasses} cursor-not-allowed border-border/80 bg-card/70 text-muted/70 ${
+                  isMobileMenuFullscreen ? "opacity-0 translate-y-3" : "opacity-0 -translate-y-1"
+                }`}
+                style={{
+                  transitionDelay: `${index * 120}ms`,
+                  opacity: isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu) ? 1 : 0,
+                  transform:
+                    isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu)
+                      ? "translateY(0)"
+                      : undefined,
+                }}
+              >
+                {item.label}
+              </span>
+            );
+          }
+
+          const itemClasses = item.isPrimary
+            ? isMobileMenuFullscreen
+              ? "border-primary bg-primary text-primary-foreground shadow-[0_18px_45px_rgba(249,115,22,0.28)] hover:bg-primary-soft hover:text-primary-foreground"
+              : "border-primary bg-primary text-primary-foreground shadow-[0_12px_28px_rgba(249,115,22,0.2)] hover:bg-primary-soft"
+            : isMobileMenuFullscreen
+              ? "border-border bg-card text-foreground hover:bg-primary hover:text-primary-foreground"
+              : "border-transparent bg-transparent text-muted hover:bg-primary hover:text-primary-foreground";
+
+          return (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+              className={`${sharedClasses} ${itemClasses} ${isMobileMenuFullscreen ? "opacity-0 translate-y-3" : "opacity-0 -translate-y-1"} ${
+                isActiveItem || (isMenuOpen && shouldShowMenu) ? "visible" : "hidden"
+              }`}
+              style={{
+                transitionDelay: `${index * 120}ms`,
+                opacity: isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu) ? 1 : 0,
+                transform:
+                  isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu)
+                    ? "translateY(0)"
+                    : undefined,
+              }}
+            >
+              {item.label}
+            </a>
+          );
+        })}
       </nav>
     </header>
   );
