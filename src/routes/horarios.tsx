@@ -123,7 +123,7 @@ function HorariosPage() {
                 >
                   <div className="flex items-center justify-between gap-3">
                     <p className="font-display text-2xl font-semibold text-white">{item.day}</p>
-                    <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-primary">
+                    <span className="inline-flex items-center rounded-full border border-primary/40 bg-[linear-gradient(135deg,rgba(249,115,22,0.22),rgba(249,115,22,0.08))] px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-primary shadow-[0_10px_25px_rgba(249,115,22,0.18)]">
                       {item.time}
                     </span>
                   </div>
