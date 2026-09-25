@@ -1087,7 +1087,7 @@ const PLANS: Record<Location, Plan[]> = {
 
 function RestartBanner() {
   return (
-    <section className="relative overflow-hidden bg-background py-4 sm:py-6">
+    <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.12),transparent_32%),linear-gradient(180deg,#0c0f12_0%,#090b10_100%)] py-4 sm:py-6">
       <div className="mx-auto w-full max-w-[calc(100%-1.25rem)] px-0 sm:max-w-[calc(100%-2rem)]">
         <div className="relative overflow-hidden rounded-[1.5rem] border border-primary/20 bg-background shadow-[0_24px_80px_rgba(0,0,0,0.22)] sm:rounded-[2rem]">
           <img
@@ -1095,7 +1095,7 @@ function RestartBanner() {
             alt="Pessoa correndo em ambiente natural"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/30" />
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(15,23,42,0.7),rgba(9,11,16,0.8),rgba(9,11,16,0.34))]" />
           <div className="absolute -right-14 bottom-[-2.5rem] h-72 w-72 rounded-full bg-gradient-to-br from-primary via-primary/80 to-primary/20 blur-3xl opacity-80" />
           <div className="absolute left-8 top-8 h-28 w-28 rounded-full bg-primary/20 blur-2xl" />
 
