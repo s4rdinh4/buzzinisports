@@ -787,21 +787,21 @@ function HowItWorks() {
                 key={item.number}
                 className={`group relative flex min-h-[12rem] flex-col justify-between overflow-hidden rounded-lg border p-3 shadow-[0_12px_30px_rgba(0,0,0,0.08)] transition-transform duration-200 ease-out hover:-translate-y-0.5 sm:min-h-0 sm:p-4 ${
                   isPrimary
-                    ? "border-primary/40 bg-[linear-gradient(135deg,rgba(249,115,22,0.34),rgba(15,23,42,0.96)_40%,rgba(15,23,42,1))] text-primary-foreground"
+                    ? "border-orange-400/40 bg-[linear-gradient(135deg,#ff9a3d_0%,#f97316_32%,#d65a0c_58%,#2d1206_100%)] text-white"
                     : "border-border/80 bg-[linear-gradient(135deg,rgba(148,163,184,0.08),rgba(15,23,42,0.96),rgba(15,23,42,1))] text-foreground"
                 } ${item.layout}`}
               >
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.16),transparent_35%)]" />
                 <div className="relative z-10 flex items-start justify-between gap-3">
                   <span
-                    className={`font-mono text-[9px] font-bold ${isPrimary ? "text-primary-foreground/70" : "text-primary"}`}
+                    className={`font-mono text-[9px] font-bold ${isPrimary ? "text-white/75" : "text-primary"}`}
                   >
                     {item.number}
                   </span>
                   <span
                     className={`flex size-8 items-center justify-center rounded-full border ${
                       isPrimary
-                        ? "border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground"
+                        ? "border-white/20 bg-white/10 text-white"
                         : "border-border bg-background/60 text-primary"
                     }`}
                   >
@@ -811,14 +811,14 @@ function HowItWorks() {
                 <div className="relative z-10 mt-3 sm:mt-5">
                   <h3
                     className={`font-display font-semibold leading-tight text-balance ${item.titleSize} ${
-                      isPrimary ? "text-primary-foreground" : "text-foreground"
+                      isPrimary ? "text-white" : "text-foreground"
                     }`}
                   >
                     {item.title}
                   </h3>
                   <p
                     className={`mt-1.5 max-w-[44ch] font-mono text-[9px] leading-relaxed text-pretty sm:text-[10px] ${
-                      isPrimary ? "text-primary-foreground/80" : "text-muted"
+                      isPrimary ? "text-white/80" : "text-muted"
                     }`}
                   >
                     {item.subtitle}
