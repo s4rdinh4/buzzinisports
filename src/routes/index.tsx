@@ -1559,8 +1559,8 @@ function FinalCtaBanner() {
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover object-bottom opacity-80"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.72),rgba(252,146,61,0.26),rgba(120,53,15,0.72))]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(255,255,255,0.12),transparent_26%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(28,16,9,0.82),rgba(120,53,15,0.42),rgba(23,12,8,0.8))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(255,255,255,0.08),transparent_26%)]" />
           <div className="absolute -right-10 bottom-[-2.5rem] h-52 w-52 rounded-full bg-orange-950/20 blur-3xl" />
 
           <div className="relative z-10 flex min-h-[16rem] items-center justify-center px-5 py-8 sm:px-8 lg:px-12">
