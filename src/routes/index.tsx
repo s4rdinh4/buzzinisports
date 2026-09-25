@@ -263,6 +263,7 @@ function Hero() {
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(249,115,22,0.38),transparent_24%),radial-gradient(circle_at_80%_78%,rgba(249,115,22,0.18),transparent_26%),linear-gradient(90deg,rgba(9,11,16,0.68),rgba(9,11,16,0.4),rgba(9,11,16,0.72),rgba(9,11,16,0.9))]" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
       <div className="absolute -bottom-10 left-0 h-40 w-40 rounded-full bg-primary/25 blur-3xl" />
       <div className="relative z-10 w-full px-6 pb-14 sm:px-12">
         <h1 className="max-w-[20ch] font-display text-5xl font-semibold leading-none text-balance text-foreground sm:text-7xl">
@@ -322,42 +323,30 @@ function Manifesto() {
       className="snap-intro snap-sec relative flex min-h-[100svh] items-center overflow-hidden bg-card"
     >
       <img
-        src={buzziniLogo.url}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-24 top-1/2 w-[30rem] max-w-[82vw] -translate-y-1/2 opacity-[0.07] sm:-left-20 sm:w-[44rem]"
+        src={timeBuzzini}
+        alt="Time Buzzini Sports"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-35"
       />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,11,16,0.92)_0%,rgba(9,11,16,0.8)_36%,rgba(9,11,16,0.58)_64%,rgba(9,11,16,0.88)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(249,115,22,0.16),transparent_22%)]" />
 
-      <div className="absolute right-4 top-1/2 hidden h-[70%] w-[min(30vw,28rem)] -translate-y-1/2 lg:block">
-        <div className="relative h-full w-full rounded-[1.75rem] bg-[linear-gradient(180deg,#ffb066_0%,#f97316_24%,#ea580c_44%,#0f172a_100%)] p-[1px] shadow-[0_18px_45px_rgba(249,115,22,0.2)]">
-          <div className="relative h-full w-full overflow-hidden rounded-[calc(1.75rem-1px)] bg-background">
-            <img
-              src={timeBuzzini}
-              alt="Time Buzzini Sports"
-              className="h-full w-full object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,11,16,0.12),rgba(9,11,16,0.20),rgba(9,11,16,0.76))]" />
-          </div>
-        </div>
-      </div>
-
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col items-center justify-center px-6 py-24 text-center sm:px-12 lg:pr-[30rem]">
-        <p className="max-w-[20ch] font-display text-3xl font-semibold leading-[1.12] text-balance text-foreground sm:text-5xl lg:text-6xl">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col items-center justify-center px-6 py-24 text-center sm:px-12">
+        <p className="max-w-[20ch] font-display text-3xl font-semibold leading-[1.12] text-balance text-white sm:text-5xl lg:text-6xl">
           Não treinamos
           <span className="relative mx-[0.12em] inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] text-primary">
             pessoas
           </span>
           <span className="block">só para correr mais rápido.</span>
         </p>
-        <p className="mt-6 max-w-[52ch] font-mono text-sm leading-relaxed text-pretty text-muted sm:mt-8 sm:text-base lg:text-lg">
+        <p className="mt-6 max-w-[52ch] font-mono text-sm leading-relaxed text-pretty text-white/80 sm:mt-8 sm:text-base lg:text-lg">
           Treinamos pessoas para desenvolver
-          <span className="font-bold text-foreground"> disciplina, autonomia e saúde </span>
+          <span className="font-bold text-white"> disciplina, autonomia e saúde </span>
           através da corrida.
         </p>
         <a
           href="#como-funciona"
           aria-label="Ir para Como funciona"
-          className="group mt-10 flex size-12 items-center justify-center self-center rounded-full border border-primary text-primary transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-card sm:mt-12 sm:size-14"
+          className="group mt-10 flex size-12 items-center justify-center self-center rounded-full border border-primary bg-background/10 text-primary backdrop-blur-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-card sm:mt-12 sm:size-14"
         >
           <ArrowDown
             aria-hidden="true"
