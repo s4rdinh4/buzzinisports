@@ -1106,7 +1106,7 @@ function RestartBanner() {
                 Recomeçar é possível
               </p>
               <h2 className="mt-4 font-display text-2xl font-semibold leading-[0.96] text-balance text-foreground sm:text-3xl lg:text-4xl">
-                Nunca correu?<span className="font-bold text-primary">Tudo bem</span>.
+                Nunca correu? <span className="font-bold text-primary">Tudo bem</span>.
                 <span className="mt-2 block text-foreground/95">
                   Parou há um tempo? Você pode{" "}
                   <span className="font-bold text-primary">recomeçar</span>.
@@ -1462,6 +1462,33 @@ function Faq() {
   );
 }
 
+function FinalCtaBanner() {
+  return (
+    <section className="relative overflow-hidden bg-background py-4 sm:py-6">
+      <div className="mx-auto w-full max-w-[calc(100%-1.25rem)] px-0 sm:max-w-[calc(100%-2rem)]">
+        <div className="relative overflow-hidden rounded-[1.5rem] border border-orange-300/30 bg-[linear-gradient(135deg,#ffb066_0%,#f97316_32%,#ea580c_62%,#9a3d09_100%)] shadow-[0_24px_80px_rgba(249,115,22,0.18)] sm:rounded-[2rem]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(255,255,255,0.18),transparent_26%)]" />
+          <div className="absolute -right-10 bottom-[-2.5rem] h-52 w-52 rounded-full bg-white/10 blur-3xl" />
+
+          <div className="relative z-10 flex min-h-[16rem] items-center justify-center px-5 py-8 sm:px-8 lg:px-12">
+            <div className="flex w-full max-w-4xl flex-col items-center justify-center gap-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+              <p className="font-display text-3xl font-semibold leading-none tracking-[-0.04em] text-white sm:text-4xl lg:text-5xl">
+                #vemserbuzzini
+              </p>
+              <a
+                href="#planos"
+                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.12em] text-primary transition-transform hover:-translate-y-0.5 hover:bg-orange-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-orange-500"
+              >
+                Ver planos
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer id="rodape" className="relative overflow-hidden bg-background py-12 sm:py-16">
@@ -1558,6 +1585,7 @@ function Index() {
       <RestartBanner />
       <Plans />
       <Faq />
+      <FinalCtaBanner />
       <Footer />
     </main>
   );
