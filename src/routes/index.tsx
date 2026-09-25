@@ -787,14 +787,16 @@ function HowItWorks() {
                 key={item.number}
                 className={`group relative flex min-h-[12rem] flex-col justify-between overflow-hidden rounded-lg border p-3 shadow-[0_12px_30px_rgba(0,0,0,0.08)] transition-transform duration-200 ease-out hover:-translate-y-0.5 sm:min-h-0 sm:p-4 ${
                   isPrimary
-                    ? "border-orange-400/40 bg-[linear-gradient(135deg,#ff9a3d_0%,#f97316_32%,#d65a0c_58%,#2d1206_100%)] text-white"
-                    : "border-border/80 bg-[linear-gradient(135deg,rgba(148,163,184,0.08),rgba(15,23,42,0.96),rgba(15,23,42,1))] text-foreground"
+                    ? "border-orange-400/40 bg-[linear-gradient(135deg,#ff9a3d_0%,#f97316_32%,#d65a0c_58%,#2d1206_100%)] text-white shadow-[0_18px_38px_rgba(249,115,22,0.18)]"
+                    : "border-border/70 bg-[linear-gradient(135deg,rgba(255,255,255,0.02),rgba(17,24,39,0.96),rgba(2,6,23,1))] text-foreground"
                 } ${item.layout}`}
               >
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.16),transparent_35%)]" />
                 <div className="relative z-10 flex items-start justify-between gap-3">
                   <span
-                    className={`font-mono text-[9px] font-bold ${isPrimary ? "text-white/75" : "text-primary"}`}
+                    className={`font-mono text-[9px] font-bold tracking-[0.16em] ${
+                      isPrimary ? "text-white/75" : "text-slate-300"
+                    }`}
                   >
                     {item.number}
                   </span>
@@ -802,7 +804,7 @@ function HowItWorks() {
                     className={`flex size-8 items-center justify-center rounded-full border ${
                       isPrimary
                         ? "border-white/20 bg-white/10 text-white"
-                        : "border-border bg-background/60 text-primary"
+                        : "border-border/60 bg-slate-800/70 text-slate-100"
                     }`}
                   >
                     <Icon aria-hidden="true" className="size-4 sm:size-5" strokeWidth={1.75} />
@@ -810,15 +812,15 @@ function HowItWorks() {
                 </div>
                 <div className="relative z-10 mt-3 sm:mt-5">
                   <h3
-                    className={`font-display font-semibold leading-tight text-balance ${item.titleSize} ${
-                      isPrimary ? "text-white" : "text-foreground"
+                    className={`font-display leading-[0.98] tracking-[-0.03em] text-balance ${item.titleSize} ${
+                      isPrimary ? "font-semibold text-white" : "font-medium text-slate-100"
                     }`}
                   >
                     {item.title}
                   </h3>
                   <p
                     className={`mt-1.5 max-w-[44ch] font-mono text-[9px] leading-relaxed text-pretty sm:text-[10px] ${
-                      isPrimary ? "text-white/80" : "text-muted"
+                      isPrimary ? "text-white/80" : "text-slate-300/85"
                     }`}
                   >
                     {item.subtitle}
