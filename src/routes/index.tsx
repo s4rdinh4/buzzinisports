@@ -118,7 +118,7 @@ function SiteLogo() {
   const menuItems = [
     { label: "COMO FUNCIONA", href: "#como-funciona", isPrimary: false, isDisabled: false },
     { label: "LOCAIS", href: "#localidades", isPrimary: false, isDisabled: false },
-    { label: "HORÁRIOS", href: "#horarios", isPrimary: false, isDisabled: true },
+    { label: "HORÁRIOS", href: "/horarios", isPrimary: false, isDisabled: false },
     { label: "PLANOS", href: "#planos", isPrimary: true, isDisabled: false },
   ] as const;
 
