@@ -302,7 +302,7 @@ function Hero() {
 
 function OpeningMessage() {
   return (
-    <section className="snap-intro snap-sec relative overflow-hidden bg-[#0b0d12] py-14 sm:py-20">
+    <section className="snap-intro snap-sec relative flex min-h-[26rem] items-center justify-center overflow-hidden bg-[#0b0d12] py-14 sm:min-h-[30rem] sm:py-20">
       <style>{`
         @keyframes ambient-shift {
           0% {
