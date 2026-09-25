@@ -1473,7 +1473,7 @@ function FinalCtaBanner() {
           <div className="relative z-10 flex min-h-[16rem] items-center justify-center px-5 py-8 sm:px-8 lg:px-12">
             <div className="flex w-full max-w-4xl flex-col items-center justify-center gap-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
               <p className="font-display text-3xl font-semibold leading-none tracking-[-0.04em] text-white sm:text-4xl lg:text-5xl">
-                #vemserbuzzini
+                #vemserbuzziner
               </p>
               <a
                 href="#planos"
