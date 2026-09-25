@@ -31,13 +31,14 @@
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
+  scroll-padding-top: 4rem;
   overflow-x: clip;
   overflow-y: auto;
 }
 
 .snap-sec {
   scroll-snap-align: start;
-  scroll-snap-stop: proximity;
+  scroll-snap-stop: always;
   min-height: 100svh;
 }
 
@@ -48,13 +49,14 @@ html {
 
 @media (max-width: 767px) {
   html {
-    scroll-snap-type: none;
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 5rem;
   }
 
   .snap-sec,
   .snap-intro {
-    scroll-snap-align: none;
-    scroll-snap-stop: normal;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 }
 
