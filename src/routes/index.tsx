@@ -132,7 +132,7 @@ function SiteLogo() {
         isMobileMenuFullscreen
           ? "fixed inset-0 bg-background/95 px-4 pb-12 pt-4 backdrop-blur-sm"
           : isCompactHeader
-            ? "fixed left-6 top-4 sm:left-12 sm:top-6"
+            ? "fixed left-4 top-3 sm:left-6 sm:top-4"
             : isDesktop
               ? "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
               : "absolute left-1/2 top-4 -translate-x-1/2 sm:top-6"
@@ -147,27 +147,27 @@ function SiteLogo() {
       }}
     >
       <div
-        className={`flex items-center gap-2 transition-none ${
+        className={`flex items-center gap-1.5 transition-none ${
           isMobileMenuFullscreen
             ? "relative w-full"
             : isCompactHeader
-              ? "rounded-full bg-background/85 p-1.5 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border"
+              ? "rounded-full bg-background/85 p-1 shadow-[0_12px_35px_rgba(0,0,0,0.18)] ring-1 ring-border"
               : "rounded-none bg-transparent p-0 shadow-none ring-0"
-        } ${isMenuOpen && isCompactHeader ? "w-60" : "w-auto"} ${isCompactHeader ? "sm:w-40" : "sm:w-auto"}`}
+        } ${isMenuOpen && isCompactHeader ? "w-44 sm:w-40" : "w-auto"} ${isCompactHeader ? "sm:w-32" : "sm:w-auto"}`}
       >
         <a
           href="#inicio"
           aria-label="Buzzini Sports — início"
-          className={`block min-w-0 flex-1 transition-none ${isMobileMenuFullscreen ? "pl-0" : "pl-2"}`}
+          className={`block min-w-0 flex-1 transition-none ${isMobileMenuFullscreen ? "pl-0" : "pl-1.5"}`}
         >
           <img
             src={buzziniLogo.url}
             alt="Buzzini Sports"
-            className={`w-auto object-contain transition-none ${isCompactHeader && isDesktop ? "translate-x-[22px]" : ""} ${
+            className={`w-auto object-contain transition-none ${isCompactHeader && isDesktop ? "translate-x-[14px]" : ""} ${
               isMobileMenuFullscreen
                 ? "h-11 sm:h-12"
                 : isCompactHeader
-                  ? "h-9 sm:h-10"
+                  ? "h-7 sm:h-8"
                   : !isDesktop
                     ? "h-12 sm:h-16"
                     : "h-10 sm:h-12 md:h-24"
@@ -181,7 +181,7 @@ function SiteLogo() {
           aria-controls="site-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
           className={`ml-auto flex shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-            isMobileMenuFullscreen ? "size-10" : "size-9"
+            isMobileMenuFullscreen ? "size-10" : "size-8"
           } ${shouldShowMenu ? "visible" : "hidden"} ${isCompactHeader ? "" : "md:hidden"}`}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -193,7 +193,7 @@ function SiteLogo() {
         className={
           isMobileMenuFullscreen
             ? "mt-16 flex h-[calc(100%-4rem)] flex-col items-center justify-center gap-4 text-center"
-            : `absolute left-0 top-full mt-2 w-72 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border transition-all duration-300 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`
+            : `absolute left-0 top-full mt-2 w-56 rounded-2xl bg-background/95 p-2 shadow-xl ring-1 ring-border transition-all duration-300 ${isMenuOpen && shouldShowMenu ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`
         }
       >
         {menuItems.map((item, index) => {
