@@ -47,6 +47,7 @@ import video03 from "@/assets/depoiments/video03.mp4";
 import video03Poster from "@/assets/depoiments/video03.jpg";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Buzzini Sports — Assessoria de Corrida" },
@@ -63,7 +64,21 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://buzzinisports.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://buzzinisports.lovable.app/" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: FAQS.map(({ question, answer }) => ({
+          "@type": "Question",
+          name: question,
+          acceptedAnswer: { "@type": "Answer", text: answer },
+        })),
+      }),
+    }],
   }),
   component: Index,
 });
