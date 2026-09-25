@@ -34,6 +34,7 @@ const HIGHLIGHTS = [
 ] as const;
 
 export const Route = createFileRoute("/horarios")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Horários Buzzini Sports" },
@@ -42,7 +43,13 @@ export const Route = createFileRoute("/horarios")({
         content:
           "Confira os horários da Buzzini Sports e veja como funciona o acompanhamento dos treinos em cada dia da semana.",
       },
+      { property: "og:title", content: "Horários de Treino — Buzzini Sports" },
+      { property: "og:description", content: "Confira os horários de treino presencial em Bebedouro, Ribeirão Preto e São Paulo com a Buzzini Sports." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://buzzinisports.lovable.app/horarios" },
     ],
+    links: [{ rel: "canonical", href: "https://buzzinisports.lovable.app/horarios" }],
   }),
   component: HorariosPage,
 });

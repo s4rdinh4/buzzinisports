@@ -80,17 +80,18 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Passada — Assessoria de Corrida" },
+      { title: "Buzzini Sports — Assessoria de Corrida" },
       {
         name: "description",
         content:
-          "Assessoria de corrida com planos personalizados do 5K à maratona. São Paulo, Curitiba e Recife — presencial e online.",
+          "Treinos de corrida personalizados pela Buzzini Sports em Bebedouro, Ribeirão Preto, São Paulo e online para todo o Brasil.",
       },
-      { property: "og:title", content: "Passada — Assessoria de Corrida" },
+      { property: "og:title", content: "Buzzini Sports — Assessoria de Corrida" },
       {
         property: "og:description",
         content:
@@ -98,6 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "google-site-verification", content: "bgKE04_pFqS-OfFC41dgzktF1yWfnCtTPGeXxuZThFE" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -125,7 +127,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
