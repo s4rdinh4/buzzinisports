@@ -969,7 +969,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Estrutura Buzzini no dia da Prova",
       ],
       featuredBenefits: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
-      isFeatured: false,
+      isFeatured: true,
     },
     {
       name: "Semestral",
@@ -981,7 +981,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Estrutura Buzzini no dia da Prova",
       ],
       featuredBenefits: ["Camiseta Buzzini", "Melhor suporte com o treinador"],
-      isFeatured: true,
+      isFeatured: false,
     },
     {
       name: "Trimestral",
@@ -1019,7 +1019,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Estrutura Buzzini no dia da Prova",
       ],
       featuredBenefits: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
-      isFeatured: false,
+      isFeatured: true,
     },
     {
       name: "Semestral",
@@ -1031,7 +1031,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Estrutura Buzzini no dia da Prova",
       ],
       featuredBenefits: ["Camiseta Buzzini", "Melhor suporte com o treinador"],
-      isFeatured: true,
+      isFeatured: false,
     },
     {
       name: "Trimestral",
@@ -1226,11 +1226,6 @@ function Plans() {
                       </span>
                     )}
                   </p>
-                  {isAnnualPlan && (
-                    <p className="mt-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white">
-                      {dailyPriceText}
-                    </p>
-                  )}
                   <ul
                     className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${
                       isFeatured ? "text-foreground/80" : "text-foreground/75"
@@ -1256,6 +1251,11 @@ function Plans() {
                       </li>
                     ))}
                   </ul>
+                  {isAnnualPlan && (
+                    <p className="mt-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                      {dailyPriceText}
+                    </p>
+                  )}
                 </div>
                 {isAnnualPlan && <div className="mt-4 h-4" />}
                 <Button
