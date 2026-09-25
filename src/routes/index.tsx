@@ -302,8 +302,9 @@ function Hero() {
 
 function OpeningMessage() {
   return (
-    <section className="snap-intro snap-sec flex min-h-[60vh] items-center bg-background py-14 sm:py-20">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:px-12">
+    <section className="snap-intro snap-sec relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.12),_transparent_32%),linear-gradient(180deg,_rgba(9,11,16,0.98),_rgba(15,15,19,1))] py-14 sm:py-20">
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.04),transparent,rgba(249,115,22,0.04))]" />
+      <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:px-12">
         <p className="max-w-[24ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
           Não importa sua idade, seu ritmo ou
           <span className="mt-2 block">
