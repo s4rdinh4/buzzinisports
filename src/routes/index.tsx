@@ -1547,7 +1547,7 @@ function FinalCtaBanner() {
             src={faixaBuzzini}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover opacity-80"
+            className="absolute inset-0 h-full w-full object-cover object-bottom opacity-80"
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.72),rgba(252,146,61,0.26),rgba(120,53,15,0.72))]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(255,255,255,0.12),transparent_26%)]" />
