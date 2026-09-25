@@ -184,7 +184,7 @@ function SiteLogo() {
           aria-controls="site-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
           className={`ml-auto flex shrink-0 items-center justify-center rounded-full text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-            isMobileMenuFullscreen ? "size-10" : "size-7"
+            isMobileMenuFullscreen ? "size-10" : "size-9 sm:size-7"
           } ${shouldShowMenu ? "visible" : "hidden"} ${isCompactHeader ? "" : "md:hidden"}`}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
