@@ -1498,7 +1498,16 @@ function Faq() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative flex flex-col justify-center bg-card py-12 sm:py-16">
+    <section
+      id="faq"
+      className="relative flex flex-col justify-center overflow-hidden bg-card py-12 sm:py-16"
+    >
+      <img
+        src={logoBuzziniOutline}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[-2.5rem] top-1/2 hidden h-72 w-auto -translate-y-1/2 opacity-10 md:block lg:left-[-4rem] lg:h-80"
+      />
       <div className="mx-auto w-full max-w-4xl px-6 sm:px-12">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
           Dúvidas frequentes
