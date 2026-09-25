@@ -24,6 +24,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/buzzini-logo.png.asset.json";
 import fundoBuzzini from "@/assets/fundo_buzzini.jpeg";
 import fundoSite from "@/assets/fundo_site.jpeg";
+import timeBuzzini from "@/assets/time_buzzini.jpg";
 import coachLara from "@/assets/coach-lara.webp.asset.json";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
@@ -325,7 +326,21 @@ function Manifesto() {
         aria-hidden="true"
         className="pointer-events-none absolute -left-24 top-1/2 w-[30rem] max-w-[82vw] -translate-y-1/2 opacity-[0.07] sm:-left-20 sm:w-[44rem]"
       />
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-5xl flex-col items-center justify-center px-6 py-24 text-center sm:px-12">
+
+      <div className="absolute right-4 top-1/2 hidden h-[70%] w-[min(30vw,28rem)] -translate-y-1/2 lg:block">
+        <div className="relative h-full w-full rounded-[1.75rem] border border-transparent bg-[linear-gradient(180deg,#fb923c_0%,#f97316_18%,#0f172a_100%)] p-[1px] shadow-[0_18px_45px_rgba(249,115,22,0.18)]">
+          <div className="relative h-full w-full overflow-hidden rounded-[calc(1.75rem-1px)] bg-background">
+            <img
+              src={timeBuzzini}
+              alt="Time Buzzini Sports"
+              className="h-full w-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,11,16,0.12),rgba(9,11,16,0.18),rgba(9,11,16,0.78))]" />
+          </div>
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col items-center justify-center px-6 py-24 text-center sm:px-12 lg:pr-[30rem]">
         <p className="max-w-[20ch] font-display text-3xl font-semibold leading-[1.12] text-balance text-foreground sm:text-5xl lg:text-6xl">
           Não treinamos
           <span className="relative mx-[0.12em] inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] text-primary">
