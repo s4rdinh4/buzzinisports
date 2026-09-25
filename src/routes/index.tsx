@@ -302,8 +302,30 @@ function Hero() {
 
 function OpeningMessage() {
   return (
-    <section className="snap-intro snap-sec relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.12),_transparent_32%),linear-gradient(180deg,_rgba(9,11,16,0.98),_rgba(15,15,19,1))] py-14 sm:py-20">
+    <section className="snap-intro snap-sec relative overflow-hidden bg-[#0b0d12] py-14 sm:py-20">
+      <style>{`
+        @keyframes ambient-shift {
+          0% {
+            transform: translate3d(-2%, -1%, 0) scale(1);
+          }
+          50% {
+            transform: translate3d(2%, 2%, 0) scale(1.06);
+          }
+          100% {
+            transform: translate3d(-1%, 1%, 0) scale(0.98);
+          }
+        }
+      `}</style>
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 18% 20%, rgba(249,115,22,0.12), transparent 26%), radial-gradient(circle at 82% 72%, rgba(249,115,22,0.08), transparent 28%), linear-gradient(180deg, rgba(9,11,16,0.98), rgba(15,15,19,1))",
+        }}
+      />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.04),transparent,rgba(249,115,22,0.04))]" />
+      <div className="absolute left-[-10%] top-[-8%] h-[120%] w-[42%] rounded-full bg-[radial-gradient(circle,_rgba(249,115,22,0.10),transparent_64%)] blur-3xl [animation:ambient-shift_22s_ease-in-out_infinite_alternate]" />
+      <div className="absolute right-[-8%] bottom-[-12%] h-[120%] w-[45%] rounded-full bg-[radial-gradient(circle,_rgba(249,115,22,0.08),transparent_68%)] blur-3xl [animation:ambient-shift_26s_ease-in-out_infinite_alternate_reverse]" />
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:px-12">
         <p className="max-w-[24ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
           Não importa sua idade, seu ritmo ou
