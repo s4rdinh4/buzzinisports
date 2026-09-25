@@ -1251,13 +1251,14 @@ function Plans() {
                       </li>
                     ))}
                   </ul>
-                  {isAnnualPlan && (
-                    <p className="mt-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                </div>
+                {isAnnualPlan && (
+                  <div className="mt-4">
+                    <p className="inline-flex w-full items-center justify-center rounded-full bg-primary px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground shadow-[0_10px_24px_rgba(249,115,22,0.22)]">
                       {dailyPriceText}
                     </p>
-                  )}
-                </div>
-                {isAnnualPlan && <div className="mt-4 h-4" />}
+                  </div>
+                )}
                 <Button
                   variant="ghost"
                   type="button"
