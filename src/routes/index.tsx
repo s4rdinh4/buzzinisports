@@ -66,11 +66,16 @@ export const Route = createFileRoute("/")({
 
 function StravaIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>
-      <path
-        d="M12 2.5 9.2 8.8h2.6L12 2.5Zm-3.7 7.5L8.2 14h2.4L8.3 10Zm7.2 0L14.8 14h2.4L15.5 10Zm-3 7.2 1.9 3.8h2.2L12.9 17.2Zm-5.4-5.3L6.2 14h2.5l-2.1-5.6Zm12.1 0L18.3 14h2.5l-2.1-5.6Z"
-        fill="currentColor"
-      />
+    <svg
+      viewBox="0 0 14 14"
+      role="img"
+      focusable="false"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      fill="currentColor"
+    >
+      <path d="M 8.6935,9.972 7.649,7.914 l -1.5325,0 2.577,5.086 2.575,-5.086 -1.533,0 m -3.504,-2.7995 1.418,2.799 2.086,0 L 6.2315,1 l -3.5,6.914 2.0845,0" />
     </svg>
   );
 }
