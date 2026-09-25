@@ -68,7 +68,7 @@ function StravaIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>
       <path
-        d="M11.2 2.5 8.1 9.4h2.8L11.2 2.5Zm-1.7 6.9L9 15.8h2.7L9.5 9.4Zm5.3 0L13.8 15.8h2.7L15.8 9.4Zm-1.7 6.9 1.2 5.2h2.4l-3.6-5.2Zm-5-4.9L7.1 15.8H9.8L8.1 9.4Z"
+        d="M12 2.5 9.2 8.8h2.6L12 2.5Zm-3.7 7.5L8.2 14h2.4L8.3 10Zm7.2 0L14.8 14h2.4L15.5 10Zm-3 7.2 1.9 3.8h2.2L12.9 17.2Zm-5.4-5.3L6.2 14h2.5l-2.1-5.6Zm12.1 0L18.3 14h2.5l-2.1-5.6Z"
         fill="currentColor"
       />
     </svg>
@@ -1462,7 +1462,7 @@ function Footer() {
               assessoria@buzzini.com.br
             </a>
             <a
-              href="https://wa.me/5517988026622?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
+              href="https://web.whatsapp.com/send?phone=5517988026622&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
               target="_blank"
               rel="noreferrer"
               aria-label="Abrir WhatsApp da Buzzini Sports"
@@ -1471,33 +1471,36 @@ function Footer() {
               <Phone aria-hidden="true" className="size-4" />
               <span>+55 17 98802-6622</span>
             </a>
-            <div className="mt-2 flex items-center gap-3">
+            <div className="mt-2 flex flex-col items-start gap-2">
               <a
                 href="https://www.instagram.com/buzzinisports/"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram da Buzzini Sports"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                className="inline-flex items-center gap-2 transition-colors hover:text-primary"
               >
                 <Instagram aria-hidden="true" className="size-4" />
+                <span>Instagram</span>
               </a>
               <a
                 href="https://www.strava.com/clubs/buzzini"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Strava da Buzzini Sports"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                className="inline-flex items-center gap-2 transition-colors hover:text-primary"
               >
                 <StravaIcon className="size-4" />
+                <span>Strava</span>
               </a>
               <a
-                href="https://wa.me/5517988026622?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
+                href="https://web.whatsapp.com/send?phone=5517988026622&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
                 target="_blank"
                 rel="noreferrer"
                 aria-label="WhatsApp da Buzzini Sports"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                className="inline-flex items-center gap-2 transition-colors hover:text-primary"
               >
                 <MessageCircle aria-hidden="true" className="size-4" />
+                <span>WhatsApp</span>
               </a>
             </div>
           </div>
