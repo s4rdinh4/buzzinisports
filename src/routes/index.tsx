@@ -673,7 +673,7 @@ function Team() {
               A equipe por trás do ritmo.
             </h2>
           </div>
-          <div className="hidden shrink-0 gap-2 sm:flex">
+          <div className="hidden shrink-0 rounded-full border border-border/80 bg-card/60 p-1 shadow-[0_10px_24px_rgba(0,0,0,0.12)] backdrop-blur-sm sm:flex">
             <Button
               type="button"
               variant="outline"
@@ -681,8 +681,9 @@ function Team() {
               onClick={() => handlePageChange(-1)}
               disabled={page === 0}
               aria-label="Página anterior da equipe"
+              className="h-10 w-10 rounded-full border-0 bg-transparent text-foreground transition-all hover:bg-primary/10 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <ChevronLeft aria-hidden="true" />
+              <ChevronLeft aria-hidden="true" className="size-4" />
             </Button>
             <Button
               type="button"
@@ -691,8 +692,9 @@ function Team() {
               onClick={() => handlePageChange(1)}
               disabled={page === pageCount - 1}
               aria-label="Próxima página da equipe"
+              className="h-10 w-10 rounded-full border-0 bg-transparent text-foreground transition-all hover:bg-primary/10 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <ChevronRight aria-hidden="true" />
+              <ChevronRight aria-hidden="true" className="size-4" />
             </Button>
           </div>
         </div>
@@ -734,7 +736,7 @@ function Team() {
           ))}
         </div>
         <div className="mt-6 flex items-center justify-between sm:justify-center">
-          <div className="flex gap-2" role="tablist" aria-label="Páginas da equipe">
+          <div className="flex items-center gap-2" role="tablist" aria-label="Páginas da equipe">
             {Array.from({ length: pageCount }, (_, index) => (
               <button
                 key={index}
@@ -743,8 +745,10 @@ function Team() {
                 aria-selected={page === index}
                 aria-label={`Ir para página ${index + 1} da equipe`}
                 onClick={() => setPage(index)}
-                className={`h-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card ${
-                  page === index ? "w-8 bg-primary" : "w-2 bg-border hover:bg-primary/60"
+                className={`rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card ${
+                  page === index
+                    ? "h-2.5 w-9 bg-primary shadow-[0_0_18px_rgba(249,115,22,0.5)]"
+                    : "h-2 w-2 bg-border/80 hover:bg-primary/60"
                 }`}
               />
             ))}
@@ -757,8 +761,9 @@ function Team() {
               onClick={() => handlePageChange(-1)}
               disabled={page === 0}
               aria-label="Página anterior da equipe"
+              className="h-10 w-10 rounded-full border-border/80 bg-card/80 text-foreground transition-all hover:border-primary/60 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <ChevronLeft aria-hidden="true" />
+              <ChevronLeft aria-hidden="true" className="size-4" />
             </Button>
             <Button
               type="button"
@@ -767,8 +772,9 @@ function Team() {
               onClick={() => handlePageChange(1)}
               disabled={page === pageCount - 1}
               aria-label="Próxima página da equipe"
+              className="h-10 w-10 rounded-full border-border/80 bg-card/80 text-foreground transition-all hover:border-primary/60 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <ChevronRight aria-hidden="true" />
+              <ChevronRight aria-hidden="true" className="size-4" />
             </Button>
           </div>
         </div>
