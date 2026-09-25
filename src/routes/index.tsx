@@ -726,7 +726,7 @@ const HOW_IT_WORKS = [
     title: "Você define sua realidade",
     subtitle: "Sua rotina que manda, ajuste conforme seu tempo.",
     icon: CalendarClock,
-    layout: "sm:col-span-7 sm:row-span-2",
+    layout: "col-span-1 sm:col-span-7 sm:row-span-2",
     titleSize: "text-lg sm:text-3xl",
   },
   {
@@ -734,7 +734,7 @@ const HOW_IT_WORKS = [
     title: "Acesso ao App Runy",
     subtitle: "Possibilidade de sincronizar com seu relógio GPS.",
     icon: Watch,
-    layout: "sm:col-span-5",
+    layout: "col-span-1 sm:col-span-5",
     titleSize: "text-lg sm:text-2xl",
   },
   {
@@ -742,7 +742,7 @@ const HOW_IT_WORKS = [
     title: "Seu treinador próximo a você",
     subtitle: "Um treinador que acompanha sua evolução.",
     icon: UserRoundCheck,
-    layout: "sm:col-span-5",
+    layout: "col-span-1 sm:col-span-5",
     titleSize: "text-lg sm:text-2xl",
   },
   {
@@ -750,7 +750,7 @@ const HOW_IT_WORKS = [
     title: "Metodologia Exclusiva",
     subtitle: "Um plano criado para você ir mais longe.",
     icon: RouteIcon,
-    layout: "sm:col-span-12",
+    layout: "col-span-1 sm:col-span-12",
     titleSize: "text-lg sm:text-2xl",
   },
 ] as const;
@@ -777,31 +777,38 @@ function HowItWorks() {
           </p>
         </div>
 
-        <div className="mt-5 grid auto-rows-fr grid-cols-2 gap-3 sm:mt-7 sm:grid-cols-12 sm:grid-rows-3 sm:gap-4">
+        <div className="mt-5 grid auto-rows-fr grid-cols-1 gap-3 sm:mt-7 sm:grid-cols-12 sm:grid-rows-3 sm:gap-4">
           {HOW_IT_WORKS.map((item, index) => {
             const Icon = item.icon;
+            const isPrimary = index === 0;
+
             return (
               <article
                 key={item.number}
-                className={`group relative flex min-h-0 flex-col justify-between overflow-hidden rounded-lg border p-3 sm:p-4 ${
-                  index === 0
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-card text-foreground"
+                className={`group relative flex min-h-[12rem] flex-col justify-between overflow-hidden rounded-lg border p-3 shadow-[0_12px_30px_rgba(0,0,0,0.08)] transition-transform duration-200 ease-out hover:-translate-y-0.5 sm:min-h-0 sm:p-4 ${
+                  isPrimary
+                    ? "border-primary/40 bg-[linear-gradient(135deg,rgba(249,115,22,0.34),rgba(15,23,42,0.96)_40%,rgba(15,23,42,1))] text-primary-foreground"
+                    : "border-border/80 bg-[linear-gradient(135deg,rgba(148,163,184,0.08),rgba(15,23,42,0.96),rgba(15,23,42,1))] text-foreground"
                 } ${item.layout}`}
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.16),transparent_35%)]" />
+                <div className="relative z-10 flex items-start justify-between gap-3">
                   <span
-                    className={`font-mono text-[9px] font-bold ${index === 0 ? "text-primary-foreground/70" : "text-primary"}`}
+                    className={`font-mono text-[9px] font-bold ${isPrimary ? "text-primary-foreground/70" : "text-primary"}`}
                   >
                     {item.number}
                   </span>
-                  <Icon
-                    aria-hidden="true"
-                    className={`size-4 sm:size-5 ${index === 0 ? "text-primary-foreground" : "text-primary"}`}
-                    strokeWidth={1.75}
-                  />
+                  <span
+                    className={`flex size-8 items-center justify-center rounded-full border ${
+                      isPrimary
+                        ? "border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground"
+                        : "border-border bg-background/60 text-primary"
+                    }`}
+                  >
+                    <Icon aria-hidden="true" className="size-4 sm:size-5" strokeWidth={1.75} />
+                  </span>
                 </div>
-                <div className="mt-3 sm:mt-5">
+                <div className="relative z-10 mt-3 sm:mt-5">
                   <h3
                     className={`font-display font-semibold leading-tight text-balance ${item.titleSize}`}
                   >
@@ -809,7 +816,7 @@ function HowItWorks() {
                   </h3>
                   <p
                     className={`mt-1.5 max-w-[44ch] font-mono text-[9px] leading-relaxed text-pretty sm:text-[10px] ${
-                      index === 0 ? "text-primary-foreground/75" : "text-muted"
+                      isPrimary ? "text-primary-foreground/80" : "text-muted"
                     }`}
                   >
                     {item.subtitle}
@@ -1216,7 +1223,7 @@ function Plans() {
                 )}
                 <div>
                   <p
-                    className={`font-mono text-xs uppercase tracking-[0.12em] ${isFeatured ? "text-primary" : "text-muted"}`}
+                    className={`font-mono text-xs font-bold uppercase tracking-[0.12em] ${isFeatured ? "text-primary" : "text-muted"}`}
                   >
                     {plan.name}
                   </p>
@@ -1276,11 +1283,7 @@ function Plans() {
 
                     setSelectedPlan({ name: plan.name, location });
                   }}
-                  className={`mt-5 h-10 w-full rounded-full px-3 font-mono text-xs uppercase ${
-                    isFeatured
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
-                      : "bg-transparent text-foreground ring-1 ring-border hover:bg-primary hover:text-primary-foreground"
-                  }`}
+                  className={`mt-5 h-10 w-full rounded-full px-3 font-mono text-xs font-bold uppercase ${"bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"}`}
                 >
                   Quero esse plano
                 </Button>
