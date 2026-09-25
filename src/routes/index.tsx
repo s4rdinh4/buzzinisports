@@ -1466,9 +1466,9 @@ function FinalCtaBanner() {
   return (
     <section className="relative overflow-hidden bg-background py-4 sm:py-6">
       <div className="mx-auto w-full max-w-[calc(100%-1.25rem)] px-0 sm:max-w-[calc(100%-2rem)]">
-        <div className="relative overflow-hidden rounded-[1.5rem] border border-orange-300/30 bg-[linear-gradient(135deg,#ffb066_0%,#f97316_32%,#ea580c_62%,#9a3d09_100%)] shadow-[0_24px_80px_rgba(249,115,22,0.18)] sm:rounded-[2rem]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(255,255,255,0.18),transparent_26%)]" />
-          <div className="absolute -right-10 bottom-[-2.5rem] h-52 w-52 rounded-full bg-white/10 blur-3xl" />
+        <div className="relative overflow-hidden rounded-[1.5rem] border border-orange-300/30 bg-[linear-gradient(135deg,#f97316_0%,#ea580c_24%,#c2410c_52%,#431407_100%)] shadow-[0_24px_80px_rgba(249,115,22,0.22)] sm:rounded-[2rem]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(255,255,255,0.12),transparent_26%)]" />
+          <div className="absolute -right-10 bottom-[-2.5rem] h-52 w-52 rounded-full bg-orange-950/20 blur-3xl" />
 
           <div className="relative z-10 flex min-h-[16rem] items-center justify-center px-5 py-8 sm:px-8 lg:px-12">
             <div className="flex w-full max-w-4xl flex-col items-center justify-center gap-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
