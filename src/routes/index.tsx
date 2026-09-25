@@ -177,7 +177,7 @@ function SiteLogo() {
         }
       >
         {menuItems.map((item, index) => {
-          const isActiveItem = item.isPrimary && (isMobileMenuFullscreen || isMenuOpen);
+          const shouldReveal = isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu);
           const sharedClasses = isMobileMenuFullscreen
             ? "block w-full max-w-xs rounded-full border px-5 py-4 font-mono text-sm uppercase tracking-[0.18em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             : "block rounded-xl px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary";
@@ -187,15 +187,12 @@ function SiteLogo() {
               <span
                 key={item.label}
                 className={`${sharedClasses} cursor-not-allowed border-border/80 bg-card/70 text-muted/70 ${
-                  isMobileMenuFullscreen ? "opacity-0 translate-y-3" : "opacity-0 -translate-y-1"
+                  isMobileMenuFullscreen ? "translate-y-3 opacity-0" : "-translate-y-1 opacity-0"
                 }`}
                 style={{
                   transitionDelay: `${index * 120}ms`,
-                  opacity: isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu) ? 1 : 0,
-                  transform:
-                    isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu)
-                      ? "translateY(0)"
-                      : undefined,
+                  opacity: shouldReveal ? 1 : 0,
+                  transform: shouldReveal ? "translateY(0)" : undefined,
                 }}
               >
                 {item.label}
@@ -216,16 +213,13 @@ function SiteLogo() {
               key={item.label}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
-              className={`${sharedClasses} ${itemClasses} ${isMobileMenuFullscreen ? "opacity-0 translate-y-3" : "opacity-0 -translate-y-1"} ${
-                isActiveItem || (isMenuOpen && shouldShowMenu) ? "visible" : "hidden"
-              }`}
+              className={`${sharedClasses} ${itemClasses} ${
+                isMobileMenuFullscreen ? "translate-y-3 opacity-0" : "-translate-y-1 opacity-0"
+              } ${isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu) ? "visible" : "hidden"}`}
               style={{
                 transitionDelay: `${index * 120}ms`,
-                opacity: isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu) ? 1 : 0,
-                transform:
-                  isMobileMenuFullscreen || (isMenuOpen && shouldShowMenu)
-                    ? "translateY(0)"
-                    : undefined,
+                opacity: shouldReveal ? 1 : 0,
+                transform: shouldReveal ? "translateY(0)" : undefined,
               }}
             >
               {item.label}
