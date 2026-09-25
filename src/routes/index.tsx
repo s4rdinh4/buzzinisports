@@ -960,27 +960,15 @@ type Plan = {
 const PLANS: Record<Location, Plan[]> = {
   "Outras cidades": [
     {
-      name: "Mensal",
-      price: "R$ 150/mês",
+      name: "Anual",
+      price: "R$ 130/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
         "Acesso ao App Runy",
         "Estrutura Buzzini no dia da Prova",
       ],
-      featuredBenefits: [],
-      isFeatured: false,
-    },
-    {
-      name: "Trimestral",
-      price: "R$ 145/mês",
-      benefits: [
-        "Planilha Personalizada",
-        "Contato com Treinador",
-        "Acesso ao App Runy",
-        "Estrutura Buzzini no dia da Prova",
-      ],
-      featuredBenefits: [],
+      featuredBenefits: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
       isFeatured: false,
     },
     {
@@ -996,8 +984,34 @@ const PLANS: Record<Location, Plan[]> = {
       isFeatured: true,
     },
     {
+      name: "Trimestral",
+      price: "R$ 145/mês",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: [],
+      isFeatured: false,
+    },
+    {
+      name: "Mensal",
+      price: "R$ 150/mês",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: [],
+      isFeatured: false,
+    },
+  ],
+  "São Paulo": [
+    {
       name: "Anual",
-      price: "R$ 130/mês",
+      price: "R$ 230/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
@@ -1005,32 +1019,6 @@ const PLANS: Record<Location, Plan[]> = {
         "Estrutura Buzzini no dia da Prova",
       ],
       featuredBenefits: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
-      isFeatured: false,
-    },
-  ],
-  "São Paulo": [
-    {
-      name: "Mensal",
-      price: "R$ 250/mês",
-      benefits: [
-        "Planilha Personalizada",
-        "Contato com Treinador",
-        "Acesso ao App Runy",
-        "Estrutura Buzzini no dia da Prova",
-      ],
-      featuredBenefits: [],
-      isFeatured: false,
-    },
-    {
-      name: "Trimestral",
-      price: "R$ 245/mês",
-      benefits: [
-        "Planilha Personalizada",
-        "Contato com Treinador",
-        "Acesso ao App Runy",
-        "Estrutura Buzzini no dia da Prova",
-      ],
-      featuredBenefits: [],
       isFeatured: false,
     },
     {
@@ -1046,15 +1034,27 @@ const PLANS: Record<Location, Plan[]> = {
       isFeatured: true,
     },
     {
-      name: "Anual",
-      price: "R$ 230/mês",
+      name: "Trimestral",
+      price: "R$ 245/mês",
       benefits: [
         "Planilha Personalizada",
         "Contato com Treinador",
         "Acesso ao App Runy",
         "Estrutura Buzzini no dia da Prova",
       ],
-      featuredBenefits: ["Kit Exclusivo Buzzini", "Desconto especial anual"],
+      featuredBenefits: [],
+      isFeatured: false,
+    },
+    {
+      name: "Mensal",
+      price: "R$ 250/mês",
+      benefits: [
+        "Planilha Personalizada",
+        "Contato com Treinador",
+        "Acesso ao App Runy",
+        "Estrutura Buzzini no dia da Prova",
+      ],
+      featuredBenefits: [],
       isFeatured: false,
     },
   ],
@@ -1188,6 +1188,13 @@ function Plans() {
             const isFeatured = plan.isFeatured;
             const [priceValue, priceSuffix] = plan.price.split("/");
             const [currency, amount] = (priceValue ?? plan.price).split(" ");
+            const dailyValue = Number((amount ?? "0").replace(/\./g, "")) / 30;
+            const dailyPriceText = `Cerca de ${Number(dailyValue).toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })} por dia`;
 
             return (
               <article
@@ -1217,6 +1224,9 @@ function Plans() {
                         /{priceSuffix}
                       </span>
                     )}
+                  </p>
+                  <p className="mt-4 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                    {dailyPriceText}
                   </p>
                   <ul
                     className={`mt-4 space-y-2 font-mono text-[11px] leading-relaxed ${
