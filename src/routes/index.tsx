@@ -866,8 +866,7 @@ function Locations() {
     >
       <div className="mx-auto grid w-full max-w-6xl items-center gap-6 px-6 py-10 sm:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
         <div className="relative order-2 mx-auto w-full max-w-xl lg:order-1">
-          <div className="absolute inset-10 rounded-[2rem] bg-[radial-gradient(circle,_rgba(249,115,22,0.22),_transparent_60%)] blur-3xl" />
-          <div className="relative rounded-[2rem] border border-primary/10 bg-gradient-to-br from-background via-card to-primary/5 p-4 shadow-[0_24px_70px_rgba(15,15,19,0.26)]">
+          <div className="relative rounded-[1.5rem] border border-border/80 bg-gradient-to-br from-background via-card to-primary/5 p-4 shadow-[0_12px_28px_rgba(15,15,19,0.12)]">
             <svg
               viewBox="285 275 310 285"
               role="img"
