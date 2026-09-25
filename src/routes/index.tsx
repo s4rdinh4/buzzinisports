@@ -255,12 +255,12 @@ function Hero() {
   return (
     <section
       id="inicio"
-      className="snap-intro snap-sec relative flex items-end overflow-hidden bg-background"
+      className="snap-intro snap-sec relative flex min-h-[100svh] items-end overflow-hidden bg-background"
     >
       <img
         src={fundoBuzzini}
         alt="Pessoa correndo ao amanhecer"
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-center md:object-cover"
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(249,115,22,0.38),transparent_24%),radial-gradient(circle_at_80%_78%,rgba(249,115,22,0.18),transparent_26%),linear-gradient(90deg,rgba(9,11,16,0.68),rgba(9,11,16,0.4),rgba(9,11,16,0.72),rgba(9,11,16,0.9))]" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
