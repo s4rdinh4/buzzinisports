@@ -1197,12 +1197,8 @@ function Plans() {
               maximumFractionDigits: 0,
             })} por dia`;
             const planGradient = isFeatured
-              ? "bg-[linear-gradient(180deg,rgba(249,115,22,0.15),rgba(16,17,20,0.96),rgba(16,17,20,1))]"
-              : plan.name === "Semestral"
-                ? "bg-[linear-gradient(180deg,rgba(34,211,238,0.12),rgba(16,17,20,0.96),rgba(16,17,20,1))]"
-                : plan.name === "Trimestral"
-                  ? "bg-[linear-gradient(180deg,rgba(168,85,247,0.12),rgba(16,17,20,0.96),rgba(16,17,20,1))]"
-                  : "bg-[linear-gradient(180deg,rgba(16,185,129,0.12),rgba(16,17,20,0.96),rgba(16,17,20,1))]";
+              ? "bg-[linear-gradient(180deg,rgba(249,115,22,0.16),rgba(16,17,20,0.96),rgba(16,17,20,1))]"
+              : "bg-[linear-gradient(180deg,rgba(148,163,184,0.08),rgba(16,17,20,0.96),rgba(16,17,20,1))]";
 
             return (
               <article
