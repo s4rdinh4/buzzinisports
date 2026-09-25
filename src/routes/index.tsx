@@ -810,7 +810,9 @@ function HowItWorks() {
                 </div>
                 <div className="relative z-10 mt-3 sm:mt-5">
                   <h3
-                    className={`font-display font-semibold leading-tight text-balance ${item.titleSize}`}
+                    className={`font-display font-semibold leading-tight text-balance ${item.titleSize} ${
+                      isPrimary ? "text-primary-foreground" : "text-foreground"
+                    }`}
                   >
                     {item.title}
                   </h3>
