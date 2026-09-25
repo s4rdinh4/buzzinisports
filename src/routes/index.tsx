@@ -262,7 +262,8 @@ function Hero() {
         alt="Pessoa correndo ao amanhecer"
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/75 to-background/15" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(249,115,22,0.38),transparent_24%),radial-gradient(circle_at_80%_78%,rgba(249,115,22,0.18),transparent_26%),linear-gradient(90deg,rgba(9,11,16,0.68),rgba(9,11,16,0.4),rgba(9,11,16,0.72),rgba(9,11,16,0.9))]" />
+      <div className="absolute -bottom-10 left-0 h-40 w-40 rounded-full bg-primary/25 blur-3xl" />
       <div className="relative z-10 w-full px-6 pb-14 sm:px-12">
         <h1 className="max-w-[20ch] font-display text-5xl font-semibold leading-none text-balance text-foreground sm:text-7xl">
           Find Your Motivation!
@@ -328,14 +329,14 @@ function Manifesto() {
       />
 
       <div className="absolute right-4 top-1/2 hidden h-[70%] w-[min(30vw,28rem)] -translate-y-1/2 lg:block">
-        <div className="relative h-full w-full rounded-[1.75rem] border border-transparent bg-[linear-gradient(180deg,#fb923c_0%,#f97316_18%,#0f172a_100%)] p-[1px] shadow-[0_18px_45px_rgba(249,115,22,0.18)]">
+        <div className="relative h-full w-full rounded-[1.75rem] bg-[linear-gradient(180deg,#ffb066_0%,#f97316_24%,#ea580c_44%,#0f172a_100%)] p-[1px] shadow-[0_18px_45px_rgba(249,115,22,0.2)]">
           <div className="relative h-full w-full overflow-hidden rounded-[calc(1.75rem-1px)] bg-background">
             <img
               src={timeBuzzini}
               alt="Time Buzzini Sports"
               className="h-full w-full object-cover object-center"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,11,16,0.12),rgba(9,11,16,0.18),rgba(9,11,16,0.78))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,11,16,0.12),rgba(9,11,16,0.20),rgba(9,11,16,0.76))]" />
           </div>
         </div>
       </div>
