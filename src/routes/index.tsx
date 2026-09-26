@@ -1013,14 +1013,14 @@ function Locations() {
       id="localidades"
       className="snap-intro snap-sec relative flex flex-col justify-center overflow-hidden bg-transparent"
     >
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-6 px-6 py-10 sm:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
+      <div className="mx-auto grid w-full max-w-6xl -translate-y-2 items-center gap-6 px-6 pt-4 pb-12 sm:-translate-y-5 sm:px-12 sm:pb-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
         <div className="relative order-2 mx-auto w-full max-w-xl lg:order-1">
           <div className="relative rounded-[1.5rem] border border-border/80 bg-gradient-to-br from-background via-card to-primary/5 p-4 shadow-[0_12px_28px_rgba(15,15,19,0.12)]">
             <svg
               viewBox="285 275 310 285"
               role="img"
               aria-label="Mapa ampliado da região Sudeste com Bebedouro, Ribeirão Preto e São Paulo destacadas"
-              className="relative mx-auto block h-auto max-h-[42svh] w-full overflow-hidden"
+              className="relative mx-auto block h-auto max-h-[35svh] w-full overflow-hidden"
             >
               {brazilMap.locations
                 .filter((state: { id: string }) => ["sp", "mg", "rj", "es"].includes(state.id))
@@ -1063,7 +1063,7 @@ function Locations() {
               ))}
             </svg>
           </div>
-          <div className="relative z-10 mx-auto mt-6 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-2.5 font-mono text-[10px] uppercase text-muted shadow-[0_10px_25px_rgba(0,0,0,0.08)] backdrop-blur-sm sm:rounded-full">
+          <div className="relative z-10 mx-auto mt-3.5 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-2 font-mono text-[10px] uppercase text-muted shadow-[0_10px_25px_rgba(0,0,0,0.08)] backdrop-blur-sm sm:rounded-full">
             <span>
               <b className="text-primary">1</b> Bebedouro
             </span>
@@ -1077,17 +1077,16 @@ function Locations() {
         </div>
 
         <div className="order-1 lg:order-2">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary"></p>
-          <h2 className="mt-4 max-w-[14ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
+          <h2 className="mt-1 max-w-[20ch] font-display text-3xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-[2.6rem]">
             Perto de você. Em todo o Brasil.
           </h2>
-          <div className="mt-6 flex flex-col gap-3">
+          <div className="mt-4 flex flex-col gap-2.5">
             {LOCATIONS_INFO.map((item) => (
               <div
                 key={item.name}
-                className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 backdrop-blur-sm transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.03]"
+                className="flex items-center gap-3.5 rounded-xl border border-white/10 bg-white/[0.02] px-3.5 py-2.5 backdrop-blur-sm transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.03]"
               >
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-[0_12px_24px_rgba(249,115,22,0.22)]">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-[0_12px_24px_rgba(249,115,22,0.22)]">
                   <MapPin aria-hidden="true" className="size-4" />
                 </div>
                 <div>
@@ -1097,8 +1096,8 @@ function Locations() {
                 </div>
               </div>
             ))}
-            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 backdrop-blur-sm transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.03]">
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-background to-card text-primary ring-1 ring-border shadow-[0_10px_20px_rgba(15,15,19,0.12)]">
+            <div className="flex items-center gap-3.5 rounded-xl border border-white/10 bg-white/[0.02] px-3.5 py-2.5 backdrop-blur-sm transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.03]">
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-background to-card text-primary ring-1 ring-border shadow-[0_10px_20px_rgba(15,15,19,0.12)]">
                 <Radio aria-hidden="true" className="size-4" />
               </div>
               <div>
