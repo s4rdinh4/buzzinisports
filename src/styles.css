@@ -33,7 +33,6 @@ html {
   scroll-snap-type: y proximity;
   scroll-padding-top: 4rem;
   overflow-x: clip;
-  overflow-y: auto;
 }
 
 .snap-sec {
@@ -75,8 +74,6 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-family: "Manrope", sans-serif;
-  overflow-x: clip;
-  overflow-y: auto;
 }
 
 @keyframes ken-burns {
