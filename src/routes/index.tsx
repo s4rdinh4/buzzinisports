@@ -27,7 +27,6 @@ import findLogo from "@/assets/find.svg";
 import faixaBuzzini from "@/assets/faixa_buzzini.png";
 import fundoBuzzini from "@/assets/fundo_buzzini.jpeg";
 import fundoSite from "@/assets/fundo_site.jpeg";
-import timeBuzzini from "@/assets/time_buzzini.jpg";
 import coachLara from "@/assets/coach-lara.webp.asset.json";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
@@ -376,32 +375,50 @@ function Hero() {
   );
 }
 
+function StickyIntroSequence() {
+  return (
+    <div className="relative">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none sticky top-0 -z-0 h-screen w-full overflow-hidden"
+      >
+        <style>{`
+          @keyframes ambient-shift {
+            0% {
+              transform: translate3d(-2%, -1%, 0) scale(1);
+            }
+            50% {
+              transform: translate3d(2%, 2%, 0) scale(1.06);
+            }
+            100% {
+              transform: translate3d(-1%, 1%, 0) scale(0.98);
+            }
+          }
+        `}</style>
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 18% 20%, rgba(249,115,22,0.14), transparent 28%), radial-gradient(circle at 82% 72%, rgba(249,115,22,0.10), transparent 30%), linear-gradient(180deg, rgba(9,11,16,0.98), rgba(15,15,19,1))",
+          }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.04),transparent,rgba(249,115,22,0.04))]" />
+        <div className="absolute -left-[10%] -top-[8%] h-[120%] w-[45%] rounded-full bg-[radial-gradient(circle,_rgba(249,115,22,0.12),transparent_64%)] blur-3xl [animation:ambient-shift_22s_ease-in-out_infinite_alternate]" />
+        <div className="absolute -right-[8%] -bottom-[12%] h-[120%] w-[48%] rounded-full bg-[radial-gradient(circle,_rgba(249,115,22,0.10),transparent_68%)] blur-3xl [animation:ambient-shift_26s_ease-in-out_infinite_alternate_reverse]" />
+      </div>
+
+      <div className="relative z-10 -mt-[100vh]">
+        <OpeningMessage />
+        <Manifesto />
+        <HowItWorks />
+      </div>
+    </div>
+  );
+}
+
 function OpeningMessage() {
   return (
-    <section className="snap-intro snap-sec relative flex min-h-[26rem] items-center justify-center overflow-hidden bg-[#0b0d12] py-14 sm:min-h-[30rem] sm:py-20">
-      <style>{`
-        @keyframes ambient-shift {
-          0% {
-            transform: translate3d(-2%, -1%, 0) scale(1);
-          }
-          50% {
-            transform: translate3d(2%, 2%, 0) scale(1.06);
-          }
-          100% {
-            transform: translate3d(-1%, 1%, 0) scale(0.98);
-          }
-        }
-      `}</style>
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(circle at 18% 20%, rgba(249,115,22,0.12), transparent 26%), radial-gradient(circle at 82% 72%, rgba(249,115,22,0.08), transparent 28%), linear-gradient(180deg, rgba(9,11,16,0.98), rgba(15,15,19,1))",
-        }}
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.04),transparent,rgba(249,115,22,0.04))]" />
-      <div className="absolute left-[-10%] top-[-8%] h-[120%] w-[42%] rounded-full bg-[radial-gradient(circle,_rgba(249,115,22,0.10),transparent_64%)] blur-3xl [animation:ambient-shift_22s_ease-in-out_infinite_alternate]" />
-      <div className="absolute right-[-8%] bottom-[-12%] h-[120%] w-[45%] rounded-full bg-[radial-gradient(circle,_rgba(249,115,22,0.08),transparent_68%)] blur-3xl [animation:ambient-shift_26s_ease-in-out_infinite_alternate_reverse]" />
+    <section className="snap-intro snap-sec relative flex min-h-[26rem] items-center justify-center overflow-hidden bg-transparent py-14 sm:min-h-[30rem] sm:py-20">
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:px-12">
         <p className="max-w-[24ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
           Não importa sua idade, seu ritmo ou
@@ -430,16 +447,8 @@ function Manifesto() {
   return (
     <section
       aria-label="Manifesto Buzzini Sports"
-      className="snap-intro snap-sec relative flex min-h-[100svh] items-center overflow-hidden bg-card"
+      className="snap-intro snap-sec relative flex min-h-[100svh] items-center overflow-hidden bg-transparent"
     >
-      <img
-        src={timeBuzzini}
-        alt="Time Buzzini Sports"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-35 md:object-[center_32%]"
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,11,16,0.92)_0%,rgba(9,11,16,0.8)_36%,rgba(9,11,16,0.58)_64%,rgba(9,11,16,0.88)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(249,115,22,0.16),transparent_22%)]" />
-
       <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col items-center justify-center px-6 py-24 text-center sm:px-12">
         <p className="max-w-[20ch] font-display text-3xl font-semibold leading-[1.12] text-balance text-white sm:text-5xl lg:text-6xl">
           Não treinamos
@@ -904,7 +913,7 @@ function HowItWorks() {
   return (
     <ScrollRevealSection
       id="como-funciona"
-      className="snap-intro snap-sec relative flex flex-col justify-center overflow-hidden bg-background"
+      className="snap-intro snap-sec relative flex flex-col justify-center overflow-hidden bg-transparent"
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-8 sm:px-12 sm:py-10">
         <div className="flex items-end justify-between gap-6">
@@ -1763,9 +1772,7 @@ function Index() {
     <main className="bg-background">
       <SiteLogo />
       <Hero />
-      <OpeningMessage />
-      <Manifesto />
-      <HowItWorks />
+      <StickyIntroSequence />
       <Locations />
       <Stories />
       <Team />
