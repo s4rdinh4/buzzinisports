@@ -420,19 +420,18 @@ function OpeningMessage() {
   return (
     <section className="snap-intro snap-sec relative flex min-h-[26rem] items-center justify-center overflow-hidden bg-transparent py-14 sm:min-h-[30rem] sm:py-20">
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:px-12">
-        <p className="max-w-[24ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
+        <p className="max-w-[26ch] font-display text-xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
           Não importa sua idade, seu ritmo ou
           <span className="mt-2 block">
-            <span className="relative inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] text-primary">
-              onde você está começando
+            <span className="relative inline-block rounded-[0.18em] bg-primary/15 px-[0.18em] pb-[0.05em] text-primary">
+              onde você está começando.
             </span>
-            .
           </span>
         </p>
-        <p className="max-w-[30ch] font-display text-2xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
+        <p className="max-w-[30ch] font-display text-xl font-semibold leading-tight text-balance text-foreground sm:text-4xl lg:text-5xl">
           Não importa se você ainda acredita que
           <span className="mt-2 block">
-            <span className="relative inline-block rounded-[0.18em] bg-primary/15 px-[0.12em] pb-[0.05em] text-primary">
+            <span className="relative inline-block rounded-[0.18em] bg-primary/15 px-[0.18em] pb-[0.05em] text-primary">
               corrida{" "}
             </span>{" "}
             não é pra você.
