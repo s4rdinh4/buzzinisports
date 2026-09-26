@@ -411,6 +411,7 @@ function StickyIntroSequence() {
         <OpeningMessage />
         <Manifesto />
         <HowItWorks />
+        <Locations />
       </div>
     </div>
   );
@@ -1010,7 +1011,7 @@ function Locations() {
   return (
     <ScrollRevealSection
       id="localidades"
-      className="relative flex flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.12),_transparent_36%),linear-gradient(180deg,_rgba(10,10,12,0.92),_rgba(15,15,19,1))]"
+      className="snap-intro snap-sec relative flex flex-col justify-center overflow-hidden bg-transparent"
     >
       <div className="mx-auto grid w-full max-w-6xl items-center gap-6 px-6 py-10 sm:px-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
         <div className="relative order-2 mx-auto w-full max-w-xl lg:order-1">
@@ -1062,7 +1063,7 @@ function Locations() {
               ))}
             </svg>
           </div>
-          <div className="relative z-10 mx-auto mt-6 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-full border border-primary/10 bg-gradient-to-r from-background via-card to-background px-5 py-3 font-mono text-[10px] uppercase text-muted shadow-[0_10px_25px_rgba(0,0,0,0.08)]">
+          <div className="relative z-10 mx-auto mt-6 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-2.5 font-mono text-[10px] uppercase text-muted shadow-[0_10px_25px_rgba(0,0,0,0.08)] backdrop-blur-sm sm:rounded-full">
             <span>
               <b className="text-primary">1</b> Bebedouro
             </span>
@@ -1080,30 +1081,30 @@ function Locations() {
           <h2 className="mt-4 max-w-[14ch] font-display text-4xl font-semibold leading-tight text-balance text-foreground sm:text-5xl">
             Perto de você. Em todo o Brasil.
           </h2>
-          <div className="mt-6 divide-y divide-border/70 border-y border-border/80 bg-background/30 backdrop-blur-sm">
+          <div className="mt-6 flex flex-col gap-3">
             {LOCATIONS_INFO.map((item) => (
               <div
                 key={item.name}
-                className="flex gap-4 py-4 transition-colors duration-300 hover:bg-gradient-to-r hover:from-primary/5 hover:via-transparent hover:to-primary/5"
+                className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 backdrop-blur-sm transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.03]"
               >
                 <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-[0_12px_24px_rgba(249,115,22,0.22)]">
                   <MapPin aria-hidden="true" className="size-4" />
                 </div>
                 <div>
                   <p className="font-display text-lg font-semibold text-foreground">{item.name}</p>
-                  <p className="mt-1 font-mono text-[10px] uppercase text-primary">{item.state}</p>
-                  <p className="mt-2 font-mono text-xs text-muted">{item.detail}</p>
+                  <p className="mt-0.5 font-mono text-[10px] uppercase text-primary">{item.state}</p>
+                  <p className="mt-1 font-mono text-xs text-muted">{item.detail}</p>
                 </div>
               </div>
             ))}
-            <div className="flex gap-4 py-4 transition-colors duration-300 hover:bg-gradient-to-r hover:from-primary/5 hover:via-transparent hover:to-primary/5">
+            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 backdrop-blur-sm transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.03]">
               <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-background to-card text-primary ring-1 ring-border shadow-[0_10px_20px_rgba(15,15,19,0.12)]">
                 <Radio aria-hidden="true" className="size-4" />
               </div>
               <div>
                 <p className="font-display text-lg font-semibold text-foreground">Online</p>
-                <p className="mt-1 font-mono text-[10px] uppercase text-primary">Todo o Brasil</p>
-                <p className="mt-2 font-mono text-xs text-muted">
+                <p className="mt-0.5 font-mono text-[10px] uppercase text-primary">Todo o Brasil</p>
+                <p className="mt-1 font-mono text-xs text-muted">
                   Planilha personalizada e acompanhamento onde você estiver.
                 </p>
               </div>
@@ -1772,7 +1773,6 @@ function Index() {
       <SiteLogo />
       <Hero />
       <StickyIntroSequence />
-      <Locations />
       <Stories />
       <Team />
       <RestartBanner />
