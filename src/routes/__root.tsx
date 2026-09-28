@@ -12,7 +12,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { GTM_ID, GA_ID, trackPageView } from "../lib/gtm";
+import { GTM_ID, GA_ID, trackPageView, initTrafficSource } from "../lib/gtm";
 
 function NotFoundComponent() {
   return (
@@ -189,6 +189,7 @@ function RootComponent() {
 
   useEffect(() => {
     sessionStorage.removeItem("buzzini-route-module-recovery");
+    initTrafficSource();
   }, []);
 
   useEffect(() => {
