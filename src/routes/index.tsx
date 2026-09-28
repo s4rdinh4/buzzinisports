@@ -32,7 +32,7 @@ import coachLara from "@/assets/coach-lara.webp.asset.json";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
 import fotoVinicius from "@/assets/foto_vinicius.webp.asset.json";
-import fotoLarissa from "@/assets/foto_larissa.webp.asset.json";
+import fotoLarissa from "@/assets/fotoLarissa.jpeg";
 import fotoBeatriz from "@/assets/foto_beatriz.webp.asset.json";
 import fotoGeorge from "@/assets/foto_george.webp.asset.json";
 import fotoHudson from "@/assets/foto_hudson.webp.asset.json";
