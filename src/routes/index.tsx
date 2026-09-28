@@ -39,6 +39,7 @@ import fotoHudson from "@/assets/foto_hudson.webp.asset.json";
 import fotoRodrigo from "@/assets/foto_rodrigo.webp.asset.json";
 import fotoIgor from "@/assets/foto_igor.webp.asset.json";
 import whatsappIcon from "@/assets/whatsapp.webp";
+import { sendGTMEvent } from "@/lib/gtm";
 import video01 from "@/assets/depoiments/video01.mp4";
 import video01Poster from "@/assets/depoiments/video01.jpg";
 import video02 from "@/assets/depoiments/video02.mp4";
@@ -1465,7 +1466,18 @@ function Plans() {
                     const message = `Olá, vi no site o plano ${plan.name} e gostaria de mais informações`;
                     const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
+                    sendGTMEvent("select_plan_cta", {
+                      plan_name: plan.name,
+                      location,
+                      is_mobile: isMobile,
+                    });
+
                     if (isMobile) {
+                      sendGTMEvent("whatsapp_click", {
+                        plan_name: plan.name,
+                        location,
+                        method: "mobile_direct",
+                      });
                       window.location.href = link;
                       return;
                     }
@@ -1549,6 +1561,13 @@ function Plans() {
                     href={whatsappWebLink}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={() => {
+                      sendGTMEvent("whatsapp_click", {
+                        plan_name: selectedPlan.name,
+                        location: selectedPlan.location,
+                        method: "modal_web",
+                      });
+                    }}
                     className="flex items-center justify-center gap-2"
                   >
                     Abrir WhatsApp Web
@@ -1727,6 +1746,11 @@ function Footer() {
                   href="https://web.whatsapp.com/send?phone=5517988026622&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => {
+                    sendGTMEvent("whatsapp_click", {
+                      location: "footer_phone",
+                    });
+                  }}
                   aria-label="Abrir WhatsApp da Buzzini Sports"
                   className="inline-flex items-center gap-2 transition-colors hover:text-primary"
                 >
@@ -1758,6 +1782,11 @@ function Footer() {
                     href="https://web.whatsapp.com/send?phone=5517988026622&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20planos."
                     target="_blank"
                     rel="noreferrer"
+                    onClick={() => {
+                      sendGTMEvent("whatsapp_click", {
+                        location: "footer_icon",
+                      });
+                    }}
                     aria-label="WhatsApp da Buzzini Sports"
                     className="inline-flex items-center gap-2 transition-colors hover:text-primary"
                   >
