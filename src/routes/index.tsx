@@ -25,13 +25,14 @@ import buzziniLogo from "@/assets/logo_buzzini.svg";
 import logoBuzziniOutline from "@/assets/logo_buzzini_outline.svg";
 import findLogo from "@/assets/find.svg";
 import faixaBuzzini from "@/assets/faixa_buzzini.png";
-import fundoBuzzini from "@/assets/fundo_buzzini.jpeg";
+import heroRunner960 from "@/assets/hero-runner-960.webp";
+import heroRunner1600 from "@/assets/hero-runner-1600.webp";
 import fundoSite from "@/assets/fundo_site.jpeg";
 import coachLara from "@/assets/coach-lara.webp.asset.json";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
 import fotoVinicius from "@/assets/foto_vinicius.webp.asset.json";
-import fotoLarissa from "@/assets/fotoLarissa.jpeg";
+import fotoLarissa from "@/assets/foto_larissa.webp.asset.json";
 import fotoBeatriz from "@/assets/foto_beatriz.webp.asset.json";
 import fotoGeorge from "@/assets/foto_george.webp.asset.json";
 import fotoHudson from "@/assets/foto_hudson.webp.asset.json";
@@ -332,11 +333,18 @@ function Hero() {
       id="inicio"
       className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#090b10]"
     >
-      <img
-        src={fundoBuzzini}
-        alt="Pessoa correndo ao amanhecer"
-        className="absolute inset-0 h-full w-full object-cover object-center md:object-cover"
-      />
+      <picture className="absolute inset-0">
+        <source media="(max-width: 767px)" srcSet={heroRunner960} />
+        <img
+          src={heroRunner1600}
+          alt="Pessoa correndo ao amanhecer"
+          width={1600}
+          height={1067}
+          fetchPriority="high"
+          decoding="async"
+          className="h-full w-full object-cover object-center"
+        />
+      </picture>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(249,115,22,0.38),transparent_24%),radial-gradient(circle_at_80%_78%,rgba(249,115,22,0.18),transparent_26%),linear-gradient(90deg,rgba(9,11,16,0.68),rgba(9,11,16,0.4),rgba(9,11,16,0.72),rgba(9,11,16,0.9))]" />
       <div
         aria-hidden="true"
@@ -530,7 +538,7 @@ function DepoimentVideo({
             className="aspect-[9/16] w-full cursor-pointer object-cover"
             controls={showControls}
             playsInline
-            preload="metadata"
+            preload="none"
             poster={poster}
             aria-label={`Depoimento em vídeo da Buzzini Sports ${index + 1}`}
             onClick={(event) => {
@@ -721,7 +729,7 @@ const COACHES = [
     bio: "Responsável pelo sistema de acompanhamento de treinos e evolução dos alunos.",
   },
   {
-    photo: fotoLarissa,
+    photo: fotoLarissa.url,
     name: "Larissa Paredes",
     credential: "Marketing · Designer",
     bio: "Responsável pela comunicação visual e marketing da Buzzini Sports.",
@@ -822,6 +830,7 @@ function Team() {
                   width={512}
                   height={512}
                   loading="lazy"
+                  decoding="async"
                   className="h-full w-full scale-[1.02] object-cover object-top"
                 />
               </div>
@@ -1267,6 +1276,8 @@ function RestartBanner() {
           <img
             src={fundoSite}
             alt="Pessoa correndo em ambiente natural"
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 h-full w-full object-cover object-[center_70%]"
           />
           <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(15,23,42,0.72),rgba(9,11,16,0.82),rgba(9,11,16,0.48))]" />
@@ -1653,6 +1664,8 @@ function FinalCtaBanner() {
             src={faixaBuzzini}
             alt=""
             aria-hidden="true"
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 h-full w-full object-cover object-bottom opacity-80"
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(28,16,9,0.82),rgba(120,53,15,0.42),rgba(23,12,8,0.8))]" />
