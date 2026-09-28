@@ -730,7 +730,7 @@ const COACHES = [
     bio: "Responsável pelo sistema de acompanhamento de treinos e evolução dos alunos.",
   },
   {
-    photo: fotoLarissa.url,
+    photo: fotoLarissa,
     name: "Larissa Paredes",
     credential: "Marketing · Designer",
     bio: "Responsável pela comunicação visual e marketing da Buzzini Sports.",
