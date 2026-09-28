@@ -330,7 +330,7 @@ function Hero() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-[100svh] items-end overflow-hidden bg-background"
+      className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#090b10]"
     >
       <img
         src={fundoBuzzini}
@@ -338,8 +338,14 @@ function Hero() {
         className="absolute inset-0 h-full w-full object-cover object-center md:object-cover"
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(249,115,22,0.38),transparent_24%),radial-gradient(circle_at_80%_78%,rgba(249,115,22,0.18),transparent_26%),linear-gradient(90deg,rgba(9,11,16,0.68),rgba(9,11,16,0.4),rgba(9,11,16,0.72),rgba(9,11,16,0.9))]" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
-      <div className="absolute -bottom-10 left-0 h-40 w-40 rounded-full bg-primary/25 blur-3xl" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-3/4"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(9,11,16,0) 0%, rgba(9,11,16,0.08) 28%, rgba(9,11,16,0.32) 48%, rgba(9,11,16,0.68) 70%, rgba(9,11,16,0.92) 88%, rgba(9,11,16,1) 100%)",
+        }}
+      />
       <div className="relative z-10 w-full px-6 pb-14 sm:px-12">
         <h1 className="max-w-[20ch] font-display text-5xl font-semibold leading-none text-balance text-foreground sm:text-7xl">
           Find Your Motivation!
@@ -364,7 +370,7 @@ function Hero() {
       <a
         href="#como-funciona"
         aria-label="Rolar para a próxima seção"
-        className="pointer-events-auto absolute right-6 top-[calc(100%-7rem)] hidden items-center justify-center md:flex"
+        className="pointer-events-auto absolute right-6 top-[calc(100%-7rem)] z-10 hidden items-center justify-center md:flex"
       >
         <ArrowDown
           aria-hidden="true"
@@ -399,12 +405,19 @@ function StickyIntroSequence() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 18% 20%, rgba(249,115,22,0.14), transparent 28%), radial-gradient(circle at 82% 72%, rgba(249,115,22,0.10), transparent 30%), linear-gradient(180deg, rgba(9,11,16,0.98), rgba(15,15,19,1))",
+              "radial-gradient(circle at 18% 20%, rgba(249,115,22,0.14), transparent 28%), radial-gradient(circle at 82% 72%, rgba(249,115,22,0.10), transparent 30%), linear-gradient(180deg, rgba(9,11,16,1), rgba(15,15,19,1))",
           }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(249,115,22,0.04),transparent,rgba(249,115,22,0.04))]" />
         <div className="absolute -left-[10%] -top-[8%] h-[120%] w-[45%] rounded-full bg-[radial-gradient(circle,_rgba(249,115,22,0.12),transparent_64%)] blur-3xl [animation:ambient-shift_22s_ease-in-out_infinite_alternate]" />
         <div className="absolute -right-[8%] -bottom-[12%] h-[120%] w-[48%] rounded-full bg-[radial-gradient(circle,_rgba(249,115,22,0.10),transparent_68%)] blur-3xl [animation:ambient-shift_26s_ease-in-out_infinite_alternate_reverse]" />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-44"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(9,11,16,1) 0%, rgba(9,11,16,0.7) 45%, rgba(9,11,16,0) 100%)",
+          }}
+        />
       </div>
 
       <div className="relative z-10 -mt-[100vh]">
