@@ -3,6 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 
 import buzziniLogo from "@/assets/logo_buzzini.svg";
 import logoBuzziniOutline from "@/assets/logo_buzzini_outline.svg";
+import { sendGTMEvent } from "@/lib/gtm";
 
 const SCHEDULE = [
   {
@@ -191,6 +192,11 @@ function HorariosPage() {
                   href="https://web.whatsapp.com/send?phone=5517988026622&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Buzzini%20Sports%20e%20quero%20falar%20sobre%20os%20hor%C3%A1rios."
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => {
+                    sendGTMEvent("whatsapp_click", {
+                      location: "horarios_contact",
+                    });
+                  }}
                   className="block transition-colors hover:text-primary"
                 >
                   +55 17 98802-6622
