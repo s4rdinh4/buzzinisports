@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Performance decisions
+
+- Serve the hero as responsive WebP files and keep below-the-fold media lazy or interaction-loaded to protect initial page speed.
