@@ -31,7 +31,7 @@ import coachLara from "@/assets/coach-lara.webp.asset.json";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
 import fotoVinicius from "@/assets/foto_vinicius.webp.asset.json";
-import fotoLarissa from "@/assets/foto_larissa.webp.asset.json";
+import fotoLarissa from "@/assets/fotoLarissa.jpeg";
 import fotoBeatriz from "@/assets/foto_beatriz.webp.asset.json";
 import fotoGeorge from "@/assets/foto_george.webp.asset.json";
 import fotoHudson from "@/assets/foto_hudson.webp.asset.json";
@@ -693,25 +693,25 @@ const COACHES = [
   {
     photo: fotoVinicius.url,
     name: "Vinicius Silva",
-    credential: "Treinador Auxiliar · Fisioterapeuta",
+    credential: "Treinador · Fisioterapeuta",
     bio: "Formado em fisioterapia, especializado em reabilitação e prevenção de lesões.",
   },
   {
     photo: fotoBeatriz.url,
     name: "Beatriz Padovan",
-    credential: "Treinadora Auxiliar · Educação Física",
+    credential: "Treinadora · Educação Física",
     bio: "Treinadora de corrida, como foco principal no desenvolvimento de atletas iniciantes e intermediários.",
   },
   {
     photo: fotoHudson.url,
     name: "Hudson Morais",
-    credential: "Treinador Auxiliar · Educação Física",
+    credential: "Treinador · Educação Física",
     bio: "Treinador de corrida, responsável técnico pela Buzzini Ribeirão Preto.",
   },
   {
     photo: fotoGeorge.url,
     name: "George Almeida",
-    credential: "Treinador Auxiliar · Educação Física",
+    credential: "Treinador · Educação Física",
     bio: "Treinador de corrida, com foco em desenvolvimento de atletas iniciantes.",
   },
   {
@@ -721,7 +721,7 @@ const COACHES = [
     bio: "Responsável pelo sistema de acompanhamento de treinos e evolução dos alunos.",
   },
   {
-    photo: fotoLarissa.url,
+    photo: fotoLarissa,
     name: "Larissa Paredes",
     credential: "Marketing · Designer",
     bio: "Responsável pela comunicação visual e marketing da Buzzini Sports.",
@@ -1104,7 +1104,9 @@ function Locations() {
                 </div>
                 <div>
                   <p className="font-display text-lg font-semibold text-foreground">{item.name}</p>
-                  <p className="mt-0.5 font-mono text-[10px] uppercase text-primary">{item.state}</p>
+                  <p className="mt-0.5 font-mono text-[10px] uppercase text-primary">
+                    {item.state}
+                  </p>
                   <p className="mt-1 font-mono text-xs text-muted">{item.detail}</p>
                 </div>
               </div>
