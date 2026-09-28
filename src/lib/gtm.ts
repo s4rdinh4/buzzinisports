@@ -1,5 +1,9 @@
+import { getTrafficSource, initTrafficSource } from "./traffic";
+
 export const GTM_ID = import.meta.env.VITE_GTM_ID || "GTM-P69LMTGG";
 export const GA_ID = import.meta.env.VITE_GA_ID || "G-R8NQ50ZW99";
+
+export { initTrafficSource, getTrafficSource };
 
 declare global {
   interface Window {
@@ -10,17 +14,24 @@ declare global {
 
 /**
  * Envia um evento customizado para o Google Tag Manager (dataLayer) e Google Analytics 4 (gtag).
+ * Anexa automaticamente os dados de atribuição de tráfego (UTMs, referrer).
  */
 export function sendGTMEvent(event: string, payload: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
+  const traffic = getTrafficSource();
+  const fullPayload = {
+    ...traffic,
+    ...payload,
+  };
+
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event,
-    ...payload,
+    ...fullPayload,
   });
 
   if (typeof window.gtag === "function") {
-    window.gtag("event", event, payload);
+    window.gtag("event", event, fullPayload);
   }
 }
 
