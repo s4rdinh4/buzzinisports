@@ -1,6 +1,7 @@
-# SEO fixes
+# Otimização de mídia
 
-- [x] Add a valid sitemap for public pages and reference it in crawler rules.
-- [x] Correct Portuguese language, brand and location metadata, and FAQ structured data.
-- [x] Confirm the pricing contact buttons and social links already work.
-- [x] Complete Google Search Console verification and submit the sitemap.
+- [ ] Comprimir fotos locais dos treinadores e substituir os arquivos pesados.
+- [ ] Comprimir vídeos e capas dos depoimentos.
+- [ ] Impedir downloads de vídeos antes da interação.
+- [ ] Otimizar imagens decorativas pesadas sem alterar o visual.
+- [ ] Validar carregamento, reprodução, visual e erros.

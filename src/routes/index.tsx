@@ -24,28 +24,28 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import buzziniLogo from "@/assets/logo_buzzini.svg";
 import logoBuzziniOutline from "@/assets/logo_buzzini_outline.svg";
 import findLogo from "@/assets/find.svg";
-import faixaBuzzini from "@/assets/faixa_buzzini.png";
+import faixaBuzzini from "@/assets/faixa-buzzini.webp";
 import heroRunner960 from "@/assets/hero-runner-960.webp";
 import heroRunner1600 from "@/assets/hero-runner-1600.webp";
-import fundoSite from "@/assets/fundo_site.jpeg";
-import fotoNara from "@/assets/fotoNara.jpeg";
+import fundoSite from "@/assets/fundo-site.webp";
+import fotoNara from "@/assets/foto-nara.webp";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
 import fotoVinicius from "@/assets/foto_vinicius.webp.asset.json";
-import fotoLarissa from "@/assets/foto_larissa.jpeg";
+import fotoLarissa from "@/assets/foto-larissa.webp";
 import fotoBeatriz from "@/assets/foto_beatriz.webp.asset.json";
 import fotoGeorge from "@/assets/foto_george.webp.asset.json";
-import fotoHudson from "@/assets/fotoHudson.jpeg";
+import fotoHudson from "@/assets/foto-hudson.webp";
 import fotoRodrigo from "@/assets/foto_rodrigo.webp.asset.json";
 import fotoIgor from "@/assets/foto_igor.webp.asset.json";
 import whatsappIcon from "@/assets/whatsapp.webp";
 import { sendGTMEvent } from "@/lib/gtm";
-import video01 from "@/assets/depoiments/video01.mp4";
-import video01Poster from "@/assets/depoiments/video01.jpg";
-import video02 from "@/assets/depoiments/video02.mp4";
-import video02Poster from "@/assets/depoiments/video02.jpg";
-import video03 from "@/assets/depoiments/video03.mp4";
-import video03Poster from "@/assets/depoiments/video03.jpg";
+import video01 from "@/assets/depoiments/video01.mp4.asset.json";
+import video01Poster from "@/assets/depoiments/video01.webp";
+import video02 from "@/assets/depoiments/video02.mp4.asset.json";
+import video02Poster from "@/assets/depoiments/video02.webp";
+import video03 from "@/assets/depoiments/video03.mp4.asset.json";
+import video03Poster from "@/assets/depoiments/video03.webp";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -501,17 +501,17 @@ function Manifesto() {
 
 const DEPOIMENTS = [
   {
-    video: video01,
+    video: video01.url,
     poster: video01Poster,
     description: "Estrutura, disciplina e apoio para seguir evoluindo mesmo com a rotina pesada.",
   },
   {
-    video: video02,
+    video: video02.url,
     poster: video02Poster,
     description: "Treinos pensados para o seu momento e para o resultado que você quer alcançar.",
   },
   {
-    video: video03,
+    video: video03.url,
     poster: video03Poster,
     description:
       "Acompanhamento real, planejamento individual e evolução que faz diferença no dia a dia.",
@@ -525,10 +525,18 @@ function DepoimentVideo({
   description,
 }: (typeof DEPOIMENTS)[number] & { index: number }) {
   const [showControls, setShowControls] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   const startVideo = (element: HTMLVideoElement) => {
+    if (!isVideoLoaded) {
+      setIsVideoLoaded(true);
+      element.src = video;
+      element.load();
+    }
     setShowControls(true);
-    void element.play();
+    const playWhenReady = () => void element.play();
+    if (element.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) playWhenReady();
+    else element.addEventListener("canplay", playWhenReady, { once: true });
   };
 
   return (
@@ -545,9 +553,7 @@ function DepoimentVideo({
             onClick={(event) => {
               if (!showControls) startVideo(event.currentTarget);
             }}
-          >
-            <source src={video} type="video/mp4" />
-          </video>
+          />
           {!showControls && (
             <button
               type="button"
@@ -1277,6 +1283,8 @@ function RestartBanner() {
           <img
             src={fundoSite}
             alt="Pessoa correndo em ambiente natural"
+            width={1280}
+            height={854}
             loading="lazy"
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover object-[center_70%]"
@@ -1683,6 +1691,8 @@ function FinalCtaBanner() {
             src={faixaBuzzini}
             alt=""
             aria-hidden="true"
+            width={1080}
+            height={722}
             loading="lazy"
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover object-bottom opacity-80"
