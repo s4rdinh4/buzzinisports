@@ -28,14 +28,14 @@ import faixaBuzzini from "@/assets/faixa_buzzini.png";
 import heroRunner960 from "@/assets/hero-runner-960.webp";
 import heroRunner1600 from "@/assets/hero-runner-1600.webp";
 import fundoSite from "@/assets/fundo_site.jpeg";
-import coachLara from "@/assets/coach-lara.webp.asset.json";
+import fotoNara from "@/assets/fotoNara.jpeg";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
 import fotoVinicius from "@/assets/foto_vinicius.webp.asset.json";
 import fotoLarissa from "@/assets/foto_larissa.jpeg";
 import fotoBeatriz from "@/assets/foto_beatriz.webp.asset.json";
 import fotoGeorge from "@/assets/foto_george.webp.asset.json";
-import fotoHudson from "@/assets/foto_hudson.webp.asset.json";
+import fotoHudson from "@/assets/fotoHudson.jpeg";
 import fotoRodrigo from "@/assets/foto_rodrigo.webp.asset.json";
 import fotoIgor from "@/assets/foto_igor.webp.asset.json";
 import whatsappIcon from "@/assets/whatsapp.webp";
@@ -694,7 +694,7 @@ const COACHES = [
     bio: "Treinador de corrida, responsável técnico pela Buzzini São Paulo.",
   },
   {
-    photo: coachLara.url,
+    photo: fotoNara,
     name: "Nara de Lucena",
     credential: "Treinadora · Corrida",
     bio: "Velocidade e força, do 5K ao 10K com técnica de corrida.",
@@ -712,7 +712,7 @@ const COACHES = [
     bio: "Treinadora de corrida, como foco principal no desenvolvimento de atletas iniciantes e intermediários.",
   },
   {
-    photo: fotoHudson.url,
+    photo: fotoHudson,
     name: "Hudson Morais",
     credential: "Treinador · Educação Física",
     bio: "Treinador de corrida, responsável técnico pela Buzzini Ribeirão Preto.",
