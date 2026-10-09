@@ -1,8 +1,8 @@
 import { getTrafficSource, initTrafficSource } from "./traffic";
 
-export const GTM_ID = import.meta.env.VITE_GTM_ID || "GTM-P69LMTGG";
-export const GA_ID = import.meta.env.VITE_GA_ID || "G-R8NQ50ZW99";
-export const META_PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID || "1571381581401643";
+export const GTM_ID = import.meta.env['VITE_GTM_ID'] || "GTM-P69LMTGG";
+export const GA_ID = import.meta.env['VITE_GA_ID'] || "G-R8NQ50ZW99";
+export const META_PIXEL_ID = import.meta.env['VITE_META_PIXEL_ID'] || "1571381581401643";
 
 export { initTrafficSource, getTrafficSource };
 
