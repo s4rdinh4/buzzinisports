@@ -20,7 +20,6 @@ import teamPhoto from "@/assets/time_buzzini.jpg";
 
 const whatsappNumber = "5517988026622";
 const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Olá, quero conhecer a Buzzini Empresas.")}`;
-const commercialEmail = "assessoria@buzzini.com.br";
 
 const faqs = [
   {
@@ -61,7 +60,7 @@ const faqs = [
   {
     question: "Como solicitar uma proposta?",
     answer:
-      "Preencha o formulário para abrir um e-mail pré-preenchido para a equipe comercial. Nada é enviado automaticamente: você revisa a mensagem e decide se quer enviá-la.",
+      "Preencha o formulário e autorize o envio dos dados para a equipe comercial. A confirmação aparece na página quando o envio for concluído.",
   },
 ];
 
@@ -172,26 +171,53 @@ function NumberedHeading({ eyebrow, title, id }: { eyebrow: string; title: strin
 
 function EmpresasPage() {
   const [consent, setConsent] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const message = [
-      "Olá, quero conversar sobre a Buzzini Empresas.",
-      "",
-      `Nome: ${formData.get("name")}`,
-      `E-mail corporativo: ${formData.get("email")}`,
-      `Empresa: ${formData.get("company")}`,
-      `Cargo: ${formData.get("role")}`,
-      `Telefone: ${formData.get("phone") || "Não informado"}`,
-      `Participantes estimados: ${formData.get("participants")}`,
-      `Cidade e estado: ${formData.get("location")}`,
-      `Mensagem: ${formData.get("message") || "Não informada"}`,
-    ].join("\n");
-    const subject = `Plano Empresarial | ${formData.get("company")}`;
-    window.location.assign(
-      `mailto:${commercialEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`,
-    );
+    setIsSubmitting(true);
+    setSubmissionStatus("");
+
+    try {
+      const response = await fetch("/api/empresa-contato", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          company: formData.get("company"),
+          role: formData.get("role"),
+          phone: formData.get("phone"),
+          location: formData.get("location"),
+          participants: formData.get("participants"),
+          message: formData.get("message"),
+          consent,
+          website: formData.get("website"),
+        }),
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => null);
+        setSubmissionStatus(
+          typeof result?.error === "string"
+            ? result.error
+            : "Não foi possível enviar sua solicitação. Tente novamente mais tarde.",
+        );
+        return;
+      }
+
+      event.currentTarget.reset();
+      setConsent(false);
+      setSubmissionStatus("Solicitação enviada. Nossa equipe comercial recebeu seus dados.");
+    } catch {
+      setSubmissionStatus(
+        "Não foi possível enviar sua solicitação agora. Tente novamente em alguns instantes.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -561,7 +587,7 @@ function EmpresasPage() {
         </div>
       </section>
 
-      {/* 9 — Formulário que prepara uma mensagem, não envia */}
+      {/* 9 — Formulário de contato empresarial */}
       <section
         id="contato"
         aria-labelledby="contato-titulo"
@@ -579,19 +605,12 @@ function EmpresasPage() {
               adequada ao seu perfil.
             </p>
             <p className="mt-3 max-w-[45ch] text-sm leading-relaxed text-muted">
-              Ao continuar, abriremos seu aplicativo de e-mail com uma mensagem endereçada a{" "}
-              <a
-                href={`mailto:${commercialEmail}`}
-                className="font-semibold text-primary underline underline-offset-4"
-              >
-                {commercialEmail}
-              </a>
-              . Você poderá revisar e escolher se deseja enviá-la; o site não faz envio automático.
+              Envie os dados pelo formulário para que nossa equipe comercial possa avaliar o perfil
+              da empresa e preparar uma proposta.
             </p>
             <p className="mt-4 max-w-[48ch] text-xs leading-relaxed text-muted">
-              Este site não salva nem envia os dados do formulário para um servidor. Eles serão
-              incluídos no rascunho de e-mail e só serão compartilhados com a Buzzini se você optar
-              por enviá-lo usando seu aplicativo de e-mail.
+              Seus dados serão usados para responder à solicitação e enviados à equipe comercial da
+              Buzzini. Este formulário não armazena as informações no site.
             </p>
             <p className="mt-4 rounded-lg border border-border bg-background/70 p-3 text-xs leading-relaxed text-muted">
               Política de privacidade própria da Buzzini: não foi localizada uma URL oficial
@@ -604,6 +623,13 @@ function EmpresasPage() {
             onSubmit={handleContactSubmit}
             className="grid gap-4 rounded-2xl border border-border bg-background p-5 sm:grid-cols-2 sm:p-7"
           >
+            <label
+              aria-hidden="true"
+              className="absolute -left-[10000px] h-px w-px overflow-hidden"
+            >
+              Website
+              <input name="website" tabIndex={-1} autoComplete="off" />
+            </label>
             <label className="grid gap-2 text-sm font-semibold">
               Seu nome <span className="text-primary">*</span>
               <input
@@ -703,24 +729,25 @@ function EmpresasPage() {
                 className="mt-0.5 size-4 shrink-0 accent-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               />
               <span>
-                Estou ciente de que, ao continuar, os dados acima serão inseridos em um rascunho de
-                e-mail para a equipe comercial. O site não envia a mensagem: poderei revisar e só
-                será compartilhada se eu optar por enviá-la pelo meu aplicativo de e-mail. Li o
-                aviso sobre a política de privacidade não localizada.{" "}
-                <span className="text-primary">*</span>
+                Autorizo o envio dos dados informados para a equipe comercial da Buzzini, para
+                contato sobre a proposta empresarial. Li o aviso sobre a política de privacidade não
+                localizada. <span className="text-primary">*</span>
               </span>
             </label>
             <button
               type="submit"
-              disabled={!consent}
+              disabled={!consent || isSubmitting}
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 sm:col-span-2 sm:justify-self-start"
             >
-              Preparar e-mail comercial
+              {isSubmitting ? "Enviando solicitação..." : "Solicitar contato comercial"}
               <MoveUpRight aria-hidden="true" className="size-4" />
             </button>
-            <p className="text-xs leading-relaxed text-muted sm:col-span-2">
-              Nenhum e-mail será enviado automaticamente. O aplicativo de e-mail pode abrir em outra
-              tela; revise a mensagem e envie manualmente se desejar.
+            <p
+              role="status"
+              aria-live="polite"
+              className="text-xs leading-relaxed text-muted sm:col-span-2"
+            >
+              {submissionStatus}
             </p>
           </form>
         </div>
