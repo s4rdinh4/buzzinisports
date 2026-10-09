@@ -176,7 +176,8 @@ function EmpresasPage() {
 
   async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     setIsSubmitting(true);
     setSubmissionStatus("");
 
@@ -208,7 +209,7 @@ function EmpresasPage() {
         return;
       }
 
-      event.currentTarget.reset();
+      form.reset();
       setConsent(false);
       setSubmissionStatus("Solicitação enviada. Nossa equipe comercial recebeu seus dados.");
     } catch {

@@ -12,3 +12,8 @@
 ## Performance decisions
 
 - Serve the hero as responsive WebP files and keep below-the-fold media lazy or interaction-loaded to protect initial page speed.
+
+## App email decisions
+
+- Send company inquiry notifications through the managed template sender from the existing dedicated server handler, never SMTP or client code, to keep credentials private and delivery managed.
+- Keep company inquiry notifications fixed to the commercial recipient with the submitter as Reply-To, so public requests cannot send arbitrary emails.

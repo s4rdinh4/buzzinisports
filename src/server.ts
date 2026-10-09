@@ -1,6 +1,6 @@
 import "./lib/error-capture";
 
-import { sendCompanyInquiryEmail } from "./lib/company-smtp";
+import { sendTemplateEmail } from "./lib/email-templates/send-email";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 import { z } from "zod";
@@ -25,20 +25,6 @@ const companyInquirySchema = z.object({
 });
 
 const MAX_COMPANY_INQUIRY_BYTES = 10_000;
-
-function getSmtpPassword(env: unknown): string | undefined {
-  if (typeof env === "object" && env !== null) {
-    const binding = (env as Record<string, unknown>)["SMTP_PASSWORD"];
-    if (typeof binding === "string" && binding.length > 0) return binding;
-  }
-
-  if (typeof process !== "undefined") {
-    const localPassword = process.env["SMTP_PASSWORD"];
-    if (localPassword) return localPassword;
-  }
-
-  return undefined;
-}
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -72,7 +58,7 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   });
 }
 
-async function handleCompanyInquiry(request: Request, env: unknown): Promise<Response> {
+async function handleCompanyInquiry(request: Request): Promise<Response> {
   if (request.method !== "POST") {
     return Response.json({ error: "Método não permitido." }, { status: 405 });
   }
@@ -116,14 +102,15 @@ async function handleCompanyInquiry(request: Request, env: unknown): Promise<Res
     );
   }
 
-  const password = getSmtpPassword(env);
-  if (!password) {
-    console.error("Company inquiry SMTP secret is not configured");
-    return Response.json({ error: "Envio temporariamente indisponível." }, { status: 503 });
-  }
-
   try {
-    await sendCompanyInquiryEmail(password, parsed.data);
+    const result = await sendTemplateEmail('company-inquiry', 'assessoria@buzzini.com.br', {
+      templateData: parsed.data,
+      replyTo: parsed.data.email,
+      idempotencyKey: `company-inquiry-${crypto.randomUUID()}`,
+    });
+    if (!result.sent) {
+      return Response.json({ error: 'O recebimento por e-mail está indisponível. Entre em contato pelo WhatsApp.' }, { status: 503 });
+    }
     return Response.json({ ok: true });
   } catch (error) {
     console.error(
@@ -152,7 +139,7 @@ export default {
     try {
       const url = new URL(request.url);
       if (url.pathname === "/api/empresa-contato") {
-        return await handleCompanyInquiry(request, env);
+        return await handleCompanyInquiry(request);
       }
 
       const handler = await getServerEntry();
