@@ -613,11 +613,6 @@ function EmpresasPage() {
               Seus dados serão usados para responder à solicitação e enviados à equipe comercial da
               Buzzini. Este formulário não armazena as informações no site.
             </p>
-            <p className="mt-4 rounded-lg border border-border bg-background/70 p-3 text-xs leading-relaxed text-muted">
-              Política de privacidade própria da Buzzini: não foi localizada uma URL oficial
-              confirmada para apresentar aqui. Solicite essa informação à empresa antes de enviar
-              dados pessoais, se necessário.
-            </p>
           </div>
 
           <form
