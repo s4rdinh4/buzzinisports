@@ -4,6 +4,7 @@
 
 - [x] Preparar domínio de envio e modelo de notificação comercial sem SMTP.
 - [x] Conectar o formulário ao envio gerenciado.
+- [x] Corrigir o tratamento de domínio pendente e limite de envio, mantendo a página e os campos intactos.
 - [ ] Confirmar entrega real após a verificação do domínio e publicação (aguarda DNS e publicação).
 
 - [ ] Comprimir fotos locais dos treinadores e substituir os arquivos pesados.

@@ -199,8 +199,8 @@ function EmpresasPage() {
         }),
       });
 
-      if (!response.ok) {
-        const result = await response.json().catch(() => null);
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.ok !== true) {
         setSubmissionStatus(
           typeof result?.error === "string"
             ? result.error
