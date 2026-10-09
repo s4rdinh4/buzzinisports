@@ -110,21 +110,20 @@ async function handleCompanyInquiry(request: Request): Promise<Response> {
       idempotencyKey: `company-inquiry-${crypto.randomUUID()}`,
     });
     if (!result.sent) {
-      return Response.json({ error: 'O recebimento por e-mail está indisponível. Entre em contato pelo WhatsApp.' }, { status: 503 });
+      return Response.json({ ok: false, code: 'recipient_suppressed', error: 'O recebimento por e-mail está indisponível. Entre em contato pelo WhatsApp.' });
     }
     return Response.json({ ok: true });
   } catch (error) {
     if (error instanceof EmailAPIError) {
       if (error.code === 'domain_not_verified' || error.code === 'emails_disabled') {
         return Response.json(
-          { error: 'O envio por e-mail ainda não está disponível. Tente novamente mais tarde ou fale com a equipe pelo WhatsApp.' },
-          { status: 503 },
+          { ok: false, code: error.code, error: 'O envio por e-mail ainda não está disponível. Tente novamente mais tarde ou fale com a equipe pelo WhatsApp.' },
         );
       }
       if (error.status === 429) {
         const retryAfter = error.retryAfterSeconds ?? 60;
         return Response.json(
-          { error: 'O envio está temporariamente ocupado. Aguarde alguns instantes antes de tentar novamente.' },
+          { ok: false, code: 'rate_limited', error: 'O envio está temporariamente ocupado. Aguarde alguns instantes antes de tentar novamente.' },
           { status: 429, headers: { 'Retry-After': String(retryAfter) } },
         );
       }
@@ -135,8 +134,7 @@ async function handleCompanyInquiry(request: Request): Promise<Response> {
       error instanceof EmailAPIError ? error.code : 'unexpected_failure',
     );
     return Response.json(
-      { error: "Não foi possível enviar a solicitação. Tente novamente mais tarde." },
-      { status: 503 },
+      { ok: false, code: 'delivery_failed', error: "Não foi possível enviar a solicitação. Tente novamente mais tarde." },
     );
   }
 }
