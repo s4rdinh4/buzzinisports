@@ -20,6 +20,7 @@ import teamPhoto from "@/assets/time_buzzini.jpg";
 
 const whatsappNumber = "5517988026622";
 const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Olá, quero conhecer a Buzzini Empresas.")}`;
+const commercialEmail = "assessoria@buzzini.com.br";
 
 const faqs = [
   {
@@ -60,7 +61,7 @@ const faqs = [
   {
     question: "Como solicitar uma proposta?",
     answer:
-      "Preencha o formulário para abrir uma mensagem pré-preenchida no WhatsApp oficial. Nada é enviado automaticamente: você revisa a mensagem e decide se quer enviá-la.",
+      "Preencha o formulário para abrir um e-mail pré-preenchido para a equipe comercial. Nada é enviado automaticamente: você revisa a mensagem e decide se quer enviá-la.",
   },
 ];
 
@@ -72,7 +73,7 @@ export const Route = createFileRoute("/empresas")({
       {
         name: "description",
         content:
-          "Mais movimento na rotina. Mais saúde para sua equipe. Conheça a proposta Buzzini Empresas e converse com nossa equipe pelo WhatsApp oficial.",
+          "Mais movimento na rotina. Mais saúde para sua equipe. Conheça a proposta Buzzini Empresas e converse com nossa equipe.",
       },
       { property: "og:title", content: "Buzzini Empresas — Corrida para sua equipe" },
       {
@@ -137,19 +138,14 @@ const rhBenefits = [
 ];
 
 const commercialSteps = [
-  ["01", "Solicitação de contato", "A empresa envia seus dados pelo WhatsApp oficial."],
-  ["02", "Entendimento do perfil", "A Buzzini conhece o perfil e a quantidade de funcionários."],
+  ["Solicitação de contato", "A empresa envia seus dados por e-mail para a equipe comercial."],
+  ["Entendimento do perfil", "A Buzzini conhece o perfil e a quantidade de funcionários."],
   [
-    "03",
     "Avaliação e proposta",
     "As partes avaliam a adesão potencial e definem uma proposta personalizada.",
   ],
-  [
-    "04",
-    "Aprovação e divulgação",
-    "A empresa aprova as condições e organiza a divulgação interna.",
-  ],
-  ["05", "Implantação", "O benefício é implantado conforme o contrato."],
+  ["Aprovação e divulgação", "A empresa aprova as condições e organiza a divulgação interna."],
+  ["Implantação", "O benefício é implantado conforme o contrato."],
 ];
 
 function Eyebrow({ children }: { children: ReactNode }) {
@@ -160,22 +156,10 @@ function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-function NumberedHeading({
-  number,
-  eyebrow,
-  title,
-  id,
-}: {
-  number: string;
-  eyebrow: string;
-  title: string;
-  id: string;
-}) {
+function NumberedHeading({ eyebrow, title, id }: { eyebrow: string; title: string; id: string }) {
   return (
     <div>
-      <Eyebrow>
-        {number} / {eyebrow}
-      </Eyebrow>
+      <Eyebrow>{eyebrow}</Eyebrow>
       <h2
         id={id}
         className="mt-4 max-w-[19ch] font-display text-3xl font-semibold leading-tight text-balance sm:text-4xl lg:text-5xl"
@@ -204,7 +188,10 @@ function EmpresasPage() {
       `Cidade e estado: ${formData.get("location")}`,
       `Mensagem: ${formData.get("message") || "Não informada"}`,
     ].join("\n");
-    window.location.assign(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`);
+    const subject = `Plano Empresarial | ${formData.get("company")}`;
+    window.location.assign(
+      `mailto:${commercialEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`,
+    );
   }
 
   return (
@@ -310,7 +297,6 @@ function EmpresasPage() {
       >
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <NumberedHeading
-            number="02"
             eyebrow="A proposta"
             id="diferenciais-titulo"
             title="Corrida pensada para a realidade da sua empresa."
@@ -367,18 +353,14 @@ function EmpresasPage() {
       >
         <div className="mx-auto max-w-7xl">
           <NumberedHeading
-            number="03"
             eyebrow="Como funciona"
             id="operacao-titulo"
             title="Quatro passos para construir a proposta."
           />
           <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:mt-14 lg:grid-cols-4">
-            {operationSteps.map((step, index) => (
+            {operationSteps.map((step) => (
               <li key={step.title} className="rounded-2xl border border-border bg-background p-6">
-                <span className="font-mono text-sm font-bold tracking-[0.14em] text-primary">
-                  0{index + 1}
-                </span>
-                <h3 className="mt-5 font-display text-lg font-semibold">{step.title}</h3>
+                <h3 className="font-display text-lg font-semibold">{step.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted">{step.text}</p>
               </li>
             ))}
@@ -394,7 +376,6 @@ function EmpresasPage() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-20">
           <div>
             <NumberedHeading
-              number="04"
               eyebrow="Coparticipação"
               id="coparticipacao-titulo"
               title="Um exemplo para entender a divisão."
@@ -450,7 +431,6 @@ function EmpresasPage() {
       >
         <div className="mx-auto max-w-7xl">
           <NumberedHeading
-            number="05"
             eyebrow="Benefícios para RH"
             id="rh-titulo"
             title="Movimento que pode fazer parte da cultura."
@@ -492,7 +472,6 @@ function EmpresasPage() {
           </div>
           <div>
             <NumberedHeading
-              number="06"
               eyebrow="Diferentes experiências"
               id="experiencia-titulo"
               title="Cada pessoa tem seu próprio ponto de partida."
@@ -530,16 +509,14 @@ function EmpresasPage() {
       >
         <div className="mx-auto max-w-7xl">
           <NumberedHeading
-            number="07"
             eyebrow="Etapas comerciais"
             id="comercial-titulo"
             title="Da primeira mensagem à decisão."
           />
           <ol className="mt-10 grid gap-3 sm:grid-cols-2 lg:mt-14 lg:grid-cols-5">
-            {commercialSteps.map(([number, title, text]) => (
-              <li key={number} className="rounded-2xl border border-border bg-background p-5">
-                <p className="font-mono text-sm font-bold text-primary">{number}</p>
-                <h3 className="mt-4 font-display text-lg font-semibold">{title}</h3>
+            {commercialSteps.map(([title, text]) => (
+              <li key={title} className="rounded-2xl border border-border bg-background p-5">
+                <h3 className="font-display text-lg font-semibold">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{text}</p>
               </li>
             ))}
@@ -556,7 +533,6 @@ function EmpresasPage() {
         <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
           <div>
             <NumberedHeading
-              number="08"
               eyebrow="Perguntas frequentes"
               id="duvidas-titulo"
               title="O que vale saber antes de conversar."
@@ -594,7 +570,6 @@ function EmpresasPage() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div>
             <NumberedHeading
-              number="09"
               eyebrow="Converse com a equipe"
               id="contato-titulo"
               title="Vamos levar mais movimento para sua empresa?"
@@ -604,15 +579,19 @@ function EmpresasPage() {
               adequada ao seu perfil.
             </p>
             <p className="mt-3 max-w-[45ch] text-sm leading-relaxed text-muted">
-              Ao continuar, abriremos o WhatsApp oficial com uma mensagem preenchida pelos dados
-              abaixo. Você poderá revisar e escolher se deseja enviá-la; o site não faz envio
-              automático.
+              Ao continuar, abriremos seu aplicativo de e-mail com uma mensagem endereçada a{" "}
+              <a
+                href={`mailto:${commercialEmail}`}
+                className="font-semibold text-primary underline underline-offset-4"
+              >
+                {commercialEmail}
+              </a>
+              . Você poderá revisar e escolher se deseja enviá-la; o site não faz envio automático.
             </p>
             <p className="mt-4 max-w-[48ch] text-xs leading-relaxed text-muted">
               Este site não salva nem envia os dados do formulário para um servidor. Eles serão
-              incluídos na mensagem preparada para o WhatsApp e só serão compartilhados com a
-              Buzzini se você optar por enviá-la. Ao usar o WhatsApp, também se aplicam as condições
-              de privacidade do próprio serviço.
+              incluídos no rascunho de e-mail e só serão compartilhados com a Buzzini se você optar
+              por enviá-lo usando seu aplicativo de e-mail.
             </p>
             <p className="mt-4 rounded-lg border border-border bg-background/70 p-3 text-xs leading-relaxed text-muted">
               Política de privacidade própria da Buzzini: não foi localizada uma URL oficial
@@ -724,10 +703,11 @@ function EmpresasPage() {
                 className="mt-0.5 size-4 shrink-0 accent-[var(--color-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               />
               <span>
-                Estou ciente de que, ao continuar, os dados acima serão inseridos em uma mensagem
-                para o WhatsApp oficial. O site não envia a mensagem: poderei revisar e só será
-                compartilhada se eu tocar em enviar no WhatsApp. Li o aviso sobre a política de
-                privacidade não localizada. <span className="text-primary">*</span>
+                Estou ciente de que, ao continuar, os dados acima serão inseridos em um rascunho de
+                e-mail para a equipe comercial. O site não envia a mensagem: poderei revisar e só
+                será compartilhada se eu optar por enviá-la pelo meu aplicativo de e-mail. Li o
+                aviso sobre a política de privacidade não localizada.{" "}
+                <span className="text-primary">*</span>
               </span>
             </label>
             <button
@@ -735,12 +715,12 @@ function EmpresasPage() {
               disabled={!consent}
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 sm:col-span-2 sm:justify-self-start"
             >
-              Solicitar contato comercial
+              Preparar e-mail comercial
               <MoveUpRight aria-hidden="true" className="size-4" />
             </button>
             <p className="text-xs leading-relaxed text-muted sm:col-span-2">
-              Nenhuma mensagem será enviada automaticamente. O WhatsApp pode abrir em outra tela;
-              revise o texto e envie manualmente se desejar.
+              Nenhum e-mail será enviado automaticamente. O aplicativo de e-mail pode abrir em outra
+              tela; revise a mensagem e envie manualmente se desejar.
             </p>
           </form>
         </div>
@@ -754,7 +734,7 @@ function EmpresasPage() {
               <img src={buzziniLogo} alt="Buzzini Sports" className="h-9 w-auto" />
             </a>
             <p className="mt-2 text-xs text-muted">
-              10 / Buzzini Empresas · Corrida para todos os ritmos.
+              Buzzini Empresas · Corrida para todos os ritmos.
             </p>
           </div>
           <a
