@@ -1892,6 +1892,12 @@ function WhatsAppInvite() {
         href={whatsappLink}
         target="_blank"
         rel="noreferrer"
+        onClick={() =>
+          sendGTMEvent("whatsapp_click", {
+            source: "whatsapp_popup",
+            location: "home",
+          })
+        }
         className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-center font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none"
       >
         <MessageCircle aria-hidden="true" className="size-4 shrink-0" />
