@@ -1833,6 +1833,74 @@ function Footer() {
   );
 }
 
+let hasShownWhatsAppInvite = false;
+
+function WhatsAppInvite() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const sessionKey = "buzzini-whatsapp-invite-seen";
+
+    if (hasShownWhatsAppInvite) return;
+
+    try {
+      if (window.sessionStorage.getItem(sessionKey)) {
+        hasShownWhatsAppInvite = true;
+        return;
+      }
+      window.sessionStorage.setItem(sessionKey, "true");
+    } catch {
+      // Keep the invite available when browser storage is disabled.
+    }
+
+    hasShownWhatsAppInvite = true;
+    setIsVisible(true);
+  }, []);
+
+  if (!isVisible) return null;
+
+  const whatsappMessage =
+    "Olá, vim pelo site da Buzzini Sports e quero falar sobre os planos.";
+  const whatsappLink = `https://wa.me/5517988026622?text=${encodeURIComponent(whatsappMessage)}`;
+
+  return (
+    <aside
+      aria-label="Convite para falar com a Buzzini pelo WhatsApp"
+      className="fixed bottom-4 right-4 z-[60] w-[calc(100%-2rem)] max-w-sm rounded-2xl border border-primary/35 bg-card-high p-5 shadow-2xl shadow-black/40 sm:bottom-6 sm:right-6 sm:p-6"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary sm:text-xs">
+          Um passo de cada vez
+        </p>
+        <button
+          type="button"
+          aria-label="Fechar convite do WhatsApp"
+          title="Fechar"
+          onClick={() => setIsVisible(false)}
+          className="-mr-2 -mt-2 inline-flex size-10 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-foreground/10 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none"
+        >
+          <X aria-hidden="true" className="size-5" />
+        </button>
+      </div>
+      <h2 className="mt-1 font-display text-xl font-semibold leading-tight text-foreground sm:text-2xl">
+        Sua próxima corrida começa com uma conversa.
+      </h2>
+      <p className="mt-2 font-mono text-sm leading-relaxed text-muted">
+        Fale com a equipe e encontre o melhor caminho para a sua rotina.
+      </p>
+      <a
+        href={whatsappLink}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-center font-mono text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none"
+      >
+        <MessageCircle aria-hidden="true" className="size-4 shrink-0" />
+        Chamar a Buzzini no WhatsApp
+      </a>
+    </aside>
+  );
+}
+
 function Index() {
   return (
     <main className="bg-background">
@@ -1846,6 +1914,7 @@ function Index() {
       <Faq />
       <FinalCtaBanner />
       <Footer />
+      <WhatsAppInvite />
     </main>
   );
 }
