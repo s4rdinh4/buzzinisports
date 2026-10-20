@@ -14,23 +14,26 @@ import { sendGTMEvent } from "@/lib/gtm";
 
 const whatsappNumber = "5517988026622";
 const whatsappMessage =
-  "Olá! Tenho interesse na promoção Black Friday da Buzzini Sports: plano trimestral de R$ 150,00 por R$ 99,90, com pagamento no cartão. Pode me orientar sobre a contratação?";
+  "Olá! Tenho interesse na promoção Black Friday da Buzzini Sports: R$ 99,90 por mês durante os primeiros 3 meses e, depois, R$ 150,00 por mês. Pode me orientar sobre a contratação?";
 const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
 export const Route = createFileRoute("/black-friday")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Black Friday Buzzini Sports | Plano trimestral" },
+      { title: "Black Friday Buzzini Sports | R$ 99,90/mês por 3 meses" },
       {
         name: "description",
         content:
-          "Na Black Friday Buzzini Sports, o plano trimestral sai de R$ 150,00 por R$ 99,90. Pagamento no cartão. Fale com a equipe pelo WhatsApp.",
+          "Na Black Friday Buzzini Sports, pague R$ 99,90 por mês durante os primeiros 3 meses; depois, R$ 150,00 por mês. Fale com a equipe pelo WhatsApp.",
       },
-      { property: "og:title", content: "Black Friday Buzzini Sports — Corra com a Buzzini" },
+      {
+        property: "og:title",
+        content: "Black Friday Buzzini Sports | R$ 99,90/mês por 3 meses",
+      },
       {
         property: "og:description",
-        content: "Plano trimestral de R$ 150,00 por R$ 99,90. Pagamento no cartão.",
+        content: "R$ 99,90 por mês durante os primeiros 3 meses; depois, R$ 150,00 por mês.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://buzzinisports.lovable.app/black-friday" },
@@ -103,17 +106,17 @@ function BlackFridayPage() {
                 Seu próximo passo na corrida começa com um plano.
               </p>
               <p className="mt-3 max-w-md text-sm leading-relaxed text-white/65 sm:text-base">
-                Treino com direção, acompanhamento de verdade e uma condição especial no plano
-                trimestral.
+                Treino com direção, acompanhamento de verdade e uma condição especial para começar
+                sua assessoria.
               </p>
 
               <div className="mt-8 flex flex-wrap items-end gap-x-5 gap-y-3 sm:mt-10 sm:gap-x-7">
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
-                    De
+                    Depois dos 3 primeiros meses
                   </p>
-                  <p className="mt-1 font-display text-xl font-medium text-white/55 line-through decoration-[#f36b2b] decoration-2 sm:text-2xl">
-                    R$ 150,00
+                  <p className="mt-1 font-display text-xl font-medium text-white/75 sm:text-2xl">
+                    R$ 150,00/mês
                   </p>
                 </div>
                 <span className="mb-2 font-mono text-sm text-[#ff8954]" aria-hidden="true">
@@ -121,7 +124,7 @@ function BlackFridayPage() {
                 </span>
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#ff8954]">
-                    Por
+                    Por mês, nos primeiros 3 meses
                   </p>
                   <p className="mt-1 font-display text-4xl font-semibold leading-none tracking-tight text-white sm:text-5xl">
                     R$ 99,90
@@ -129,7 +132,7 @@ function BlackFridayPage() {
                 </div>
               </div>
               <p className="mt-3 font-mono text-xs uppercase tracking-[0.14em] text-white/65">
-                Plano trimestral <span className="px-1 text-[#f36b2b]">/</span> Pagamento no cartão
+                Depois, R$ 150,00 por mês
               </p>
 
               <a
@@ -202,7 +205,7 @@ function BlackFridayPage() {
                 Black Friday Buzzini
               </p>
               <h2 className="mt-3 max-w-[22ch] font-display text-2xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl">
-                Plano trimestral: de R$ 150,00 por R$ 99,90.
+                R$ 99,90 por mês nos primeiros 3 meses. Depois, R$ 150,00 por mês.
               </h2>
               <p className="mt-3 flex items-center gap-2 text-sm text-white/60">
                 <CreditCard className="size-4 text-[#ff8954]" aria-hidden="true" />
@@ -238,67 +241,118 @@ function BlackFridayPage() {
               Dúvidas sobre a oferta?
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60 sm:text-base">
-              Veja o que está informado e confirme com a equipe qualquer condição que não esteja
-              detalhada.
+              Informações sobre a assessoria, o início dos treinos e a condição mensal da oferta.
             </p>
           </div>
 
           <div className="divide-y divide-white/15 border-y border-white/15">
             <details className="group">
               <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
-                <span>Qual é o plano e qual preço estão divulgados?</span>
+                <span>O que está incluído na assessoria?</span>
                 <ChevronDown
                   className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
                   aria-hidden="true"
                 />
               </summary>
               <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
-                A página informa o plano trimestral, de R$ 150,00 por R$ 99,90. Não está
-                especificado se R$ 99,90 é o valor total ou mensal; confirme esse detalhe com a
-                equipe pelo WhatsApp antes de contratar.
+                A assessoria inclui planilha personalizada, contato com treinador, acesso ao app
+                Runy e estrutura Buzzini no dia da prova.
               </p>
             </details>
 
             <details className="group">
               <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
-                <span>Como é feito o pagamento?</span>
+                <span>Como os treinos são personalizados?</span>
                 <ChevronDown
                   className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
                   aria-hidden="true"
                 />
               </summary>
               <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
-                A condição divulgada é pagamento no cartão. Bandeiras aceitas, parcelamento e outros
-                detalhes não estão especificados; confirme com a equipe pelo WhatsApp.
+                O plano de corrida é elaborado de acordo com seu objetivo e sua rotina. A assessoria
+                atende diferentes níveis, inclusive quem está começando.
               </p>
             </details>
 
             <details className="group">
               <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
-                <span>Qual é a duração e quais são as condições da promoção?</span>
+                <span>Como funciona o acompanhamento do treinador?</span>
                 <ChevronDown
                   className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
                   aria-hidden="true"
                 />
               </summary>
               <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
-                A oferta é apresentada para um plano trimestral. O prazo de validade da promoção e
-                outras condições não estão informados nesta página; confirme com a equipe pelo
-                WhatsApp.
+                Você tem contato com um treinador, que acompanha sua evolução.
               </p>
             </details>
 
             <details className="group">
               <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
-                <span>Como faço para contratar?</span>
+                <span>O que posso fazer pelo app Runy?</span>
                 <ChevronDown
                   className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
                   aria-hidden="true"
                 />
               </summary>
               <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
-                Fale com a equipe Buzzini pelo WhatsApp para tirar dúvidas e receber orientação
-                sobre a contratação.{" "}
+                A assessoria oferece acesso ao app Runy, com possibilidade de sincronização com seu
+                relógio GPS.
+              </p>
+            </details>
+
+            <details className="group">
+              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
+                <span>O que significa estrutura Buzzini no dia da prova?</span>
+                <ChevronDown
+                  className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
+                A estrutura Buzzini no dia da prova faz parte dos itens da assessoria. Para saber
+                como ela funciona em uma prova específica, consulte a equipe.
+              </p>
+            </details>
+
+            <details className="group">
+              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
+                <span>Posso começar mesmo sem experiência?</span>
+                <ChevronDown
+                  className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
+                Sim. A assessoria atende desde quem está começando do zero até quem já corre e quer
+                melhorar seus tempos; o planejamento considera seu nível, objetivo e rotina.
+              </p>
+            </details>
+
+            <details className="group">
+              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
+                <span>Qual é o valor mensal da promoção?</span>
+                <ChevronDown
+                  className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
+                O valor é R$ 99,90 por mês durante os primeiros 3 meses. Depois desse período, a
+                mensalidade passa a ser R$ 150,00 por mês.
+              </p>
+            </details>
+
+            <details className="group">
+              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
+                <span>Como faço para começar?</span>
+                <ChevronDown
+                  className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
+                Fale com a equipe Buzzini pelo WhatsApp para receber orientação sobre a contratação.{" "}
                 <a
                   href={whatsappLink}
                   target="_blank"
@@ -317,7 +371,7 @@ function BlackFridayPage() {
 
       <footer className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-8 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
         <span>Buzzini Sports · Assessoria de corrida</span>
-        <span>Oferta do plano trimestral. Pagamento no cartão.</span>
+        <span>R$ 99,90/mês nos primeiros 3 meses; depois, R$ 150,00/mês.</span>
       </footer>
     </div>
   );
