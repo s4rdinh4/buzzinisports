@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlackFridayRouteImport } from './routes/black-friday'
 import { Route as EmpresasRouteImport } from './routes/empresas'
 import { Route as HorariosRouteImport } from './routes/horarios'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -18,6 +19,11 @@ import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/l
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlackFridayRoute = BlackFridayRouteImport.update({
+  id: '/black-friday',
+  path: '/black-friday',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmpresasRoute = EmpresasRouteImport.update({
@@ -44,6 +50,7 @@ const LovableEmailTransactionalPreviewRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/black-friday': typeof BlackFridayRoute
   '/empresas': typeof EmpresasRoute
   '/horarios': typeof HorariosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/black-friday': typeof BlackFridayRoute
   '/empresas': typeof EmpresasRoute
   '/horarios': typeof HorariosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -59,6 +67,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/black-friday': typeof BlackFridayRoute
   '/empresas': typeof EmpresasRoute
   '/horarios': typeof HorariosRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -68,6 +77,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/black-friday'
     | '/empresas'
     | '/horarios'
     | '/sitemap.xml'
@@ -75,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/black-friday'
     | '/empresas'
     | '/horarios'
     | '/sitemap.xml'
@@ -82,6 +93,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/black-friday'
     | '/empresas'
     | '/horarios'
     | '/sitemap.xml'
@@ -90,6 +102,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlackFridayRoute: typeof BlackFridayRoute
   EmpresasRoute: typeof EmpresasRoute
   HorariosRoute: typeof HorariosRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -103,6 +116,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/black-friday': {
+      id: '/black-friday'
+      path: '/black-friday'
+      fullPath: '/black-friday'
+      preLoaderRoute: typeof BlackFridayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/empresas': {
@@ -138,6 +158,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlackFridayRoute: BlackFridayRoute,
   EmpresasRoute: EmpresasRoute,
   HorariosRoute: HorariosRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
