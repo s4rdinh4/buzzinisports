@@ -1,9 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowUpRight, Check, CreditCard, MessageCircle } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Check,
+  ChevronDown,
+  CreditCard,
+  MessageCircle,
+} from "lucide-react";
 
 import buzziniLogo from "@/assets/logo_buzzini.svg";
-import heroRunner960 from "@/assets/hero-runner-960.webp";
-import heroRunner1600 from "@/assets/hero-runner-1600.webp";
+import heroPhoto from "@/assets/fundo-site.webp";
 import { sendGTMEvent } from "@/lib/gtm";
 
 const whatsappNumber = "5517988026622";
@@ -67,20 +73,15 @@ function BlackFridayPage() {
       <main>
         <section className="relative isolate min-h-[calc(100svh-5rem)] overflow-hidden">
           <picture className="absolute inset-0 -z-20">
-            <source
-              media="(min-width: 1024px)"
-              srcSet={`${heroRunner1600} 1600w, ${heroRunner960} 960w`}
-              sizes="100vw"
-            />
             <img
-              src={heroRunner960}
-              srcSet={`${heroRunner960} 960w, ${heroRunner1600} 1600w`}
+              src={heroPhoto}
               sizes="100vw"
               alt=""
               aria-hidden="true"
+              loading="eager"
               fetchPriority="high"
               decoding="async"
-              className="absolute inset-0 h-full min-h-[calc(100svh-5rem)] w-full object-cover object-[58%_center] lg:object-center"
+              className="absolute inset-0 h-full min-h-[calc(100svh-5rem)] w-full object-cover object-center"
             />
           </picture>
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(8,9,10,0.97)_0%,rgba(8,9,10,0.88)_48%,rgba(8,9,10,0.32)_100%)]" />
@@ -219,6 +220,97 @@ function BlackFridayPage() {
               Falar sobre a oferta
               <ArrowUpRight className="size-4" aria-hidden="true" />
             </a>
+          </div>
+        </section>
+
+        <section
+          aria-labelledby="faq-title"
+          className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-12 lg:py-24"
+        >
+          <div>
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#ff8954] sm:text-xs">
+              Antes de começar
+            </p>
+            <h2
+              id="faq-title"
+              className="mt-3 max-w-[12ch] font-display text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-4xl"
+            >
+              Dúvidas sobre a oferta?
+            </h2>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60 sm:text-base">
+              Veja o que está informado e confirme com a equipe qualquer condição que não esteja
+              detalhada.
+            </p>
+          </div>
+
+          <div className="divide-y divide-white/15 border-y border-white/15">
+            <details className="group">
+              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
+                <span>Qual é o plano e qual preço estão divulgados?</span>
+                <ChevronDown
+                  className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
+                A página informa o plano trimestral, de R$ 150,00 por R$ 99,90. Não está
+                especificado se R$ 99,90 é o valor total ou mensal; confirme esse detalhe com a
+                equipe pelo WhatsApp antes de contratar.
+              </p>
+            </details>
+
+            <details className="group">
+              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
+                <span>Como é feito o pagamento?</span>
+                <ChevronDown
+                  className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
+                A condição divulgada é pagamento no cartão. Bandeiras aceitas, parcelamento e outros
+                detalhes não estão especificados; confirme com a equipe pelo WhatsApp.
+              </p>
+            </details>
+
+            <details className="group">
+              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
+                <span>Qual é a duração e quais são as condições da promoção?</span>
+                <ChevronDown
+                  className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
+                A oferta é apresentada para um plano trimestral. O prazo de validade da promoção e
+                outras condições não estão informados nesta página; confirme com a equipe pelo
+                WhatsApp.
+              </p>
+            </details>
+
+            <details className="group">
+              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#ff8954] sm:text-base [&::-webkit-details-marker]:hidden">
+                <span>Como faço para contratar?</span>
+                <ChevronDown
+                  className="size-5 shrink-0 text-[#ff8954] transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </summary>
+              <p className="max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-white/65">
+                Fale com a equipe Buzzini pelo WhatsApp para tirar dúvidas e receber orientação
+                sobre a contratação.{" "}
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackWhatsAppClick("faq")}
+                  className="font-semibold text-[#ff8954] underline decoration-[#ff8954]/50 underline-offset-4 transition-colors hover:text-white motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff8954]"
+                >
+                  Chamar no WhatsApp
+                </a>
+                .
+              </p>
+            </details>
           </div>
         </section>
       </main>
