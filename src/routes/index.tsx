@@ -1817,6 +1817,12 @@ function Footer() {
             <div className="flex flex-col gap-2 pt-2">
               <p className="text-xs uppercase tracking-[0.15em] text-muted">Parcerias</p>
               <a
+                href="/midia-kit"
+                className="font-semibold text-primary transition-colors hover:text-primary-soft"
+              >
+                Mídia Kit 2026 ↗
+              </a>
+              <a
                 href="mailto:marketing@buzzini.com.br"
                 className="transition-colors hover:text-primary"
               >

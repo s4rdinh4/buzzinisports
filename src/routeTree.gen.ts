@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlackFridayRouteImport } from './routes/black-friday'
 import { Route as EmpresasRouteImport } from './routes/empresas'
 import { Route as HorariosRouteImport } from './routes/horarios'
+import { Route as MidiaKitRouteImport } from './routes/midia-kit'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
@@ -36,6 +37,11 @@ const HorariosRoute = HorariosRouteImport.update({
   path: '/horarios',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MidiaKitRoute = MidiaKitRouteImport.update({
+  id: '/midia-kit',
+  path: '/midia-kit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/black-friday': typeof BlackFridayRoute
   '/empresas': typeof EmpresasRoute
   '/horarios': typeof HorariosRoute
+  '/midia-kit': typeof MidiaKitRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/black-friday': typeof BlackFridayRoute
   '/empresas': typeof EmpresasRoute
   '/horarios': typeof HorariosRoute
+  '/midia-kit': typeof MidiaKitRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/black-friday': typeof BlackFridayRoute
   '/empresas': typeof EmpresasRoute
   '/horarios': typeof HorariosRoute
+  '/midia-kit': typeof MidiaKitRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/black-friday'
     | '/empresas'
     | '/horarios'
+    | '/midia-kit'
     | '/sitemap.xml'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/black-friday'
     | '/empresas'
     | '/horarios'
+    | '/midia-kit'
     | '/sitemap.xml'
     | '/lovable/email/transactional/preview'
   id:
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/black-friday'
     | '/empresas'
     | '/horarios'
+    | '/midia-kit'
     | '/sitemap.xml'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   BlackFridayRoute: typeof BlackFridayRoute
   EmpresasRoute: typeof EmpresasRoute
   HorariosRoute: typeof HorariosRoute
+  MidiaKitRoute: typeof MidiaKitRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
@@ -139,6 +152,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HorariosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/midia-kit': {
+      id: '/midia-kit'
+      path: '/midia-kit'
+      fullPath: '/midia-kit'
+      preLoaderRoute: typeof MidiaKitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlackFridayRoute: BlackFridayRoute,
   EmpresasRoute: EmpresasRoute,
   HorariosRoute: HorariosRoute,
+  MidiaKitRoute: MidiaKitRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
