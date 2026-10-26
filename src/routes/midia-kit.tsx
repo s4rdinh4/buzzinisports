@@ -114,7 +114,7 @@ const PARTNERSHIP_OPTIONS: PartnershipOption[] = [
     reachEstimate: "Treino exclusivo com café da manhã e fotos",
     monthlyImpact: 50000,
     description:
-      "Treino especial 'Powered by Sua Marca' (como os já realizados com Centauro/Fila e Forcell Rio), com café especial e engajamento presencial dos atletas.",
+      "Treino especial 'Powered by Sua Marca' (como os já realizados com Centauro/Fila e Forcell), com café especial e engajamento presencial dos atletas.",
   },
   {
     id: "vip-club-discounts",
@@ -137,11 +137,11 @@ const FAQS = [
   },
   {
     q: "Vocês produzem fotos e vídeos profissionais com a nossa marca?",
-    a: "Sim. Em todas as 24 provas do ano e viagens para maratonas, a Buzzini conta com cobertura audiovisual profissional na tenda, backdrop de pódio e percurso, gerando material de alta resolução para uso mútuo nas redes.",
+    a: "Sim. Em provas especiais do calendário a Buzzini conta com cobertura audiovisual profissional na tenda, backdrop de pódio e percurso, gerando material de alta resolução para uso mútuo nas redes.",
   },
   {
     q: "Por que a Buzzini não insere logos em camisetas e uniformes?",
-    a: "Nossa política preserva a identidade visual minimalista do uniforme e valoriza muito mais as marcas parceiras em canais de alto impacto real: tendas físicas oficiais nas 24 provas, backdrops de fotos com medalhas, collabs no Instagram com mais de 320 mil contas de alcance e sampling direto na mão do atleta.",
+    a: "Nossa política preserva a identidade visual minimalista do uniforme e valoriza muito mais as marcas parceiras em canais de alto impacto real: tendas físicas oficiais nas provas, backdrops de fotos com medalhas, collabs no Instagram com mais de 320 mil contas de alcance e sampling direto na mão do atleta.",
   },
 ];
 
@@ -328,7 +328,7 @@ function MidiaKitPage() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
                 <span className="relative inline-flex size-2 rounded-full bg-[#FF5500]" />
               </span>
-              <span>Apresentação Comercial Oficial • Temporada 2026</span>
+              <span>Apresentação Comercial Oficial • Temporada 2026/2027</span>
               <span className="text-slate-300">•</span>
               <span className="text-slate-600 font-medium">Fundada em 10/03/2024</span>
             </div>
@@ -461,7 +461,7 @@ function MidiaKitPage() {
                   </span>
                   <p className="text-xs font-bold text-[#FF5500]">Provas por Ano</p>
                   <p className="mt-1 text-[0.7rem] text-slate-500">
-                    Média de +60 atletas, pico de +140
+                    Média de +50 atletas, pico de +120
                   </p>
                 </div>
               </div>
@@ -994,8 +994,8 @@ function MidiaKitPage() {
                 <span className="font-display font-extrabold text-lg text-[#FF5500]">FORCELL</span>
                 <p className="text-xs font-semibold text-slate-800 mt-1">Parceria Recorrente</p>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Ativações em eventos corporativos, incluindo <strong>Forcell Rio</strong> e
-                  comitiva <strong>Buzzini in Rio</strong>.
+                  Ativações em eventos corporativos, incluindo <strong>Forcell</strong> e comitiva{" "}
+                  <strong>Buzzini in Rio</strong>.
                 </p>
               </div>
 
