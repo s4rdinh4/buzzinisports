@@ -37,6 +37,7 @@ import faixaBuzzini from "@/assets/faixa-buzzini.webp";
 import fotoLarissa from "@/assets/foto-larissa.webp";
 import fotoHudson from "@/assets/foto-hudson.webp";
 import fotoNara from "@/assets/foto-nara.webp";
+import { FlagBrazil, FlagUSA, FlagIreland } from "@/components/ui/flag-icon";
 
 const WHATSAPP_NUMBER = "5517991556246";
 const BASE_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=`;
@@ -787,8 +788,9 @@ function MidiaKitPage() {
                     </span>
                     <span className="text-xs font-semibold text-slate-500">Polo Principal</span>
                   </div>
-                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950">
-                    Bebedouro — SP
+                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950 flex items-center gap-2">
+                    <FlagBrazil className="h-4 w-5.5 rounded-xs shadow-2xs" />
+                    <span>Bebedouro — SP</span>
                   </h4>
                   <div className="mt-1 flex items-baseline gap-2">
                     <p className="font-display text-3xl font-extrabold text-[#FF5500]">78,5%</p>
@@ -807,8 +809,9 @@ function MidiaKitPage() {
                     </span>
                     <span className="text-xs font-semibold text-slate-500">Agronegócio</span>
                   </div>
-                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950">
-                    Ribeirão Preto — SP
+                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950 flex items-center gap-2">
+                    <FlagBrazil className="h-4 w-5.5 rounded-xs shadow-2xs" />
+                    <span>Ribeirão Preto — SP</span>
                   </h4>
                   <div className="mt-1 flex items-baseline gap-2">
                     <p className="font-display text-3xl font-extrabold text-slate-900">10,5%</p>
@@ -829,8 +832,9 @@ function MidiaKitPage() {
                       Parques & Maratonas
                     </span>
                   </div>
-                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950">
-                    São Paulo — SP
+                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950 flex items-center gap-2">
+                    <FlagBrazil className="h-4 w-5.5 rounded-xs shadow-2xs" />
+                    <span>São Paulo — SP</span>
                   </h4>
                   <div className="mt-1 flex items-baseline gap-2">
                     <p className="font-display text-3xl font-extrabold text-slate-900">3,0%</p>
@@ -844,13 +848,47 @@ function MidiaKitPage() {
               </div>
 
               {/* Online e demais cidades */}
-              <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center text-xs text-slate-600">
-                <span className="font-bold text-slate-900">
-                  8,0% em Demais Regiões & Assessoria Online:
-                </span>{" "}
-                Atletas conectados e comitivas em Colina, Viradouro, Barretos, Cajobi, Matão, Jaú,
-                Curitiba, Campo Grande, Balneário Camboriú, além de alunos nos 🇺🇸 Estados Unidos e
-                🇮🇪 Irlanda.
+              <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5 text-center shadow-xs">
+                <h4 className="font-display text-sm font-bold text-slate-950">
+                  8,0% em Demais Regiões & Assessoria Online (+16 Alunos)
+                </h4>
+                <p className="mx-auto mt-1 max-w-2xl text-xs text-slate-500">
+                  Além dos 3 polos principais, atletas Buzzini treinam e competem representando a assessoria em várias regiões do Brasil e no exterior:
+                </p>
+                <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50/90 px-3 py-1.5 text-xs font-bold text-emerald-900 shadow-2xs">
+                    <FlagBrazil className="h-3.5 w-5 rounded-[2px] shadow-2xs" />
+                    <span>Brasil (11+ Cidades)</span>
+                  </span>
+                  {[
+                    "Colina",
+                    "Viradouro",
+                    "Barretos",
+                    "Cajobi",
+                    "Matão",
+                    "Jaú",
+                    "Taquaral",
+                    "Taiúva",
+                    "Curitiba",
+                    "Campo Grande",
+                    "Balneário Camboriú",
+                  ].map((city) => (
+                    <span
+                      key={city}
+                      className="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 shadow-2xs"
+                    >
+                      {city}
+                    </span>
+                  ))}
+                  <span className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50/90 px-3 py-1.5 text-xs font-bold text-blue-900 shadow-2xs">
+                    <FlagUSA className="h-3.5 w-5 rounded-[2px] shadow-2xs" />
+                    <span>Estados Unidos (EUA)</span>
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50/90 px-3 py-1.5 text-xs font-bold text-emerald-900 shadow-2xs">
+                    <FlagIreland className="h-3.5 w-5 rounded-[2px] shadow-2xs" />
+                    <span>Irlanda</span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>

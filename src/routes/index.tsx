@@ -39,6 +39,7 @@ import fotoHudson from "@/assets/foto-hudson.webp";
 import fotoRodrigo from "@/assets/foto_rodrigo.webp.asset.json";
 import fotoIgor from "@/assets/foto_igor.webp.asset.json";
 import whatsappIcon from "@/assets/whatsapp.webp";
+import { FlagBrazil, FlagUSA, FlagIreland } from "@/components/ui/flag-icon";
 import { sendGTMEvent } from "@/lib/gtm";
 import video01 from "@/assets/depoiments/video01.mp4.asset.json";
 import video01Poster from "@/assets/depoiments/video01.webp";
@@ -1094,13 +1095,13 @@ function Locations() {
           </div>
           <div className="relative z-10 mx-auto mt-3.5 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-2 font-mono text-[10px] uppercase text-muted shadow-[0_10px_25px_rgba(0,0,0,0.08)] backdrop-blur-sm sm:rounded-full">
             <span>
-              <b className="text-primary">1</b> Bebedouro
+              <b className="text-primary">1</b> Bebedouro <FlagBrazil className="h-2.5 w-3.5 rounded-[1px]" />
             </span>
             <span>
-              <b className="text-primary">2</b> Ribeirão Preto
+              <b className="text-primary">2</b> Ribeirão Preto <FlagBrazil className="h-2.5 w-3.5 rounded-[1px]" />
             </span>
             <span>
-              <b className="text-primary">3</b> São Paulo
+              <b className="text-primary">3</b> São Paulo <FlagBrazil className="h-2.5 w-3.5 rounded-[1px]" />
             </span>
           </div>
         </div>
@@ -1119,7 +1120,7 @@ function Locations() {
                   <MapPin aria-hidden="true" className="size-4" />
                 </div>
                 <div>
-                  <p className="font-display text-lg font-semibold text-foreground">{item.name}</p>
+                  <p className="font-display text-lg font-semibold text-foreground flex items-center gap-2"><span>{item.name}</span><FlagBrazil className="inline-block h-3 w-4 rounded-[1px]" /></p>
                   <p className="mt-0.5 font-mono text-[10px] uppercase text-primary">
                     {item.state}
                   </p>
@@ -1133,7 +1134,7 @@ function Locations() {
               </div>
               <div>
                 <p className="font-display text-lg font-semibold text-foreground">Online</p>
-                <p className="mt-0.5 font-mono text-[10px] uppercase text-primary">Todo o Brasil</p>
+                <p className="mt-0.5 font-mono text-[10px] uppercase text-primary flex items-center gap-1.5 flex-wrap"><span>Todo o Brasil e Exterior</span><span className="inline-flex items-center gap-1"><FlagBrazil className="inline-block h-2.5 w-3.5 rounded-[1px]" /><FlagUSA className="inline-block h-2.5 w-3.5 rounded-[1px]" /><FlagIreland className="inline-block h-2.5 w-3.5 rounded-[1px]" /></span></p>
                 <p className="mt-1 font-mono text-xs text-muted">
                   Planilha personalizada e acompanhamento onde você estiver.
                 </p>
