@@ -25,7 +25,19 @@ const companyInquirySchema = z.object({
   website: z.string().max(0),
 });
 
-const MAX_COMPANY_INQUIRY_BYTES = 10_000;
+const midiaKitInquirySchema = z.object({
+  name: z.string().trim().min(2).max(120),
+  email: z.string().trim().email().max(254),
+  company: z.string().trim().min(2).max(160),
+  role: z.string().trim().max(120).optional().default(""),
+  phone: z.string().trim().min(6).max(40),
+  formats: z.string().trim().max(500).optional().default(""),
+  message: z.string().trim().max(1000).optional().default(""),
+  consent: z.literal(true),
+  website: z.string().max(0).optional().default(""),
+});
+
+const MAX_INQUIRY_BYTES = 10_000;
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -59,11 +71,7 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   });
 }
 
-async function handleCompanyInquiry(request: Request): Promise<Response> {
-  if (request.method !== "POST") {
-    return Response.json({ error: "Método não permitido." }, { status: 405 });
-  }
-
+function validateOrigin(request: Request): Response | null {
   const origin = request.headers.get("origin");
   if (origin) {
     try {
@@ -74,20 +82,30 @@ async function handleCompanyInquiry(request: Request): Promise<Response> {
       return Response.json({ error: "Origem da solicitação inválida." }, { status: 403 });
     }
   }
+  return null;
+}
+
+async function handleCompanyInquiry(request: Request): Promise<Response> {
+  if (request.method !== "POST") {
+    return Response.json({ error: "Método não permitido." }, { status: 405 });
+  }
+
+  const originCheck = validateOrigin(request);
+  if (originCheck) return originCheck;
 
   if (!request.headers.get("content-type")?.includes("application/json")) {
     return Response.json({ error: "Formato de solicitação inválido." }, { status: 415 });
   }
 
   const contentLength = Number(request.headers.get("content-length") ?? 0);
-  if (contentLength > MAX_COMPANY_INQUIRY_BYTES) {
+  if (contentLength > MAX_INQUIRY_BYTES) {
     return Response.json({ error: "Solicitação muito grande." }, { status: 413 });
   }
 
   let payload: unknown;
   try {
     const body = await request.text();
-    if (new TextEncoder().encode(body).byteLength > MAX_COMPANY_INQUIRY_BYTES) {
+    if (new TextEncoder().encode(body).byteLength > MAX_INQUIRY_BYTES) {
       return Response.json({ error: "Solicitação muito grande." }, { status: 413 });
     }
     payload = JSON.parse(body);
@@ -139,6 +157,78 @@ async function handleCompanyInquiry(request: Request): Promise<Response> {
   }
 }
 
+async function handleMidiaKitInquiry(request: Request): Promise<Response> {
+  if (request.method !== "POST") {
+    return Response.json({ error: "Método não permitido." }, { status: 405 });
+  }
+
+  const originCheck = validateOrigin(request);
+  if (originCheck) return originCheck;
+
+  if (!request.headers.get("content-type")?.includes("application/json")) {
+    return Response.json({ error: "Formato de solicitação inválido." }, { status: 415 });
+  }
+
+  const contentLength = Number(request.headers.get("content-length") ?? 0);
+  if (contentLength > MAX_INQUIRY_BYTES) {
+    return Response.json({ error: "Solicitação muito grande." }, { status: 413 });
+  }
+
+  let payload: unknown;
+  try {
+    const body = await request.text();
+    if (new TextEncoder().encode(body).byteLength > MAX_INQUIRY_BYTES) {
+      return Response.json({ error: "Solicitação muito grande." }, { status: 413 });
+    }
+    payload = JSON.parse(body);
+  } catch {
+    return Response.json({ error: "Não foi possível ler os dados enviados." }, { status: 400 });
+  }
+
+  const parsed = midiaKitInquirySchema.safeParse(payload);
+  if (!parsed.success) {
+    return Response.json(
+      { error: "Confira os campos obrigatórios do formulário." },
+      { status: 400 },
+    );
+  }
+
+  try {
+    const result = await sendTemplateEmail('midia-kit-inquiry', 'assessoria@buzzini.com.br', {
+      templateData: parsed.data,
+      replyTo: parsed.data.email,
+      idempotencyKey: `midia-kit-${crypto.randomUUID()}`,
+    });
+    if (!result.sent) {
+      return Response.json({ ok: false, code: 'recipient_suppressed', error: 'O recebimento por e-mail está indisponível. Entre em contato pelo WhatsApp.' });
+    }
+    return Response.json({ ok: true });
+  } catch (error) {
+    if (error instanceof EmailAPIError) {
+      if (error.code === 'domain_not_verified' || error.code === 'emails_disabled') {
+        return Response.json(
+          { ok: false, code: error.code, error: 'O envio por e-mail ainda não está disponível. Tente novamente mais tarde ou fale com a equipe pelo WhatsApp.' },
+        );
+      }
+      if (error.status === 429) {
+        const retryAfter = error.retryAfterSeconds ?? 60;
+        return Response.json(
+          { ok: false, code: 'rate_limited', error: 'O envio está temporariamente ocupado. Aguarde alguns instantes antes de tentar novamente.' },
+          { status: 429, headers: { 'Retry-After': String(retryAfter) } },
+        );
+      }
+    }
+    console.error(
+      "Midia kit inquiry email delivery failed",
+      error instanceof Error ? error.name : "Unknown error",
+      error instanceof EmailAPIError ? error.code : 'unexpected_failure',
+    );
+    return Response.json(
+      { ok: false, code: 'delivery_failed', error: "Não foi possível enviar a solicitação. Tente novamente mais tarde." },
+    );
+  }
+}
+
 function isH3SwallowedErrorBody(body: string): boolean {
   try {
     const payload = JSON.parse(body) as { unhandled?: unknown; message?: unknown };
@@ -154,6 +244,9 @@ export default {
       const url = new URL(request.url);
       if (url.pathname === "/api/empresa-contato") {
         return await handleCompanyInquiry(request);
+      }
+      if (url.pathname === "/api/midia-kit-contato") {
+        return await handleMidiaKitInquiry(request);
       }
 
       const handler = await getServerEntry();

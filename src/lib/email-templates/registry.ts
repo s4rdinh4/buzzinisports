@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react'
 import { template as companyInquiry } from './company-inquiry'
+import { template as midiaKitInquiry } from './midia-kit-inquiry'
 
 export interface TemplateEntry {
   component: ComponentType<any>
@@ -20,4 +21,5 @@ export interface TemplateEntry {
  */
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'company-inquiry': companyInquiry,
+  'midia-kit-inquiry': midiaKitInquiry,
 }
