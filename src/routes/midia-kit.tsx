@@ -632,7 +632,7 @@ function MidiaKitPage() {
                 </div>
                 <div>
                   <h4 className="font-display text-xs font-bold text-slate-950">
-                    Corpo Técnico de8 Professores
+                    Corpo Técnico de Professores
                   </h4>
                   <p className="text-[0.7rem] text-slate-500">
                     Acompanhamento especializado para corredores e triatletas
@@ -853,7 +853,8 @@ function MidiaKitPage() {
                   8,0% em Demais Regiões & Assessoria Online (+16 Alunos)
                 </h4>
                 <p className="mx-auto mt-1 max-w-2xl text-xs text-slate-500">
-                  Além dos 3 polos principais, atletas Buzzini treinam e competem representando a assessoria em várias regiões do Brasil e no exterior:
+                  Além dos 3 polos principais, atletas Buzzini treinam e competem representando a
+                  assessoria em várias regiões do Brasil e no exterior:
                 </p>
                 <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
                   <span className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50/90 px-3 py-1.5 text-xs font-bold text-emerald-900 shadow-2xs">
