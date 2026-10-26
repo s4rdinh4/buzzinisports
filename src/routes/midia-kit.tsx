@@ -3,25 +3,37 @@ import { useState, type FormEvent } from "react";
 import {
   Activity,
   ArrowRight,
+  ArrowUpRight,
+  Award,
   BarChart3,
   Building2,
   Calendar,
   Check,
   CheckCircle2,
+  ChevronDown,
+  ChevronRight,
   Copy,
+  ExternalLink,
+  Eye,
   Flame,
   Globe2,
   GraduationCap,
+  HeartHandshake,
   HeartPulse,
+  HelpCircle,
   Instagram,
+  Layers,
   Mail,
   MapPin,
   Megaphone,
   MessageCircle,
+  Phone,
   PieChart,
   Send,
   Share2,
+  ShieldCheck,
   Sparkles,
+  Star,
   Target,
   Trophy,
   Users,
@@ -30,6 +42,12 @@ import {
 } from "lucide-react";
 
 import buzziniLogo from "@/assets/logo_buzzini.svg";
+import teamPhoto from "@/assets/time_buzzini.jpg";
+import heroRunner1600 from "@/assets/hero-runner-1600.webp";
+import faixaBuzzini from "@/assets/faixa-buzzini.webp";
+import fotoLarissa from "@/assets/foto-larissa.webp";
+import fotoHudson from "@/assets/foto-hudson.webp";
+import fotoNara from "@/assets/foto-nara.webp";
 
 const WHATSAPP_NUMBER = "5517988026622";
 const BASE_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=`;
@@ -43,7 +61,7 @@ export const Route = createFileRoute("/midia-kit")({
       {
         name: "description",
         content:
-          "Mídia Kit oficial da Buzzini Sports. Conecte sua marca a 200 alunos ativos, 24 provas ao ano, presença em 3 polos (Bebedouro, Ribeirão, SP) e 320 mil contas alcançadas por mês.",
+          "Mídia Kit oficial da Buzzini Sports. Conecte sua marca a 200 alunos ativos, 24 provas ao ano, presença em 3 polos (Bebedouro, Ribeirão, SP) e mais de 320 mil contas alcançadas por mês.",
       },
       { property: "og:title", content: "Mídia Kit Oficial 2026 | Buzzini Sports" },
       {
@@ -75,7 +93,7 @@ const PARTNERSHIP_OPTIONS: PartnershipOption[] = [
     id: "race-tent",
     name: "Espaço Físico & Backdrop na Tenda Oficial (24 Provas/Ano)",
     category: "tenda",
-    reachEstimate: "60 a 140 alunos por prova + público geral",
+    reachEstimate: "60 a 140 alunos por prova + público da arena",
     monthlyImpact: 85000,
     description:
       "Sua marca em destaque na arena física das 24 provas do calendário anual (Live! Run, Track&Field, Night Run, etc.) com banner, totem e backdrop oficial para fotos de pódio e medalhas.",
@@ -87,7 +105,7 @@ const PARTNERSHIP_OPTIONS: PartnershipOption[] = [
     reachEstimate: "320 mil contas alcançadas organicamente",
     monthlyImpact: 140000,
     description:
-      "Publicações conjuntas em collab, cobertura dos treinos nos Stories e menção no ecossistema com mais de 320.000 contas alcançadas mensalmente.",
+      "Publicações conjuntas em collab no perfil oficial (@buzzinisports), cobertura dos treinos nos Stories e menção orgânica no ecossistema de endurance.",
   },
   {
     id: "major-races-activation",
@@ -105,16 +123,16 @@ const PARTNERSHIP_OPTIONS: PartnershipOption[] = [
     reachEstimate: "Entrega em mãos para 200 alunos / 300 pessoas",
     monthlyImpact: 35000,
     description:
-      "Distribuição física de amostras, suplementos, hidratação ou produtos nos kits de prova e treinos semanais da assessoria.",
+      "Distribuição física de amostras, suplementos, hidratação ou produtos nos kits de prova e treinos semanais da assessoria esportiva.",
   },
   {
     id: "special-train",
     name: "Naming Rights de Treinão Temático / Shake Out Run",
     category: "experiencia",
-    reachEstimate: "Treino exclusivo com café da manhã e fotos",
+    reachEstimate: "Treino exclusivo com café da manhã e cobertura fotográfica",
     monthlyImpact: 50000,
     description:
-      "Treino especial 'Powered by Sua Marca' (como os já realizados com Centauro/Fila e Forcell Rio), com café especial e engajamento presencial dos atletas.",
+      "Treino especial 'Powered by Sua Marca' (como os já realizados com Centauro/Fila e Forcell Rio), com café especial e engajamento presencial de atletas.",
   },
   {
     id: "own-events",
@@ -123,7 +141,7 @@ const PARTNERSHIP_OPTIONS: PartnershipOption[] = [
     reachEstimate: "Famílias e comunidade regional de corrida",
     monthlyImpact: 30000,
     description:
-      "Ativação nos eventos proprietários da Buzzini, como a corrida Morilo's PET, palestras técnicas e apresentações pré-prova.",
+      "Ativação nos eventos proprietários da Buzzini, como a corrida Morilo's PET, ciclos de palestras esportivas e encontros pré-prova.",
   },
   {
     id: "vip-club-discounts",
@@ -133,6 +151,30 @@ const PARTNERSHIP_OPTIONS: PartnershipOption[] = [
     monthlyImpact: 25000,
     description:
       "Divulgação de cupom exclusivo nos grupos oficiais de WhatsApp e recomendação ativa e de confiança dos 8 professores da equipe.",
+  },
+];
+
+// FAQ items for brand managers & sponsors
+const FAQS = [
+  {
+    q: "Existe exclusividade de categoria comercial para a minha marca?",
+    a: "Sim! Na Cota Master, sua marca garante exclusividade total no segmento (por exemplo: apenas um banco/cooperativa, uma marca de vestuário, uma marca de suplementação ou um plano de saúde). Nas demais cotas, garantimos que não haja marcas concorrentes diretas em uma mesma ativação.",
+  },
+  {
+    q: "Podemos enviar produtos e amostras para os kits dos alunos (Sampling)?",
+    a: "Com certeza. O sampling direto é um dos pilares mais fortes da Buzzini Sports. Entregamos os produtos em mãos durante os treinos semanais ou nos kits de prova oficiais, assegurando experimentação real por atletas de corrida e endurance.",
+  },
+  {
+    q: "Vocês produzem fotos e vídeos profissionais com a nossa marca?",
+    a: "Sim. Em todas as 24 provas do calendário anual e viagens para maratonas, a Buzzini conta com cobertura fotográfica e de vídeo profissional na tenda, backdrop de pódio e percurso, gerando material de alta resolução para uso nas redes de ambas as partes.",
+  },
+  {
+    q: "Por que a Buzzini não insere logos em uniformes e camisetas?",
+    a: "Nossa política preserva a identidade visual minimalista do uniforme e valoriza muito mais as marcas parceiras em canais de alto impacto real: tendas físicas de destaque nas 24 provas, backdrops oficiais de medalha, collabs no Instagram com mais de 320 mil contas de alcance e sampling direto na mão do corredor.",
+  },
+  {
+    q: "Qual o prazo de ativação após alinhamento da proposta?",
+    a: "Nossa equipe comercial e técnica é extremamente ágil. Em até 5 dias úteis após a confirmação, iniciamos a divulgação nos grupos oficiais de WhatsApp, colabs no Instagram e inclusão da marca nas arenas de prova seguintes.",
   },
 ];
 
@@ -150,15 +192,16 @@ function MidiaKitPage() {
   const [interestNote, setInterestNote] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // Toggle option selection
+  // Toggle option selection in the simulator
   const toggleOption = (id: string) => {
     setSelectedOptions((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
 
-  // Copy media kit link to clipboard (for sending by email)
+  // Copy media kit link to clipboard (optimized for sending by email)
   const handleCopyLink = () => {
     if (typeof window !== "undefined" && navigator?.clipboard) {
       navigator.clipboard.writeText(window.location.href || MEDIA_KIT_URL);
@@ -167,7 +210,7 @@ function MidiaKitPage() {
     }
   };
 
-  // Calculate estimated total impact
+  // Calculate estimated total monthly impact
   const totalImpact = selectedOptions.reduce((acc, currId) => {
     const item = PARTNERSHIP_OPTIONS.find((opt) => opt.id === currId);
     return acc + (item?.monthlyImpact || 0);
@@ -198,21 +241,37 @@ function MidiaKitPage() {
 
   return (
     <div className="relative min-h-screen bg-[#F8FAFC] text-slate-800 antialiased selection:bg-orange-500/20 selection:text-orange-950 font-sans">
-      {/* Inline styles for modern subtle animations */}
+      {/* Modern CSS keyframes for fluid animations */}
       <style>{`
         @keyframes floatSlow {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-6px); }
+          50% { transform: translateY(-7px); }
         }
         @keyframes pulseSoft {
           0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.04); opacity: 0.9; }
+          50% { transform: scale(1.05); opacity: 0.9; }
+        }
+        @keyframes shimmerWave {
+          0% { transform: translateX(-150%); }
+          100% { transform: translateX(150%); }
         }
         .animate-float-slow {
-          animation: floatSlow 4.5s ease-in-out infinite;
+          animation: floatSlow 5s ease-in-out infinite;
         }
         .animate-pulse-soft {
-          animation: pulseSoft 2.8s ease-in-out infinite;
+          animation: pulseSoft 3s ease-in-out infinite;
+        }
+        .shimmer-effect {
+          position: relative;
+          overflow: hidden;
+        }
+        .shimmer-effect::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          transform: translateX(-150%);
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+          animation: shimmerWave 3.5s infinite;
         }
       `}</style>
 
@@ -225,7 +284,7 @@ function MidiaKitPage() {
       </a>
 
       {/* Top Floating / Fixed Nav */}
-      <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-md transition-colors">
+      <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-md transition-all">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
           <a
             href="/"
@@ -252,6 +311,9 @@ function MidiaKitPage() {
             <a href="#numeros" className="transition-colors hover:text-[#FF5500]">
               Números
             </a>
+            <a href="#galeria" className="transition-colors hover:text-[#FF5500]">
+              Pista & Atletas
+            </a>
             <a href="#perfil" className="transition-colors hover:text-[#FF5500]">
               Perfil dos Alunos
             </a>
@@ -259,16 +321,19 @@ function MidiaKitPage() {
               Regiões
             </a>
             <a href="#provas" className="transition-colors hover:text-[#FF5500]">
-              24 Provas & Maratonas
+              24 Provas
             </a>
             <a href="#cases" className="transition-colors hover:text-[#FF5500]">
-              Cases de Sucesso
-            </a>
-            <a href="#formatos" className="transition-colors hover:text-[#FF5500]">
-              5 Pilares
+              Cases
             </a>
             <a href="#simulador" className="transition-colors hover:text-[#FF5500]">
               Simulador
+            </a>
+            <a href="#cotas" className="transition-colors hover:text-[#FF5500]">
+              Cotas
+            </a>
+            <a href="#faq" className="transition-colors hover:text-[#FF5500]">
+              FAQ
             </a>
           </nav>
 
@@ -307,20 +372,20 @@ function MidiaKitPage() {
 
       {/* Main Content Area */}
       <main id="main-content" className="relative">
-        {/* Decorative Modern Background Ambient Light */}
+        {/* Modern Ambient Light & Mesh Gradient */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 -z-10 flex justify-center overflow-hidden"
         >
-          <div className="h-[520px] w-[1100px] -translate-y-1/3 rounded-full bg-gradient-to-b from-orange-200/50 via-amber-100/30 to-transparent blur-3xl" />
-          <div className="absolute right-0 top-72 h-[380px] w-[450px] rounded-full bg-orange-100/60 blur-3xl" />
-          <div className="absolute left-0 top-96 h-[380px] w-[450px] rounded-full bg-sky-100/50 blur-3xl" />
+          <div className="h-[540px] w-[1200px] -translate-y-1/3 rounded-full bg-gradient-to-b from-orange-200/50 via-amber-100/30 to-transparent blur-3xl" />
+          <div className="absolute right-0 top-60 h-[420px] w-[500px] rounded-full bg-orange-100/60 blur-3xl" />
+          <div className="absolute left-0 top-80 h-[420px] w-[500px] rounded-full bg-sky-100/50 blur-3xl" />
         </div>
 
         {/* HERO SECTION */}
         <section className="relative px-4 pt-12 pb-16 sm:px-6 sm:pt-20 sm:pb-24 lg:px-8">
           <div className="mx-auto max-w-5xl text-center">
-            {/* Tag Badge */}
+            {/* Live Season Badge */}
             <div className="inline-flex items-center gap-2.5 rounded-full border border-orange-200/90 bg-white px-4 py-1.5 text-xs font-bold text-orange-700 shadow-sm animate-float-slow">
               <span className="relative flex size-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
@@ -328,8 +393,8 @@ function MidiaKitPage() {
               </span>
               <span>Apresentação Comercial Oficial • Temporada 2026</span>
               <span className="hidden text-slate-300 sm:inline">•</span>
-              <span className="hidden text-slate-500 font-medium sm:inline">
-                2 Anos e 7 Meses de Expansão
+              <span className="hidden text-slate-600 font-medium sm:inline">
+                2 Anos e 7 Meses de Expansão Contínua
               </span>
             </div>
 
@@ -338,7 +403,7 @@ function MidiaKitPage() {
               Conecte sua marca a quem vive a corrida com{" "}
               <span className="relative inline-block text-[#FF5500]">
                 fidelidade, paixão e presença real
-                <span className="absolute -bottom-1.5 left-0 h-1.5 w-full rounded-full bg-orange-300/60" />
+                <span className="absolute -bottom-1.5 left-0 h-1.5 w-full rounded-full bg-orange-300/70" />
               </span>
               .
             </h1>
@@ -359,14 +424,14 @@ function MidiaKitPage() {
               Instagram.
             </p>
 
-            {/* CTAs */}
+            {/* Action Buttons */}
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3.5">
               <a
-                href="#contato"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#FF5500] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition-all hover:-translate-y-0.5 hover:bg-[#E64D00] hover:shadow-xl hover:shadow-orange-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5500]"
+                href="#simulador"
+                className="shimmer-effect inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#FF5500] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition-all hover:-translate-y-0.5 hover:bg-[#E64D00] hover:shadow-xl hover:shadow-orange-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5500]"
               >
                 <Zap className="size-4" />
-                <span>Quero Apoiar / Patrocinar</span>
+                <span>Simular Minha Estratégia</span>
                 <ArrowRight className="size-4" />
               </a>
 
@@ -400,13 +465,12 @@ function MidiaKitPage() {
               </button>
             </div>
 
-            {/* Email send notification banner */}
             <p className="mt-3 text-xs text-slate-500">
-              💡 Enviando para a sua diretoria por e-mail? Use o botão acima para copiar o link direto da apresentação web interativa.
+              💡 Enviando para sua diretoria por e-mail? Use o botão acima para copiar o link direto da apresentação web interativa.
             </p>
           </div>
 
-          {/* KPI GRID HIGHLIGHTS - 5 BIG CARDS */}
+          {/* 5 BIG BENTO KPI CARDS */}
           <div id="numeros" className="mx-auto mt-14 max-w-6xl scroll-mt-24">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {/* Card 1: Alunos */}
@@ -425,7 +489,7 @@ function MidiaKitPage() {
                   </span>
                   <p className="text-xs font-bold text-[#FF5500]">Alunos Ativos Hoje</p>
                   <p className="mt-1.5 text-[0.73rem] leading-relaxed text-slate-500">
-                    Evolução sólida de 130 para 200 alunos. Mais de 300 pessoas impactadas no ecossistema direto.
+                    Evolução sólida de 130 para 200 alunos. Mais de 300 pessoas no ecossistema direto.
                   </p>
                 </div>
               </div>
@@ -522,10 +586,122 @@ function MidiaKitPage() {
           </div>
         </section>
 
+        {/* SECTION: VISUAL GALLERY SHOWCASE (A BUZZINI EM AÇÃO) */}
+        <section id="galeria" className="scroll-mt-20 py-16 sm:py-24 border-t border-slate-200/80 bg-white">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+              <div>
+                <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF5500]">
+                  Presença & Credibilidade Visual
+                </p>
+                <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+                  A Buzzini Sports acontecendo no mundo real
+                </h2>
+              </div>
+              <p className="max-w-md text-sm leading-relaxed text-slate-600">
+                Mais do que números na internet: uma comunidade vibrante e unida que lota arenas de corrida, sobe em pódios e consome produtos de marcas parceiras.
+              </p>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+              {/* Photo 1: Team delegation celebration */}
+              <div className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-md">
+                <div className="relative h-72 w-full overflow-hidden">
+                  <img
+                    src={teamPhoto}
+                    alt="Equipe Buzzini Sports reunida"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                  <span className="rounded-full bg-[#FF5500] px-3 py-1 text-[0.65rem] font-extrabold uppercase tracking-wider text-white">
+                    🏆 Maior Assessoria
+                  </span>
+                  <h3 className="mt-2.5 font-display text-lg font-bold">
+                    Força Coletiva & Delegações
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-300 leading-relaxed">
+                    Presença maciça de até 140 atletas em uma mesma prova, dominando pódios e arenas por onde passa.
+                  </p>
+                </div>
+              </div>
+
+              {/* Photo 2: Faixa pórtico de chegada */}
+              <div className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-md">
+                <div className="relative h-72 w-full overflow-hidden">
+                  <img
+                    src={faixaBuzzini}
+                    alt="Linha de chegada Buzzini"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                  <span className="rounded-full bg-amber-500 px-3 py-1 text-[0.65rem] font-extrabold uppercase tracking-wider text-slate-950">
+                    Superação Real
+                  </span>
+                  <h3 className="mt-2.5 font-display text-lg font-bold">
+                    Linha de Chegada & Conquistas
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-300 leading-relaxed">
+                    Média de 60 atletas cruzando pórticos em cada etapa, gerando fotos de alto engajamento emocional.
+                  </p>
+                </div>
+              </div>
+
+              {/* Photo 3: Hero runner em treino */}
+              <div className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-md">
+                <div className="relative h-72 w-full overflow-hidden">
+                  <img
+                    src={heroRunner1600}
+                    alt="Atleta em treino Buzzini"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                  <span className="rounded-full bg-sky-500 px-3 py-1 text-[0.65rem] font-extrabold uppercase tracking-wider text-slate-950">
+                    Rotina & Foco
+                  </span>
+                  <h3 className="mt-2.5 font-display text-lg font-bold">
+                    Treinamento & Consumo Diário
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-300 leading-relaxed">
+                    Treinos semanais com uso intensivo de tênis, vestuário, nutrição esportiva e suplementação.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Coaches bar */}
+            <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-2">
+                  <img src={fotoHudson} alt="Coach Hudson" className="size-10 rounded-full border-2 border-white object-cover" />
+                  <img src={fotoLarissa} alt="Coach Larissa" className="size-10 rounded-full border-2 border-white object-cover" />
+                  <img src={fotoNara} alt="Coach Nara" className="size-10 rounded-full border-2 border-white object-cover" />
+                </div>
+                <div>
+                  <h4 className="font-display text-sm font-bold text-slate-950">Corpo Técnico Qualificado</h4>
+                  <p className="text-xs text-slate-500">8 treinadores e especialistas em biomecânica, corrida e triathlon</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-[#FF5500]">
+                <span>Acompanhamento personalizado em cada treino</span>
+                <CheckCircle2 className="size-4" />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SECTION: PERFIL REAL DOS ALUNOS */}
         <section
           id="perfil"
-          className="scroll-mt-20 border-y border-slate-200/80 bg-white py-16 sm:py-24"
+          className="scroll-mt-20 border-t border-slate-200/80 bg-slate-50/50 py-16 sm:py-24"
         >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
@@ -545,7 +721,7 @@ function MidiaKitPage() {
 
             <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {/* Box 1: Gênero (Forte Presença Feminina) */}
-              <div className="rounded-2xl border border-slate-200/90 bg-slate-50/60 p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:bg-white hover:shadow-md">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:shadow-md">
                 <div className="flex items-center gap-3">
                   <div className="flex size-10 items-center justify-center rounded-xl bg-rose-100 text-rose-600">
                     <PieChart className="size-5" />
@@ -592,7 +768,7 @@ function MidiaKitPage() {
               </div>
 
               {/* Box 2: Faixa Etária */}
-              <div className="rounded-2xl border border-slate-200/90 bg-slate-50/60 p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:bg-white hover:shadow-md">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:shadow-md">
                 <div className="flex items-center gap-3">
                   <div className="flex size-10 items-center justify-center rounded-xl bg-orange-100 text-[#FF5500]">
                     <Activity className="size-5" />
@@ -615,12 +791,12 @@ function MidiaKitPage() {
                 </div>
 
                 <p className="mt-5 text-[0.73rem] leading-relaxed text-slate-500">
-                  Público em plena fase produtiva, tomadores de decisão e abertos a inovações que agregam saúde e qualidade de vida.
+                  Público em plena fase produtiva, tomadores de decisão e abertos a inovações que agregam saúde e bem-estar.
                 </p>
               </div>
 
               {/* Box 3: Nível de Treinamento */}
-              <div className="rounded-2xl border border-slate-200/90 bg-slate-50/60 p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:bg-white hover:shadow-md">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:shadow-md">
                 <div className="flex items-center gap-3">
                   <div className="flex size-10 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
                     <Target className="size-5" />
@@ -634,13 +810,13 @@ function MidiaKitPage() {
                 </div>
 
                 <div className="mt-6 space-y-2 text-xs">
-                  <div className="rounded-xl border border-slate-200 bg-white p-2.5 shadow-2xs">
+                  <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-2.5">
                     <strong className="text-slate-900">Iniciantes & Intermediários:</strong>
                     <p className="text-[0.7rem] text-slate-500">
                       Predominante — formando hábitos esportivos e adquirindo seus primeiros tênis e kits.
                     </p>
                   </div>
-                  <div className="rounded-xl border border-slate-200 bg-white p-2.5 shadow-2xs">
+                  <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-2.5">
                     <strong className="text-slate-900">Avançados & Triathlon:</strong>
                     <p className="text-[0.7rem] text-slate-500">
                       Corredores de maratonas e provas extremas como Ironman, servindo de inspiração para toda a assessoria.
@@ -650,7 +826,7 @@ function MidiaKitPage() {
               </div>
 
               {/* Box 4: Perfil Econômico & Ticket */}
-              <div className="rounded-2xl border border-slate-200/90 bg-slate-50/60 p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:bg-white hover:shadow-md">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:shadow-md">
                 <div className="flex items-center gap-3">
                   <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
                     <Wallet className="size-5" />
@@ -681,7 +857,7 @@ function MidiaKitPage() {
         </section>
 
         {/* SECTION: PRESENÇA GEOGRÁFICA DETALHADA */}
-        <section id="geografia" className="scroll-mt-20 py-16 sm:py-24">
+        <section id="geografia" className="scroll-mt-20 py-16 sm:py-24 bg-white border-t border-slate-200/80">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF5500]">
@@ -766,7 +942,7 @@ function MidiaKitPage() {
             </div>
 
             {/* Other Cities / Online & International */}
-            <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+            <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50/60 p-6 text-center shadow-sm">
               <h4 className="font-display text-base font-bold text-slate-950">
                 Capilaridade Nacional e Internacional (+16 Alunos Online)
               </h4>
@@ -792,7 +968,7 @@ function MidiaKitPage() {
                 ].map((city) => (
                   <span
                     key={city}
-                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-800 transition-colors hover:border-orange-300 hover:bg-orange-50"
+                    className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 shadow-2xs transition-colors hover:border-orange-300 hover:bg-orange-50"
                   >
                     {city}
                   </span>
@@ -805,7 +981,7 @@ function MidiaKitPage() {
         {/* SECTION: 24 PROVAS POR ANO & FORÇA DE DELEGAÇÃO */}
         <section
           id="provas"
-          className="scroll-mt-20 border-t border-slate-200/80 bg-white py-16 sm:py-24"
+          className="scroll-mt-20 border-t border-slate-200/80 bg-slate-50/50 py-16 sm:py-24"
         >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
@@ -924,7 +1100,7 @@ function MidiaKitPage() {
             </div>
 
             {/* ESTRUTURA FÍSICA NA ARENA */}
-            <div className="mt-12 rounded-2xl border border-slate-200 bg-slate-50/70 p-6 shadow-sm">
+            <div className="mt-12 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
                 <div className="max-w-xl">
                   <span className="rounded-full bg-orange-100 border border-orange-300 px-3 py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-orange-800">
@@ -940,19 +1116,19 @@ function MidiaKitPage() {
                   </p>
                 </div>
                 <div className="grid grid-cols-2 gap-3 text-xs font-semibold text-slate-900">
-                  <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-3 shadow-2xs">
+                  <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 shadow-2xs">
                     <CheckCircle2 className="size-4 text-[#FF5500]" />
                     <span>Tenda Oficial Própria</span>
                   </div>
-                  <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-3 shadow-2xs">
+                  <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 shadow-2xs">
                     <CheckCircle2 className="size-4 text-[#FF5500]" />
                     <span>Backdrop de Medalhas</span>
                   </div>
-                  <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-3 shadow-2xs">
+                  <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 shadow-2xs">
                     <CheckCircle2 className="size-4 text-[#FF5500]" />
                     <span>Windbanners & Totens</span>
                   </div>
-                  <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-3 shadow-2xs">
+                  <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 p-3 shadow-2xs">
                     <CheckCircle2 className="size-4 text-[#FF5500]" />
                     <span>Ponto de Hidratação</span>
                   </div>
@@ -963,7 +1139,7 @@ function MidiaKitPage() {
         </section>
 
         {/* SECTION: HISTÓRICO COM MARCAS / CASES REAIS */}
-        <section id="cases" className="scroll-mt-20 py-16 sm:py-24">
+        <section id="cases" className="scroll-mt-20 py-16 sm:py-24 bg-white border-t border-slate-200/80">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF5500]">
@@ -1061,7 +1237,7 @@ function MidiaKitPage() {
             </div>
 
             {/* EVENTOS PRÓPRIOS DA BUZZINI */}
-            <div className="mt-12 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div className="mt-12 rounded-2xl border border-slate-200 bg-slate-50/70 p-6 shadow-sm">
               <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
                 <div>
                   <span className="rounded-full bg-orange-100 border border-orange-300 px-3 py-1 font-mono text-[0.68rem] font-bold uppercase tracking-wider text-orange-800">
@@ -1089,7 +1265,7 @@ function MidiaKitPage() {
         {/* SECTION: OS 5 PILARES QUE A BUZZINI OFERECE ÀS MARCAS */}
         <section
           id="formatos"
-          className="scroll-mt-20 border-t border-slate-200/80 bg-white py-16 sm:py-24"
+          className="scroll-mt-20 border-t border-slate-200/80 bg-slate-50/50 py-16 sm:py-24"
         >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
@@ -1107,7 +1283,7 @@ function MidiaKitPage() {
 
             <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {/* Pilar 1: Visibilidade */}
-              <div className="rounded-2xl border border-slate-200/90 bg-slate-50/60 p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:bg-white hover:shadow-md">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:shadow-md">
                 <div className="flex size-11 items-center justify-center rounded-xl bg-orange-100 text-[#FF5500]">
                   <Megaphone className="size-5" />
                 </div>
@@ -1120,7 +1296,7 @@ function MidiaKitPage() {
               </div>
 
               {/* Pilar 2: Retorno & Comunidade */}
-              <div className="rounded-2xl border border-slate-200/90 bg-slate-50/60 p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:bg-white hover:shadow-md">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:shadow-md">
                 <div className="flex size-11 items-center justify-center rounded-xl bg-orange-100 text-[#FF5500]">
                   <BarChart3 className="size-5" />
                 </div>
@@ -1133,7 +1309,7 @@ function MidiaKitPage() {
               </div>
 
               {/* Pilar 3: Redes Sociais */}
-              <div className="rounded-2xl border border-slate-200/90 bg-slate-50/60 p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:bg-white hover:shadow-md">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:shadow-md">
                 <div className="flex size-11 items-center justify-center rounded-xl bg-orange-100 text-[#FF5500]">
                   <Instagram className="size-5" />
                 </div>
@@ -1146,7 +1322,7 @@ function MidiaKitPage() {
               </div>
 
               {/* Pilar 4: Ativações & Sampling */}
-              <div className="rounded-2xl border border-slate-200/90 bg-slate-50/60 p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:bg-white hover:shadow-md">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:shadow-md">
                 <div className="flex size-11 items-center justify-center rounded-xl bg-orange-100 text-[#FF5500]">
                   <HeartPulse className="size-5" />
                 </div>
@@ -1159,7 +1335,7 @@ function MidiaKitPage() {
               </div>
 
               {/* Pilar 5: Individualidade */}
-              <div className="rounded-2xl border border-slate-200/90 bg-slate-50/60 p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:bg-white hover:shadow-md sm:col-span-2 lg:col-span-2">
+              <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm transition-all duration-300 hover:border-orange-400/50 hover:shadow-md sm:col-span-2 lg:col-span-2">
                 <div className="flex size-11 items-center justify-center rounded-xl bg-orange-100 text-[#FF5500]">
                   <Sparkles className="size-5" />
                 </div>
@@ -1177,12 +1353,12 @@ function MidiaKitPage() {
         {/* SECTION: SIMULADOR INTERATIVO DE IMPACTO */}
         <section
           id="simulador"
-          className="scroll-mt-20 border-y border-slate-200/80 bg-slate-50 py-16 sm:py-24"
+          className="scroll-mt-20 border-t border-slate-200/80 bg-white py-16 sm:py-24"
         >
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <span className="rounded-full bg-orange-100 border border-orange-300 px-3.5 py-1 font-mono text-xs font-bold uppercase tracking-wider text-orange-800">
-                Simulador Interativo
+                Simulador Interativo 2.0
               </span>
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
                 Monte a Estratégia de Ativação da sua Marca
@@ -1208,7 +1384,7 @@ function MidiaKitPage() {
                       onClick={() => toggleOption(opt.id)}
                       className={`flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all duration-200 ${
                         isChecked
-                          ? "border-[#FF5500] bg-orange-50/70 shadow-sm ring-1 ring-[#FF5500]/20"
+                          ? "border-[#FF5500] bg-orange-50/80 shadow-sm ring-1 ring-[#FF5500]/20"
                           : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/50"
                       }`}
                     >
@@ -1237,8 +1413,8 @@ function MidiaKitPage() {
 
               {/* Real-time Impact Summary Card */}
               <div className="lg:col-span-5">
-                <div className="sticky top-24 rounded-2xl border border-slate-200 bg-white p-6 shadow-xl">
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div className="sticky top-24 rounded-2xl border border-slate-200 bg-slate-50/80 p-6 shadow-xl">
+                  <div className="flex items-center justify-between border-b border-slate-200/80 pb-4">
                     <span className="font-display text-sm font-bold text-slate-950">
                       Projeção de Impacto Mensal
                     </span>
@@ -1257,7 +1433,7 @@ function MidiaKitPage() {
                     </p>
                   </div>
 
-                  <div className="mt-6 space-y-2.5 border-t border-slate-100 pt-4 text-xs text-slate-600">
+                  <div className="mt-6 space-y-2.5 border-t border-slate-200/80 pt-4 text-xs text-slate-600">
                     <div className="flex justify-between">
                       <span>Ações selecionadas:</span>
                       <strong className="text-slate-900">
@@ -1283,7 +1459,7 @@ function MidiaKitPage() {
                       href={`${BASE_WHATSAPP_URL}${customWhatsAppMsg}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF5500] px-4 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition-all hover:bg-[#E64D00] hover:shadow-xl hover:-translate-y-0.5"
+                      className="shimmer-effect inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF5500] px-4 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition-all hover:bg-[#E64D00] hover:shadow-xl hover:-translate-y-0.5"
                     >
                       <MessageCircle className="size-4" />
                       <span>Pedir Proposta para esta Seleção</span>
@@ -1299,7 +1475,7 @@ function MidiaKitPage() {
         </section>
 
         {/* SECTION: COTAS DE PATROCÍNIO SUGERIDAS */}
-        <section className="py-16 sm:py-24">
+        <section id="cotas" className="scroll-mt-20 py-16 sm:py-24 border-t border-slate-200/80 bg-slate-50/50">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF5500]">
@@ -1476,13 +1652,60 @@ function MidiaKitPage() {
           </div>
         </section>
 
+        {/* SECTION: FAQ INTERATIVO PARA MARCAS E PATROCINADORES */}
+        <section id="faq" className="scroll-mt-20 py-16 sm:py-24 border-t border-slate-200/80 bg-white">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <span className="rounded-full bg-slate-100 border border-slate-200 px-3.5 py-1 font-mono text-xs font-bold uppercase tracking-wider text-slate-700">
+                Tire suas dúvidas
+              </span>
+              <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+                Perguntas Frequentes de Marcas e Parceiros
+              </h2>
+              <p className="mx-auto mt-3 max-w-xl text-sm text-slate-600">
+                Respostas rápidas para as principais dúvidas de gestores de marketing antes de iniciar uma parceria com a Buzzini Sports.
+              </p>
+            </div>
+
+            <div className="mt-10 space-y-3">
+              {FAQS.map((faq, idx) => {
+                const isOpen = openFaq === idx;
+                return (
+                  <div
+                    key={faq.q}
+                    className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/50 transition-all"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaq(isOpen ? null : idx)}
+                      className="flex w-full items-center justify-between gap-4 p-5 text-left font-display text-sm font-bold text-slate-900 hover:text-[#FF5500]"
+                    >
+                      <span>{faq.q}</span>
+                      <ChevronDown
+                        className={`size-4 shrink-0 text-slate-400 transition-transform duration-300 ${
+                          isOpen ? "rotate-180 text-[#FF5500]" : ""
+                        }`}
+                      />
+                    </button>
+                    {isOpen && (
+                      <div className="border-t border-slate-200/60 bg-white px-5 py-4 text-xs leading-relaxed text-slate-600">
+                        {faq.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* SECTION: FORMULÁRIO DE CONTATO & WHATSAPP DIRETO */}
         <section
           id="contato"
-          className="scroll-mt-20 border-t border-slate-200/80 bg-white py-16 sm:py-24"
+          className="scroll-mt-20 border-t border-slate-200/80 bg-slate-50/70 py-16 sm:py-24"
         >
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-50/70 p-6 shadow-xl sm:p-10 lg:p-12">
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-10 lg:p-12">
               <div className="text-center">
                 <span className="rounded-full bg-orange-100 border border-orange-300 px-3.5 py-1 font-mono text-xs font-bold uppercase tracking-wider text-orange-800">
                   Vamos Conversar
@@ -1585,7 +1808,7 @@ function MidiaKitPage() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF5500] py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition-all hover:bg-[#E64D00] hover:shadow-xl hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5500]"
+                      className="shimmer-effect inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF5500] py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition-all hover:bg-[#E64D00] hover:shadow-xl hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5500]"
                     >
                       <Send className="size-4" />
                       <span>Enviar Solicitação de Parceria</span>
@@ -1614,7 +1837,7 @@ function MidiaKitPage() {
 
                   <button
                     onClick={handleCopyLink}
-                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-2xs transition-colors hover:bg-slate-100 hover:text-slate-900"
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 shadow-2xs transition-colors hover:bg-slate-100 hover:text-slate-900"
                   >
                     {copiedLink ? (
                       <>
@@ -1674,11 +1897,59 @@ function MidiaKitPage() {
         </div>
       </footer>
 
+      {/* Floating Sticky Quick Action Pill Bar */}
+      <aside
+        aria-label="Ações rápidas"
+        className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/95 px-3 py-1.5 shadow-2xl backdrop-blur-md ring-1 ring-slate-900/5 sm:gap-3 sm:px-4 sm:py-2"
+      >
+        <div className="hidden sm:flex items-center gap-2 pr-2 border-r border-slate-200 text-xs font-bold text-slate-800">
+          <span className="flex size-2 rounded-full bg-[#FF5500] animate-ping" />
+          <span>Mídia Kit 2026</span>
+        </div>
+
+        <button
+          onClick={handleCopyLink}
+          type="button"
+          className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 hover:bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-700 transition-colors"
+        >
+          {copiedLink ? (
+            <>
+              <Check className="size-3 text-emerald-600" />
+              <span className="text-emerald-700 font-bold">Copiado</span>
+            </>
+          ) : (
+            <>
+              <Copy className="size-3 text-[#FF5500]" />
+              <span>Copiar Link</span>
+            </>
+          )}
+        </button>
+
+        <a
+          href="#simulador"
+          className="hidden md:inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-[#FF5500] transition-colors"
+        >
+          <span>Simulador</span>
+        </a>
+
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+            "Olá Lucas! Vi o Mídia Kit da Buzzini Sports e gostaria de conversar sobre patrocínio."
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-full bg-[#FF5500] hover:bg-[#E64D00] px-3.5 py-1 text-xs font-bold text-white shadow-sm transition-all"
+        >
+          <MessageCircle className="size-3.5" />
+          <span>Falar no WhatsApp</span>
+        </a>
+      </aside>
+
       {/* Floating Copied Toast */}
       {copiedLink && (
         <aside
           aria-live="polite"
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 rounded-2xl border border-emerald-300 bg-white px-4 py-3 shadow-2xl ring-1 ring-emerald-500/10 transition-all duration-300 animate-in fade-in slide-in-from-bottom-3"
+          className="fixed bottom-20 right-6 z-50 flex items-center gap-2.5 rounded-2xl border border-emerald-300 bg-white px-4 py-3 shadow-2xl ring-1 ring-emerald-500/10 transition-all duration-300 animate-in fade-in slide-in-from-bottom-3"
         >
           <div className="flex size-8 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
             <Check className="size-4" />
