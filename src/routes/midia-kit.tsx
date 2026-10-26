@@ -38,7 +38,7 @@ import fotoLarissa from "@/assets/foto-larissa.webp";
 import fotoHudson from "@/assets/foto-hudson.webp";
 import fotoNara from "@/assets/foto-nara.webp";
 
-const WHATSAPP_NUMBER = "5517988026622";
+const WHATSAPP_NUMBER = "5517991556246";
 const BASE_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=`;
 const MEDIA_KIT_URL = "https://buzzinisports.lovable.app/midia-kit";
 
@@ -50,13 +50,13 @@ export const Route = createFileRoute("/midia-kit")({
       {
         name: "description",
         content:
-          "Mídia Kit oficial da Buzzini Sports. Conecte sua marca a 200 alunos ativos, 24 provas ao ano, presença em 3 polos (Bebedouro, Ribeirão, SP) e mais de 320 mil contas alcançadas por mês.",
+          "Mídia Kit oficial da Buzzini Sports. Conecte sua marca a mais de +200 alunos ativos, mais de 24 provas ao ano, presença em 3 polos (Bebedouro, Ribeirão, SP) e mais de 320 mil contas alcançadas por mês.",
       },
       { property: "og:title", content: "Mídia Kit Oficial 2026 | Buzzini Sports" },
       {
         property: "og:description",
         content:
-          "Oportunidades de patrocínio e ativação com a Buzzini Sports. Comunidade fiel de corredores, histórico com Z2, Centauro/Fila, Forcell e YoPRO.",
+          "Oportunidades de patrocínio e ativação com a Buzzini Sports. Comunidade fiel de corredores (+200 alunos), histórico com Z2, Centauro/Fila, Forcell e YoPRO.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: MEDIA_KIT_URL },
@@ -78,16 +78,16 @@ interface PartnershipOption {
 const PARTNERSHIP_OPTIONS: PartnershipOption[] = [
   {
     id: "race-tent",
-    name: "Espaço & Backdrop na Tenda Oficial (24 Provas/Ano)",
-    reachEstimate: "60 a 140 alunos/prova + público da arena",
+    name: "Espaço & Backdrop na Tenda Oficial (+24 Provas ao Ano)",
+    reachEstimate: "+60 a +140 atletas/prova + público da arena",
     monthlyImpact: 85000,
     description:
-      "Sua marca em destaque na arena física das 24 provas do calendário (Live! Run, Track&Field, etc.) com banner, totem e backdrop oficial para fotos de pódio e medalhas.",
+      "Sua marca em destaque na arena física de mais de 24 provas do calendário oficial (Live! Run, Track&Field, etc.) com banner, totem e backdrop oficial para fotos de pódio e medalhas.",
   },
   {
     id: "instagram-collab",
-    name: "Collabs no Instagram & Reels (320k Contas/Mês)",
-    reachEstimate: "320 mil contas alcançadas/mês",
+    name: "Collabs no Instagram & Reels (+320k Contas/Mês)",
+    reachEstimate: "+320 mil contas alcançadas/mês",
     monthlyImpact: 140000,
     description:
       "Publicações conjuntas em collab no perfil oficial (@buzzinisports), cobertura dos treinos nos Stories e menção orgânica no ecossistema de endurance.",
@@ -103,7 +103,7 @@ const PARTNERSHIP_OPTIONS: PartnershipOption[] = [
   {
     id: "product-sampling",
     name: "Sampling Direto & Degustação nos Treinos e Provas",
-    reachEstimate: "200 alunos / 300 pessoas no ecossistema",
+    reachEstimate: "+200 alunos ativos / +300 pessoas no ecossistema",
     monthlyImpact: 35000,
     description:
       "Distribuição física de amostras, suplementos, hidratação ou produtos nos kits de prova e treinos semanais da assessoria esportiva.",
@@ -119,10 +119,10 @@ const PARTNERSHIP_OPTIONS: PartnershipOption[] = [
   {
     id: "vip-club-discounts",
     name: "Clube de Vantagens & Cupons Exclusivos para Alunos",
-    reachEstimate: "Canal direto de conversão com alunos",
+    reachEstimate: "Canal direto de conversão com +200 alunos",
     monthlyImpact: 25000,
     description:
-      "Divulgação de cupom exclusivo nos grupos oficiais de WhatsApp e recomendação ativa e de confiança dos 8 professores da equipe.",
+      "Divulgação de cupom exclusivo nos grupos oficiais de WhatsApp e recomendação ativa e de confiança dos professores da equipe.",
   },
 ];
 
@@ -162,7 +162,7 @@ function MidiaKitPage() {
   // Toggle option selection in the simulator
   const toggleOption = (id: string) => {
     setSelectedOptions((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
 
@@ -190,7 +190,7 @@ function MidiaKitPage() {
   const customWhatsAppMsg = encodeURIComponent(
     `Olá Lucas e equipe Buzzini Sports! Vi o Mídia Kit online da assessoria e gostaria de receber uma proposta comercial.\n` +
       (selectedNames ? `Formatos selecionados: ${selectedNames}\n` : "") +
-      `Gostaria de agendar uma conversa para receber uma proposta personalizada!`
+      `Gostaria de agendar uma conversa para receber uma proposta personalizada!`,
   );
 
   // Send contact form via email (matching /empresas schema)
@@ -233,7 +233,9 @@ function MidiaKitPage() {
       form.reset();
       setConsent(false);
       setIsSuccess(true);
-      setSubmissionStatus("Solicitação enviada com sucesso! Nossa equipe comercial recebeu sua mensagem por e-mail e entrará em contato em breve.");
+      setSubmissionStatus(
+        "Solicitação enviada com sucesso! Nossa equipe comercial recebeu sua mensagem por e-mail e entrará em contato em breve.",
+      );
     } catch {
       setSubmissionStatus(
         "Não foi possível enviar a solicitação agora. Tente novamente em alguns instantes ou chame nossa equipe diretamente pelo WhatsApp.",
@@ -303,63 +305,6 @@ function MidiaKitPage() {
               Mídia Kit 2026
             </span>
           </a>
-
-          <nav className="hidden items-center gap-5 text-xs font-semibold text-slate-600 lg:flex">
-            <a href="#numeros" className="transition-colors hover:text-[#FF5500]">
-              Números
-            </a>
-            <a href="#galeria" className="transition-colors hover:text-[#FF5500]">
-              Presença Real
-            </a>
-            <a href="#perfil" className="transition-colors hover:text-[#FF5500]">
-              Perfil dos Alunos
-            </a>
-            <a href="#provas" className="transition-colors hover:text-[#FF5500]">
-              24 Provas
-            </a>
-            <a href="#cases" className="transition-colors hover:text-[#FF5500]">
-              Cases
-            </a>
-            <a href="#simulador" className="transition-colors hover:text-[#FF5500]">
-              Simulador
-            </a>
-            <a href="#cotas" className="transition-colors hover:text-[#FF5500]">
-              Cotas
-            </a>
-            <a href="#faq" className="transition-colors hover:text-[#FF5500]">
-              FAQ
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={handleCopyLink}
-              type="button"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:border-slate-300 hover:text-slate-950"
-              title="Copiar link para enviar por e-mail"
-            >
-              {copiedLink ? (
-                <>
-                  <Check className="size-3.5 text-emerald-600" />
-                  <span className="text-emerald-700 font-bold">Copiado!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="size-3.5 text-[#FF5500]" />
-                  <span className="hidden sm:inline">Copiar Link</span>
-                  <span className="sm:hidden">Link</span>
-                </>
-              )}
-            </button>
-
-            <a
-              href="#contato"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-[#FF5500] px-3.5 py-1.5 text-xs font-bold text-white shadow-md shadow-orange-500/20 transition-all hover:bg-[#E64D00] hover:shadow-lg hover:-translate-y-0.5"
-            >
-              <MessageCircle className="size-3.5" />
-              <span>Seja Parceiro</span>
-            </a>
-          </div>
         </div>
       </header>
 
@@ -400,11 +345,17 @@ function MidiaKitPage() {
 
             {/* Concise Subheadline */}
             <p className="mx-auto mt-5 max-w-2xl font-sans text-base leading-relaxed text-slate-600 sm:text-lg">
-              Com <strong className="text-slate-950">200 alunos ativos</strong>, corpo técnico de{" "}
-              <strong className="text-[#FF5500]">8 professores</strong>, presença em{" "}
-              <strong className="text-slate-950">24 provas por ano</strong> e mais de{" "}
-              <strong className="text-[#FF5500]">320 mil contas alcançadas por mês</strong> no
-              Instagram, a Buzzini Sports é a ponte direta entre a sua marca e corredores engajados.
+              Com mais de <strong className="text-slate-950 font-bold">+200 alunos ativos</strong>,
+              corpo técnico de{" "}
+              <strong className="text-[#FF5500] font-bold">8 professores especialistas</strong>,
+              presença confirmada em{" "}
+              <strong className="text-slate-950 font-bold">mais de 24 provas ao ano</strong> e mais
+              de{" "}
+              <strong className="text-[#FF5500] font-bold">
+                320 mil contas alcançadas por mês
+              </strong>{" "}
+              no Instagram, a Buzzini Sports é a ponte direta entre a sua marca e corredores
+              altamente engajados.
             </p>
 
             {/* Action Buttons */}
@@ -420,7 +371,7 @@ function MidiaKitPage() {
 
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                  "Olá Lucas! Vi o Mídia Kit da Buzzini Sports e gostaria de conversar sobre patrocínio comercial."
+                  "Olá Lucas! Vi o Mídia Kit da Buzzini Sports e gostaria de conversar sobre patrocínio comercial.",
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -464,11 +415,11 @@ function MidiaKitPage() {
                 </div>
                 <div className="mt-3">
                   <span className="font-display text-3xl font-extrabold tracking-tight text-slate-950">
-                    200
+                    +200
                   </span>
                   <p className="text-xs font-bold text-[#FF5500]">Alunos Ativos</p>
                   <p className="mt-1 text-[0.7rem] text-slate-500">
-                    300 pessoas no ecossistema direto
+                    +300 pessoas no ecossistema direto
                   </p>
                 </div>
               </div>
@@ -485,9 +436,9 @@ function MidiaKitPage() {
                 </div>
                 <div className="mt-3">
                   <span className="font-display text-3xl font-extrabold tracking-tight text-slate-950">
-                    320k
+                    +320k
                   </span>
-                  <p className="text-xs font-bold text-[#FF5500]">Contas / Mês</p>
+                  <p className="text-xs font-bold text-[#FF5500]">Contas Alcançadas / Mês</p>
                   <p className="mt-1 text-[0.7rem] text-slate-600">
                     Reels virais e coberturas de treinos
                   </p>
@@ -506,11 +457,11 @@ function MidiaKitPage() {
                 </div>
                 <div className="mt-3">
                   <span className="font-display text-3xl font-extrabold tracking-tight text-slate-950">
-                    24
+                    +24
                   </span>
-                  <p className="text-xs font-bold text-[#FF5500]">Provas / Ano</p>
+                  <p className="text-xs font-bold text-[#FF5500]">Provas por Ano</p>
                   <p className="mt-1 text-[0.7rem] text-slate-500">
-                    Média 60 atletas, pico de 140
+                    Média de +60 atletas, pico de +140
                   </p>
                 </div>
               </div>
@@ -553,7 +504,7 @@ function MidiaKitPage() {
                 </div>
                 <div className="mt-3">
                   <span className="font-display text-3xl font-extrabold tracking-tight text-slate-950">
-                    2.670
+                    +2.670
                   </span>
                   <p className="text-xs font-bold text-[#FF5500]">Seguidores Fiéis</p>
                   <p className="mt-1 text-[0.7rem] text-slate-500">
@@ -566,7 +517,10 @@ function MidiaKitPage() {
         </section>
 
         {/* SECTION: VISUAL GALLERY (PRESENÇA REAL) */}
-        <section id="galeria" className="scroll-mt-20 py-12 sm:py-16 border-t border-slate-200/80 bg-white">
+        <section
+          id="galeria"
+          className="scroll-mt-20 py-12 sm:py-16 border-t border-slate-200/80 bg-white"
+        >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
               <div>
@@ -578,7 +532,8 @@ function MidiaKitPage() {
                 </h2>
               </div>
               <p className="max-w-md text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Uma comunidade ativa que lota arenas de corrida, conquista pódios e consome produtos de marcas parceiras.
+                Uma comunidade ativa que lota arenas de corrida, conquista pódios e consome produtos
+                de marcas parceiras.
               </p>
             </div>
 
@@ -622,9 +577,7 @@ function MidiaKitPage() {
                   <span className="rounded-full bg-amber-500 px-2.5 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-wider text-slate-950">
                     Superação
                   </span>
-                  <h3 className="mt-2 font-display text-base font-bold">
-                    Linha de Chegada
-                  </h3>
+                  <h3 className="mt-2 font-display text-base font-bold">Linha de Chegada</h3>
                   <p className="mt-0.5 text-xs text-slate-300">
                     Média de 60 atletas cruzando pórticos em cada etapa oficial.
                   </p>
@@ -660,22 +613,43 @@ function MidiaKitPage() {
             <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="flex -space-x-2">
-                  <img src={fotoHudson} alt="Coach Hudson" className="size-9 rounded-full border-2 border-white object-cover" />
-                  <img src={fotoLarissa} alt="Coach Larissa" className="size-9 rounded-full border-2 border-white object-cover" />
-                  <img src={fotoNara} alt="Coach Nara" className="size-9 rounded-full border-2 border-white object-cover" />
+                  <img
+                    src={fotoHudson}
+                    alt="Coach Hudson"
+                    className="size-9 rounded-full border-2 border-white object-cover"
+                  />
+                  <img
+                    src={fotoLarissa}
+                    alt="Coach Larissa"
+                    className="size-9 rounded-full border-2 border-white object-cover"
+                  />
+                  <img
+                    src={fotoNara}
+                    alt="Coach Nara"
+                    className="size-9 rounded-full border-2 border-white object-cover"
+                  />
                 </div>
                 <div>
-                  <h4 className="font-display text-xs font-bold text-slate-950">Corpo Técnico de 8 Professores</h4>
-                  <p className="text-[0.7rem] text-slate-500">Acompanhamento especializado para corredores e triatletas</p>
+                  <h4 className="font-display text-xs font-bold text-slate-950">
+                    Corpo Técnico de8 Professores
+                  </h4>
+                  <p className="text-[0.7rem] text-slate-500">
+                    Acompanhamento especializado para corredores e triatletas
+                  </p>
                 </div>
               </div>
-              <span className="text-xs font-semibold text-[#FF5500]">Recomendação qualificada de marcas e produtos</span>
+              <span className="text-xs font-semibold text-[#FF5500]">
+                Recomendação qualificada de marcas e produtos
+              </span>
             </div>
           </div>
         </section>
 
-        {/* SECTION: PERFIL ENXUTO DOS ALUNOS & POLOS */}
-        <section id="perfil" className="scroll-mt-20 border-t border-slate-200/80 bg-slate-50/60 py-12 sm:py-16">
+        {/* SECTION: PERFIL ENXUTO DOS ALUNOS & POLOS EM % */}
+        <section
+          id="perfil"
+          className="scroll-mt-20 border-t border-slate-200/80 bg-slate-50/60 py-12 sm:py-16"
+        >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div>
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF5500]">
@@ -693,13 +667,15 @@ function MidiaKitPage() {
                   <div className="flex size-8 items-center justify-center rounded-lg bg-rose-100 text-rose-600">
                     <PieChart className="size-4" />
                   </div>
-                  <h3 className="font-display text-xs font-bold text-slate-950">Divisão por Gênero</h3>
+                  <h3 className="font-display text-xs font-bold text-slate-950">
+                    Divisão por Gênero
+                  </h3>
                 </div>
                 <div className="mt-4 space-y-2 text-xs font-semibold">
                   <div>
                     <div className="flex justify-between text-[0.72rem]">
                       <span className="text-rose-600 font-bold">57% Mulheres</span>
-                      <span className="text-slate-900">~114 alunas</span>
+                      <span className="text-slate-900">+114 alunas</span>
                     </div>
                     <div className="mt-1 h-2 w-full rounded-full bg-slate-100 overflow-hidden">
                       <div className="h-full bg-rose-500 rounded-full" style={{ width: "57%" }} />
@@ -708,14 +684,16 @@ function MidiaKitPage() {
                   <div>
                     <div className="flex justify-between text-[0.72rem]">
                       <span className="text-sky-600 font-bold">43% Homens</span>
-                      <span className="text-slate-900">~85 alunos</span>
+                      <span className="text-slate-900">+85 alunos</span>
                     </div>
                     <div className="mt-1 h-2 w-full rounded-full bg-slate-100 overflow-hidden">
                       <div className="h-full bg-sky-500 rounded-full" style={{ width: "43%" }} />
                     </div>
                   </div>
                 </div>
-                <p className="mt-3 text-[0.7rem] text-slate-500">Amplo apelo para moda fitness, bem-estar e calçados.</p>
+                <p className="mt-3 text-[0.7rem] text-slate-500">
+                  Amplo apelo para moda fitness, bem-estar e calçados.
+                </p>
               </div>
 
               {/* Box 2: Faixa Etária */}
@@ -727,10 +705,14 @@ function MidiaKitPage() {
                   <h3 className="font-display text-xs font-bold text-slate-950">Faixa Etária</h3>
                 </div>
                 <div className="mt-4 rounded-lg bg-orange-50/70 border border-orange-200/80 p-3 text-center">
-                  <span className="font-display text-2xl font-extrabold text-[#FF5500]">25 a 40 anos</span>
-                  <p className="text-[0.68rem] font-bold text-slate-700">Predominante</p>
+                  <span className="font-display text-2xl font-extrabold text-[#FF5500]">
+                    25 a 40 anos
+                  </span>
+                  <p className="text-[0.68rem] font-bold text-slate-700">Faixa predominante</p>
                 </div>
-                <p className="mt-3 text-[0.7rem] text-slate-500">Público ativo em fase profissional ascendente e poder de decisão.</p>
+                <p className="mt-3 text-[0.7rem] text-slate-500">
+                  Público ativo em fase profissional ascendente e poder de decisão.
+                </p>
               </div>
 
               {/* Box 3: Perfil Econômico */}
@@ -739,13 +721,21 @@ function MidiaKitPage() {
                   <div className="flex size-8 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
                     <Wallet className="size-4" />
                   </div>
-                  <h3 className="font-display text-xs font-bold text-slate-950">Perfil Econômico</h3>
+                  <h3 className="font-display text-xs font-bold text-slate-950">
+                    Perfil Econômico
+                  </h3>
                 </div>
                 <div className="mt-4 rounded-lg bg-emerald-50/70 border border-emerald-200/80 p-3 text-center">
-                  <span className="font-display text-2xl font-extrabold text-emerald-700">Classes B e C</span>
-                  <p className="text-[0.68rem] font-bold text-slate-700">Ticket Médio: R$ 140,00/mês</p>
+                  <span className="font-display text-2xl font-extrabold text-emerald-700">
+                    Classes B e C
+                  </span>
+                  <p className="text-[0.68rem] font-bold text-slate-700">
+                    Ticket Médio: R$ 140,00/mês
+                  </p>
                 </div>
-                <p className="mt-3 text-[0.7rem] text-slate-500">Consumidores fiéis que compram tênis, suplementação e viajam para provas.</p>
+                <p className="mt-3 text-[0.7rem] text-slate-500">
+                  Consumidores fiéis que compram calçados, nutrição e viajam para maratonas.
+                </p>
               </div>
 
               {/* Box 4: Nível Esportivo */}
@@ -758,54 +748,131 @@ function MidiaKitPage() {
                 </div>
                 <div className="mt-4 space-y-1.5 text-[0.72rem]">
                   <div className="rounded-md bg-slate-50 p-2 border border-slate-200">
-                    <strong className="text-slate-900">Iniciantes e Intermediários:</strong> Maioria formando hábitos e comprando kits.
+                    <strong className="text-slate-900">Iniciantes e Intermediários:</strong> Maioria
+                    formando hábitos e comprando kits.
                   </div>
                   <div className="rounded-md bg-slate-50 p-2 border border-slate-200">
-                    <strong className="text-slate-900">Avançados & Triathlon:</strong> Atletas de maratonas e provas extremas (Ironman).
+                    <strong className="text-slate-900">Avançados & Triathlon:</strong> Atletas de
+                    maratonas e provas extremas (Ironman).
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Polos Geográficos enxutos */}
-            <div id="geografia" className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="font-display text-sm font-bold text-slate-950">Distribuição Geográfica dos Alunos</h3>
-              <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {/* Polos Geográficos enxutos em Porcentagem (%) */}
+            <div
+              id="geografia"
+              className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <div>
+                  <h3 className="font-display text-base font-bold text-slate-950">
+                    Distribuição Geográfica da Equipe
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    Proporção territorial dos mais de +200 alunos ativos da Buzzini Sports
+                  </p>
+                </div>
+                <span className="self-start sm:self-auto rounded-full bg-orange-100 border border-orange-300 px-3 py-0.5 text-xs font-bold text-orange-800">
+                  +200 Atletas Ativos
+                </span>
+              </div>
+
+              <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                {/* Bebedouro */}
                 <div className="rounded-xl border-2 border-[#FF5500] bg-orange-50/40 p-4">
-                  <span className="text-[0.65rem] font-bold uppercase text-orange-800 bg-orange-100 px-2 py-0.5 rounded">Matriz</span>
-                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950">Bebedouro — SP</h4>
-                  <p className="font-display text-2xl font-extrabold text-[#FF5500]">157 alunos</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[0.65rem] font-bold uppercase text-orange-800 bg-orange-100 px-2 py-0.5 rounded">
+                      Matriz Oficial
+                    </span>
+                    <span className="text-xs font-semibold text-slate-500">Polo Principal</span>
+                  </div>
+                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950">
+                    Bebedouro — SP
+                  </h4>
+                  <div className="mt-1 flex items-baseline gap-2">
+                    <p className="font-display text-3xl font-extrabold text-[#FF5500]">78,5%</p>
+                    <span className="text-xs font-semibold text-slate-600">da equipe</span>
+                  </div>
+                  <p className="mt-2 text-[0.72rem] text-slate-600">
+                    Maior concentração de treinos presenciais e mobilização em massa para provas.
+                  </p>
                 </div>
+
+                {/* Ribeirão Preto */}
                 <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
-                  <span className="text-[0.65rem] font-bold uppercase text-sky-800 bg-sky-100 px-2 py-0.5 rounded">Polo Regional</span>
-                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950">Ribeirão Preto — SP</h4>
-                  <p className="font-display text-2xl font-extrabold text-slate-900">21 alunos</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[0.65rem] font-bold uppercase text-sky-800 bg-sky-100 px-2 py-0.5 rounded">
+                      Polo Regional
+                    </span>
+                    <span className="text-xs font-semibold text-slate-500">Agronegócio</span>
+                  </div>
+                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950">
+                    Ribeirão Preto — SP
+                  </h4>
+                  <div className="mt-1 flex items-baseline gap-2">
+                    <p className="font-display text-3xl font-extrabold text-slate-900">10,5%</p>
+                    <span className="text-xs font-semibold text-slate-600">da equipe</span>
+                  </div>
+                  <p className="mt-2 text-[0.72rem] text-slate-600">
+                    Forte presença em circuitos de renome nacional como Live! Run e Track&Field.
+                  </p>
                 </div>
+
+                {/* São Paulo */}
                 <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
-                  <span className="text-[0.65rem] font-bold uppercase text-amber-800 bg-amber-100 px-2 py-0.5 rounded">Capital</span>
-                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950">São Paulo — SP</h4>
-                  <p className="font-display text-2xl font-extrabold text-slate-900">6 alunos</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[0.65rem] font-bold uppercase text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
+                      Capital
+                    </span>
+                    <span className="text-xs font-semibold text-slate-500">
+                      Parques & Maratonas
+                    </span>
+                  </div>
+                  <h4 className="mt-2 font-display text-lg font-bold text-slate-950">
+                    São Paulo — SP
+                  </h4>
+                  <div className="mt-1 flex items-baseline gap-2">
+                    <p className="font-display text-3xl font-extrabold text-slate-900">3,0%</p>
+                    <span className="text-xs font-semibold text-slate-600">da equipe</span>
+                  </div>
+                  <p className="mt-2 text-[0.72rem] text-slate-600">
+                    Atletas nos principais parques (Ibirapuera, USP) e em grandes maratonas do
+                    estado.
+                  </p>
                 </div>
               </div>
-              <div className="mt-3 text-center text-xs text-slate-500">
-                +16 alunos online e comitivas em: Colina, Viradouro, Barretos, Cajobi, Matão, Jaú, Curitiba, Campo Grande, Balneário Camboriú, EUA e Irlanda.
+
+              {/* Online e demais cidades */}
+              <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-center text-xs text-slate-600">
+                <span className="font-bold text-slate-900">
+                  8,0% em Demais Regiões & Assessoria Online:
+                </span>{" "}
+                Atletas conectados e comitivas em Colina, Viradouro, Barretos, Cajobi, Matão, Jaú,
+                Curitiba, Campo Grande, Balneário Camboriú, além de alunos nos 🇺🇸 Estados Unidos e
+                🇮🇪 Irlanda.
               </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION: 24 PROVAS POR ANO & TROFÉUS (SEM AFC TRIPLICE COROA) */}
-        <section id="provas" className="scroll-mt-20 border-t border-slate-200/80 bg-white py-12 sm:py-16">
+        {/* SECTION: 24 PROVAS POR ANO & TROFÉUS */}
+        <section
+          id="provas"
+          className="scroll-mt-20 border-t border-slate-200/80 bg-white py-12 sm:py-16"
+        >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <span className="rounded-full bg-amber-100 border border-amber-300 px-3 py-0.5 text-xs font-bold text-amber-900">
                 Presença Presencial Consolidada
               </span>
               <h2 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950">
-                24 Provas ao Ano com Estrutura Física Completa
+                Mais de 24 Provas ao Ano com Estrutura Física Completa
               </h2>
               <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-slate-600">
-                Média de 60 atletas por prova e delegações de até 140 pessoas, transformando arenas esportivas em pontos de ativação direta.
+                Média de mais de 60 atletas por prova e delegações de até +140 atletas em grandes
+                comitivas, transformando arenas esportivas em pontos de ativação direta da sua
+                marca.
               </p>
             </div>
 
@@ -813,18 +880,30 @@ function MidiaKitPage() {
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
               <div className="rounded-xl border border-amber-200 bg-gradient-to-b from-amber-50/60 to-white p-5 text-center shadow-sm">
                 <Trophy className="mx-auto size-6 text-amber-600" />
-                <h3 className="mt-2 font-display text-base font-bold text-slate-950">Live! Run XP</h3>
-                <p className="text-xs font-bold uppercase text-amber-700">🏆 Troféu Maior Assessoria</p>
+                <h3 className="mt-2 font-display text-base font-bold text-slate-950">
+                  Live! Run XP
+                </h3>
+                <p className="text-xs font-bold uppercase text-amber-700">
+                  🏆 Troféu Maior Assessoria
+                </p>
               </div>
               <div className="rounded-xl border border-amber-200 bg-gradient-to-b from-amber-50/60 to-white p-5 text-center shadow-sm">
                 <Trophy className="mx-auto size-6 text-amber-600" />
-                <h3 className="mt-2 font-display text-base font-bold text-slate-950">Track&Field Series</h3>
-                <p className="text-xs font-bold uppercase text-amber-700">🏆 Troféu Maior Assessoria</p>
+                <h3 className="mt-2 font-display text-base font-bold text-slate-950">
+                  Track&Field Series
+                </h3>
+                <p className="text-xs font-bold uppercase text-amber-700">
+                  🏆 Troféu Maior Assessoria
+                </p>
               </div>
               <div className="rounded-xl border border-amber-200 bg-gradient-to-b from-amber-50/60 to-white p-5 text-center shadow-sm">
                 <Trophy className="mx-auto size-6 text-amber-600" />
-                <h3 className="mt-2 font-display text-base font-bold text-slate-950">Parque Night Run</h3>
-                <p className="text-xs font-bold uppercase text-amber-700">🏆 Troféu Maior Assessoria</p>
+                <h3 className="mt-2 font-display text-base font-bold text-slate-950">
+                  Parque Night Run
+                </h3>
+                <p className="text-xs font-bold uppercase text-amber-700">
+                  🏆 Troféu Maior Assessoria
+                </p>
               </div>
             </div>
 
@@ -877,7 +956,10 @@ function MidiaKitPage() {
         </section>
 
         {/* SECTION: CASES DE MARCAS ENXUTOS */}
-        <section id="cases" className="scroll-mt-20 border-t border-slate-200/80 bg-slate-50/60 py-12 sm:py-16">
+        <section
+          id="cases"
+          className="scroll-mt-20 border-t border-slate-200/80 bg-slate-50/60 py-12 sm:py-16"
+        >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF5500]">
@@ -898,10 +980,13 @@ function MidiaKitPage() {
               </div>
 
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-                <span className="font-display font-extrabold text-lg text-[#FF5500]">Centauro & FILA</span>
+                <span className="font-display font-extrabold text-lg text-[#FF5500]">
+                  Centauro & FILA
+                </span>
                 <p className="text-xs font-semibold text-slate-800 mt-1">Varejo & Tênis</p>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Realização de <strong>Shake Out Run</strong> com experimentação e test-drive de calçados de corrida.
+                  Realização de <strong>Shake Out Run</strong> com experimentação e test-drive de
+                  calçados de corrida.
                 </p>
               </div>
 
@@ -909,12 +994,15 @@ function MidiaKitPage() {
                 <span className="font-display font-extrabold text-lg text-[#FF5500]">FORCELL</span>
                 <p className="text-xs font-semibold text-slate-800 mt-1">Parceria Recorrente</p>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Ativações em eventos corporativos, incluindo <strong>Forcell Rio</strong> e comitiva <strong>Buzzini in Rio</strong>.
+                  Ativações em eventos corporativos, incluindo <strong>Forcell Rio</strong> e
+                  comitiva <strong>Buzzini in Rio</strong>.
                 </p>
               </div>
 
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-                <span className="font-display font-extrabold text-lg text-[#FF5500]">YoPRO (Danone)</span>
+                <span className="font-display font-extrabold text-lg text-[#FF5500]">
+                  YoPRO (Danone)
+                </span>
                 <p className="text-xs font-semibold text-slate-800 mt-1">Recovery Proteico</p>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
                   Distribuição pós-treino entregando recuperação proteica na tenda da assessoria.
@@ -925,10 +1013,18 @@ function MidiaKitPage() {
             {/* Evento proprietário */}
             <div className="mt-6 rounded-xl border border-slate-200 bg-white p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
               <div>
-                <h4 className="font-display text-sm font-bold text-slate-950">Evento Próprio: Morilo's PET & Treinões Temáticos</h4>
-                <p className="text-xs text-slate-500">Corridas engajando famílias inteiras, palestras técnicas e apresentações pré-prova.</p>
+                <h4 className="font-display text-sm font-bold text-slate-950">
+                  Evento Próprio: Morilo's PET & Treinões Temáticos
+                </h4>
+                <p className="text-xs text-slate-500">
+                  Corridas engajando famílias inteiras, palestras técnicas e apresentações
+                  pré-prova.
+                </p>
               </div>
-              <a href="#contato" className="shrink-0 text-xs font-bold text-[#FF5500] hover:underline">
+              <a
+                href="#contato"
+                className="shrink-0 text-xs font-bold text-[#FF5500] hover:underline"
+              >
                 Ativar no próximo evento ↗
               </a>
             </div>
@@ -936,7 +1032,10 @@ function MidiaKitPage() {
         </section>
 
         {/* SECTION: SIMULADOR INTERATIVO */}
-        <section id="simulador" className="scroll-mt-20 border-t border-slate-200/80 bg-white py-12 sm:py-16">
+        <section
+          id="simulador"
+          className="scroll-mt-20 border-t border-slate-200/80 bg-white py-12 sm:py-16"
+        >
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <span className="rounded-full bg-orange-100 border border-orange-300 px-3 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-orange-800">
@@ -973,7 +1072,9 @@ function MidiaKitPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center justify-between gap-1">
-                          <span className="text-xs sm:text-sm font-bold text-slate-950">{opt.name}</span>
+                          <span className="text-xs sm:text-sm font-bold text-slate-950">
+                            {opt.name}
+                          </span>
                           <span className="rounded-full bg-white border border-slate-200 px-2 py-0.5 text-[0.62rem] font-semibold text-[#FF5500]">
                             {opt.reachEstimate}
                           </span>
@@ -1004,15 +1105,17 @@ function MidiaKitPage() {
                   <div className="mt-5 space-y-2 border-t border-slate-200/80 pt-3 text-xs text-slate-600">
                     <div className="flex justify-between">
                       <span>Formatos selecionados:</span>
-                      <strong className="text-slate-900">{selectedOptions.length} de {PARTNERSHIP_OPTIONS.length}</strong>
+                      <strong className="text-slate-900">
+                        {selectedOptions.length} de {PARTNERSHIP_OPTIONS.length}
+                      </strong>
                     </div>
                     <div className="flex justify-between">
                       <span>Presença em pista:</span>
-                      <strong className="text-slate-900">24 provas por ano</strong>
+                      <strong className="text-slate-900">Mais de 24 provas ao ano</strong>
                     </div>
                     <div className="flex justify-between">
                       <span>Comunidade direta:</span>
-                      <strong className="text-[#FF5500]">200 alunos / 300 pessoas</strong>
+                      <strong className="text-[#FF5500]">+200 alunos / +300 pessoas</strong>
                     </div>
                   </div>
 
@@ -1030,7 +1133,10 @@ function MidiaKitPage() {
         </section>
 
         {/* SECTION: COTAS DE PATROCÍNIO (ZERO LOGO EM UNIFORMES) */}
-        <section id="cotas" className="scroll-mt-20 py-12 sm:py-16 border-t border-slate-200/80 bg-slate-50/60">
+        <section
+          id="cotas"
+          className="scroll-mt-20 py-12 sm:py-16 border-t border-slate-200/80 bg-slate-50/60"
+        >
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#FF5500]">
@@ -1040,7 +1146,8 @@ function MidiaKitPage() {
                 Níveis de Patrocínio e Ativação
               </h2>
               <p className="mt-1 text-xs text-slate-500">
-                * Preservamos a estética dos uniformes dos atletas; ativamos sua marca em tendas, pódios, reels e sampling.
+                * Preservamos a estética dos uniformes dos atletas; ativamos sua marca em tendas,
+                pódios, reels e sampling.
               </p>
             </div>
 
@@ -1050,15 +1157,17 @@ function MidiaKitPage() {
                 <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[0.62rem] font-bold uppercase text-slate-700">
                   Cota Prata
                 </span>
-                <h3 className="mt-3 font-display text-xl font-bold text-slate-950">Apoio & Nutrição</h3>
+                <h3 className="mt-3 font-display text-xl font-bold text-slate-950">
+                  Apoio & Nutrição
+                </h3>
                 <ul className="mt-4 space-y-2 text-xs text-slate-700">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="size-3.5 text-[#FF5500] shrink-0 mt-0.5" />
-                    <span>Banner na tenda oficial nas 24 provas do ano.</span>
+                    <span>Banner na tenda oficial em mais de 24 provas do ano.</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="size-3.5 text-[#FF5500] shrink-0 mt-0.5" />
-                    <span>Sampling pontual de produtos nos treinos.</span>
+                    <span>Sampling pontual de produtos nos treinos (+200 alunos).</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="size-3.5 text-[#FF5500] shrink-0 mt-0.5" />
@@ -1081,7 +1190,9 @@ function MidiaKitPage() {
                 <span className="rounded-full bg-orange-100 px-2 py-0.5 text-[0.62rem] font-bold uppercase text-orange-800">
                   Cota Ouro
                 </span>
-                <h3 className="mt-3 font-display text-xl font-bold text-slate-950">Patrocinador Oficial</h3>
+                <h3 className="mt-3 font-display text-xl font-bold text-slate-950">
+                  Patrocinador Oficial
+                </h3>
                 <ul className="mt-4 space-y-2 text-xs text-slate-800">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="size-3.5 text-[#FF5500] shrink-0 mt-0.5" />
@@ -1089,7 +1200,7 @@ function MidiaKitPage() {
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="size-3.5 text-[#FF5500] shrink-0 mt-0.5" />
-                    <span>1 collab mensal no Instagram (alcance de 320k contas).</span>
+                    <span>1 collab mensal no Instagram (alcance de mais de 320k contas).</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="size-3.5 text-[#FF5500] shrink-0 mt-0.5" />
@@ -1113,7 +1224,9 @@ function MidiaKitPage() {
                 <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[0.62rem] font-bold uppercase text-amber-800">
                   Cota Master
                 </span>
-                <h3 className="mt-3 font-display text-xl font-bold text-slate-950">Parceiro Master</h3>
+                <h3 className="mt-3 font-display text-xl font-bold text-slate-950">
+                  Parceiro Master
+                </h3>
                 <ul className="mt-4 space-y-2 text-xs text-slate-800">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="size-3.5 text-amber-600 shrink-0 mt-0.5" />
@@ -1125,11 +1238,11 @@ function MidiaKitPage() {
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="size-3.5 text-amber-600 shrink-0 mt-0.5" />
-                    <span>2 collabs mensais + stories semanais no Instagram.</span>
+                    <span>2 collabs mensais + stories semanais no Instagram (+320k contas).</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="size-3.5 text-amber-600 shrink-0 mt-0.5" />
-                    <span>Espaço VIP e co-branding na tenda de todas as provas.</span>
+                    <span>Espaço VIP e co-branding na tenda de todas as mais de 24 provas.</span>
                   </li>
                 </ul>
                 <a
@@ -1144,7 +1257,10 @@ function MidiaKitPage() {
         </section>
 
         {/* SECTION: FAQ ENXUTO */}
-        <section id="faq" className="scroll-mt-20 py-12 sm:py-16 border-t border-slate-200/80 bg-white">
+        <section
+          id="faq"
+          className="scroll-mt-20 py-12 sm:py-16 border-t border-slate-200/80 bg-white"
+        >
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-center font-display text-2xl font-extrabold text-slate-950">
               Perguntas Frequentes de Marcas
@@ -1196,7 +1312,8 @@ function MidiaKitPage() {
                   Conecte sua marca à Buzzini Sports
                 </h2>
                 <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-slate-600">
-                  Preencha os dados abaixo para receber nossa proposta comercial oficial diretamente no seu e-mail corporativo.
+                  Preencha os dados abaixo para receber nossa proposta comercial oficial diretamente
+                  no seu e-mail corporativo.
                 </p>
               </div>
 
@@ -1286,7 +1403,7 @@ function MidiaKitPage() {
                       type="tel"
                       name="phone"
                       required
-                      placeholder="(17) 99999-9999"
+                      placeholder="(17) 99155-6246"
                       className="mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#FF5500] focus:outline-none focus:ring-1 focus:ring-[#FF5500]"
                     />
                   </div>
@@ -1326,7 +1443,9 @@ function MidiaKitPage() {
                     className="mt-0.5 size-4 rounded border-slate-300 text-[#FF5500] focus:ring-[#FF5500]"
                   />
                   <span>
-                    Autorizo a equipe comercial da Buzzini Sports a entrar em contato com minha empresa por e-mail ou WhatsApp para envio de propostas e informações comerciais. *
+                    Autorizo a equipe comercial da Buzzini Sports a entrar em contato com minha
+                    empresa por e-mail ou WhatsApp para envio de propostas e informações comerciais.
+                    *
                   </span>
                 </label>
 
@@ -1337,7 +1456,9 @@ function MidiaKitPage() {
                     className="shimmer-effect inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF5500] py-3 text-sm font-bold text-white shadow-md shadow-orange-500/25 transition-all hover:bg-[#E64D00] disabled:opacity-60"
                   >
                     <Send className="size-4" />
-                    <span>{isSubmitting ? "Enviando solicitação..." : "Enviar Solicitação de Parceria"}</span>
+                    <span>
+                      {isSubmitting ? "Enviando solicitação..." : "Enviar Solicitação de Parceria"}
+                    </span>
                   </button>
                 </div>
               </form>
@@ -1354,7 +1475,7 @@ function MidiaKitPage() {
                   className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-emerald-50 px-4 py-1.5 text-xs font-bold text-emerald-700 hover:bg-emerald-100"
                 >
                   <MessageCircle className="size-3.5" />
-                  <span>WhatsApp Direto: (17) 98802-6622</span>
+                  <span>WhatsApp Direto: (17) 99155-6246</span>
                 </a>
               </div>
             </div>
@@ -1384,9 +1505,16 @@ function MidiaKitPage() {
               <Instagram className="size-3 text-[#FF5500]" />
               <span>@buzzinisports</span>
             </a>
-            <a href="/" className="hover:text-[#FF5500]">Página Principal</a>
-            <a href="/empresas" className="hover:text-[#FF5500]">Buzzini Empresas</a>
-            <button onClick={handleCopyLink} className="hover:text-[#FF5500] flex items-center gap-1">
+            <a href="/" className="hover:text-[#FF5500]">
+              Página Principal
+            </a>
+            <a href="/empresas" className="hover:text-[#FF5500]">
+              Buzzini Empresas
+            </a>
+            <button
+              onClick={handleCopyLink}
+              className="hover:text-[#FF5500] flex items-center gap-1"
+            >
               <Share2 className="size-3 text-[#FF5500]" />
               <span>{copiedLink ? "Link Copiado!" : "Compartilhar Link"}</span>
             </button>
@@ -1403,24 +1531,6 @@ function MidiaKitPage() {
           <span className="flex size-2 rounded-full bg-[#FF5500] animate-ping" />
           <span>Mídia Kit 2026</span>
         </div>
-
-        <button
-          onClick={handleCopyLink}
-          type="button"
-          className="inline-flex items-center gap-1 rounded-full bg-slate-100 hover:bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-700 transition-colors"
-        >
-          {copiedLink ? (
-            <>
-              <Check className="size-3 text-emerald-600" />
-              <span className="text-emerald-700 font-bold">Copiado</span>
-            </>
-          ) : (
-            <>
-              <Copy className="size-3 text-[#FF5500]" />
-              <span>Copiar Link</span>
-            </>
-          )}
-        </button>
 
         <a
           href="#contato"
@@ -1442,7 +1552,9 @@ function MidiaKitPage() {
           </div>
           <div>
             <p className="text-xs font-bold text-slate-900">Link Copiado com Sucesso!</p>
-            <p className="text-[0.7rem] text-slate-500">Pronto para colar no seu e-mail de apresentação.</p>
+            <p className="text-[0.7rem] text-slate-500">
+              Pronto para colar no seu e-mail de apresentação.
+            </p>
           </div>
         </aside>
       )}
