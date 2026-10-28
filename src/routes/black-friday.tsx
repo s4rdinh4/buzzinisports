@@ -124,20 +124,30 @@ function BlackFridayPage() {
                 Depois, R$ 150,00 por mês
               </p>
 
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => trackWhatsAppClick("hero")}
-                className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-[#f36b2b] px-7 py-4 text-sm font-bold text-[#17100d] shadow-[0_12px_50px_rgba(243,107,43,0.24)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#ff8954] motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-[#090a0b] sm:mt-9 sm:w-auto sm:min-w-72"
-              >
-                <MessageCircle className="size-5" aria-hidden="true" />
-                Tenho interesse na oferta
-                <ArrowUpRight className="size-4" aria-hidden="true" />
-              </a>
-              <p className="mt-3 text-xs leading-relaxed text-white/55">
-                Fale com a equipe no WhatsApp para saber como contratar.
-              </p>
+              <div className="mt-8 flex flex-col items-start gap-3 sm:mt-9">
+                <a
+                  href="https://www.runyapp.com/checkout/buzzini-sports/ML3W9W84"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-[#f36b2b] px-7 py-4 text-sm font-bold text-[#17100d] shadow-[0_12px_50px_rgba(243,107,43,0.24)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#ff8954] motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-[#090a0b] sm:w-auto sm:min-w-72"
+                >
+                  <CreditCard className="size-5" aria-hidden="true" />
+                  Tenho interesse na oferta
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                  <span className="sr-only">(abre em nova aba)</span>
+                </a>
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackWhatsAppClick("hero")}
+                  className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white/85 transition-colors hover:border-[#ff8954] hover:bg-white/5 hover:text-white motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff8954] focus-visible:ring-offset-4 focus-visible:ring-offset-[#090a0b]"
+                >
+                  <MessageCircle className="size-4" aria-hidden="true" />
+                  Ainda tem dúvidas? Fale pelo WhatsApp
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -354,6 +364,30 @@ function BlackFridayPage() {
                 .
               </p>
             </details>
+          </div>
+        </section>
+
+        <section className="border-y border-white/10 bg-[#111213]">
+          <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:px-8 sm:py-12 md:flex-row md:items-center md:justify-between lg:px-12">
+            <div>
+              <h2 className="font-display text-xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-2xl">
+                Ainda ficou com dúvidas?
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-white/60">
+                Nossa equipe pode ajudar você a dar o próximo passo.
+              </p>
+            </div>
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackWhatsAppClick("post_faq")}
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-[#f36b2b]/70 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-[#ff8954] hover:bg-[#f36b2b]/10 motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff8954] focus-visible:ring-offset-4 focus-visible:ring-offset-[#111213] md:w-auto"
+            >
+              <MessageCircle className="size-4" aria-hidden="true" />
+              Chamar no WhatsApp
+              <ArrowUpRight className="size-4" aria-hidden="true" />
+            </a>
           </div>
         </section>
       </main>
