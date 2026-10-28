@@ -28,10 +28,6 @@ import faixaBuzzini from "@/assets/faixa-buzzini.webp";
 import heroRunner960 from "@/assets/hero-runner-960.webp";
 import heroRunner1600 from "@/assets/hero-runner-1600.webp";
 import fundoSite from "@/assets/fundo-site.webp";
-import appleLogo from "@/assets/apple.svg";
-import garminLogo from "@/assets/garmin.svg";
-import polarLogo from "@/assets/polar.svg";
-import stravaLogo from "@/assets/strava.svg";
 import fotoNara from "@/assets/foto-nara.webp";
 import fotoLucas from "@/assets/foto_lucas.webp.asset.json";
 import fotoRobson from "@/assets/foto_robson.webp.asset.json";
@@ -43,7 +39,7 @@ import fotoHudson from "@/assets/foto-hudson.webp";
 import fotoRodrigo from "@/assets/foto_rodrigo.webp.asset.json";
 import fotoIgor from "@/assets/foto_igor.webp.asset.json";
 import whatsappIcon from "@/assets/whatsapp.webp";
-import { FlagBrazil, FlagUSA, FlagIreland } from "@/components/ui/flag-icon";
+import { FlagUSA, FlagIreland } from "@/components/ui/flag-icon";
 import { sendGTMEvent } from "@/lib/gtm";
 import video01 from "@/assets/depoiments/video01.mp4.asset.json";
 import video01Poster from "@/assets/depoiments/video01.webp";
@@ -438,7 +434,6 @@ function StickyIntroSequence() {
         <OpeningMessage />
         <Manifesto />
         <HowItWorks />
-        <TrainingIntegrations />
         <Locations />
       </div>
     </div>
@@ -502,66 +497,6 @@ function Manifesto() {
         </a>
       </div>
     </section>
-  );
-}
-
-const TRAINING_INTEGRATIONS = [
-  { name: "Apple Watch", logo: appleLogo, invert: true },
-  { name: "Garmin", logo: garminLogo, invert: false },
-  { name: "Polar", logo: polarLogo, invert: false },
-  { name: "Strava", logo: stravaLogo, invert: false },
-] as const;
-
-function TrainingIntegrations() {
-  return (
-    <ScrollRevealSection
-      id="integracoes"
-      className="snap-intro snap-sec relative flex items-center bg-transparent py-10 sm:py-14"
-    >
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-12">
-        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary sm:text-xs">
-              Integrações
-            </p>
-            <h2 className="mt-2 max-w-[22ch] font-display text-3xl font-semibold leading-none text-balance text-foreground sm:text-5xl">
-              Seus dados de treino em sintonia.
-            </h2>
-          </div>
-          <p className="max-w-[38ch] font-mono text-xs leading-relaxed text-muted sm:text-right">
-            Conecte a Buzzini ao ecossistema que você já usa para acompanhar sua evolução.
-          </p>
-        </div>
-
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-3 lg:grid-cols-6">
-          {TRAINING_INTEGRATIONS.map((integration) => (
-            <article
-              key={integration.name}
-              aria-label={integration.name}
-              className="flex min-h-24 items-center justify-center rounded-xl border border-border/70 bg-white px-5 py-5 shadow-[0_12px_30px_rgba(0,0,0,0.08)] sm:min-h-28"
-            >
-              <img
-                src={integration.logo}
-                alt={integration.name}
-                className={`max-h-12 w-full max-w-28 object-contain ${integration.invert ? "brightness-0" : ""}`}
-              />
-            </article>
-          ))}
-          {[
-            { name: "Amazfit", className: "font-display text-xl font-medium tracking-[0.08em]" },
-            { name: "COROS", className: "font-mono text-2xl font-bold tracking-[0.12em]" },
-          ].map((integration) => (
-            <article
-              key={integration.name}
-              aria-label={integration.name}
-              className="flex min-h-24 items-center justify-center rounded-xl border border-border/70 bg-white px-5 py-5 shadow-[0_12px_30px_rgba(0,0,0,0.08)] sm:min-h-28"
-            >
-              <span className={integration.className}>{integration.name}</span>
-            </article>
-          ))}
-        </div>
-      </div>
-    </ScrollRevealSection>
   );
 }
 
@@ -1160,13 +1095,13 @@ function Locations() {
           </div>
           <div className="relative z-10 mx-auto mt-3.5 flex w-fit flex-wrap justify-center gap-x-5 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-2 font-mono text-[10px] uppercase text-muted shadow-[0_10px_25px_rgba(0,0,0,0.08)] backdrop-blur-sm sm:rounded-full">
             <span>
-              <b className="text-primary">1</b> Bebedouro <FlagBrazil className="h-2.5 w-3.5 rounded-[1px]" />
+              <b className="text-primary">1</b> Bebedouro
             </span>
             <span>
-              <b className="text-primary">2</b> Ribeirão Preto <FlagBrazil className="h-2.5 w-3.5 rounded-[1px]" />
+              <b className="text-primary">2</b> Ribeirão Preto
             </span>
             <span>
-              <b className="text-primary">3</b> São Paulo <FlagBrazil className="h-2.5 w-3.5 rounded-[1px]" />
+              <b className="text-primary">3</b> São Paulo
             </span>
           </div>
         </div>
@@ -1185,7 +1120,7 @@ function Locations() {
                   <MapPin aria-hidden="true" className="size-4" />
                 </div>
                 <div>
-                  <p className="font-display text-lg font-semibold text-foreground flex items-center gap-2"><span>{item.name}</span><FlagBrazil className="inline-block h-3 w-4 rounded-[1px]" /></p>
+                  <p className="font-display text-lg font-semibold text-foreground">{item.name}</p>
                   <p className="mt-0.5 font-mono text-[10px] uppercase text-primary">
                     {item.state}
                   </p>
@@ -1199,7 +1134,7 @@ function Locations() {
               </div>
               <div>
                 <p className="font-display text-lg font-semibold text-foreground">Online</p>
-                <p className="mt-0.5 font-mono text-[10px] uppercase text-primary flex items-center gap-1.5 flex-wrap"><span>Todo o Brasil e Exterior</span><span className="inline-flex items-center gap-1"><FlagBrazil className="inline-block h-2.5 w-3.5 rounded-[1px]" /><FlagUSA className="inline-block h-2.5 w-3.5 rounded-[1px]" /><FlagIreland className="inline-block h-2.5 w-3.5 rounded-[1px]" /></span></p>
+                <p className="mt-0.5 flex flex-wrap items-center gap-1.5 font-mono text-[10px] uppercase text-primary"><span>Todo o Brasil e Exterior</span><span className="inline-flex items-center gap-1"><FlagUSA className="inline-block h-2.5 w-3.5 rounded-[1px]" /><FlagIreland className="inline-block h-2.5 w-3.5 rounded-[1px]" /></span></p>
                 <p className="mt-1 font-mono text-xs text-muted">
                   Planilha personalizada e acompanhamento onde você estiver.
                 </p>
