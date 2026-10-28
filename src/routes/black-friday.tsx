@@ -111,6 +111,7 @@ function BlackFridayPage() {
               </p>
 
               <div className="mt-8 flex flex-wrap items-end gap-x-5 gap-y-3 sm:mt-10 sm:gap-x-7">
+                <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#ff8954]">
                     Por mês, nos primeiros 3 meses
                   </p>
