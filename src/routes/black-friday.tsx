@@ -111,18 +111,6 @@ function BlackFridayPage() {
               </p>
 
               <div className="mt-8 flex flex-wrap items-end gap-x-5 gap-y-3 sm:mt-10 sm:gap-x-7">
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
-                    Depois dos 3 primeiros meses
-                  </p>
-                  <p className="mt-1 font-display text-xl font-medium text-white/75 sm:text-2xl">
-                    R$ 150,00/mês
-                  </p>
-                </div>
-                <span className="mb-2 font-mono text-sm text-[#ff8954]" aria-hidden="true">
-                  →
-                </span>
-                <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#ff8954]">
                     Por mês, nos primeiros 3 meses
                   </p>
