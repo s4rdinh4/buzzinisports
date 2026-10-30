@@ -545,6 +545,7 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
           html: personalizedHtml,
           text: htmlToPlainText(personalizedHtml),
           purpose: "marketing",
+          unsubscribe_token: unsubscribeToken,
           label: "admin-marketing-campaign",
           idempotency_key: `${parsed.data.campaignId}-${recipient}`,
         },
