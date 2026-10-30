@@ -81,6 +81,7 @@ function EmailCampaignPage() {
     invalidRecipients.length === 0 &&
     subject.trim().length > 0 &&
     html.trim().length > 0 &&
+    html.includes("{{unsubscribe_url}}") &&
     consentConfirmed &&
     unsubscribeConfirmed;
 
@@ -117,6 +118,21 @@ function EmailCampaignPage() {
     } catch {
       setErrorMessage("Não foi possível encerrar a sessão. Tente novamente.");
     }
+  }
+
+  function addUnsubscribeLink() {
+    const unsubscribeMarkup =
+      '<p style="font-size:12px;color:#64748b;text-align:center;">Não deseja mais receber nossos e-mails? <a href="{{unsubscribe_url}}" style="color:#f59e0b;">Cancelar inscrição</a>.</p>';
+    setHtml((currentHtml) => {
+      if (currentHtml.includes("{{unsubscribe_url}}")) return currentHtml;
+      if (/<\/body\s*>/i.test(currentHtml)) {
+        return currentHtml.replace(/<\/body\s*>/i, `${unsubscribeMarkup}\n</body>`);
+      }
+      if (/<\/html\s*>/i.test(currentHtml)) {
+        return currentHtml.replace(/<\/html\s*>/i, `${unsubscribeMarkup}\n</html>`);
+      }
+      return currentHtml.trim() ? `${currentHtml}\n${unsubscribeMarkup}` : unsubscribeMarkup;
+    });
   }
 
   async function handleSend(event: FormEvent<HTMLFormElement>) {
@@ -310,9 +326,20 @@ function EmailCampaignPage() {
                   placeholder="Cole aqui o HTML completo da campanha."
                   className="mt-1 w-full resize-y rounded-lg border border-border bg-background px-3 py-2 font-mono text-xs leading-relaxed outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 />
+                <button
+                  type="button"
+                  onClick={addUnsubscribeLink}
+                  className="mt-2 min-h-9 rounded-full border border-border px-3 text-xs font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+                >
+                  Inserir link de descadastro
+                </button>
                 <p className="mt-1 text-xs text-muted">
-                  Máximo de 100.000 caracteres. O HTML também precisa incluir um link HTTPS
-                  funcional de descadastro com um texto como “Cancelar inscrição”.
+                  Máximo de 100.000 caracteres. O marcador{" "}
+                  <code className="rounded bg-background px-1 py-0.5 font-mono">
+                    {"{{unsubscribe_url}}"}
+                  </code>{" "}
+                  precisa estar no href de um link com texto de descadastro. Ele será substituído
+                  por um link pessoal e seguro para cada destinatário.
                 </p>
               </div>
 

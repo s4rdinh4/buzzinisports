@@ -1,4 +1,4 @@
-import { EmailAPIError, sendLovableEmail } from "@lovable.dev/email-js";
+import { EmailAPIError, sendLovableEmail, setEmailUnsubscribe } from "@lovable.dev/email-js";
 import { decodeHTML } from "entities";
 import { z } from "zod";
 
@@ -7,6 +7,8 @@ const MAX_CAMPAIGN_RECIPIENTS = 50;
 const CAMPAIGN_HTML_LIMIT = 100_000;
 const SESSION_COOKIE_NAME = "buzzini_campaign_session";
 const SESSION_MAX_AGE_SECONDS = 8 * 60 * 60;
+const UNSUBSCRIBE_PLACEHOLDER = "{{unsubscribe_url}}";
+const SENDER_DOMAIN = "notify.buzzini.com.br";
 
 function containsUnsafeEmailMarkup(html: string): boolean {
   return (
@@ -205,6 +207,11 @@ function handleCampaignLogout(request: Request): Response {
 function htmlToPlainText(html: string): string {
   const text = html
     .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, " ")
+    .replace(
+      /<a\b[^>]*\bhref\s*=\s*(["'])(.*?)\1[^>]*>([\s\S]*?)<\/a\s*>/gi,
+      (_match, _quote: string, href: string, content: string) =>
+        `${content.replace(/<[^>]*>/g, " ")} (${href})`,
+    )
     .replace(/<\s*(br|\/p|\/div|\/tr|\/li|\/h[1-6])\b[^>]*>/gi, "\n")
     .replace(/<[^>]*>/g, " ")
     .replace(/[ \t]+\n/g, "\n")
@@ -213,11 +220,10 @@ function htmlToPlainText(html: string): string {
   return decodeHTML(text).trim();
 }
 
-function containsUnsubscribeLink(html: string): boolean {
-  const links = html.matchAll(
-    /<a\b[^>]*\bhref\s*=\s*(["'])(https?:\/\/.*?)\1[^>]*>([\s\S]*?)<\/a\s*>/gi,
-  );
+function containsUnsubscribePlaceholder(html: string): boolean {
+  const links = html.matchAll(/<a\b[^>]*\bhref\s*=\s*(["'])(.*?)\1[^>]*>([\s\S]*?)<\/a\s*>/gi);
   for (const link of links) {
+    if (link[2]?.trim() !== UNSUBSCRIBE_PLACEHOLDER) continue;
     const label = decodeHTML((link[3] ?? "").replace(/<[^>]*>/g, " ")).trim();
     if (
       /descadastr|cancelar.{0,30}(?:receb|inscriç)|parar de receber|unsubscribe|opt.?out|sair da lista/i.test(
@@ -230,6 +236,175 @@ function containsUnsubscribeLink(html: string): boolean {
   return false;
 }
 
+function bytesToBase64Url(bytes: Uint8Array): string {
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function base64UrlToBytes(value: string): Uint8Array {
+  if (!/^[a-zA-Z0-9_-]+$/.test(value)) throw new Error("Invalid unsubscribe token encoding");
+  const base64 = value.replace(/-/g, "+").replace(/_/g, "/");
+  const binary = atob(base64.padEnd(Math.ceil(base64.length / 4) * 4, "="));
+  return Uint8Array.from(binary, (character) => character.charCodeAt(0));
+}
+
+async function getUnsubscribeEncryptionKey(secret: string): Promise<CryptoKey> {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(secret));
+  return crypto.subtle.importKey("raw", digest, { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
+}
+
+async function createUnsubscribeToken(
+  email: string,
+  campaignId: string,
+  secret: string,
+): Promise<string> {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const payload = new TextEncoder().encode(JSON.stringify({ email, campaignId }));
+  const encrypted = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv },
+    await getUnsubscribeEncryptionKey(secret),
+    payload,
+  );
+  return `${bytesToBase64Url(iv)}.${bytesToBase64Url(new Uint8Array(encrypted))}`;
+}
+
+async function readUnsubscribeToken(
+  token: string,
+  secret: string,
+): Promise<{ email: string; campaignId: string } | null> {
+  try {
+    const [encodedIv, encodedPayload, ...rest] = token.split(".");
+    if (!encodedIv || !encodedPayload || rest.length > 0) return null;
+    const decodedIv = base64UrlToBytes(encodedIv);
+    const iv = new Uint8Array(decodedIv.length);
+    iv.set(decodedIv);
+    const decodedPayload = base64UrlToBytes(encodedPayload);
+    const encryptedPayload = new Uint8Array(decodedPayload.length);
+    encryptedPayload.set(decodedPayload);
+    const decoded = new TextDecoder().decode(
+      await crypto.subtle.decrypt(
+        { name: "AES-GCM", iv },
+        await getUnsubscribeEncryptionKey(secret),
+        encryptedPayload,
+      ),
+    );
+    const parsed: unknown = JSON.parse(decoded);
+    const result = z
+      .object({
+        email: z.string().email().max(254),
+        campaignId: z.string().uuid(),
+      })
+      .safeParse(parsed);
+    return result.success ? result.data : null;
+  } catch {
+    return null;
+  }
+}
+
+function unsubscribePage(message: string, token: string, confirmed = false): Response {
+  const title = confirmed ? "Descadastro confirmado" : "Cancelar recebimento de e-mails";
+  const content = confirmed
+    ? `<p>${message}</p>`
+    : `<p>Confirme para parar de receber comunicações de marketing da Buzzini Sports.</p>
+      <form method="post">
+        <input type="hidden" name="token" value="${token}">
+        <button type="submit">Confirmar descadastro</button>
+      </form>`;
+  const html = `<!doctype html>
+    <html lang="pt-BR">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex,nofollow">
+        <title>${title} | Buzzini Sports</title>
+        <style>
+          body{margin:0;padding:24px;background:#0b0e14;color:#f8fafc;font:16px/1.6 Arial,sans-serif}
+          main{max-width:560px;margin:12vh auto;padding:32px;border:1px solid #334155;border-radius:16px;background:#131924}
+          h1{font-size:24px}p{color:#cbd5e1}
+          button{margin-top:16px;padding:12px 20px;border:0;border-radius:999px;background:#f59e0b;color:#111827;font-weight:700;cursor:pointer}
+        </style>
+      </head>
+      <body><main><h1>${title}</h1>${content}</main></body>
+    </html>`;
+  return new Response(html, {
+    status: 200,
+    headers: {
+      "Cache-Control": "no-store",
+      "Content-Security-Policy":
+        "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+      "Content-Type": "text/html; charset=utf-8",
+      "Referrer-Policy": "no-referrer",
+      "X-Content-Type-Options": "nosniff",
+    },
+  });
+}
+
+async function handleUnsubscribe(request: Request, token: string): Promise<Response> {
+  const secret = getAdminSecret();
+  if (!secret) {
+    console.error("EMAIL_CAMPAIGN_ADMIN_KEY is missing or shorter than 32 characters");
+    return new Response("O descadastro está temporariamente indisponível.", { status: 503 });
+  }
+
+  const payload = await readUnsubscribeToken(token, secret);
+  if (!payload) {
+    return new Response("Este link de descadastro é inválido.", { status: 400 });
+  }
+
+  if (request.method === "GET") {
+    return unsubscribePage("", token);
+  }
+  if (request.method !== "POST") {
+    return new Response("Método não permitido.", { status: 405, headers: { Allow: "GET, POST" } });
+  }
+  if (!isSameOrigin(request)) {
+    return new Response("Origem da solicitação inválida.", { status: 403 });
+  }
+  if (!request.headers.get("content-type")?.includes("application/x-www-form-urlencoded")) {
+    return new Response("Solicitação inválida.", { status: 415 });
+  }
+
+  let form: FormData;
+  try {
+    form = await request.formData();
+  } catch {
+    return new Response("Não foi possível ler a solicitação.", { status: 400 });
+  }
+  if (form.get("token") !== token) {
+    return new Response("O link de descadastro não corresponde à solicitação.", { status: 400 });
+  }
+
+  const apiKey = process.env["LOVABLE_API_KEY"];
+  if (!apiKey) {
+    console.error("LOVABLE_API_KEY is not configured for email unsubscribes");
+    return new Response("O descadastro está temporariamente indisponível.", { status: 503 });
+  }
+
+  try {
+    const apiBaseUrl = process.env["LOVABLE_API_BASE_URL"];
+    await setEmailUnsubscribe(
+      { recipient: payload.email, domain: SENDER_DOMAIN, subscribed: false },
+      apiBaseUrl ? { apiKey, apiBaseUrl } : { apiKey },
+    );
+  } catch (error) {
+    console.error(
+      "Marketing email unsubscribe failed",
+      error instanceof EmailAPIError ? error.code : "unexpected_failure",
+      error instanceof EmailAPIError ? error.status : undefined,
+    );
+    return new Response("Não foi possível concluir o descadastro. Tente novamente mais tarde.", {
+      status: 502,
+    });
+  }
+
+  return unsubscribePage(
+    "Seu endereço foi removido das comunicações de marketing da Buzzini Sports.",
+    token,
+    true,
+  );
+}
+
 export async function handleEmailCampaign(request: Request): Promise<Response> {
   const pathname = new URL(request.url).pathname;
   if (pathname === "/api/email-campaign/login") return handleCampaignLogin(request);
@@ -237,6 +412,9 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
   if (pathname !== "/api/email-campaign") {
     return jsonResponse({ error: "Não encontrado." }, 404);
   }
+
+  const unsubscribeToken = new URL(request.url).searchParams.get("unsubscribe");
+  if (unsubscribeToken) return handleUnsubscribe(request, unsubscribeToken);
 
   if (request.method !== "GET" && request.method !== "POST") {
     return jsonResponse({ error: "Método não permitido." }, 405, { Allow: "GET, POST" });
@@ -293,10 +471,10 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
     return jsonResponse({ error: `Confira: ${invalidFields.join("; ")}.` }, 400);
   }
 
-  if (!containsUnsubscribeLink(parsed.data.html)) {
+  if (!containsUnsubscribePlaceholder(parsed.data.html)) {
     return jsonResponse(
       {
-        error: "Inclua no HTML um link HTTPS funcional, com texto de descadastro, antes de enviar.",
+        error: `Inclua o marcador ${UNSUBSCRIBE_PLACEHOLDER} no href de um link com texto de descadastro.`,
       },
       400,
     );
@@ -312,6 +490,15 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
     console.error("LOVABLE_API_KEY is not configured for email campaigns");
     return jsonResponse(
       { error: "O serviço de e-mail ainda não está configurado no servidor." },
+      503,
+    );
+  }
+
+  const campaignSecret = getAdminSecret();
+  if (!campaignSecret) {
+    console.error("EMAIL_CAMPAIGN_ADMIN_KEY is missing or shorter than 32 characters");
+    return jsonResponse(
+      { error: "O acesso administrativo ainda não está configurado no servidor." },
       503,
     );
   }
@@ -337,14 +524,25 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
     }
 
     try {
+      const unsubscribeToken = await createUnsubscribeToken(
+        recipient,
+        parsed.data.campaignId,
+        campaignSecret,
+      );
+      const unsubscribeUrl = new URL("/api/email-campaign", request.url);
+      unsubscribeUrl.searchParams.set("unsubscribe", unsubscribeToken);
+      const personalizedHtml = parsed.data.html.replaceAll(
+        UNSUBSCRIBE_PLACEHOLDER,
+        unsubscribeUrl.toString(),
+      );
       await sendLovableEmail(
         {
           to: recipient,
           from: { name: "Buzzini Sports", address: "noreply@notify.buzzini.com.br" },
           sender_domain: "notify.buzzini.com.br",
           subject: parsed.data.subject,
-          html: parsed.data.html,
-          text: plainText,
+          html: personalizedHtml,
+          text: htmlToPlainText(personalizedHtml),
           purpose: "marketing",
           label: "admin-marketing-campaign",
           idempotency_key: `${parsed.data.campaignId}-${recipient}`,
