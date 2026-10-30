@@ -1,0 +1,467 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState, type FormEvent } from "react";
+import type { Session } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
+
+type RecipientResult = {
+  email: string;
+  status: "sent" | "suppressed" | "failed" | "not_sent";
+};
+
+type CampaignResponse = {
+  ok?: boolean;
+  error?: string;
+  results?: RecipientResult[];
+};
+
+export const Route = createFileRoute("/admin/email-campaign")({
+  staticData: { sitemap: false },
+  head: () => ({
+    meta: [
+      { title: "Disparo de e-mail | Buzzini Sports" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
+  component: EmailCampaignPage,
+});
+
+function EmailCampaignPage() {
+  const [session, setSession] = useState<Session | null>(null);
+  const [isLoadingSession, setIsLoadingSession] = useState(true);
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isCheckingAccess, setIsCheckingAccess] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [recipientsInput, setRecipientsInput] = useState("");
+  const [subject, setSubject] = useState("");
+  const [html, setHtml] = useState("");
+  const [consentConfirmed, setConsentConfirmed] = useState(false);
+  const [unsubscribeConfirmed, setUnsubscribeConfirmed] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [results, setResults] = useState<RecipientResult[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    const { data } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      if (active) setSession(nextSession);
+    });
+
+    void supabase.auth
+      .getSession()
+      .then(({ data: sessionData, error }) => {
+        if (!active) return;
+        if (error) setErrorMessage("Não foi possível verificar seu login. Tente novamente.");
+        setSession(sessionData.session);
+        setIsLoadingSession(false);
+      })
+      .catch(() => {
+        if (!active) return;
+        setErrorMessage("Não foi possível conectar à autenticação. Tente novamente.");
+        setIsLoadingSession(false);
+      });
+
+    return () => {
+      active = false;
+      data.subscription.unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    setIsAuthorized(false);
+    setIsCheckingAccess(Boolean(session));
+
+    if (!session) {
+      setIsCheckingAccess(false);
+      return;
+    }
+
+    void fetch("/api/email-campaign", {
+      headers: { Authorization: `Bearer ${session.access_token}` },
+    })
+      .then(async (response) => {
+        const payload = (await response.json()) as CampaignResponse;
+        if (!response.ok) throw new Error(payload.error || "Acesso não autorizado.");
+        if (active) {
+          setIsAuthorized(true);
+          setErrorMessage("");
+        }
+      })
+      .catch((error: unknown) => {
+        if (!active) return;
+        setIsAuthorized(false);
+        setErrorMessage(
+          error instanceof Error ? error.message : "Não foi possível validar seu acesso.",
+        );
+      })
+      .finally(() => {
+        if (active) setIsCheckingAccess(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [session]);
+
+  const recipients = recipientsInput
+    .split(/[\n,;]+/)
+    .map((recipient) => recipient.trim().toLowerCase())
+    .filter(Boolean);
+  const uniqueRecipients = [...new Set(recipients)];
+  const hasDuplicateRecipients = uniqueRecipients.length !== recipients.length;
+  const canSend =
+    isAuthorized &&
+    !isSending &&
+    uniqueRecipients.length > 0 &&
+    uniqueRecipients.length <= 50 &&
+    !hasDuplicateRecipients &&
+    subject.trim().length > 0 &&
+    html.trim().length > 0 &&
+    consentConfirmed &&
+    unsubscribeConfirmed;
+
+  async function handleSignIn(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setErrorMessage("");
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+      if (error) setErrorMessage("Não foi possível entrar. Confira o e-mail e a senha.");
+    } catch {
+      setErrorMessage("Não foi possível conectar à autenticação. Tente novamente.");
+    }
+  }
+
+  async function handleSignOut() {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) setErrorMessage("Não foi possível encerrar a sessão. Tente novamente.");
+      else {
+        setIsAuthorized(false);
+        setErrorMessage("");
+      }
+    } catch {
+      setErrorMessage("Não foi possível encerrar a sessão. Tente novamente.");
+    }
+  }
+
+  async function handleSend(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!session || !canSend) return;
+
+    setIsSending(true);
+    setErrorMessage("");
+    setResults([]);
+    try {
+      const response = await fetch("/api/email-campaign", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          campaignId: crypto.randomUUID(),
+          recipients: uniqueRecipients,
+          subject: subject.trim(),
+          html,
+          consentConfirmed,
+          unsubscribeConfirmed,
+        }),
+      });
+      const payload = (await response.json()) as CampaignResponse;
+      if (!response.ok) throw new Error(payload.error || "Não foi possível iniciar o envio.");
+      setResults(payload.results ?? []);
+      if (!payload.results?.length) {
+        setErrorMessage("O servidor não retornou o resultado do envio.");
+      }
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error ? error.message : "Não foi possível concluir o envio.",
+      );
+    } finally {
+      setIsSending(false);
+    }
+  }
+
+  const resultLabels: Record<RecipientResult["status"], string> = {
+    sent: "Enviado",
+    suppressed: "Não enviado — endereço suprimido",
+    failed: "Falha no envio",
+    not_sent: "Não enviado — campanha interrompida",
+  };
+
+  return (
+    <main className="min-h-screen bg-background px-4 py-10 text-foreground sm:px-8 sm:py-14">
+      <div className="mx-auto max-w-5xl">
+        <header className="mb-8 flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
+              Área administrativa
+            </p>
+            <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">
+              Disparo de e-mail
+            </h1>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+              Envie uma campanha individualmente para cada contato, usando o remetente oficial
+              Buzzini Sports.
+            </p>
+          </div>
+          {session && (
+            <button
+              type="button"
+              onClick={() => void handleSignOut()}
+              className="rounded-full border border-border px-4 py-2 text-sm transition-colors hover:bg-card"
+            >
+              Sair
+            </button>
+          )}
+        </header>
+
+        {errorMessage && (
+          <p
+            role="alert"
+            className="mb-5 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+          >
+            {errorMessage}
+          </p>
+        )}
+
+        {isLoadingSession || isCheckingAccess ? (
+          <div className="rounded-2xl border border-border bg-card p-6 text-sm text-muted">
+            Verificando acesso...
+          </div>
+        ) : !session ? (
+          <form
+            onSubmit={(event) => void handleSignIn(event)}
+            className="max-w-md rounded-2xl border border-border bg-card p-6 shadow-xl"
+          >
+            <h2 className="font-display text-xl font-semibold">Entrar</h2>
+            <p className="mt-2 text-sm text-muted">
+              Use uma conta Supabase autorizada para acessar esta ferramenta.
+            </p>
+            <label className="mt-5 block text-sm font-medium" htmlFor="admin-email">
+              E-mail
+            </label>
+            <input
+              id="admin-email"
+              type="email"
+              autoComplete="username"
+              required
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="mt-1 min-h-11 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            />
+            <label className="mt-4 block text-sm font-medium" htmlFor="admin-password">
+              Senha
+            </label>
+            <input
+              id="admin-password"
+              type="password"
+              autoComplete="current-password"
+              required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              className="mt-1 min-h-11 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            />
+            <button
+              type="submit"
+              className="mt-5 min-h-11 w-full rounded-full bg-primary px-5 font-semibold text-primary-foreground transition-colors hover:bg-primary-soft"
+            >
+              Entrar
+            </button>
+          </form>
+        ) : !isAuthorized ? (
+          <div className="max-w-xl rounded-2xl border border-border bg-card p-6">
+            <h2 className="font-display text-xl font-semibold">Acesso restrito</h2>
+            <p className="mt-2 text-sm leading-relaxed text-muted">
+              A sessão foi autenticada, mas esta conta não está autorizada para campanhas. A
+              autorização é definida no servidor.
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
+            <form
+              onSubmit={(event) => void handleSend(event)}
+              className="space-y-5 rounded-2xl border border-border bg-card p-5 shadow-xl sm:p-7"
+            >
+              <div>
+                <h2 className="font-display text-xl font-semibold">Nova campanha</h2>
+                <p className="mt-1 text-sm text-muted">
+                  Até 50 destinatários. Os endereços não ficam visíveis uns para os outros nem são
+                  armazenados pela página.
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium" htmlFor="campaign-recipients">
+                  Destinatários
+                </label>
+                <textarea
+                  id="campaign-recipients"
+                  required
+                  rows={5}
+                  value={recipientsInput}
+                  onChange={(event) => setRecipientsInput(event.target.value)}
+                  placeholder={"pessoa1@exemplo.com\npessoa2@exemplo.com"}
+                  aria-describedby="recipients-help"
+                  className="mt-1 w-full resize-y rounded-lg border border-border bg-background px-3 py-2 font-mono text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                />
+                <p id="recipients-help" className="mt-1 text-xs text-muted">
+                  Separe os endereços por linha, vírgula ou ponto e vírgula.{" "}
+                  {uniqueRecipients.length}
+                  /50 válidos na lista.
+                </p>
+                {hasDuplicateRecipients && (
+                  <p role="alert" className="mt-1 text-xs text-red-300">
+                    Há endereços repetidos. Remova-os antes de enviar.
+                  </p>
+                )}
+                {uniqueRecipients.length > 50 && (
+                  <p role="alert" className="mt-1 text-xs text-red-300">
+                    O limite por campanha é de 50 destinatários.
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium" htmlFor="campaign-subject">
+                  Assunto
+                </label>
+                <input
+                  id="campaign-subject"
+                  required
+                  maxLength={180}
+                  value={subject}
+                  onChange={(event) => setSubject(event.target.value)}
+                  className="mt-1 min-h-11 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium" htmlFor="campaign-html">
+                  HTML do e-mail
+                </label>
+                <textarea
+                  id="campaign-html"
+                  required
+                  maxLength={100_000}
+                  rows={14}
+                  value={html}
+                  onChange={(event) => setHtml(event.target.value)}
+                  placeholder="Cole aqui o HTML completo da campanha."
+                  className="mt-1 w-full resize-y rounded-lg border border-border bg-background px-3 py-2 font-mono text-xs leading-relaxed outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                />
+                <p className="mt-1 text-xs text-muted">Máximo de 100.000 caracteres.</p>
+              </div>
+
+              <div className="space-y-3 rounded-xl border border-border bg-background/60 p-4">
+                <label className="flex items-start gap-3 text-sm leading-relaxed">
+                  <input
+                    type="checkbox"
+                    checked={consentConfirmed}
+                    onChange={(event) => setConsentConfirmed(event.target.checked)}
+                    className="mt-1 size-4 accent-primary"
+                  />
+                  <span>
+                    Confirmo que os destinatários autorizaram o recebimento destas comunicações.
+                  </span>
+                </label>
+                <label className="flex items-start gap-3 text-sm leading-relaxed">
+                  <input
+                    type="checkbox"
+                    checked={unsubscribeConfirmed}
+                    onChange={(event) => setUnsubscribeConfirmed(event.target.checked)}
+                    className="mt-1 size-4 accent-primary"
+                  />
+                  <span>
+                    Confirmo que o HTML inclui um link funcional para o destinatário cancelar o
+                    recebimento.
+                  </span>
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                disabled={!canSend}
+                className="min-h-12 w-full rounded-full bg-primary px-6 font-semibold text-primary-foreground transition-colors hover:bg-primary-soft disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isSending ? "Enviando campanha..." : "Enviar campanha"}
+              </button>
+            </form>
+
+            <aside className="space-y-5">
+              <section className="rounded-2xl border border-border bg-card p-5">
+                <h2 className="font-display text-lg font-semibold">Remetente</h2>
+                <p className="mt-2 text-sm text-muted">Buzzini Sports</p>
+                <p className="font-mono text-sm">noreply@notify.buzzini.com.br</p>
+                <p className="mt-3 text-xs leading-relaxed text-muted">
+                  O envio ocorre pelo serviço gerenciado do Lovable. Cada contato recebe uma
+                  mensagem individual.
+                </p>
+              </section>
+
+              <section className="overflow-hidden rounded-2xl border border-border bg-card">
+                <div className="border-b border-border p-4">
+                  <h2 className="font-display text-lg font-semibold">Pré-visualização</h2>
+                  <p className="mt-1 text-xs text-muted">
+                    A prévia é isolada e pode não refletir todos os clientes de e-mail.
+                  </p>
+                </div>
+                {html.trim() ? (
+                  <iframe
+                    title="Pré-visualização do HTML da campanha"
+                    srcDoc={html}
+                    sandbox=""
+                    referrerPolicy="no-referrer"
+                    className="h-[28rem] w-full bg-white"
+                  />
+                ) : (
+                  <div className="flex h-40 items-center justify-center px-5 text-sm text-muted">
+                    Cole o HTML para visualizar.
+                  </div>
+                )}
+              </section>
+
+              {results.length > 0 && (
+                <section
+                  aria-live="polite"
+                  className="rounded-2xl border border-border bg-card p-5"
+                >
+                  <h2 className="font-display text-lg font-semibold">Resultado do envio</h2>
+                  <p className="mt-1 text-sm text-muted">
+                    {results.filter((result) => result.status === "sent").length} enviados de{" "}
+                    {results.length} destinatários.
+                  </p>
+                  <ul className="mt-4 max-h-72 space-y-2 overflow-auto text-xs">
+                    {results.map((result) => (
+                      <li
+                        key={`${result.email}-${result.status}`}
+                        className="flex flex-wrap justify-between gap-x-3 gap-y-1 border-t border-border pt-2"
+                      >
+                        <span className="break-all font-mono">{result.email}</span>
+                        <span
+                          className={
+                            result.status === "sent"
+                              ? "text-emerald-300"
+                              : result.status === "not_sent"
+                                ? "text-amber-300"
+                                : "text-red-300"
+                          }
+                        >
+                          {resultLabels[result.status]}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+            </aside>
+          </div>
+        )}
+      </div>
+    </main>
+  );
+}

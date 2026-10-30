@@ -15,6 +15,7 @@ import { Route as EmpresasRouteImport } from './routes/empresas'
 import { Route as HorariosRouteImport } from './routes/horarios'
 import { Route as MidiaKitRouteImport } from './routes/midia-kit'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AdminEmailCampaignRouteImport } from './routes/admin.email-campaign'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminEmailCampaignRoute = AdminEmailCampaignRouteImport.update({
+  id: '/admin/email-campaign',
+  path: '/admin/email-campaign',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/horarios': typeof HorariosRoute
   '/midia-kit': typeof MidiaKitRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/email-campaign': typeof AdminEmailCampaignRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/horarios': typeof HorariosRoute
   '/midia-kit': typeof MidiaKitRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/email-campaign': typeof AdminEmailCampaignRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/horarios': typeof HorariosRoute
   '/midia-kit': typeof MidiaKitRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/email-campaign': typeof AdminEmailCampaignRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/horarios'
     | '/midia-kit'
     | '/sitemap.xml'
+    | '/admin/email-campaign'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/horarios'
     | '/midia-kit'
     | '/sitemap.xml'
+    | '/admin/email-campaign'
     | '/lovable/email/transactional/preview'
   id:
     | '__root__'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/horarios'
     | '/midia-kit'
     | '/sitemap.xml'
+    | '/admin/email-campaign'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   HorariosRoute: typeof HorariosRoute
   MidiaKitRoute: typeof MidiaKitRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AdminEmailCampaignRoute: typeof AdminEmailCampaignRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
@@ -166,6 +179,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/email-campaign': {
+      id: '/admin/email-campaign'
+      path: '/admin/email-campaign'
+      fullPath: '/admin/email-campaign'
+      preLoaderRoute: typeof AdminEmailCampaignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/preview': {
       id: '/lovable/email/transactional/preview'
       path: '/lovable/email/transactional/preview'
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   HorariosRoute: HorariosRoute,
   MidiaKitRoute: MidiaKitRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AdminEmailCampaignRoute: AdminEmailCampaignRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport

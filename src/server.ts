@@ -1,5 +1,6 @@
 import "./lib/error-capture";
 
+import { handleEmailCampaign } from "./lib/email-campaign.server";
 import { sendTemplateEmail } from "./lib/email-templates/send-email";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
@@ -247,6 +248,9 @@ export default {
       }
       if (url.pathname === "/api/midia-kit-contato") {
         return await handleMidiaKitInquiry(request);
+      }
+      if (url.pathname === "/api/email-campaign") {
+        return await handleEmailCampaign(request);
       }
 
       const handler = await getServerEntry();
