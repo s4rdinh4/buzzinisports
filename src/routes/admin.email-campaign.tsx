@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
-import type { Session } from "@supabase/supabase-js";
-import { supabase } from "@/integrations/supabase/client";
 
 type RecipientResult = {
   email: string;
@@ -26,11 +24,8 @@ export const Route = createFileRoute("/admin/email-campaign")({
 });
 
 function EmailCampaignPage() {
-  const [session, setSession] = useState<Session | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoadingSession, setIsLoadingSession] = useState(true);
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [isCheckingAccess, setIsCheckingAccess] = useState(false);
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [recipientsInput, setRecipientsInput] = useState("");
   const [subject, setSubject] = useState("");
@@ -43,66 +38,30 @@ function EmailCampaignPage() {
 
   useEffect(() => {
     let active = true;
-    const { data } = supabase.auth.onAuthStateChange((_event, nextSession) => {
-      if (active) setSession(nextSession);
-    });
-
-    void supabase.auth
-      .getSession()
-      .then(({ data: sessionData, error }) => {
-        if (!active) return;
-        if (error) setErrorMessage("Não foi possível verificar seu login. Tente novamente.");
-        setSession(sessionData.session);
-        setIsLoadingSession(false);
-      })
-      .catch(() => {
-        if (!active) return;
-        setErrorMessage("Não foi possível conectar à autenticação. Tente novamente.");
-        setIsLoadingSession(false);
-      });
-
-    return () => {
-      active = false;
-      data.subscription.unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    let active = true;
-    setIsAuthorized(false);
-    setIsCheckingAccess(Boolean(session));
-
-    if (!session) {
-      setIsCheckingAccess(false);
-      return;
-    }
-
-    void fetch("/api/email-campaign", {
-      headers: { Authorization: `Bearer ${session.access_token}` },
-    })
+    void fetch("/api/email-campaign")
       .then(async (response) => {
+        if (response.ok) return true;
+        if (response.status === 401) return false;
         const payload = (await response.json()) as CampaignResponse;
-        if (!response.ok) throw new Error(payload.error || "Acesso não autorizado.");
-        if (active) {
-          setIsAuthorized(true);
-          setErrorMessage("");
-        }
+        throw new Error(payload.error || "Não foi possível verificar o acesso.");
+      })
+      .then((authenticated) => {
+        if (active) setIsAuthenticated(authenticated);
       })
       .catch((error: unknown) => {
         if (!active) return;
-        setIsAuthorized(false);
         setErrorMessage(
-          error instanceof Error ? error.message : "Não foi possível validar seu acesso.",
+          error instanceof Error ? error.message : "Não foi possível verificar o acesso.",
         );
       })
       .finally(() => {
-        if (active) setIsCheckingAccess(false);
+        if (active) setIsLoadingSession(false);
       });
 
     return () => {
       active = false;
     };
-  }, [session]);
+  }, []);
 
   const recipients = recipientsInput
     .split(/[\n,;]+/)
@@ -111,7 +70,7 @@ function EmailCampaignPage() {
   const uniqueRecipients = [...new Set(recipients)];
   const hasDuplicateRecipients = uniqueRecipients.length !== recipients.length;
   const canSend =
-    isAuthorized &&
+    isAuthenticated &&
     !isSending &&
     uniqueRecipients.length > 0 &&
     uniqueRecipients.length <= 50 &&
@@ -125,24 +84,32 @@ function EmailCampaignPage() {
     event.preventDefault();
     setErrorMessage("");
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
-        password,
+      const response = await fetch("/api/email-campaign/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: password }),
       });
-      if (error) setErrorMessage("Não foi possível entrar. Confira o e-mail e a senha.");
-    } catch {
-      setErrorMessage("Não foi possível conectar à autenticação. Tente novamente.");
+      const payload = (await response.json()) as CampaignResponse;
+      if (!response.ok) throw new Error(payload.error || "Não foi possível entrar.");
+      setPassword("");
+      setIsAuthenticated(true);
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error ? error.message : "Não foi possível validar a chave de acesso.",
+      );
     }
   }
 
   async function handleSignOut() {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) setErrorMessage("Não foi possível encerrar a sessão. Tente novamente.");
-      else {
-        setIsAuthorized(false);
-        setErrorMessage("");
+      const response = await fetch("/api/email-campaign/logout", { method: "POST" });
+      if (!response.ok) {
+        setErrorMessage("Não foi possível encerrar a sessão. Tente novamente.");
+        return;
       }
+      setIsAuthenticated(false);
+      setErrorMessage("");
+      setResults([]);
     } catch {
       setErrorMessage("Não foi possível encerrar a sessão. Tente novamente.");
     }
@@ -150,7 +117,7 @@ function EmailCampaignPage() {
 
   async function handleSend(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!session || !canSend) return;
+    if (!canSend) return;
 
     setIsSending(true);
     setErrorMessage("");
@@ -158,10 +125,7 @@ function EmailCampaignPage() {
     try {
       const response = await fetch("/api/email-campaign", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           campaignId: crypto.randomUUID(),
           recipients: uniqueRecipients,
@@ -172,7 +136,10 @@ function EmailCampaignPage() {
         }),
       });
       const payload = (await response.json()) as CampaignResponse;
-      if (!response.ok) throw new Error(payload.error || "Não foi possível iniciar o envio.");
+      if (!response.ok) {
+        if (response.status === 401) setIsAuthenticated(false);
+        throw new Error(payload.error || "Não foi possível iniciar o envio.");
+      }
       setResults(payload.results ?? []);
       if (!payload.results?.length) {
         setErrorMessage("O servidor não retornou o resultado do envio.");
@@ -209,7 +176,7 @@ function EmailCampaignPage() {
               Buzzini Sports.
             </p>
           </div>
-          {session && (
+          {isAuthenticated && (
             <button
               type="button"
               onClick={() => void handleSignOut()}
@@ -229,33 +196,21 @@ function EmailCampaignPage() {
           </p>
         )}
 
-        {isLoadingSession || isCheckingAccess ? (
+        {isLoadingSession ? (
           <div className="rounded-2xl border border-border bg-card p-6 text-sm text-muted">
             Verificando acesso...
           </div>
-        ) : !session ? (
+        ) : !isAuthenticated ? (
           <form
             onSubmit={(event) => void handleSignIn(event)}
             className="max-w-md rounded-2xl border border-border bg-card p-6 shadow-xl"
           >
             <h2 className="font-display text-xl font-semibold">Entrar</h2>
             <p className="mt-2 text-sm text-muted">
-              Use uma conta Supabase autorizada para acessar esta ferramenta.
+              Informe a chave administrativa configurada nos secrets do servidor.
             </p>
-            <label className="mt-5 block text-sm font-medium" htmlFor="admin-email">
-              E-mail
-            </label>
-            <input
-              id="admin-email"
-              type="email"
-              autoComplete="username"
-              required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              className="mt-1 min-h-11 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            />
             <label className="mt-4 block text-sm font-medium" htmlFor="admin-password">
-              Senha
+              Chave de acesso
             </label>
             <input
               id="admin-password"
@@ -273,14 +228,6 @@ function EmailCampaignPage() {
               Entrar
             </button>
           </form>
-        ) : !isAuthorized ? (
-          <div className="max-w-xl rounded-2xl border border-border bg-card p-6">
-            <h2 className="font-display text-xl font-semibold">Acesso restrito</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted">
-              A sessão foi autenticada, mas esta conta não está autorizada para campanhas. A
-              autorização é definida no servidor.
-            </p>
-          </div>
         ) : (
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
             <form

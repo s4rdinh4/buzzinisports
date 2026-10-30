@@ -5,6 +5,8 @@ import { z } from "zod";
 const MAX_CAMPAIGN_BYTES = 150_000;
 const MAX_CAMPAIGN_RECIPIENTS = 50;
 const CAMPAIGN_HTML_LIMIT = 100_000;
+const SESSION_COOKIE_NAME = "buzzini_campaign_session";
+const SESSION_MAX_AGE_SECONDS = 8 * 60 * 60;
 
 const campaignSchema = z.object({
   campaignId: z.string().uuid(),
@@ -32,95 +34,165 @@ const campaignSchema = z.object({
   unsubscribeConfirmed: z.literal(true),
 });
 
-type Authorization = { authorizedEmail: string } | { response: Response };
+function getAdminSecret(): string | null {
+  const secret = process.env["EMAIL_CAMPAIGN_ADMIN_KEY"];
+  return secret && secret.length >= 32 ? secret : null;
+}
 
-async function authorizeCampaignRequest(request: Request): Promise<Authorization> {
-  const supabaseUrl = process.env["SUPABASE_URL"];
-  const publishableKey = process.env["SUPABASE_PUBLISHABLE_KEY"];
-  const adminEmails = (process.env["EMAIL_CAMPAIGN_ADMIN_EMAILS"] ?? "")
-    .split(",")
-    .map((email) => email.trim().toLowerCase())
-    .filter(Boolean);
+function jsonResponse(body: unknown, status = 200, headers?: HeadersInit): Response {
+  const responseHeaders = new Headers(headers);
+  responseHeaders.set("Cache-Control", "no-store");
+  return Response.json(body, { status, headers: responseHeaders });
+}
 
-  if (!supabaseUrl || !publishableKey || adminEmails.length === 0) {
-    console.error("Email campaign admin authorization is not configured");
-    return {
-      response: Response.json(
-        { error: "O acesso administrativo ainda não está configurado no servidor." },
-        { status: 503 },
-      ),
-    };
-  }
-
-  const authorization = request.headers.get("authorization");
-  const token = authorization?.match(/^Bearer\s+(.+)$/i)?.[1];
-  if (!token) {
-    return {
-      response: Response.json({ error: "Faça login para continuar." }, { status: 401 }),
-    };
-  }
-
-  let userResponse: Response;
+function isSameOrigin(request: Request): boolean {
+  const origin = request.headers.get("origin");
+  if (!origin) return false;
   try {
-    userResponse = await fetch(`${supabaseUrl.replace(/\/+$/, "")}/auth/v1/user`, {
-      headers: {
-        apikey: publishableKey,
-        authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error) {
-    console.error("Email campaign authentication request failed", error);
-    return {
-      response: Response.json(
-        { error: "Não foi possível validar seu login. Tente novamente." },
-        { status: 502 },
-      ),
-    };
+    return new URL(origin).origin === new URL(request.url).origin;
+  } catch {
+    return false;
+  }
+}
+
+function readCookie(request: Request, name: string): string | undefined {
+  const cookieHeader = request.headers.get("cookie") ?? "";
+  for (const cookie of cookieHeader.split(";")) {
+    const [key, ...valueParts] = cookie.trim().split("=");
+    if (key === name) return valueParts.join("=");
+  }
+  return undefined;
+}
+
+async function createSessionSignature(expiration: string, secret: string): Promise<string> {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(expiration));
+  return Array.from(new Uint8Array(signature), (byte) => byte.toString(16).padStart(2, "0")).join(
+    "",
+  );
+}
+
+async function isValidSessionSignature(
+  expiration: string,
+  signature: string,
+  secret: string,
+): Promise<boolean> {
+  if (!/^\d{10}$/.test(expiration) || !/^[a-f0-9]{64}$/.test(signature)) return false;
+  if (Number(expiration) <= Math.floor(Date.now() / 1000)) return false;
+
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["verify"],
+  );
+  const signatureBytes = new Uint8Array(
+    signature.match(/.{2}/g)?.map((part) => Number.parseInt(part, 16)) ?? [],
+  );
+  return crypto.subtle.verify("HMAC", key, signatureBytes, new TextEncoder().encode(expiration));
+}
+
+async function validateSession(request: Request, secret: string): Promise<boolean> {
+  const token = readCookie(request, SESSION_COOKIE_NAME);
+  if (!token) return false;
+  const separator = token.indexOf(".");
+  if (separator < 0) return false;
+  return isValidSessionSignature(token.slice(0, separator), token.slice(separator + 1), secret);
+}
+
+function sessionCookie(request: Request, value: string, maxAge: number): string {
+  const secure = new URL(request.url).protocol === "https:" ? "; Secure" : "";
+  return `${SESSION_COOKIE_NAME}=${value}; Path=/api/email-campaign; HttpOnly; SameSite=Strict; Max-Age=${maxAge}${secure}`;
+}
+
+async function authorizeCampaignRequest(request: Request): Promise<Response | null> {
+  const secret = getAdminSecret();
+  if (!secret) {
+    console.error("EMAIL_CAMPAIGN_ADMIN_KEY is missing or shorter than 32 characters");
+    return jsonResponse(
+      { error: "O acesso administrativo ainda não está configurado no servidor." },
+      503,
+    );
   }
 
-  if (userResponse.status === 401 || userResponse.status === 403) {
-    return {
-      response: Response.json({ error: "Sua sessão expirou. Entre novamente." }, { status: 401 }),
-    };
+  if (!(await validateSession(request, secret))) {
+    return jsonResponse({ error: "A sessão expirou. Entre novamente." }, 401);
+  }
+  return null;
+}
+
+async function handleCampaignLogin(request: Request): Promise<Response> {
+  if (request.method !== "POST") {
+    return jsonResponse({ error: "Método não permitido." }, 405, { Allow: "POST" });
+  }
+  if (!isSameOrigin(request)) {
+    return jsonResponse({ error: "Origem da solicitação inválida." }, 403);
+  }
+  if (!request.headers.get("content-type")?.includes("application/json")) {
+    return jsonResponse({ error: "Formato de solicitação inválido." }, 415);
   }
 
-  if (!userResponse.ok) {
-    console.error("Email campaign authentication failed", userResponse.status);
-    return {
-      response: Response.json(
-        { error: "Não foi possível validar seu login. Tente novamente." },
-        { status: 502 },
-      ),
-    };
+  const secret = getAdminSecret();
+  if (!secret) {
+    console.error("EMAIL_CAMPAIGN_ADMIN_KEY is missing or shorter than 32 characters");
+    return jsonResponse(
+      { error: "O acesso administrativo ainda não está configurado no servidor." },
+      503,
+    );
   }
 
-  let user: { email?: unknown; email_confirmed_at?: unknown };
+  let payload: unknown;
   try {
-    user = (await userResponse.json()) as typeof user;
-  } catch (error) {
-    console.error("Email campaign authentication returned an invalid response", error);
-    return {
-      response: Response.json(
-        { error: "Não foi possível validar seu login. Tente novamente." },
-        { status: 502 },
-      ),
-    };
+    const body = await request.text();
+    if (new TextEncoder().encode(body).byteLength > 2_000) {
+      return jsonResponse({ error: "Solicitação muito grande." }, 413);
+    }
+    payload = JSON.parse(body);
+  } catch {
+    return jsonResponse({ error: "Não foi possível ler os dados enviados." }, 400);
   }
 
-  if (
-    typeof user.email !== "string" ||
-    !user.email_confirmed_at ||
-    !adminEmails.includes(user.email.trim().toLowerCase())
-  ) {
-    return {
-      response: Response.json(
-        { error: "Esta conta não está autorizada a acessar os disparos." },
-        { status: 403 },
-      ),
-    };
+  const parsed = z.object({ key: z.string().min(1).max(500) }).safeParse(payload);
+  if (!parsed.success) {
+    return jsonResponse({ error: "Informe a chave de acesso." }, 400);
   }
 
-  return { authorizedEmail: user.email };
+  const [submittedDigest, expectedDigest] = await Promise.all([
+    crypto.subtle.digest("SHA-256", new TextEncoder().encode(parsed.data.key)),
+    crypto.subtle.digest("SHA-256", new TextEncoder().encode(secret)),
+  ]);
+  const submittedBytes = new Uint8Array(submittedDigest);
+  const expectedBytes = new Uint8Array(expectedDigest);
+  let matches = 0;
+  for (let index = 0; index < expectedBytes.length; index += 1) {
+    matches |= submittedBytes[index]! ^ expectedBytes[index]!;
+  }
+  if (matches !== 0) {
+    return jsonResponse({ error: "Chave de acesso inválida." }, 401);
+  }
+
+  const expiration = String(Math.floor(Date.now() / 1000) + SESSION_MAX_AGE_SECONDS);
+  const signature = await createSessionSignature(expiration, secret);
+  return jsonResponse({ ok: true }, 200, {
+    "Set-Cookie": sessionCookie(request, `${expiration}.${signature}`, SESSION_MAX_AGE_SECONDS),
+  });
+}
+
+function handleCampaignLogout(request: Request): Response {
+  if (request.method !== "POST") {
+    return jsonResponse({ error: "Método não permitido." }, 405, { Allow: "POST" });
+  }
+  if (!isSameOrigin(request)) {
+    return jsonResponse({ error: "Origem da solicitação inválida." }, 403);
+  }
+  return jsonResponse({ ok: true }, 200, { "Set-Cookie": sessionCookie(request, "", 0) });
 }
 
 function htmlToPlainText(html: string): string {
@@ -152,89 +224,83 @@ function containsUnsubscribeLink(html: string): boolean {
 }
 
 export async function handleEmailCampaign(request: Request): Promise<Response> {
+  const pathname = new URL(request.url).pathname;
+  if (pathname === "/api/email-campaign/login") return handleCampaignLogin(request);
+  if (pathname === "/api/email-campaign/logout") return handleCampaignLogout(request);
+  if (pathname !== "/api/email-campaign") {
+    return jsonResponse({ error: "Não encontrado." }, 404);
+  }
+
   if (request.method !== "GET" && request.method !== "POST") {
-    return Response.json({ error: "Método não permitido." }, { status: 405 });
+    return jsonResponse({ error: "Método não permitido." }, 405, { Allow: "GET, POST" });
   }
 
   if (request.method === "POST") {
-    const origin = request.headers.get("origin");
-    if (origin) {
-      try {
-        if (new URL(origin).origin !== new URL(request.url).origin) {
-          return Response.json({ error: "Origem da solicitação inválida." }, { status: 403 });
-        }
-      } catch {
-        return Response.json({ error: "Origem da solicitação inválida." }, { status: 403 });
-      }
+    if (!isSameOrigin(request)) {
+      return jsonResponse({ error: "Origem da solicitação inválida." }, 403);
     }
-
     if (!request.headers.get("content-type")?.includes("application/json")) {
-      return Response.json({ error: "Formato de solicitação inválido." }, { status: 415 });
+      return jsonResponse({ error: "Formato de solicitação inválido." }, 415);
     }
   }
 
-  const authorization = await authorizeCampaignRequest(request);
-  if ("response" in authorization) return authorization.response;
+  const authorizationError = await authorizeCampaignRequest(request);
+  if (authorizationError) return authorizationError;
 
-  if (request.method === "GET") {
-    return Response.json({ ok: true, email: authorization.authorizedEmail });
-  }
+  if (request.method === "GET") return jsonResponse({ ok: true });
 
   const contentLength = Number(request.headers.get("content-length") ?? 0);
   if (contentLength > MAX_CAMPAIGN_BYTES) {
-    return Response.json({ error: "O conteúdo ultrapassa o limite permitido." }, { status: 413 });
+    return jsonResponse({ error: "O conteúdo ultrapassa o limite permitido." }, 413);
   }
 
   let payload: unknown;
   try {
     const body = await request.text();
     if (new TextEncoder().encode(body).byteLength > MAX_CAMPAIGN_BYTES) {
-      return Response.json({ error: "O conteúdo ultrapassa o limite permitido." }, { status: 413 });
+      return jsonResponse({ error: "O conteúdo ultrapassa o limite permitido." }, 413);
     }
     payload = JSON.parse(body);
   } catch {
-    return Response.json({ error: "Não foi possível ler os dados enviados." }, { status: 400 });
+    return jsonResponse({ error: "Não foi possível ler os dados enviados." }, 400);
   }
 
   const parsed = campaignSchema.safeParse(payload);
   if (!parsed.success) {
-    return Response.json(
+    return jsonResponse(
       { error: "Confira os destinatários, o assunto, o HTML e as confirmações obrigatórias." },
-      { status: 400 },
+      400,
     );
   }
 
   if (!containsUnsubscribeLink(parsed.data.html)) {
-    return Response.json(
+    return jsonResponse(
       {
         error: "Inclua no HTML um link HTTPS funcional, com texto de descadastro, antes de enviar.",
       },
-      { status: 400 },
+      400,
     );
   }
 
   const recipients = [...new Set(parsed.data.recipients.map((email) => email.toLowerCase()))];
   if (recipients.length !== parsed.data.recipients.length) {
-    return Response.json(
-      { error: "Remova endereços repetidos da lista antes de enviar." },
-      { status: 400 },
-    );
+    return jsonResponse({ error: "Remova endereços repetidos da lista antes de enviar." }, 400);
   }
 
   const apiKey = process.env["LOVABLE_API_KEY"];
   if (!apiKey) {
     console.error("LOVABLE_API_KEY is not configured for email campaigns");
-    return Response.json(
+    return jsonResponse(
       { error: "O serviço de e-mail ainda não está configurado no servidor." },
-      { status: 503 },
+      503,
     );
   }
 
   const plainText = htmlToPlainText(parsed.data.html);
   if (!plainText) {
-    return Response.json(
+    return jsonResponse(
       { error: "O HTML precisa conter texto para a versão de e-mail sem formatação." },
-      { status: 400 },
+      400,
     );
   }
 
@@ -285,5 +351,5 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
     }
   }
 
-  return Response.json({ ok: true, results });
+  return jsonResponse({ ok: true, results });
 }

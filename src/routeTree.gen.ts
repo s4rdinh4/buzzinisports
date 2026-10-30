@@ -16,6 +16,9 @@ import { Route as HorariosRouteImport } from './routes/horarios'
 import { Route as MidiaKitRouteImport } from './routes/midia-kit'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminEmailCampaignRouteImport } from './routes/admin.email-campaign'
+import { Route as ApiEmailCampaignRouteImport } from './routes/api.email-campaign'
+import { Route as ApiEmailCampaignLoginRouteImport } from './routes/api.email-campaign.login'
+import { Route as ApiEmailCampaignLogoutRouteImport } from './routes/api.email-campaign.logout'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +56,21 @@ const AdminEmailCampaignRoute = AdminEmailCampaignRouteImport.update({
   path: '/admin/email-campaign',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiEmailCampaignRoute = ApiEmailCampaignRouteImport.update({
+  id: '/api/email-campaign',
+  path: '/api/email-campaign',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiEmailCampaignLoginRoute = ApiEmailCampaignLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => ApiEmailCampaignRoute,
+} as any)
+const ApiEmailCampaignLogoutRoute = ApiEmailCampaignLogoutRouteImport.update({
+  id: '/logout',
+  path: '/logout',
+  getParentRoute: () => ApiEmailCampaignRoute,
+} as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
@@ -68,6 +86,9 @@ export interface FileRoutesByFullPath {
   '/midia-kit': typeof MidiaKitRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/email-campaign': typeof AdminEmailCampaignRoute
+  '/api/email-campaign': typeof ApiEmailCampaignRouteWithChildren
+  '/api/email-campaign/login': typeof ApiEmailCampaignLoginRoute
+  '/api/email-campaign/logout': typeof ApiEmailCampaignLogoutRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
@@ -78,6 +99,9 @@ export interface FileRoutesByTo {
   '/midia-kit': typeof MidiaKitRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/email-campaign': typeof AdminEmailCampaignRoute
+  '/api/email-campaign': typeof ApiEmailCampaignRouteWithChildren
+  '/api/email-campaign/login': typeof ApiEmailCampaignLoginRoute
+  '/api/email-campaign/logout': typeof ApiEmailCampaignLogoutRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
@@ -89,6 +113,9 @@ export interface FileRoutesById {
   '/midia-kit': typeof MidiaKitRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/email-campaign': typeof AdminEmailCampaignRoute
+  '/api/email-campaign': typeof ApiEmailCampaignRouteWithChildren
+  '/api/email-campaign/login': typeof ApiEmailCampaignLoginRoute
+  '/api/email-campaign/logout': typeof ApiEmailCampaignLogoutRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
@@ -101,6 +128,9 @@ export interface FileRouteTypes {
     | '/midia-kit'
     | '/sitemap.xml'
     | '/admin/email-campaign'
+    | '/api/email-campaign'
+    | '/api/email-campaign/login'
+    | '/api/email-campaign/logout'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -111,6 +141,9 @@ export interface FileRouteTypes {
     | '/midia-kit'
     | '/sitemap.xml'
     | '/admin/email-campaign'
+    | '/api/email-campaign'
+    | '/api/email-campaign/login'
+    | '/api/email-campaign/logout'
     | '/lovable/email/transactional/preview'
   id:
     | '__root__'
@@ -121,6 +154,9 @@ export interface FileRouteTypes {
     | '/midia-kit'
     | '/sitemap.xml'
     | '/admin/email-campaign'
+    | '/api/email-campaign'
+    | '/api/email-campaign/login'
+    | '/api/email-campaign/logout'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
@@ -132,6 +168,7 @@ export interface RootRouteChildren {
   MidiaKitRoute: typeof MidiaKitRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminEmailCampaignRoute: typeof AdminEmailCampaignRoute
+  ApiEmailCampaignRoute: typeof ApiEmailCampaignRouteWithChildren
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
@@ -186,6 +223,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEmailCampaignRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/email-campaign': {
+      id: '/api/email-campaign'
+      path: '/api/email-campaign'
+      fullPath: '/api/email-campaign'
+      preLoaderRoute: typeof ApiEmailCampaignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/email-campaign/login': {
+      id: '/api/email-campaign/login'
+      path: '/login'
+      fullPath: '/api/email-campaign/login'
+      preLoaderRoute: typeof ApiEmailCampaignLoginRouteImport
+      parentRoute: typeof ApiEmailCampaignRoute
+    }
+    '/api/email-campaign/logout': {
+      id: '/api/email-campaign/logout'
+      path: '/logout'
+      fullPath: '/api/email-campaign/logout'
+      preLoaderRoute: typeof ApiEmailCampaignLogoutRouteImport
+      parentRoute: typeof ApiEmailCampaignRoute
+    }
     '/lovable/email/transactional/preview': {
       id: '/lovable/email/transactional/preview'
       path: '/lovable/email/transactional/preview'
@@ -196,6 +254,19 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ApiEmailCampaignRouteChildren {
+  ApiEmailCampaignLoginRoute: typeof ApiEmailCampaignLoginRoute
+  ApiEmailCampaignLogoutRoute: typeof ApiEmailCampaignLogoutRoute
+}
+
+const ApiEmailCampaignRouteChildren: ApiEmailCampaignRouteChildren = {
+  ApiEmailCampaignLoginRoute: ApiEmailCampaignLoginRoute,
+  ApiEmailCampaignLogoutRoute: ApiEmailCampaignLogoutRoute,
+}
+
+const ApiEmailCampaignRouteWithChildren =
+  ApiEmailCampaignRoute._addFileChildren(ApiEmailCampaignRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlackFridayRoute: BlackFridayRoute,
@@ -204,6 +275,7 @@ const rootRouteChildren: RootRouteChildren = {
   MidiaKitRoute: MidiaKitRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminEmailCampaignRoute: AdminEmailCampaignRoute,
+  ApiEmailCampaignRoute: ApiEmailCampaignRouteWithChildren,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport

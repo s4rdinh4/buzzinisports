@@ -249,7 +249,9 @@ export default {
       if (url.pathname === "/api/midia-kit-contato") {
         return await handleMidiaKitInquiry(request);
       }
-      if (url.pathname === "/api/email-campaign") {
+      if (url.pathname === "/api/email-campaign" ||
+          url.pathname === "/api/email-campaign/login" ||
+          url.pathname === "/api/email-campaign/logout") {
         return await handleEmailCampaign(request);
       }
 
