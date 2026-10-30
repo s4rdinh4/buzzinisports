@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlackFridayRouteImport } from './routes/black-friday'
+import { Route as DescadastroRouteImport } from './routes/descadastro'
 import { Route as EmpresasRouteImport } from './routes/empresas'
 import { Route as HorariosRouteImport } from './routes/horarios'
 import { Route as MidiaKitRouteImport } from './routes/midia-kit'
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
 const BlackFridayRoute = BlackFridayRouteImport.update({
   id: '/black-friday',
   path: '/black-friday',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DescadastroRoute = DescadastroRouteImport.update({
+  id: '/descadastro',
+  path: '/descadastro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmpresasRoute = EmpresasRouteImport.update({
@@ -81,6 +87,7 @@ const LovableEmailTransactionalPreviewRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/black-friday': typeof BlackFridayRoute
+  '/descadastro': typeof DescadastroRoute
   '/empresas': typeof EmpresasRoute
   '/horarios': typeof HorariosRoute
   '/midia-kit': typeof MidiaKitRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/black-friday': typeof BlackFridayRoute
+  '/descadastro': typeof DescadastroRoute
   '/empresas': typeof EmpresasRoute
   '/horarios': typeof HorariosRoute
   '/midia-kit': typeof MidiaKitRoute
@@ -108,6 +116,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/black-friday': typeof BlackFridayRoute
+  '/descadastro': typeof DescadastroRoute
   '/empresas': typeof EmpresasRoute
   '/horarios': typeof HorariosRoute
   '/midia-kit': typeof MidiaKitRoute
@@ -123,6 +132,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/black-friday'
+    | '/descadastro'
     | '/empresas'
     | '/horarios'
     | '/midia-kit'
@@ -136,6 +146,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/black-friday'
+    | '/descadastro'
     | '/empresas'
     | '/horarios'
     | '/midia-kit'
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/black-friday'
+    | '/descadastro'
     | '/empresas'
     | '/horarios'
     | '/midia-kit'
@@ -163,6 +175,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlackFridayRoute: typeof BlackFridayRoute
+  DescadastroRoute: typeof DescadastroRoute
   EmpresasRoute: typeof EmpresasRoute
   HorariosRoute: typeof HorariosRoute
   MidiaKitRoute: typeof MidiaKitRoute
@@ -186,6 +199,13 @@ declare module '@tanstack/react-router' {
       path: '/black-friday'
       fullPath: '/black-friday'
       preLoaderRoute: typeof BlackFridayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/descadastro': {
+      id: '/descadastro'
+      path: '/descadastro'
+      fullPath: '/descadastro'
+      preLoaderRoute: typeof DescadastroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/empresas': {
@@ -270,6 +290,7 @@ const ApiEmailCampaignRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlackFridayRoute: BlackFridayRoute,
+  DescadastroRoute: DescadastroRoute,
   EmpresasRoute: EmpresasRoute,
   HorariosRoute: HorariosRoute,
   MidiaKitRoute: MidiaKitRoute,

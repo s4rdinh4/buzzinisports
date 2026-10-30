@@ -529,8 +529,8 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
         parsed.data.campaignId,
         campaignSecret,
       );
-      const unsubscribeUrl = new URL("/api/email-campaign", request.url);
-      unsubscribeUrl.searchParams.set("unsubscribe", unsubscribeToken);
+      const unsubscribeUrl = new URL("/descadastro", request.url);
+      unsubscribeUrl.searchParams.set("token", unsubscribeToken);
       const personalizedHtml = parsed.data.html.replaceAll(
         UNSUBSCRIBE_PLACEHOLDER,
         unsubscribeUrl.toString(),
