@@ -8,6 +8,16 @@ const CAMPAIGN_HTML_LIMIT = 100_000;
 const SESSION_COOKIE_NAME = "buzzini_campaign_session";
 const SESSION_MAX_AGE_SECONDS = 8 * 60 * 60;
 
+function containsUnsafeEmailMarkup(html: string): boolean {
+  return (
+    /<(?:script|iframe|object|embed)\b/i.test(html) ||
+    /<[a-z][^>]*\s+on[a-z0-9_-]+\s*=/i.test(html) ||
+    /<[a-z][^>]*\s+(?:href|src|action|formaction)\s*=\s*(?:["'])?\s*(?:javascript|data):/i.test(
+      html,
+    )
+  );
+}
+
 const campaignSchema = z.object({
   campaignId: z.string().uuid(),
   recipients: z.array(z.string().trim().email().max(254)).min(1).max(MAX_CAMPAIGN_RECIPIENTS),
@@ -26,10 +36,7 @@ const campaignSchema = z.object({
     .string()
     .min(1)
     .max(CAMPAIGN_HTML_LIMIT)
-    .refine(
-      (value) => !/<(?:script|iframe|object|embed)\b|on[a-z]+\s*=|javascript\s*:/i.test(value),
-      "O HTML contém conteúdo não permitido.",
-    ),
+    .refine((value) => !containsUnsafeEmailMarkup(value), "O HTML contém conteúdo não permitido."),
   consentConfirmed: z.literal(true),
   unsubscribeConfirmed: z.literal(true),
 });
@@ -267,10 +274,23 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
 
   const parsed = campaignSchema.safeParse(payload);
   if (!parsed.success) {
-    return jsonResponse(
-      { error: "Confira os destinatários, o assunto, o HTML e as confirmações obrigatórias." },
-      400,
-    );
+    const fieldLabels: Record<string, string> = {
+      campaignId: "identificador da campanha",
+      recipients: "destinatários (e-mails inválidos ou limite acima de 50)",
+      subject: "assunto (obrigatório, máximo de 180 caracteres)",
+      html: "HTML (obrigatório, máximo de 100.000 caracteres ou conteúdo não permitido)",
+      consentConfirmed: "confirmação de consentimento",
+      unsubscribeConfirmed: "confirmação do link de descadastro",
+    };
+    const invalidFields = [
+      ...new Set(
+        parsed.error.issues.map((issue) => {
+          const field = issue.path[0];
+          return fieldLabels[typeof field === "string" ? field : ""] ?? "dados do formulário";
+        }),
+      ),
+    ];
+    return jsonResponse({ error: `Confira: ${invalidFields.join("; ")}.` }, 400);
   }
 
   if (!containsUnsubscribeLink(parsed.data.html)) {

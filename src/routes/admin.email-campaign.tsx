@@ -69,12 +69,16 @@ function EmailCampaignPage() {
     .filter(Boolean);
   const uniqueRecipients = [...new Set(recipients)];
   const hasDuplicateRecipients = uniqueRecipients.length !== recipients.length;
+  const invalidRecipients = uniqueRecipients.filter(
+    (recipient) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient),
+  );
   const canSend =
     isAuthenticated &&
     !isSending &&
     uniqueRecipients.length > 0 &&
     uniqueRecipients.length <= 50 &&
     !hasDuplicateRecipients &&
+    invalidRecipients.length === 0 &&
     subject.trim().length > 0 &&
     html.trim().length > 0 &&
     consentConfirmed &&
@@ -259,8 +263,13 @@ function EmailCampaignPage() {
                 <p id="recipients-help" className="mt-1 text-xs text-muted">
                   Separe os endereços por linha, vírgula ou ponto e vírgula.{" "}
                   {uniqueRecipients.length}
-                  /50 válidos na lista.
+                  /50 endereços na lista.
                 </p>
+                {invalidRecipients.length > 0 && (
+                  <p role="alert" className="mt-1 text-xs text-red-300">
+                    Confira os endereços inválidos: {invalidRecipients.join(", ")}
+                  </p>
+                )}
                 {hasDuplicateRecipients && (
                   <p role="alert" className="mt-1 text-xs text-red-300">
                     Há endereços repetidos. Remova-os antes de enviar.
@@ -301,7 +310,10 @@ function EmailCampaignPage() {
                   placeholder="Cole aqui o HTML completo da campanha."
                   className="mt-1 w-full resize-y rounded-lg border border-border bg-background px-3 py-2 font-mono text-xs leading-relaxed outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 />
-                <p className="mt-1 text-xs text-muted">Máximo de 100.000 caracteres.</p>
+                <p className="mt-1 text-xs text-muted">
+                  Máximo de 100.000 caracteres. O HTML também precisa incluir um link HTTPS
+                  funcional de descadastro com um texto como “Cancelar inscrição”.
+                </p>
               </div>
 
               <div className="space-y-3 rounded-xl border border-border bg-background/60 p-4">
