@@ -331,16 +331,20 @@ function EmailCampaignPage() {
                   onClick={addUnsubscribeLink}
                   className="mt-2 min-h-9 rounded-full border border-border px-3 text-xs font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
                 >
-                  Inserir link de descadastro
+                  Inserir link personalizado de descadastro
                 </button>
-                <p className="mt-1 text-xs text-muted">
-                  Máximo de 100.000 caracteres. O marcador{" "}
-                  <code className="rounded bg-background px-1 py-0.5 font-mono">
-                    {"{{unsubscribe_url}}"}
-                  </code>{" "}
-                  precisa estar no href de um link com texto de descadastro. Ele será substituído
-                  por um link pessoal e seguro para cada destinatário.
-                </p>
+                <div className="mt-3 rounded-lg border border-primary/30 bg-primary/5 p-3 text-xs leading-relaxed text-muted">
+                  <p className="font-semibold text-foreground">O link final é criado no disparo</p>
+                  <p className="mt-1">
+                    No HTML você verá{" "}
+                    <code className="rounded bg-background px-1 py-0.5 font-mono text-foreground">
+                      {"{{unsubscribe_url}}"}
+                    </code>
+                    . Isso é esperado: ao enviar, o sistema troca esse marcador por um link para a
+                    página de descadastro com um token exclusivo para cada destinatário.
+                  </p>
+                  <p className="mt-1">Máximo de 100.000 caracteres.</p>
+                </div>
               </div>
 
               <div className="space-y-3 rounded-xl border border-border bg-background/60 p-4">
