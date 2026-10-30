@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 type RecipientResult = {
   email: string;
   status: "sent" | "suppressed" | "failed" | "not_sent";
+  error?: string;
 };
 
 type CampaignResponse = {
@@ -432,16 +433,23 @@ function EmailCampaignPage() {
                         className="flex flex-wrap justify-between gap-x-3 gap-y-1 border-t border-border pt-2"
                       >
                         <span className="break-all font-mono">{result.email}</span>
-                        <span
-                          className={
-                            result.status === "sent"
-                              ? "text-emerald-300"
-                              : result.status === "not_sent"
-                                ? "text-amber-300"
-                                : "text-red-300"
-                          }
-                        >
-                          {resultLabels[result.status]}
+                        <span className="text-right">
+                          <span
+                            className={
+                              result.status === "sent"
+                                ? "text-emerald-300"
+                                : result.status === "not_sent"
+                                  ? "text-amber-300"
+                                  : "text-red-300"
+                            }
+                          >
+                            {resultLabels[result.status]}
+                          </span>
+                          {result.error && (
+                            <span className="mt-1 block max-w-xs text-red-200/80">
+                              Motivo: {result.error}
+                            </span>
+                          )}
                         </span>
                       </li>
                     ))}

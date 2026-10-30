@@ -514,6 +514,7 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
   const results: Array<{
     email: string;
     status: "sent" | "suppressed" | "failed" | "not_sent";
+    error?: string;
   }> = [];
   let stopSending = false;
 
@@ -535,7 +536,7 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
         UNSUBSCRIBE_PLACEHOLDER,
         unsubscribeUrl.toString(),
       );
-      await sendLovableEmail(
+      const delivery = await sendLovableEmail(
         {
           to: recipient,
           from: { name: "Buzzini Sports", address: "noreply@notify.buzzini.com.br" },
@@ -549,6 +550,9 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
         },
         { apiKey, sendUrl: process.env["LOVABLE_SEND_URL"] },
       );
+      if (!delivery.success) {
+        throw new Error("Email provider did not confirm delivery acceptance");
+      }
       results.push({ email: recipient, status: "sent" });
     } catch (error) {
       if (error instanceof EmailAPIError && error.code === "recipient_suppressed") {
@@ -556,12 +560,23 @@ export async function handleEmailCampaign(request: Request): Promise<Response> {
         continue;
       }
 
+      const errorCode =
+        error instanceof EmailAPIError && error.code && /^[a-z0-9_.-]{1,80}$/i.test(error.code)
+          ? error.code
+          : null;
+      const errorStatus = error instanceof EmailAPIError ? error.status : null;
+      const errorDetail = errorCode
+        ? `${errorCode}${errorStatus ? ` (HTTP ${errorStatus})` : ""}`
+        : errorStatus
+          ? `Erro do serviço de e-mail (HTTP ${errorStatus})`
+          : "Erro interno ao enviar pelo serviço de e-mail";
+
       console.error(
         "Marketing campaign email delivery failed",
-        error instanceof EmailAPIError ? error.code : "unexpected_failure",
-        error instanceof EmailAPIError ? error.status : undefined,
+        errorCode ?? (error instanceof Error ? error.name : "unexpected_failure"),
+        errorStatus ?? undefined,
       );
-      results.push({ email: recipient, status: "failed" });
+      results.push({ email: recipient, status: "failed", error: errorDetail });
 
       if (error instanceof EmailAPIError && error.retryable) {
         stopSending = true;
