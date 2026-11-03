@@ -1181,7 +1181,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Acesso ao App Runy",
         "Estrutura Buzzini no dia da Prova",
       ],
-      featuredBenefits: ["2 Uniformes Buzzini", "Melhor suporte com o treinador"],
+      featuredBenefits: ["2 Uniformes Buzzini", "Indicado para Meia Maratona ou Maratona"],
       isFeatured: false,
     },
     {
@@ -1231,7 +1231,7 @@ const PLANS: Record<Location, Plan[]> = {
         "Acesso ao App Runy",
         "Estrutura Buzzini no dia da Prova",
       ],
-      featuredBenefits: ["2 Uniformes Buzzini", "Melhor suporte com o treinador"],
+      featuredBenefits: ["2 Uniformes Buzzini", "Indicado para Meia Maratona ou Maratona"],
       isFeatured: false,
     },
     {
